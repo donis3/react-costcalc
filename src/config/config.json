@@ -6,7 +6,7 @@
 		"releaseDate": "2022-02-09"
 	},
 	"languages": ["tr", "en"],
-	"themes": ["emerald", "light", "dark", "cupcake", "bumblebee"],
+	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
 	"debug": {
 		"themeHelper": false,
 		"i18next": false

@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import i18n from './lib/i18n';
+import Loading from './components/layout/Loading';
+
+import './lib/i18n';//Import i18next initialization
 
 ReactDOM.render(
-	<Suspense fallback='loading...'>
+	<Suspense fallback={<Loading />}>
 		<React.StrictMode>
 			<BrowserRouter>
 				<App />
@@ -15,3 +17,13 @@ ReactDOM.render(
 	</Suspense>,
 	document.getElementById('root')
 );
+
+/*
+<Suspense fallback='loading...'>
+		<React.StrictMode>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</React.StrictMode>
+	</Suspense>
+	*/

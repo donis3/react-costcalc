@@ -1,7 +1,9 @@
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
-		extend: {},
+		extend: {
+			animation: { 'spin-slow': 'spin 2s linear infinite' },
+		},
 	},
 	// add daisyUI plugin
 	plugins: [require('daisyui')],
@@ -11,7 +13,8 @@ module.exports = {
 		styled: true,
 		//First theme is default
 		//Add themes to config/config.json too.
-		themes: ['emerald', 'light', 'dark', 'cupcake', 'bumblebee'],
+		//themes: ['emerald', 'light', 'dark', 'cupcake', 'bumblebee'],
+		themes: require('./src/config/config.json').themes, //Import from app custom config
 		base: true,
 		utils: true,
 		logs: true,
