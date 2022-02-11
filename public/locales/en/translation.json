@@ -1,0 +1,15 @@
+{
+	"header": {
+		"home": "Homepage",
+		"notfound": "Not-Found",
+		"theme": "Theme"
+	},
+	"footer" : "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
+	"themes": {
+		"emerald": "Emerald Theme",
+		"light": "Light Theme",
+		"dark": "Dark Theme",
+		"cupcake": "Cupcake!",
+		"bumblebee": "Bumblebee"
+	}
+}

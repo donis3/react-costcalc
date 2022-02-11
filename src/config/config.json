@@ -1,0 +1,14 @@
+{
+	"app": {
+		"name": "Cost Calculator",
+		"icon": "FaCoins",
+		"owner": "Rhinotap",
+		"releaseDate": "2022-02-09"
+	},
+	"languages": ["tr", "en"],
+	"themes": ["emerald", "light", "dark", "cupcake", "bumblebee"],
+	"debug": {
+		"themeHelper": false,
+		"i18next": false
+	}
+}
