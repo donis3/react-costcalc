@@ -1,52 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
+import AppContext from '../../context/AppContext';
 
-export default function Modal({ children, title = null, footer = null, initialState = false }) {
-	const [isOpen, setIsOpen] = useState(initialState);
+export default function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null }) {
+	const { windowType } = useContext(AppContext);
 
-	//Disable body scroll bar
-	useEffect(() => {
-		if (isOpen) {
-			document.body.classList.add('overflow-y-hidden');
-		} else {
-			document.body.classList.remove('overflow-y-hidden');
-		}
-		return () => document.body.classList.remove('overflow-y-hidden');
-	}, [isOpen]);
-
-	//Modal Closed
-	if (!isOpen) {
-		return <></>;
-	}
-
-	//Modal Open
-	return (
-		<ResponsiveModal title={title} footer={footer} handleCloseBtn={setIsOpen}>
-			{children}
-		</ResponsiveModal>
-	);
-}
-
-function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null }) {
 	//Close modal when clicked outside
 	const handleOutsideClick = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		handleCloseBtn?.(false);
+		handleCloseBtn?.();
 	};
 	//Close modal when clicked on btn
 	const handleButtonClick = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		handleCloseBtn?.(false);
+		handleCloseBtn?.();
 	};
 	//Don't close modal when clicked inside
 	const handleInsideClick = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 	};
+
+	//Disable body scroll bar
+	useEffect(() => {
+		if (['sm', 'md'].includes(windowType) === true) {
+			document.body.classList.add('overflow-y-hidden');
+		} else {
+			document.body.classList.remove('overflow-y-hidden');
+		}
+
+		return () => document.body.classList.remove('overflow-y-hidden');
+	}, [windowType]);
 
 	return (
 		// Wrapper Div

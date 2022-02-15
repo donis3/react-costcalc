@@ -22,13 +22,13 @@ const detectWindowSize = () => {
 
 const detectScreenType = () => {
 	const { width } = detectWindowSize();
-	if (width <= screenSizes.sm) {
+	if (width < screenSizes.md) {
 		return 'sm';
-	} else if (width <= screenSizes.md) {
+	} else if (width < screenSizes.lg) {
 		return 'md';
-	} else if (width <= screenSizes.lg) {
+	} else if (width < screenSizes.xl) {
 		return 'lg';
-	} else if (width <= screenSizes.xl) {
+	} else if (width >= screenSizes.xl) {
 		return 'xl';
 	}
 };
