@@ -11,7 +11,7 @@ import ReactCountryFlag from 'react-country-flag';
 
 export default function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [isLangModalOpen, setLangModalOpen] = useState(true);
+	const [isLangModalOpen, setLangModalOpen] = useState(false);
 	const { language } = useContext(AppContext);
 
 	return (
