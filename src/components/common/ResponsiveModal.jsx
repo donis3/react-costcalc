@@ -39,7 +39,7 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 	return (
 		// Wrapper Div
 		<div
-			className='lg:bg-opacity-80 bg-opacity-100 lg:bg-base-content bg-base-100 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full w-full'
+			className='lg:bg-opacity-70 bg-opacity-100 lg:bg-black bg-base-100 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full w-full'
 			onClick={handleOutsideClick}
 		>
 			<div
@@ -68,7 +68,7 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 					</div>
 					{/* Show Modal Footer if exists OR show blank gap*/}
 					{footer ? (
-						<div className='flex items-center p-6 space-x-2 rounded-b border-t border-base-300'>{footer}</div>
+						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300'>{footer}</div>
 					) : (
 						<div className='lg:h-10'></div>
 					)}

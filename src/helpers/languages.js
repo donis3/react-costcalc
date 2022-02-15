@@ -1,10 +1,12 @@
 export const getLangDetails = (languageCode) => {
 	if (typeof languages[languageCode] === 'object') {
-		return languages[languageCode];
+		return { code: languageCode, countryCode: getCountryCode(languageCode), ...languages[languageCode] };
 	} else {
 		return {
 			name: 'LANG_ERROR',
 			nativeName: 'LANG_ERROR',
+			code: languageCode,
+			countryCode: getCountryCode(languageCode),
 		};
 	}
 };

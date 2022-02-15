@@ -11,5 +11,17 @@
 		"dark": "Koyu Tema",
 		"cupcake": "Tatlı Tema!",
 		"bumblebee": "Yaban Arısı"
+	},
+	"langSelect": {
+		"title": "Uygulama Dili"
+	},
+	"themeSelect": {
+		"title": "Uygulama Teması"
+	},
+	"buttons": {
+		"accept": "Kabul Et",
+		"save": "Kaydet",
+		"close": "Kapat",
+		"cancel": "İptal"
 	}
 }
