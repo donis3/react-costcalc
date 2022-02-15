@@ -17,13 +17,3 @@ ReactDOM.render(
 	</Suspense>,
 	document.getElementById('root')
 );
-
-/*
-<Suspense fallback='loading...'>
-		<React.StrictMode>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</React.StrictMode>
-	</Suspense>
-	*/

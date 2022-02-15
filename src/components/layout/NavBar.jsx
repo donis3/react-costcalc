@@ -7,7 +7,7 @@ import NavLanguageSelect from './NavLanguageSelect';
 import { useTranslation } from 'react-i18next';
 
 export default function NavBar() {
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 
 	const activeLink = ({ isActive }) => {
 		if (isActive) {
@@ -30,10 +30,6 @@ export default function NavBar() {
 					<NavLink to='/' className={activeLink}>
 						<Icon icon='FaHome' className='mr-1' />
 						{t('header.home')}
-					</NavLink>
-					<NavLink to='/notfound' className={activeLink}>
-						<Icon icon='FaExclamationCircle' className='mr-1' />
-						{t('header.notfound')}
 					</NavLink>
 					<NavLanguageSelect />
 					<NavThemeSelect />
