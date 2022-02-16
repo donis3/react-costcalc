@@ -4,7 +4,7 @@
 		"notfound": "Sayfa-Bulunamadı",
 		"theme": "Tema"
 	},
-	"footer" : "{{appName}} - Sürüm: {{version}} - © {{year}} {{owner}}",
+	"footer": "{{appName}} - Sürüm: {{version}} - © {{year}} {{owner}}",
 	"themes": {
 		"emerald": "Yakut Tema",
 		"light": "Açık Tema",

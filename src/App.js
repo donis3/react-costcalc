@@ -7,7 +7,6 @@ import Navbar from './components/navbar/Navbar';
 import { AppContextProvider } from './context/AppContext';
 
 
-
 function App() {
 	loadThemeFromStorage();
 	

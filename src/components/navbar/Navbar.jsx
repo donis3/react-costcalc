@@ -7,7 +7,7 @@ import './Navbar.css';
 import LangSelect from './LangSelect';
 import AppContext from '../../context/AppContext';
 import ReactCountryFlag from 'react-country-flag';
-
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -28,33 +28,10 @@ export default function Navbar() {
 					</div>
 					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? ' flex' : ' hidden')}>
 						<ul className='nav-list  flex flex-wrap'>
-							
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item'>
-								<a href='#pablo'>Discover</a>
-							</li>
-							<li className='nav-item lg:border-l'>
-								<button onClick={() => setLangModalOpen(true)} className=" opacity-50 text-sm">
+							<NavbarItem to='/'>Home</NavbarItem>
+							<NavbarItem to='/notfound'>notfound</NavbarItem>
+							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>
+								<button onClick={() => setLangModalOpen(true)} className=' opacity-50 text-sm'>
 									{language.nativeName}
 									<ReactCountryFlag svg countryCode={language.countryCode} className='ml-2 text-2xl' />
 								</button>
@@ -67,5 +44,20 @@ export default function Navbar() {
 
 			<LangSelect isOpen={isLangModalOpen} setIsOpen={setLangModalOpen} />
 		</>
+	);
+}
+
+function NavbarItem({ children, to = '/' }) {
+	const activeLink = ({ isActive }) => {
+		if (isActive) {
+			return 'border-b  border-white';
+		} else {
+			return '';
+		}
+	};
+	return (
+		<li className='nav-item'>
+			<NavLink to={to} className={activeLink}>{children}</NavLink>
+		</li>
 	);
 }
