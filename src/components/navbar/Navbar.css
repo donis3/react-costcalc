@@ -10,5 +10,5 @@
 	@apply border-t-2 mt-3 pt-3 border-neutral-content lg:border-0 lg:flex flex-grow items-center 
 }
 .nav-list {
-	@apply flex flex-col items-end lg:flex-row list-none lg:ml-auto  w-full lg:w-auto lg:text-lg;
+	@apply flex flex-col items-end lg:flex-row list-none lg:ml-auto  w-full lg:w-auto lg:text-lg ;
 }

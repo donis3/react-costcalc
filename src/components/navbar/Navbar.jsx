@@ -18,7 +18,7 @@ export default function Navbar() {
 		<>
 			<nav className={`relative px-3 lg:px-5 py-3 ${themeConfig.navbar.bg}`}>
 				<div className='container  mx-auto flex flex-wrap items-center justify-between'>
-					<div className='w-full flex justify-between lg:w-auto '>
+					<div className='w-full flex justify-between lg:w-auto'>
 						<a className='text-neutral-content' href='#logo'>
 							<Logo width='200' />
 						</a>
@@ -26,8 +26,30 @@ export default function Navbar() {
 							<FaBars />
 						</button>
 					</div>
-					<div className={'nav-list-container' + (menuOpen ? ' flex' : ' hidden')}>
-						<ul className='nav-list'>
+					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? ' flex' : ' hidden')}>
+						<ul className='nav-list  flex flex-wrap'>
+							
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
+							<li className='nav-item'>
+								<a href='#pablo'>Discover</a>
+							</li>
 							<li className='nav-item'>
 								<a href='#pablo'>Discover</a>
 							</li>
