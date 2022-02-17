@@ -6,7 +6,7 @@ const config = {
 	root: ['test', 'locales'],
 	languages: ['it', 'tr'],
 	languageFileTypes: ['json', 'txt'], //without . example ['json', 'txt']
-	maxDbSize: 1, //Stop recursive exploration if file number exceeds this
+	maxDbSize: 100, //Max number of translation files to explore. Failsafe
 };
 
 const db = [];
@@ -71,6 +71,10 @@ const exploreDir = function (...relativePath) {
 	const files = fs.readdirSync(currentDir);
 
 	for (let index in files) {
+		//Max number of files check
+		if (db.length > config.maxDbSize) {
+			throw new Error(`Exceeded maximum file exploration size of ${config.maxDbSize}. Stopped program`);
+		}
 		if (fs.statSync(path.join(currentDir, files[index])).isDirectory() === false) {
 			//This is a normal file. Add to list if json
 			const extension = path.extname(files[index]).toLocaleLowerCase().replace('.', '');
@@ -238,18 +242,17 @@ function Main() {
 		//Test
 		//syncJson(testFile, 'tr');
 		db.forEach((file) => {
-            //Sync each file with each language
-            log(`Synchronization started for: ${ getFile(file)}`);
-            config.languages.forEach((lang) => {
-                syncJson(file, lang);
-            })
-        });
+			//Sync each file with each language
+			log(`Synchronization started for: ${getFile(file)}`);
+			config.languages.forEach((lang) => {
+				syncJson(file, lang);
+			});
+		});
 	} catch (error) {
 		console.log(error.message);
 	}
 	writeLog();
 }
-
 
 //Run program
 //For development package json command: "sync-translation": "nodemon SyncTranslation.js -e js,jsx"
