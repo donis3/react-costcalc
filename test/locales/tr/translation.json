@@ -4,24 +4,24 @@
 		"notfound": "Not-Found",
 		"theme": "Theme"
 	},
-	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
 	"themes": {
 		"emerald": "Emerald Theme",
-		"light": "Light Theme",
-		"dark": "Dark Theme",
+		"bumblebee": "Bumblebee",
 		"cupcake": "Cupcake!",
-		"bumblebee": "Bumblebee"
+		"light": "Light Theme",
+		"dark": "Dark Theme"
 	},
 	"langSelect": {
 		"title": "Change Language"
 	},
+	"buttons": {
+		"accept": "Accept",
+		"close": "Close",
+		"save": "Save",
+		"cancel": "Cancel"
+	},
 	"themeSelect": {
 		"title": "Change Theme"
 	},
-	"buttons": {
-		"accept": "Accept",
-		"save": "Save",
-		"close": "Close",
-		"cancel": "Cancel"
-	}
+	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}"
 }

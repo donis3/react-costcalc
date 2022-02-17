@@ -1,0 +1,18 @@
+{
+	"title": "This is a title",
+	"users": [
+		"donis3",
+		"hakot"
+	],
+	"objects": [
+		{
+			"property": "red"
+		},
+		{
+			"property": "blue"
+		}
+	],
+	"subfolder": {
+		"subProp": "idiot"
+	}
+}

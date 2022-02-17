@@ -1,0 +1,88 @@
+
+
+[17.02.2022 18:40:56] Sync Started...
+[17.02.2022 18:40:56] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:40:56] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:38:55] Sync Started...
+[17.02.2022 18:38:55] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:38:55] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:38:45] Sync Started...
+[17.02.2022 18:38:45] [tr] Writing over key [dark]
+[17.02.2022 18:38:45] [tr] Writing over key [light]
+[17.02.2022 18:38:45] [tr] Writing over key [footer]
+[17.02.2022 18:38:45] [tr] Writing over key [theme]
+[17.02.2022 18:38:45] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:38:45] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:38:19] Sync Started...
+[17.02.2022 18:38:19] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:38:19] [it] Writing over key [users]
+[17.02.2022 18:38:19] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:38:06] Sync Started...
+[17.02.2022 18:38:06] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:38:06] [it] Writing over key [objects]
+[17.02.2022 18:38:06] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:37:45] Sync Started...
+[17.02.2022 18:37:45] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:37:45] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:37:32] Sync Started...
+[17.02.2022 18:37:32] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:37:32] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:36:33] Sync Started...
+[17.02.2022 18:36:33] [it] Writing over key [cancel]
+[17.02.2022 18:36:33] [it] Writing over key [close]
+[17.02.2022 18:36:33] [it] Writing over key [save]
+[17.02.2022 18:36:33] [it] Writing over key [accept]
+[17.02.2022 18:36:33] [it] Creating missing key [buttons]
+[17.02.2022 18:36:33] [it] Writing over key [title]
+[17.02.2022 18:36:33] [it] Creating missing key [themeSelect]
+[17.02.2022 18:36:33] [it] Writing over key [title]
+[17.02.2022 18:36:33] [it] Creating missing key [langSelect]
+[17.02.2022 18:36:33] [it] Writing over key [bumblebee]
+[17.02.2022 18:36:33] [it] Writing over key [cupcake]
+[17.02.2022 18:36:33] [it] Writing over key [dark]
+[17.02.2022 18:36:33] [it] Writing over key [light]
+[17.02.2022 18:36:33] [it] Writing over key [emerald]
+[17.02.2022 18:36:33] [it] Creating missing key [themes]
+[17.02.2022 18:36:33] [it] Writing over key [footer]
+[17.02.2022 18:36:33] [it] Writing over key [theme]
+[17.02.2022 18:36:33] [it] Writing over key [notfound]
+[17.02.2022 18:36:33] [it] Writing over key [home]
+[17.02.2022 18:36:33] [it] Creating missing key [header]
+[17.02.2022 18:36:33] [it] Created missing file test\locales\it\translation.json
+[17.02.2022 18:36:33] [en] Synchronization started for: test\locales\en\translation.json
+[17.02.2022 18:36:33] [tr] Writing over key [subProp]
+[17.02.2022 18:36:33] [tr] Creating missing key [subfolder]
+[17.02.2022 18:36:33] [tr] Writing over key [objects]
+[17.02.2022 18:36:33] [tr] Writing over key [users]
+[17.02.2022 18:36:33] [tr] Writing over key [title]
+[17.02.2022 18:36:33] [tr] Created missing file test\locales\tr\pages\home.json
+[17.02.2022 18:36:33] [it] Writing over key [subProp]
+[17.02.2022 18:36:33] [it] Creating missing key [subfolder]
+[17.02.2022 18:36:33] [it] Writing over key [objects]
+[17.02.2022 18:36:33] [it] Writing over key [users]
+[17.02.2022 18:36:33] [it] Writing over key [title]
+[17.02.2022 18:36:33] [it] Created missing file test\locales\it\pages\home.json
+[17.02.2022 18:36:33] [en] Synchronization started for: test\locales\en\pages\home.json
+
+[17.02.2022 18:35:43] Sync Started...
+[17.02.2022 18:35:43] [en] Synchronization started for file: test\locales\en\translation.json
+[17.02.2022 18:35:43] [en] Synchronization started for file: test\locales\en\pages\home.json
+
+[17.02.2022 18:32:36] Sync Started...
+[17.02.2022 18:32:36] [tr] Writing over key [cancel]
+[17.02.2022 18:32:36] [tr] Writing over key [title]
+[17.02.2022 18:32:36] [tr] Creating missing key [themeSelect]
+[17.02.2022 18:32:36] [tr] Writing over key [footer]
+
+[17.02.2022 18:32:20] Sync Started...
+[17.02.2022 18:32:20] [tr] Writing over key [footer]
+
+[17.02.2022 18:32:09] Sync Started...
+[17.02.2022 18:32:09] [tr] Writing over key [cupcake]
