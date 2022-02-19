@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function HomePage() {
 	let arr = [];
-	for (let i = 0; i < 100; i++) {
+	for (let i = 0; i < 10; i++) {
 		arr[i] = 'Dynamic Content Height Generation - Row: ' + (i+1);
 	}
 	return (

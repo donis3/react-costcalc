@@ -6,11 +6,11 @@
 	},
 	"footer": "{{appName}} - Sürüm: {{version}} - © {{year}} {{owner}}",
 	"themes": {
-		"emerald": "Yakut Tema",
-		"light": "Açık Tema",
 		"dark": "Koyu Tema",
 		"cupcake": "Tatlı Tema!",
-		"bumblebee": "Yaban Arısı"
+		"bumblebee": "Yaban Arısı",
+		"emerald": "Yakut Tema",
+		"light": "Açık Tema"
 	},
 	"langSelect": {
 		"title": "Uygulama Dili"
@@ -22,6 +22,7 @@
 		"accept": "Kabul Et",
 		"save": "Kaydet",
 		"close": "Kapat",
-		"cancel": "İptal"
+		"cancel": "İptal",
+		"submit": "Gönder"
 	}
 }

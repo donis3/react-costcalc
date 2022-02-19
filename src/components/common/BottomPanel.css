@@ -1,0 +1,12 @@
+.bottom-panel {
+	height: 0;
+    overflow:hidden;
+    transition: height .5s ease-in-out;
+}
+
+.bottom-panel.panel-open {
+    height: 50%;
+    overflow-y:auto;
+    overflow-x:hidden;
+	transition: height .5s ease-in-out;
+}

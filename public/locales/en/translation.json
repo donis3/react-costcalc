@@ -22,6 +22,7 @@
 		"accept": "Accept",
 		"save": "Save",
 		"close": "Close",
-		"cancel": "Cancel"
+		"cancel": "Cancel",
+		"submit": "Submit"
 	}
 }
