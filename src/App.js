@@ -5,17 +5,19 @@ import Router from './Router';
 import { loadThemeFromStorage } from './helpers/themeHelper';
 import Navbar from './components/navbar/Navbar';
 import { AppContextProvider } from './context/AppContext';
-
+import { PanelContextProvider } from './context/PanelContext';
 
 function App() {
 	loadThemeFromStorage();
-	
+
 	return (
 		<AppContextProvider>
-			{/* <MainLayout footer={<Footer />} header={<NavBar />}> */}
-			<MainLayout footer={<Footer />} header={<Navbar />}>
-				<Router />
-			</MainLayout>
+			<PanelContextProvider>
+				{/* <MainLayout footer={<Footer />} header={<NavBar />}> */}
+				<MainLayout footer={<Footer />} header={<Navbar />}>
+					<Router />
+				</MainLayout>
+			</PanelContextProvider>
 		</AppContextProvider>
 	);
 }

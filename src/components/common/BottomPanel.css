@@ -1,11 +1,17 @@
-.bottom-panel {
-	height: 0;
+.panel-bottom {
+    height: 50%;
+    box-shadow: 0px -1px 10px 6px rgba(0,0,0,0.5)
+}
+
+.panel-bottom.slide-up {
+	height: 50%;
+    overflow-y:auto;
     overflow:hidden;
     transition: height .5s ease-in-out;
 }
 
-.bottom-panel.panel-open {
-    height: 50%;
+.panel-bottom.slide-down {
+    height: 0%;
     overflow-y:auto;
     overflow-x:hidden;
 	transition: height .5s ease-in-out;

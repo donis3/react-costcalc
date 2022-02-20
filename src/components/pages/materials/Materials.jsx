@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PanelContext from '../../../context/PanelContext';
+
+
 import Card from '../../common/Card';
-import BottomPanel from '../../common/BottomPanel';
+import MaterialForm from './MaterialForm';
 
 const mockData = {
 	materials: [
@@ -10,18 +13,21 @@ const mockData = {
 };
 
 export default function Materials() {
-	const [isPanelOpen, setPanelOpen] = useState(false);
-
+	const panel = useContext(PanelContext);
+	const handleOpenMaterialForm = () => {
+		return panel.open({
+			id: 'add-material-form',
+			title: 'Add New Material',
+			content: <MaterialForm />,
+			reload: false
+		});
+	}
+	
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<div className='w-full flex justify-end'>
-					<button
-						className='btn btn-primary btn-sm'
-						onClick={() => {
-							setPanelOpen(true);
-						}}
-					>
+					<button className='btn btn-primary btn-sm' onClick={handleOpenMaterialForm}>
 						+New
 					</button>
 				</div>
@@ -30,23 +36,14 @@ export default function Materials() {
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat cupiditate similique amet adipisci eligendi
 					pariatur cumque qui quasi sequi aut!
 				</p>
-				<MaterialTable></MaterialTable>
+				<MaterialTable />
 			</Card>
-			<BottomPanel
-				title='test'
-				isOpen={isPanelOpen}
-				handleClose={() => {
-					setPanelOpen(false);
-				}}
-			>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos aut recusandae a magni cumque aspernatur
-				maiores eveniet. Ab, recusandae cupiditate!
-			</BottomPanel>
 		</>
 	);
 }
 
 function MaterialTable() {
+	
 	return (
 		<div className='overflow-x-auto my-10'>
 			<table className='table table-zebra w-full table-normal table-fixed'>
