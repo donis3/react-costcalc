@@ -2,16 +2,19 @@
 	{
 		"code": "USD",
 		"value": 14,
-		"symbol": "$"
+		"symbol": "$",
+		"disabled": false
 	},
 	{
 		"code": "EUR",
 		"value": 18,
-		"symbol": "€"
+		"symbol": "€",
+		"disabled": false
 	},
 	{
 		"code": "TRY",
 		"value": 1,
-		"symbol": "₺"
+		"symbol": "₺",
+		"disabled": false
 	}
 ]
