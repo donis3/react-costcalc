@@ -1,18 +1,18 @@
 .panel-bottom {
-    height: 50%;
-    box-shadow: 0px -1px 10px 6px rgba(0,0,0,0.5)
+    box-shadow: 0px -1px 10px 6px rgba(0,0,0,0.5);
 }
 
 .panel-bottom.slide-up {
 	height: 50%;
     overflow-y:auto;
-    overflow:hidden;
+    overflow-x:hidden;
     transition: height .5s ease-in-out;
 }
 
 .panel-bottom.slide-down {
     height: 0%;
-    overflow-y:auto;
+    overflow-y:hidden;
     overflow-x:hidden;
-	transition: height .5s ease-in-out;
+    box-shadow: none;
+	transition: height .5s cubic-bezier(0.61, 1, 0.88, 1), box-shadow .5s ease-in-out;
 }

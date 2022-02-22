@@ -1,0 +1,27 @@
+{
+	"title": "Materials",
+	"lead": "Available materials and details.",
+	"btnNew": "New",
+	"table": {
+		"material": "Material",
+		"unit": "Unit",
+		"tax": "Tax",
+		"price": "Price"
+	},
+
+	"form": {
+		"title": "Add New Material",
+		"name": "Material Name",
+		"nameAlt": "",
+		"unit": "Unit",
+		"unitAlt": "Select the unit type of the material",
+		"massUnits": "Weight",
+		"volumeUnits": "Volume",
+		"density": "Material Density",
+		"densityAlt": "Density of the material (g/cm<sup>3</sup>)",
+		"price": "Unit Price",
+		"priceAlt": "With Tax: {{amount}}",
+		"currency": "Currency",
+		"currencyAlt": ""
+	}
+}

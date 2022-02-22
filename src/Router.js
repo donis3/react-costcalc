@@ -4,9 +4,11 @@ import HomePage from './components/pages/HomePage';
 import Materials from './components/pages/materials/Materials';
 import NotFound from './components/pages/NotFound';
 
+
 export default function Router() {
 	return (
 		<Routes>
+			{/* Business Routes */}
 			<Route path='/materials' element={<Materials />} />
 
 			{/* Homepage */}

@@ -1,0 +1,17 @@
+[
+	{
+		"code": "USD",
+		"value": 14,
+		"symbol": "$"
+	},
+	{
+		"code": "EUR",
+		"value": 18,
+		"symbol": "€"
+	},
+	{
+		"code": "TRY",
+		"value": 1,
+		"symbol": "₺"
+	}
+]

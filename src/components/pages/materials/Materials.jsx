@@ -1,41 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import DataContext from '../../../context/DataContext';
 import PanelContext from '../../../context/PanelContext';
-
 
 import Card from '../../common/Card';
 import MaterialForm from './MaterialForm';
 
-const mockData = {
-	materials: [
-		{ materialId: 1, name: 'Potassium Chloride', unit: 'kg', tax: '18', price: 8.4, currency: 'USD' },
-		{ materialId: 2, name: 'Hydrochloric Acid', unit: 'kg', tax: '18', price: 2.9, currency: 'USD' },
-	],
-};
-
 export default function Materials() {
+	const { t } = useTranslation('pages/materials');
 	const panel = useContext(PanelContext);
+
 	const handleOpenMaterialForm = () => {
 		return panel.open({
 			id: 'add-material-form',
-			title: 'Add New Material',
+			title: t('form.title'),
 			content: <MaterialForm />,
-			reload: false
+			reload: false,
 		});
-	}
-	
+	};
+
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<div className='w-full flex justify-end'>
 					<button className='btn btn-primary btn-sm' onClick={handleOpenMaterialForm}>
-						+New
+						{'+' + t('btnNew')}
 					</button>
 				</div>
-				<h3 className='text-2xl py-2 font-semibold'>Title</h3>
-				<p className='opacity-80'>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat cupiditate similique amet adipisci eligendi
-					pariatur cumque qui quasi sequi aut!
-				</p>
+				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
+				<p className='opacity-80'>{t('lead')}</p>
 				<MaterialTable />
 			</Card>
 		</>
@@ -43,22 +36,24 @@ export default function Materials() {
 }
 
 function MaterialTable() {
-	
+	const { materials } = useContext(DataContext);
+	const { t } = useTranslation('pages/materials');
+
 	return (
 		<div className='overflow-x-auto my-10'>
 			<table className='table table-zebra w-full table-normal table-fixed'>
 				<thead>
 					<tr>
 						<th className='w-1/12'></th>
-						<th className='w-5/12'>Material</th>
-						<th className='w-1/12'>Unit</th>
-						<th className='w-1/12'>Tax</th>
-						<th className='w-2/12'>Price</th>
+						<th className='w-5/12'>{t('table.material')}</th>
+						<th className='w-1/12'>{t('table.unit')}</th>
+						<th className='w-1/12'>{t('table.tax')}</th>
+						<th className='w-2/12'>{t('table.price')}</th>
 						<th className='w-2/12'></th>
 					</tr>
 				</thead>
 				<tbody>
-					{mockData.materials.map((material) => {
+					{materials.all.map((material) => {
 						return <MaterialTableRow key={material.materialId} {...material} actions={null} />;
 					})}
 				</tbody>
