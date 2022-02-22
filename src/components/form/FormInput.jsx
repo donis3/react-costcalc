@@ -110,7 +110,7 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 			{...props}
 			className={props.className ? props.className : 'select select-bordered w-full max-w-lg'}
 		>
-			{options.map((opt) => {
+			{options.map((opt,index) => {
 				let name = 'Option Name';
 				let value = null;
 				let disabled = false;
@@ -133,12 +133,12 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 				}
 				if (disabled) {
 					return (
-						<option value={value} disabled={true}>
+						<option value={value} disabled={true} key={index}>
 							{name}
 						</option>
 					);
 				} else {
-					return <option value={value}>{name}</option>;
+					return <option value={value} key={index}>{name}</option>;
 				}
 			})}
 		</select>

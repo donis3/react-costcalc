@@ -31,3 +31,44 @@ export function getMaxInArray(subject, propertyName, getObject = false) {
 		return objectWithMaxValue[propertyName];
 	}
 }
+
+export function sortArrayNumeric(data = [], prop = null, isAsc = true) {
+	if (Array.isArray(data) === false || data.length <= 0) return [];
+	if(prop) {
+		if(typeof data[0] !== 'object' || prop in data[0] === false ) {
+			//Invalid Data
+			return data;
+		}else {
+			return data.sort((a, b) => {
+				//Return -1 or 1 depending on asc or desc
+				return ( parseFloat(a[prop]) < parseFloat(b[prop]) ? -1 : 1) * (isAsc ? 1 : -1);
+			});
+		}
+	} else {
+		return data.sort((a, b) => {
+			//Return -1 or 1 depending on asc or desc
+			return (parseFloat(a) < parseFloat(b) ? -1 : 1) * (isAsc ? 1 : -1);
+		});
+	}
+}
+
+export function sortArrayAlphabetic(data = [], prop = null, isAsc = true) {
+	if (Array.isArray(data) === false || data.length <= 0) return [];
+	if(prop) {
+		if(typeof data[0] !== 'object' || prop in data[0] === false ) {
+			//Invalid Data
+			return data;
+		}else {
+			return data.sort((a, b) => {
+				//Return -1 or 1 depending on asc or desc
+				return isAsc ? a[prop].localeCompare(b[prop]) : b[prop].localeCompare(a[prop]);
+				
+			});
+		}
+	} else {
+		return data.sort((a, b) => {
+			//Return -1 or 1 depending on asc or desc
+			return isAsc ? a.localeCompare(b) : b.localeCompare(a);
+		});
+	}
+}

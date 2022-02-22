@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import { useTranslation } from 'react-i18next';
-import DataContext from '../../../context/DataContext';
 import PanelContext from '../../../context/PanelContext';
 
 import Card from '../../common/Card';
 import MaterialForm from './MaterialForm';
+import MaterialTable from './MaterialTable';
 
 export default function Materials() {
 	const { t } = useTranslation('pages/materials');
@@ -35,46 +35,3 @@ export default function Materials() {
 	);
 }
 
-function MaterialTable() {
-	const { materials } = useContext(DataContext);
-	const { t } = useTranslation('pages/materials');
-
-	return (
-		<div className='overflow-x-auto my-10'>
-			<table className='table table-zebra w-full table-normal table-fixed'>
-				<thead>
-					<tr>
-						<th className='w-1/12'></th>
-						<th className='w-5/12'>{t('table.material')}</th>
-						<th className='w-1/12'>{t('table.unit')}</th>
-						<th className='w-1/12'>{t('table.tax')}</th>
-						<th className='w-2/12'>{t('table.price')}</th>
-						<th className='w-2/12'></th>
-					</tr>
-				</thead>
-				<tbody>
-					{materials.all.map((material) => {
-						return <MaterialTableRow key={material.materialId} {...material} actions={null} />;
-					})}
-				</tbody>
-			</table>
-		</div>
-	);
-}
-
-function MaterialTableRow({ materialId, name, unit, tax, price, actions = null }) {
-	return (
-		<tr className='hover'>
-			<th className='truncate' title={materialId}>
-				{materialId}
-			</th>
-			<td className='whitespace-normal'>{name}</td>
-			<td className='truncate' title={unit}>
-				{unit}
-			</td>
-			<td>{tax}</td>
-			<td>{price}</td>
-			<td></td>
-		</tr>
-	);
-}
