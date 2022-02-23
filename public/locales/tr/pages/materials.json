@@ -10,7 +10,7 @@
 	},
 	"form": {
 		"title": "Add New Material",
-		"name": "Material Name",
+		"name": "Hammadde Adı",
 		"nameAlt": "",
 		"unit": "Unit",
 		"unitAlt": "Select the unit type of the material",

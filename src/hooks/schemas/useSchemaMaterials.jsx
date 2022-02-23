@@ -27,19 +27,21 @@ const getMaterialFormSchema = (JoiInstance, t) => {
 			.min(0)
 			.required()
 			.label(t('form.materialId', { ns: 'pages/materials' })),
-		name: JoiInstance.string().min(3).max(100).required().label('isim'),
+		name: JoiInstance.string().min(3).max(100).required().label( t('form.name')),
 		unit: JoiInstance.string()
 			.min(1)
 			.required()
-			.valid(...allowedUnits),
-		density: JoiInstance.number().positive().precision(2).required(),
-		tax: JoiInstance.number().positive().precision(2).required(),
-		price: JoiInstance.number().positive().precision(2).required(),
+			.valid(...allowedUnits)
+			.label(t('form.unit')),
+		density: JoiInstance.number().positive().precision(2).required().label(t('form.density')),
+		tax: JoiInstance.number().positive().precision(2).required().label(t('form.tax')),
+		price: JoiInstance.number().positive().precision(2).required().label(t('form.price')),
 		currency: JoiInstance.string()
 			.uppercase()
 			.min(1)
 			.valid(...allowedCurrencies)
-			.required(),
+			.required()
+			.label(t('form.currency')),
 	});
 
 	return materialFormSchema;
