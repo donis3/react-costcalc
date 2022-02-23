@@ -1,0 +1,7 @@
+.form-error input,
+.form-error select {
+	@apply border-error-content;
+}
+.form-error span {
+	@apply text-error-content;
+}

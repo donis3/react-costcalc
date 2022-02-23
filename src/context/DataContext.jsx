@@ -16,7 +16,7 @@ export function DataContextProvider({ children }) {
 	// };
 
 	const payload = {
-		materials: materialModel
+		materials: useMemo( () =>  materialModel, [materialModel])
 	}
 
 	return <DataContext.Provider value={payload}>{children}</DataContext.Provider>;

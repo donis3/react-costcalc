@@ -35,5 +35,5 @@ export default function useMaterialModel(materials, setMaterials) {
         }
     }
 
-	return { addMaterial, getMaterials, getCount, getKeys};
+	return { addMaterial, getMaterials, getCount, getKeys, getNextId};
 }

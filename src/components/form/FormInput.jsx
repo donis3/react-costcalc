@@ -1,14 +1,24 @@
 import React from 'react';
-
+import './FormInput.css';
 /**
  * Wrapper for form items
  */
 const FormInput = ({ children, label = null, error = null, altLabel = null, ...props }) => {
+	let showErrors = false;
 	const itemClass = ['form-control'];
+
 	if (props.className) {
 		itemClass.push(props.className);
 	}
-	if (error) itemClass.push('form-error');
+	
+	
+	if(Array.isArray(error)) {
+		const errors = error.filter(err => typeof err === 'string' ? err : null);
+		if(errors.length > 0) showErrors = true;
+	}else if(error && typeof error === 'string' && error.trim().length > 0) {
+		showErrors = true;
+	}
+	if( showErrors) itemClass.push('form-error');
 
 	const mainLabel = (
 		<label className='label'>
@@ -22,9 +32,18 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
 		</label>
 	);
 
-	const thirdLabel = (
-		<label className='label text-sm leading-3 text-error-content'>
-			<span>{error}</span>
+	//Multiple error showing support
+	const errorLabel = (
+		<label className='label text-sm leading-3'>
+			{Array.isArray(error) && error.length > 0 ? (
+				<div className='flex flex-col'>
+					{error.map((err, i) => (
+						<span key={i}>{err}</span>
+					))}
+				</div>
+			) : (
+				<span>{error}</span>
+			)}
 		</label>
 	);
 
@@ -32,8 +51,8 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
 		<div className={itemClass.join(' ')}>
 			{label && mainLabel}
 			{children}
-			{error && thirdLabel}
-			{altLabel && !error && secondaryLabel}
+			{showErrors && errorLabel}
+			{altLabel && !showErrors && secondaryLabel}
 		</div>
 	);
 };
@@ -110,7 +129,7 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 			{...props}
 			className={props.className ? props.className : 'select select-bordered w-full max-w-lg'}
 		>
-			{options.map((opt,index) => {
+			{options.map((opt, index) => {
 				let name = 'Option Name';
 				let value = null;
 				let disabled = false;
@@ -138,7 +157,11 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 						</option>
 					);
 				} else {
-					return <option value={value} key={index}>{name}</option>;
+					return (
+						<option value={value} key={index}>
+							{name}
+						</option>
+					);
 				}
 			})}
 		</select>

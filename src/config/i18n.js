@@ -1,8 +1,10 @@
 import config from './config.json';
 
+
 const backendOptions = {
 	loadPath: '/locales/{{lng}}/{{ns}}.json',
-	addPath: '/locales/add/{{lng}}/{{ns}}',
+	addPath: '/locales/{{lng}}/pages/{{ns}}',
+	
 };
 
 const detectionOptions = {
@@ -43,6 +45,7 @@ export const i18nextOptions = {
 
 	supportedLngs: ['tr', 'en'],
 	nonExplicitSupportedLngs: false,
+	ns: ['translation', 'joi'],
 	defaultNS: 'translation',
 	debug: config.debug?.i18next,
 	backend: backendOptions, //http backend plugin options

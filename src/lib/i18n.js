@@ -11,3 +11,4 @@ i18n
 	.init(i18nextOptions);
 
 export default i18n;
+export const t =  i18n.t;

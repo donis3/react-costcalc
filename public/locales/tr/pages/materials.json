@@ -8,7 +8,6 @@
 		"tax": "Tax",
 		"price": "Price"
 	},
-
 	"form": {
 		"title": "Add New Material",
 		"name": "Material Name",

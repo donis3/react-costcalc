@@ -5,11 +5,14 @@ import PanelContext from '../../../context/PanelContext';
 import FormInput from '../../form/FormInput';
 import { useFormHelper } from '../../../hooks/useFormHelper';
 import useFormHandler from '../../../hooks/useFormHandler';
+import useSchemaMaterials from '../../../hooks/schemas/useSchemaMaterials';
 
 export default function MaterialForm() {
 	//Hooks
 	const { t } = useTranslation('pages/materials', 'translation');
 	const { selectUnitArray, priceWithTax, isMassUnit, selectCurrencyArray } = useFormHelper();
+
+	const schema = useSchemaMaterials();
 
 	//Context
 	const { materials } = useContext(DataContext);
@@ -17,48 +20,51 @@ export default function MaterialForm() {
 
 	//Form State
 	const [formState, setFormState] = useState({
-		materialId: '',
+		materialId: materials.getNextId(),
 		name: '',
 		unit: 'kg',
 		tax: 0,
 		price: 0,
-		currency: '',
+		currency: 'TRY',
 		density: '1.00',
 	});
 
 	//Import form handler hook
-	const { onChangeHandler, setFieldState, onSubmitHandler } = useFormHandler({ formState, setFormState });
+	const { onChangeHandler, setFieldState, onSubmitHandler, hasError } = useFormHandler({
+		formState,
+		setFormState,
+		schema,
+	});
 
 	//Custom form change handle middleware
 	const handleChange = (e) => {
-		
-		if(e.target.name === 'unit' && isMassUnit(e.target.value) === true) {
+		if (e.target.name === 'unit' && isMassUnit(e.target.value) === true) {
 			//A weight unit is selected. Reset density
 			setFieldState('density', '1.00');
 		}
 		return onChangeHandler(e);
-	}
+	};
 
-	const handleSubmit = (e) => {
-		
-		materials.addMaterial(formState);
-		
-	}
-
+	const handleSubmit = (data) => {
+		materials.addMaterial(data);
+		console.log(data);
+	};
 
 	return (
 		<form className='' onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
 			{/* FORM GRID */}
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 mb-5'>
 				{/* Material Name */}
-				<FormInput label={t('form.name')} altLabel={t('form.nameAlt')} className='col-span-2'>
+				<FormInput label={t('form.name')} altLabel={t('form.nameAlt')} className='col-span-2' error={hasError('name')}>
 					<FormInput.Text name='name' value={formState.name} onChange={handleChange} />
 				</FormInput>
 
+				{/* Unit price and currency */}
 				<FormInput
 					label={t('form.price')}
 					altLabel={t('form.priceAlt', { amount: priceWithTax(formState.price, formState.tax) })}
 					className='col-span-2'
+					error={[hasError('price'), hasError('currency')]}
 				>
 					<FormInput.Group>
 						<FormInput.Text name='price' value={formState.price} onChange={handleChange} />
@@ -72,15 +78,22 @@ export default function MaterialForm() {
 					</FormInput.Group>
 				</FormInput>
 
-				<FormInput label={t('form.tax')} altLabel={t('form.taxAlt')} className='col-span-2'>
+				{/* Price Tax */}
+				<FormInput label={t('form.tax')} altLabel={t('form.taxAlt')} className='col-span-2' error={hasError('tax')}>
 					<FormInput.Number min='0' step='1' name='tax' value={formState.tax} onChange={handleChange} />
 				</FormInput>
 
-				<FormInput label={t('form.unit')} altLabel={t('form.unitAlt')}>
+				{/* Scale Unit  */}
+				<FormInput label={t('form.unit')} altLabel={t('form.unitAlt')} error={hasError('unit')}>
 					<FormInput.Select name='unit' options={selectUnitArray()} value={formState.unit} onChange={handleChange} />
 				</FormInput>
 
-				<FormInput label={t('form.density')} altLabel={t('form.densityAlt', { interpolation: { escapeValue: false } })}>
+				{/* Density */}
+				<FormInput
+					label={t('form.density')}
+					altLabel={t('form.densityAlt', { interpolation: { escapeValue: false } })}
+					error={hasError('density')}
+				>
 					<FormInput.Number
 						step='0.01'
 						name='density'

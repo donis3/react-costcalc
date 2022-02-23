@@ -23,6 +23,37 @@
 		"save": "Kaydet",
 		"close": "Kapat",
 		"cancel": "İptal",
-		"submit": "Gönder"
+		"submit": "Gönder",
+		"add": "Add"
+	},
+	"form": {
+		"minLength_one": "Must be at least {{count}} character long",
+		"minLength_other": "Must be at least {{count}} characters long"
+	},
+	"panel": {
+		"title": "Panel Title"
+	},
+	"units": {
+		"mass": "Mass",
+		"volume": "Volume",
+		"mg_one": "Milligram",
+		"mg_other": "Milligrams",
+		"g_one": "Gram",
+		"g_other": "Grams",
+		"kg_one": "Kilogram",
+		"kg_other": "Kilograms",
+		"t_one": "Tonne",
+		"t_other": "Tonnes",
+		"cc_one": "Cubic Centimeter",
+		"cc_other": "Cubic Centimeters",
+		"mL_one": "Milliliter",
+		"mL_other": "Milliliters",
+		"L_one": "Liter",
+		"L_other": "Liters"
+	},
+	"currency": {
+		"USD": "U.S. Dollar",
+		"EUR": "Euro",
+		"TRY": "Turkish Lira"
 	}
 }
