@@ -1,10 +1,11 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import PanelContext from '../../../context/PanelContext';
 
 import Card from '../../common/Card';
 import MaterialForm from './MaterialForm';
 import MaterialTable from './MaterialTable';
+
 
 export default function Materials() {
 	const { t } = useTranslation('pages/materials');
@@ -29,9 +30,9 @@ export default function Materials() {
 				</div>
 				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
 				<p className='opacity-80'>{t('lead')}</p>
+
 				<MaterialTable />
 			</Card>
 		</>
 	);
 }
-

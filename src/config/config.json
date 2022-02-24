@@ -3,12 +3,14 @@
 		"name": "Cost Calculator",
 		"icon": "FaCoins",
 		"owner": "Rhinotap",
-		"releaseDate": "2022-02-09"
+		"releaseDate": "2022-02-09",
+		"localStorageKey": "rhinotap.costcalc"
 	},
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
 	"debug": {
 		"themeHelper": false,
-		"i18next": false
+		"i18next": false,
+		"stateChange": true
 	}
 }

@@ -59,5 +59,6 @@ export function PanelContextProvider({ children }) {
 		id: panelId,
 	};
 
+	
 	return <PanelContext.Provider value={payload}>{children}</PanelContext.Provider>;
 }

@@ -53,7 +53,7 @@ export default function MaterialForm() {
 	return (
 		<form className='' onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
 			{/* FORM GRID */}
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 mb-5'>
+			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10 mb-5'>
 				{/* Material Name */}
 				<FormInput label={t('form.name')} altLabel={t('form.nameAlt')} className='col-span-2' error={hasError('name')}>
 					<FormInput.Text name='name' value={formState.name} onChange={handleChange} />

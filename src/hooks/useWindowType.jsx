@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import config from '../config/config.json';
 
 /* Configuration */
 const defaultSize = { height: 768, width: 1024 };
@@ -35,7 +36,7 @@ const detectScreenType = () => {
 
 /* Export hook */
 const useWindowType = () => {
-	const [windowType, setWindowType] = useState('lg');
+	const [windowType, setWindowType] = useState(detectScreenType());
 
 	//useEffect only runs on client side. Run window detection on client side
 	useEffect(() => {
@@ -48,6 +49,7 @@ const useWindowType = () => {
 
 			//Change state only if necessary
 			if (currentWindowType !== windowType) {
+				config.debug.stateChange && console.log(`WindowSize: state changed ${currentWindowType} -> ${windowType}`);
 				setWindowType(currentWindowType);
 			}
 		}
@@ -64,6 +66,7 @@ const useWindowType = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	
 	return { windowType };
 };
 

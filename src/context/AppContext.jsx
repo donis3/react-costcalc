@@ -16,14 +16,19 @@ const AppContextProvider = ({ children }) => {
 	const langDetails = getLangDetails(i18n.language);
 	const allLanguages = config.languages.map((languageCode) => getLangDetails(languageCode));
 	const handleLanguageChange = (newLanguage) => {
+		config.debug.stateChange && console.log(`AppContext: lang changed to  ${newLanguage}`);
 		i18n.changeLanguage(newLanguage);
 	};
 
 	//Theme Context
 	const [theme, setTheme] = useState(getCurrentTheme);
 	const handleChangeTheme = (newTheme) => {
+		
 		const result = setCurrentTheme(newTheme);
-		if (result) setTheme(result);
+		if (result) {
+			config.debug.stateChange && console.log(`AppContext: theme changed to ${result}`);
+			setTheme(result);
+		}
 	};
 
 	//Payload

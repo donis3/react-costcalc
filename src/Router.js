@@ -6,6 +6,7 @@ import NotFound from './components/pages/NotFound';
 
 
 export default function Router() {
+	
 	return (
 		<Routes>
 			{/* Business Routes */}
