@@ -26,13 +26,13 @@ function App() {
 			</AppContextProvider>
 			<ToastContainer
 				position='top-center'
-				autoClose={5000}
+				autoClose={2000}
 				hideProgressBar={false}
 				newestOnTop={false}
 				closeOnClick
 				rtl={false}
 				pauseOnFocusLoss
-				draggable
+				draggable={false}
 				pauseOnHover
 			/>
 		</>

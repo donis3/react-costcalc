@@ -9,13 +9,29 @@ import MaterialTable from './MaterialTable';
 export default function Materials() {
 	const { t } = useTranslation('pages/materials');
 	const [isModalOpen, setModalOpen] = useState(false);
+	const [modalContent, setModalContent] = useState(null);
+	const [modalTitle, setModalTitle] = useState('Title');
 
 	const closeModal = () => {
 		setModalOpen(false);
+		setModalContent(null);
 	};
 	const handleOpenMaterialForm = () => {
+		setModalContent(<MaterialForm handleClose={closeModal} />);
 		setModalOpen(true);
+		setModalTitle(t('form.title'));
 	};
+
+	const handleEditMaterial = (materialId) => {
+		if(materialId === null || materialId === undefined) return;
+		setModalContent(<MaterialForm handleClose={closeModal} loadMaterial={parseInt(materialId)} />);
+		setModalTitle(t('form.updateTitle'));
+		setModalOpen(true);
+	}
+
+	useEffect(() => {
+		//handleOpenMaterialForm()
+	},[])
 	
 
 	return (
@@ -29,12 +45,12 @@ export default function Materials() {
 				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
 				<p className='opacity-80'>{t('lead')}</p>
 
-				<MaterialTable />
+				<MaterialTable handleEdit={handleEditMaterial} />
 				
 			</Card>
 			{isModalOpen && (
-				<ResponsiveModal title='test' handleCloseBtn={closeModal}>
-					<MaterialForm handleClose={closeModal} />
+				<ResponsiveModal title={modalTitle} handleCloseBtn={closeModal} width='lg:max-w-4xl'>
+					{modalContent}
 				</ResponsiveModal>
 			)}
 		</>

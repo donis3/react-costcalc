@@ -11,6 +11,7 @@
 
 	"form": {
 		"title": "Add New Material",
+		"updateTitle": "Edit Material",
 		"name": "Material Name",
 		"nameAlt": "",
 		"unit": "Unit",
@@ -26,6 +27,8 @@
 		"tax": "Tax / Vat",
 		"taxAlt": "Tax Percentage",
 		"materialId": "Material Id",
-		"success": "Added {{name}} to materials"
+		"addSuccess": "Added {{name}} to materials",
+		"updateSuccess": "Updated {{name}}",
+		"deleteSuccess": "Deleted {{name}} from materials"
 	}
 }

@@ -3,7 +3,7 @@ import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 import AppContext from '../../context/AppContext';
 
-export default function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null }) {
+export default function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null, width = 'lg:max-w-4xl' }) {
 	const { windowType } = useContext(AppContext);
 
 	//Close modal when clicked outside
@@ -23,10 +23,10 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 	//Don't close modal when clicked inside
 	const handleInsideClick = (e) => {
 		e.stopPropagation();
-		
+
 	};
 
-	//Disable body scroll bar
+	//Disable body scroll bar if its small screen
 	useEffect(() => {
 		if (['sm', 'md'].includes(windowType) === true) {
 			document.body.classList.add('overflow-y-hidden');
@@ -34,8 +34,11 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 			document.body.classList.remove('overflow-y-hidden');
 		}
 
+		//remove class on unmount
 		return () => document.body.classList.remove('overflow-y-hidden');
 	}, [windowType]);
+
+	
 
 	return (
 		// Wrapper Div
@@ -44,7 +47,7 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 			onClick={handleOutsideClick}
 		>
 			<div
-				className='fade-in relative p-0   lg:h-auto lg:w-full lg:max-w-2xl h-full w-full'
+				className={'fade-in relative p-0   lg:h-auto lg:w-full  h-full w-full ' + width}
 				onClick={handleInsideClick}
 			>
 				{/* Content Wrapper */}

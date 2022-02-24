@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataContext from '../../../context/DataContext';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp, FaPencilAlt } from 'react-icons/fa';
 
-export default function MaterialTable() {
+export default function MaterialTable({handleEdit = null} = {}) {
 	const { materials } = useContext(DataContext);
 	const { t } = useTranslation('pages/materials');
 	const [sortingState, setSortingState] = useState({ field: 'materialId', asc: true });
@@ -71,7 +71,8 @@ export default function MaterialTable() {
 				</thead>
 				<tbody>
 					{materials.getMaterials(sortingState).map((material, index) => {
-						return <MaterialTableRow key={index} {...material} actions={null} />;
+						
+						return <MaterialTableRow key={index} {...material} actions={{handleEdit}} />;
 					})}
 				</tbody>
 			</table>
@@ -100,7 +101,9 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 	);
 }
 
-function MaterialTableRow({ materialId, name, unit, tax, price, actions = null }) {
+function MaterialTableRow({ materialId, name, unit, tax, price, actions }) {
+	
+
 	return (
 		<tr className='hover'>
 			<th>{materialId}</th>
@@ -110,7 +113,9 @@ function MaterialTableRow({ materialId, name, unit, tax, price, actions = null }
 			</td>
 			<td>{tax}</td>
 			<td>{price}</td>
-			<td></td>
+			<td>
+				<button className='btn btn-ghost btn-sm' onClick={() => actions?.handleEdit(materialId)}><FaPencilAlt /></button>
+			</td>
 		</tr>
 	);
 }

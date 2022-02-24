@@ -8,11 +8,44 @@ export default function useMaterialModel(materials, setMaterials) {
 		return parseInt(getMaxInArray(materials, 'materialId', false)) + 1;
 	};
 
+	//Handles updates aswell
 	const addMaterial = (newMaterialData) => {
-		newMaterialData.materialId = getNextId();
-		setMaterials((currentData) => {
-			return [newMaterialData, ...currentData];
-		});
+		//Make sure we have material id
+		if (
+			'materialId' in newMaterialData === false ||
+			newMaterialData.materialId === null ||
+			newMaterialData.materialId === undefined
+		) {
+			newMaterialData.materialId = getNextId();
+		}
+		//Check if material already exists
+		const existingMaterial = getMaterial(newMaterialData.materialId);
+
+		if (existingMaterial) {
+			//Check if update is needed
+			if (JSON.stringify(existingMaterial) === JSON.stringify(newMaterialData)) {
+				//Update unnecessary
+				return null;
+			}
+
+			//This is an update operation
+			setMaterials((currentData) => {
+				return currentData.map((item) => {
+					if (item.materialId !== newMaterialData.materialId) {
+						return item; //return other items
+					} else {
+						return newMaterialData; //change selected item
+					}
+				});
+			});
+		} else {
+			//this is an add operation, add it directly
+			setMaterials((currentData) => {
+				return [newMaterialData, ...currentData];
+			});
+		}
+		//return updated obj
+		return newMaterialData;
 	};
 
 	const getMaterials = ({ field = 'materialId', asc = true } = {}) => {
@@ -25,16 +58,37 @@ export default function useMaterialModel(materials, setMaterials) {
 		}
 	};
 
-    const getCount = () => materials.length;
-    const getKeys = () => {
-        
-        if( getCount() === 0) {
-            return [];
-        } else {
-            return Object.keys(materials[0]);
-        }
-    }
+	const getCount = () => materials.length;
+	const getKeys = () => {
+		if (getCount() === 0) {
+			return [];
+		} else {
+			return Object.keys(materials[0]);
+		}
+	};
 
+	//Get a material by id
+	const getMaterial = (materialId = null) => {
+		if (materialId === null) return null;
+		//id must be integer to pass equality test
+		materialId = parseInt(materialId);
 
-	return { addMaterial, getMaterials, getCount, getKeys, getNextId};
+		const result = materials.find((material) => material.materialId === materialId);
+
+		return result ? result : null;
+	};
+
+	const deleteMaterial = (materialId = null) => {
+		const requestedMaterial = getMaterial(materialId);
+		if (!requestedMaterial) return null;
+
+		//remove the one with given id
+		setMaterials((currentMaterials) => {
+			return currentMaterials.filter((item) => item.materialId !== requestedMaterial.materialId);
+		});
+
+		return requestedMaterial;
+	};
+
+	return { addMaterial, getMaterials, getCount, getKeys, getNextId, getMaterial, deleteMaterial };
 }

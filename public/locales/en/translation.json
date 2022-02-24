@@ -24,7 +24,9 @@
 		"close": "Close",
 		"cancel": "Cancel",
 		"submit": "Submit",
-		"add": "Add"
+		"add": "Add",
+		"delete": "Delete",
+		"deleteX": "Delete {{name}}"
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
