@@ -6,6 +6,7 @@ import FormInput from '../../form/FormInput';
 import { useFormHelper } from '../../../hooks/useFormHelper';
 import useFormHandler from '../../../hooks/useFormHandler';
 import useSchemaMaterials from '../../../hooks/schemas/useSchemaMaterials';
+import { toast } from 'react-toastify';
 
 export default function MaterialForm() {
 	//Hooks
@@ -46,13 +47,18 @@ export default function MaterialForm() {
 	};
 
 	const handleSubmit = (data) => {
+		//Send form data to material model
 		materials.addMaterial(data);
+		//Close and reset panel
+		closePanel(true);
+		//Inform
+		toast.success(t('form.success', {name: data.name}));
 	};
 
 	return (
 		<form className='' onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
 			{/* FORM GRID */}
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10 mb-5'>
+			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-2 mb-5 '>
 				{/* Material Name */}
 				<FormInput label={t('form.name')} altLabel={t('form.nameAlt')} className='col-span-2' error={hasError('name')}>
 					<FormInput.Text name='name' value={formState.name} onChange={handleChange} />

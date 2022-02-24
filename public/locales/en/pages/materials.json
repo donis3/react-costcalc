@@ -25,6 +25,7 @@
 		"currencyAlt": "",
 		"tax": "Tax / Vat",
 		"taxAlt": "Tax Percentage",
-		"materialId": "Material Id"
+		"materialId": "Material Id",
+		"success": "Added {{name}} to materials"
 	}
 }

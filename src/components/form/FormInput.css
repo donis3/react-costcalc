@@ -5,3 +5,10 @@
 .form-error span {
 	@apply text-error-content;
 }
+
+.input {
+	@apply input-md;
+}
+.select {
+	@apply select-md;
+}
