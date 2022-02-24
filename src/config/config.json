@@ -11,6 +11,7 @@
 	"debug": {
 		"themeHelper": false,
 		"i18next": false,
-		"stateChange": true
+		"stateChange": true,
+		"storage": true
 	}
 }
