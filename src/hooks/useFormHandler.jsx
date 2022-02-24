@@ -30,7 +30,12 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
             //Refresh state
             setErrors(newErrorState);
 			return null;
+		}else {
+			//no errors, remove error state
+			setErrors([]);
 		}
+
+		//Return clean validated form data
 		return result?.value;
 	};
 
@@ -112,6 +117,8 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
             //Form field is yet empty and form is not yet submitted. remove error
             return false;
         }
+
+		
 
         return result ? result.message : false;
 	};
