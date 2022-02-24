@@ -34,9 +34,7 @@ export default function Footer() {
 					<Icon icon='FaYoutube' className='w-6 h-6 fill-current' />
 				</div>
 			</footer>
-			<ThemeSelect isOpen={isThemeSelectOpen} setIsOpen={setThemeSelectOpen}>
-				Test
-			</ThemeSelect>
+			<ThemeSelect isOpen={isThemeSelectOpen} setIsOpen={setThemeSelectOpen} />
 		</>
 	);
 }

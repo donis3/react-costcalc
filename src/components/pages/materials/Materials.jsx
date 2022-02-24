@@ -1,24 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PanelContext from '../../../context/PanelContext';
 
 import Card from '../../common/Card';
+import ResponsiveModal from '../../common/ResponsiveModal';
 import MaterialForm from './MaterialForm';
 import MaterialTable from './MaterialTable';
 
-
 export default function Materials() {
 	const { t } = useTranslation('pages/materials');
-	const panel = useContext(PanelContext);
+	const [isModalOpen, setModalOpen] = useState(false);
 
-	const handleOpenMaterialForm = () => {
-		return panel.open({
-			id: 'add-material-form',
-			title: t('form.title'),
-			content: <MaterialForm />,
-			reload: false,
-		});
+	const closeModal = () => {
+		setModalOpen(false);
 	};
+	const handleOpenMaterialForm = () => {
+		setModalOpen(true);
+	};
+	
 
 	return (
 		<>
@@ -32,7 +30,13 @@ export default function Materials() {
 				<p className='opacity-80'>{t('lead')}</p>
 
 				<MaterialTable />
+				
 			</Card>
+			{isModalOpen && (
+				<ResponsiveModal title='test' handleCloseBtn={closeModal}>
+					<MaterialForm handleClose={closeModal} />
+				</ResponsiveModal>
+			)}
 		</>
 	);
 }

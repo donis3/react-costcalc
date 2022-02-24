@@ -4,6 +4,16 @@ import { useTranslation } from 'react-i18next';
 const PanelContext = createContext();
 
 export default PanelContext;
+
+/*
+Usage: 
+panel.open({
+	id: 'add-material-form',
+	title: t('form.title'),
+	content: <MaterialForm />,
+	reload: false,
+});
+ */
 export function PanelContextProvider({ children }) {
 	const [isPanelOpen, setPanelOpen] = useState(false);
 	const [panelTitle, setPanelTitle] = useState('Panel Title');
@@ -59,6 +69,5 @@ export function PanelContextProvider({ children }) {
 		id: panelId,
 	};
 
-	
 	return <PanelContext.Provider value={payload}>{children}</PanelContext.Provider>;
 }

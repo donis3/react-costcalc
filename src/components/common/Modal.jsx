@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 
+//Not used
 export default function Modal({ children, title = null, footer = null, initialState = false }) {
 	const [isOpen, setIsOpen] = useState(initialState);
 
@@ -55,7 +56,7 @@ function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn
 			onClick={handleOutsideClick}
 		>
 			<div
-				className='fade-in relative p-0   lg:h-auto lg:w-full lg:max-w-2xl h-full w-full'
+				className='fade-in relative p-0   lg:h-auto lg:w-full lg:max-w-4xl h-full w-full'
 				onClick={handleInsideClick}
 			>
 				{/* Content Wrapper */}

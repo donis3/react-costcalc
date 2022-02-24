@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataContext from '../../../context/DataContext';
-import PanelContext from '../../../context/PanelContext';
+
 import FormInput from '../../form/FormInput';
 import { useFormHelper } from '../../../hooks/useFormHelper';
 import useFormHandler from '../../../hooks/useFormHandler';
 import useSchemaMaterials from '../../../hooks/schemas/useSchemaMaterials';
 import { toast } from 'react-toastify';
 
-export default function MaterialForm() {
+export default function MaterialForm({ handleClose = null } = {}) {
 	//Hooks
 	const { t } = useTranslation('pages/materials', 'translation');
 	const { selectUnitArray, priceWithTax, isMassUnit, selectCurrencyArray } = useFormHelper();
@@ -17,7 +17,6 @@ export default function MaterialForm() {
 
 	//Context
 	const { materials } = useContext(DataContext);
-	const { close: closePanel } = useContext(PanelContext);
 
 	//Form State
 	const [formState, setFormState] = useState({
@@ -50,13 +49,20 @@ export default function MaterialForm() {
 		//Send form data to material model
 		materials.addMaterial(data);
 		//Close and reset panel
-		closePanel(true);
+		handleClose();
 		//Inform
-		toast.success(t('form.success', {name: data.name}));
+		toast.success(t('form.success', { name: data.name }));
 	};
 
 	return (
-		<form className='' onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
+		<form
+			id='material-add'
+			className=''
+			onSubmit={(e) => {
+				console.log('here');
+				onSubmitHandler(e, handleSubmit);
+			}}
+		>
 			{/* FORM GRID */}
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-2 mb-5 '>
 				{/* Material Name */}
@@ -114,7 +120,7 @@ export default function MaterialForm() {
 				<button type='submit' className='btn btn-primary mr-2'>
 					{t('buttons.save', { ns: 'translation' })}
 				</button>
-				<button className='btn btn-outline' onClick={() => closePanel(true)}>
+				<button className='btn btn-outline' onClick={() => handleClose(true)}>
 					{t('buttons.cancel', { ns: 'translation' })}
 				</button>
 			</div>

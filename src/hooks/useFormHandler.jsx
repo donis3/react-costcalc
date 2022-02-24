@@ -45,6 +45,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	 * @param {*} customHandler form submit callback
 	 */
 	const onSubmitHandler = (e, customHandler) => {
+		console.log('here');
 		e.preventDefault();
         setIsSubmitted(true);
 

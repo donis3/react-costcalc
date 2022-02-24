@@ -12,6 +12,7 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 		e.stopPropagation();
 
 		handleCloseBtn?.();
+		
 	};
 	//Close modal when clicked on btn
 	const handleButtonClick = (e) => {
@@ -21,8 +22,8 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 	};
 	//Don't close modal when clicked inside
 	const handleInsideClick = (e) => {
-		e.preventDefault();
 		e.stopPropagation();
+		
 	};
 
 	//Disable body scroll bar
