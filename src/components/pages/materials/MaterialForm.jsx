@@ -47,7 +47,6 @@ export default function MaterialForm() {
 
 	const handleSubmit = (data) => {
 		materials.addMaterial(data);
-		console.log(data);
 	};
 
 	return (

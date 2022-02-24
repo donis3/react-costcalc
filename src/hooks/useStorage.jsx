@@ -6,7 +6,7 @@ export default function useStorage() {
 
 	//When storage changes, save new state to local storage
 	useEffect(() => {
-		config.debug.storage && console.log('Saving local storage...');
+		
 		saveStorage(storage);
 	}, [storage]);
 
@@ -30,10 +30,12 @@ export default function useStorage() {
 			//Trying to save same data
 			return;
 		}
-		//Write new state
-		setStorage((oldState) => {
-			return { ...oldState, [key]: value };
-		});
+		//Before writing, refresh stored data from local storage.
+		//This is because there may be another module using useStorage and save at the same time.
+		//THey'll have different states and only the last one to write will reflect
+		const savedData = loadStorage();
+		const newState = {...savedData, [key]: value}
+		setStorage(newState);
 	};
 
 	//remove a key from current storage object
@@ -95,8 +97,16 @@ const saveStorage = (currentStorage) => {
 	if (typeof currentStorage !== 'object' || Object.keys(currentStorage).length === 0) {
 		currentStorage = {};
 	}
+	//Json stringify
 	const data = JSON.stringify(currentStorage, null, 0);
+	//Check if anything is new
+	if( localStorage.getItem(storageKey) === data) {
+		//No need to save, values are same
+		return;
+	}
 	try {
+
+		config.debug.storage && console.log('Saving local storage...');
 		localStorage.setItem(storageKey, data);
 	} catch (error) {
 		config.debug.storage && console.log(`Warning: local storage save failed.`, error);
