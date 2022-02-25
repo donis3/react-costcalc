@@ -15,6 +15,7 @@ export default function Materials() {
 	const closeModal = () => {
 		setModalOpen(false);
 		setModalContent(null);
+		
 	};
 	const handleOpenMaterialForm = () => {
 		setModalContent(<MaterialForm handleClose={closeModal} />);

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import DataContext from '../../../context/DataContext';
 import { FaCaretDown, FaCaretUp, FaPencilAlt } from 'react-icons/fa';
 
-export default function MaterialTable({handleEdit = null} = {}) {
+export default function MaterialTable({ handleEdit = null } = {}) {
 	const { materials } = useContext(DataContext);
 	const { t } = useTranslation('pages/materials');
 	const [sortingState, setSortingState] = useState({ field: 'materialId', asc: true });
@@ -41,11 +41,7 @@ export default function MaterialTable({handleEdit = null} = {}) {
 			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
 				<thead>
 					<tr>
-						<th className='w-1/12'>
-							<ThButton field='materialId' sortingState={sortingState} handler={sortBy}>
-								#
-							</ThButton>
-						</th>
+						<th className='w-1/12'>#</th>
 						<th className='w-5/12'>
 							<ThButton field='name' sortingState={sortingState} handler={sortBy}>
 								{t('table.material')}
@@ -71,8 +67,7 @@ export default function MaterialTable({handleEdit = null} = {}) {
 				</thead>
 				<tbody>
 					{materials.getMaterials(sortingState).map((material, index) => {
-						
-						return <MaterialTableRow key={index} {...material} actions={{handleEdit}} />;
+						return <MaterialTableRow key={index} index={index} {...material} actions={{ handleEdit }} />;
 					})}
 				</tbody>
 			</table>
@@ -101,12 +96,10 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 	);
 }
 
-function MaterialTableRow({ materialId, name, unit, tax, price, actions }) {
-	
-
+function MaterialTableRow({ materialId, name, unit, tax, price, actions, index = 0 }) {
 	return (
 		<tr className='hover'>
-			<th>{materialId}</th>
+			<th>{index + 1}</th>
 			<td className='whitespace-normal'>{name}</td>
 			<td className='truncate' title={unit}>
 				{unit}
@@ -114,7 +107,9 @@ function MaterialTableRow({ materialId, name, unit, tax, price, actions }) {
 			<td>{tax}</td>
 			<td>{price}</td>
 			<td>
-				<button className='btn btn-ghost btn-sm' onClick={() => actions?.handleEdit(materialId)}><FaPencilAlt /></button>
+				<button className='btn btn-ghost btn-sm' onClick={() => actions?.handleEdit(materialId)}>
+					<FaPencilAlt />
+				</button>
 			</td>
 		</tr>
 	);

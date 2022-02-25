@@ -26,7 +26,10 @@
 		"submit": "Submit",
 		"add": "Add",
 		"delete": "Delete",
-		"deleteX": "Delete {{name}}"
+		"deleteX": "Delete {{name}}",
+		"deleteConfirm": "Are you sure?",
+		"yes" : "yes",
+		"no" : "no"
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",

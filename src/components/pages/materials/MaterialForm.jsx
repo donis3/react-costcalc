@@ -7,12 +7,13 @@ import { useFormHelper } from '../../../hooks/useFormHelper';
 import useFormHandler from '../../../hooks/useFormHandler';
 import useSchemaMaterials from '../../../hooks/schemas/useSchemaMaterials';
 import { toast } from 'react-toastify';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaTrashAlt } from 'react-icons/fa';
 
 export default function MaterialForm({ handleClose = null, loadMaterial = null } = {}) {
 	//Hooks
 	const { t } = useTranslation('pages/materials', 'translation');
 	const { selectUnitArray, priceWithTax, isMassUnit, selectCurrencyArray } = useFormHelper();
+	const [deleteConfirmStep, setDeleteConfirmStep] = useState(0);
 
 	//Form Validation with joi
 	const schema = useSchemaMaterials();
@@ -77,13 +78,50 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 	};
 
 	const handleDelete = () => {
-		if(!loadMaterial) return;
+		if (!loadMaterial) return;
 		const result = materials.deleteMaterial(formState.materialId);
-		if( result ) {
+		if (result) {
 			//success
 			toast.success(t('form.deleteSuccess', { name: result.name }));
 		}
 		handleClose();
+	};
+
+	//Delete button
+	let deleteButton = <></>;
+
+	if (loadMaterial) {
+		switch (deleteConfirmStep) {
+			case 1: {
+				//Step 1
+				deleteButton = (
+					<div>
+						<span className='mr-2 font-semibold'>{t('buttons.deleteConfirm', { ns: 'translation' })}</span>
+						<button className='btn btn-outline' onClick={() => setDeleteConfirmStep(0)}>
+							<FaTimes className='mr-1' />
+							{t('buttons.no', { ns: 'translation' })}
+						</button>
+						<button type='button' className='btn btn-outline ml-2 text-red-600' onClick={handleDelete}>
+							<FaCheck className='mr-1' />
+							{t('buttons.yes', { ns: 'translation' })}
+						</button>
+					</div>
+				);
+
+				break;
+			}
+			case 0:
+			default: {
+				//Idle state
+				deleteButton = (
+					<button className='btn btn-error' onClick={() => setDeleteConfirmStep(1)}>
+						<FaTrashAlt className='mr-1' />
+						{t('buttons.delete', { ns: 'translation' })}
+					</button>
+				);
+				break;
+			}
+		}
 	}
 
 	return (
@@ -150,12 +188,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 						{t('buttons.cancel', { ns: 'translation' })}
 					</button>
 				</div>
-				{loadMaterial && (
-					<button className='btn btn-error' onClick={handleDelete}>
-						<FaTrashAlt className='mr-1' />
-						{t('buttons.delete', { ns: 'translation' })}
-					</button>
-				)}
+				{deleteButton}
 			</div>
 		</form>
 	);

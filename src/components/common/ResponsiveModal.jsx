@@ -3,7 +3,13 @@ import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 import AppContext from '../../context/AppContext';
 
-export default function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null, width = 'lg:max-w-4xl' }) {
+export default function ResponsiveModal({
+	children,
+	title = null,
+	footer = null,
+	handleCloseBtn = null,
+	width = 'lg:max-w-4xl',
+}) {
 	const { windowType } = useContext(AppContext);
 
 	//Close modal when clicked outside
@@ -12,18 +18,17 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 		e.stopPropagation();
 
 		handleCloseBtn?.();
-		
 	};
 	//Close modal when clicked on btn
 	const handleButtonClick = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
+
 		handleCloseBtn?.();
 	};
 	//Don't close modal when clicked inside
 	const handleInsideClick = (e) => {
 		e.stopPropagation();
-
 	};
 
 	//Disable body scroll bar if its small screen
@@ -38,18 +43,13 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 		return () => document.body.classList.remove('overflow-y-hidden');
 	}, [windowType]);
 
-	
-
 	return (
 		// Wrapper Div
 		<div
-			className='lg:bg-opacity-70 bg-opacity-100 lg:bg-black bg-base-100 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full w-full'
+			className='responsive-modal lg:bg-opacity-70 bg-opacity-100 lg:bg-black bg-base-100 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full w-full'
 			onClick={handleOutsideClick}
 		>
-			<div
-				className={'fade-in relative p-0   lg:h-auto lg:w-full  h-full w-full ' + width}
-				onClick={handleInsideClick}
-			>
+			<div className={'fade-in relative p-0   lg:h-auto lg:w-full  h-full w-full ' + width} onClick={handleInsideClick}>
 				{/* Content Wrapper */}
 				<div className='relative bg-base-100 lg:rounded-lg lg:shadow h-auto lg:block flex flex-col justify-between  min-h-screen lg:min-h-full'>
 					{/* Show header if exists or show gap */}
@@ -62,8 +62,8 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 					)}
 					{/* Absolute Positioned Close Button */}
 					<div className='absolute top-5 right-5  text-base-content '>
-						<button className='btn-ghost rounded-md p-1'>
-							<AiOutlineClose className='text-2xl' onClick={handleButtonClick} />
+						<button className='btn-ghost rounded-md p-1' onClick={handleButtonClick}>
+							<AiOutlineClose className='text-2xl' />
 						</button>
 					</div>
 					{/* Body */}
@@ -72,7 +72,9 @@ export default function ResponsiveModal({ children, title = null, footer = null,
 					</div>
 					{/* Show Modal Footer if exists OR show blank gap*/}
 					{footer ? (
-						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300'>{footer}</div>
+						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300'>
+							{footer}
+						</div>
 					) : (
 						<div className='lg:h-10'></div>
 					)}
