@@ -10,15 +10,14 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
 	if (props.className) {
 		itemClass.push(props.className);
 	}
-	
-	
-	if(Array.isArray(error)) {
-		const errors = error.filter(err => typeof err === 'string' ? err : null);
-		if(errors.length > 0) showErrors = true;
-	}else if(error && typeof error === 'string' && error.trim().length > 0) {
+
+	if (Array.isArray(error)) {
+		const errors = error.filter((err) => (typeof err === 'string' ? err : null));
+		if (errors.length > 0) showErrors = true;
+	} else if (error && typeof error === 'string' && error.trim().length > 0) {
 		showErrors = true;
 	}
-	if( showErrors) itemClass.push('form-error');
+	if (showErrors) itemClass.push('form-error');
 
 	const mainLabel = (
 		<label className='label'>
@@ -61,16 +60,39 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
  * Generate jsx for form input type = text
  */
 const TextInput = (props) => {
-	const { name, value, ...attributes } = props;
+	const { name, value, filter, onChange, ...attributes } = props;
 	if (attributes?.children) delete attributes.children;
 	if (attributes?.type) delete attributes.type;
 	if (!name) console.warn('Input field is missing name attribute');
+
+	//Custom onChange handler
+	const handleChange = (e) => {
+		if (filter && filter === 'number') {
+			let filteredValue = e.target.value;
+			
+			if (filteredValue.length > 0) {
+				
+				filteredValue = filteredValue.replace(',', '.'); //replace comma with dot
+				filteredValue = filteredValue.replace(/[^0-9.-]/g, ''); //remove non number chars
+				//Remove leading zero
+				filteredValue = filteredValue.replace(/^0+/, '');
+				if( filteredValue.length === 0) filteredValue = '0';
+				filteredValue = filteredValue === '.' ? '0.' : filteredValue; //Replace one dot with 0.
+			}else {
+				filteredValue = '0';
+			}
+
+			e.target.value = filteredValue;
+		}
+		onChange(e);
+	};
 
 	return (
 		<input
 			type='text'
 			name={name}
 			value={value}
+			onChange={handleChange}
 			{...attributes}
 			className={props.className ? props.className : 'input input-bordered w-full max-w-lg'}
 		/>

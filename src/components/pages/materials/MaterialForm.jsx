@@ -33,7 +33,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 	} else {
 		formInitialState = {
 			materialId: materials.getNextId(),
-			name: '',
+			name: t('form.defaultName'),
 			unit: 'kg',
 			tax: 0,
 			price: 0,
@@ -54,10 +54,12 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 
 	//Custom form change handle middleware
 	const handleChange = (e) => {
+		//Add special change handlers
 		if (e.target.name === 'unit' && isMassUnit(e.target.value) === true) {
 			//A weight unit is selected. Reset density
 			setFieldState('density', '1.00');
 		}
+
 		return onChangeHandler(e);
 	};
 
@@ -136,12 +138,12 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 				{/* Unit price and currency */}
 				<FormInput
 					label={t('form.price')}
-					altLabel={t('form.priceAlt', { amount: priceWithTax(formState.price, formState.tax) })}
+					altLabel={t('form.priceAlt', { amount: priceWithTax(formState.price, formState.tax).toFixed(2) })}
 					className='col-span-2'
 					error={[hasError('price'), hasError('currency')]}
 				>
 					<FormInput.Group>
-						<FormInput.Text name='price' value={formState.price} onChange={handleChange} />
+						<FormInput.Text name='price' value={formState.price} onChange={handleChange} filter='number' />
 						<FormInput.Select
 							name='currency'
 							className='select select-bordered w-auto'
@@ -154,7 +156,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 
 				{/* Price Tax */}
 				<FormInput label={t('form.tax')} altLabel={t('form.taxAlt')} className='col-span-2' error={hasError('tax')}>
-					<FormInput.Number min='0' step='1' name='tax' value={formState.tax} onChange={handleChange} />
+					<FormInput.Text name='tax' value={formState.tax} onChange={handleChange}  filter='number'  />
 				</FormInput>
 
 				{/* Scale Unit  */}
@@ -167,9 +169,9 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 					label={t('form.density')}
 					altLabel={t('form.densityAlt', { interpolation: { escapeValue: false } })}
 					error={hasError('density')}
+					filter='number' 
 				>
-					<FormInput.Number
-						step='0.01'
+					<FormInput.Text
 						name='density'
 						disabled={isMassUnit(formState.unit)}
 						value={formState.density}

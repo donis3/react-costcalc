@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataContext from '../../../context/DataContext';
-import { FaCaretDown, FaCaretUp, FaPencilAlt } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp, FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import useStorageState from '../../../hooks/useStorageState';
 
-export default function MaterialTable({ handleEdit = null } = {}) {
+export default function MaterialTable({ handleEdit = null, handleInfo = null } = {}) {
 	const { materials } = useContext(DataContext);
 	const { t } = useTranslation('pages/materials');
-	const [sortingState, setSortingState] = useState({ field: 'materialId', asc: true });
+	//const [sortingState, setSortingState] = useState({ field: 'materialId', asc: true });
+	const [sortingState, setSortingState] = useStorageState('materials-table', { field: 'materialId', asc: true });
 
 	const sortBy = (field = null) => {
 		//Validation
@@ -27,6 +29,7 @@ export default function MaterialTable({ handleEdit = null } = {}) {
 			//Sorting a different column. Start with default
 			currentState = { field, asc: true };
 		}
+		
 		//set state
 		return setSortingState(currentState);
 	};
@@ -41,7 +44,7 @@ export default function MaterialTable({ handleEdit = null } = {}) {
 			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
 				<thead>
 					<tr>
-						<th className='w-1/12'>#</th>
+						<th className='w-1/12 font-semibold'>#</th>
 						<th className='w-5/12'>
 							<ThButton field='name' sortingState={sortingState} handler={sortBy}>
 								{t('table.material')}
@@ -67,7 +70,7 @@ export default function MaterialTable({ handleEdit = null } = {}) {
 				</thead>
 				<tbody>
 					{materials.getMaterials(sortingState).map((material, index) => {
-						return <MaterialTableRow key={index} index={index} {...material} actions={{ handleEdit }} />;
+						return <MaterialTableRow key={index} index={index} {...material} actions={{ handleEdit, handleInfo }} />;
 					})}
 				</tbody>
 			</table>
@@ -79,7 +82,7 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 	if (!field || !handler || !sortingState) {
 		return <>{children}</>;
 	}
-	const btnClass = 'uppercase font-bold flex items-center gap-1 w-auto mr-1';
+	const btnClass = 'uppercase font-semibold flex items-center gap-1 w-auto mr-1';
 
 	if (sortingState.field === field) {
 		return (
@@ -100,16 +103,27 @@ function MaterialTableRow({ materialId, name, unit, tax, price, actions, index =
 	return (
 		<tr className='hover'>
 			<th>{index + 1}</th>
-			<td className='whitespace-normal'>{name}</td>
+			<td className='whitespace-normal'>
+				<span className='font-medium cursor-pointer' onClick={() => actions?.handleInfo(materialId, name)}>
+					{name}
+				</span>
+			</td>
 			<td className='truncate' title={unit}>
 				{unit}
 			</td>
 			<td>{tax}</td>
 			<td>{price}</td>
 			<td>
-				<button className='btn btn-ghost btn-sm' onClick={() => actions?.handleEdit(materialId)}>
-					<FaPencilAlt />
-				</button>
+				{actions?.handleEdit && (
+					<button className='btn btn-ghost btn-sm mr-1' onClick={() => actions.handleEdit(materialId)}>
+						<FaPencilAlt />
+					</button>
+				)}
+				{actions?.handleInfo && (
+					<button className='btn btn-ghost btn-sm' onClick={() => actions.handleInfo(materialId, name)}>
+						<FaInfoCircle />
+					</button>
+				)}
 			</td>
 		</tr>
 	);

@@ -60,7 +60,7 @@ export function useFormHelper() {
 		price = parseFloat(price);
 		if (isNaN(price) || isNaN(tax)) {
 			//console.warn('Price Calculation: Invalid price or tax percentage supplied');
-			return '';
+			return 0;
 		}
 
 		return price + price * (tax / 100);

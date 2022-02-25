@@ -8,9 +8,14 @@
 		"tax": "Tax",
 		"price": "Price"
 	},
+	"info" : {
+		"notFound": "Material could not be loaded for material ID: {{id}}",
+		"title" : "Details for {{name}}"
+	},
 
 	"form": {
 		"title": "Add New Material",
+		"defaultName": "New Material Name",
 		"updateTitle": "Edit Material",
 		"name": "Material Name",
 		"nameAlt": "",

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Card from '../../common/Card';
 import ResponsiveModal from '../../common/ResponsiveModal';
 import MaterialForm from './MaterialForm';
+import MaterialInfo from './MaterialInfo';
 import MaterialTable from './MaterialTable';
 
 export default function Materials() {
@@ -15,7 +16,6 @@ export default function Materials() {
 	const closeModal = () => {
 		setModalOpen(false);
 		setModalContent(null);
-		
 	};
 	const handleOpenMaterialForm = () => {
 		setModalContent(<MaterialForm handleClose={closeModal} />);
@@ -24,16 +24,22 @@ export default function Materials() {
 	};
 
 	const handleEditMaterial = (materialId) => {
-		if(materialId === null || materialId === undefined) return;
+		if (materialId === null || materialId === undefined) return;
 		setModalContent(<MaterialForm handleClose={closeModal} loadMaterial={parseInt(materialId)} />);
 		setModalTitle(t('form.updateTitle'));
 		setModalOpen(true);
-	}
+	};
+
+	const handleShowMaterial = (materialId, materialName = null) => {
+		if(materialId === null || materialId === undefined) return;
+		setModalContent(<MaterialInfo handleClose={closeModal} materialId={parseInt(materialId)} />);
+		setModalTitle(t('info.title', {name: materialName}));
+		setModalOpen(true);
+	};
 
 	useEffect(() => {
 		//handleOpenMaterialForm()
-	},[])
-	
+	}, []);
 
 	return (
 		<>
@@ -46,8 +52,7 @@ export default function Materials() {
 				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
 				<p className='opacity-80'>{t('lead')}</p>
 
-				<MaterialTable handleEdit={handleEditMaterial} />
-				
+				<MaterialTable handleEdit={handleEditMaterial} handleInfo={handleShowMaterial} />
 			</Card>
 			{isModalOpen && (
 				<ResponsiveModal title={modalTitle} handleCloseBtn={closeModal} width='lg:max-w-4xl'>
