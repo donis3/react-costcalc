@@ -64,6 +64,7 @@ const setData = (key = null, data) => {
 		}
         //Save to storage
 		localStorage.setItem(key, jsonData);
+
         return true;
 	} catch (error) {
         //Error ocurred 

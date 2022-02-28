@@ -1,40 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import DataContext from '../../../context/DataContext';
 import { FaCaretDown, FaCaretUp, FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
-import useStorageState from '../../../hooks/useStorageState';
+
+
+import mockData from '../../../data/defaultData.json';
+import useSortTableByField from '../../../hooks/useSortTableByField';
 
 export default function MaterialTable({ handleEdit = null, handleInfo = null } = {}) {
-	const { materials } = useContext(DataContext);
+	//const { materials } = useContext(DataContext);
+	const { materials } = mockData;
 	const { t } = useTranslation('pages/materials');
-	//const [sortingState, setSortingState] = useState({ field: 'materialId', asc: true });
-	const [sortingState, setSortingState] = useStorageState('materials-table', { field: 'materialId', asc: true });
+	
 
-	const sortBy = (field = null) => {
-		//Validation
-		if (!field || materials.getKeys().includes(field) === false) {
-			//Invalid field
-			return;
-		}
-		//Copy current state
-		let currentState = { field: 'materialId', asc: true };
-		if (typeof sortingState === 'object' && 'field' in sortingState && 'asc' in sortingState) {
-			currentState = { ...sortingState };
-		}
+	const [sortingState, sortBy] = useSortTableByField('materials', ['materialId', 'name', 'unit', 'tax', 'price'], 'materialId');
+	
 
-		if (currentState.field === field) {
-			//If sorting field is same, change sort order
-			currentState.asc = !currentState.asc;
-		} else {
-			//Sorting a different column. Start with default
-			currentState = { field, asc: true };
-		}
 
-		//set state
-		return setSortingState(currentState);
-	};
 
-	if (materials.getCount() <= 0) {
+	if (materials.length <= 0) {
 		//No data
 		return <></>;
 	}
@@ -69,8 +52,8 @@ export default function MaterialTable({ handleEdit = null, handleInfo = null } =
 					</tr>
 				</thead>
 				<tbody>
-					{materials.getMaterials(sortingState).map((material, index) => {
-						return <MaterialTableRow key={index} index={index} {...material} actions={{ handleEdit, handleInfo }} />;
+					{mockData.materials.map((material, index) => {
+						return <MaterialTableRow key={index} index={index} {...material} />;
 					})}
 				</tbody>
 			</table>
@@ -78,6 +61,7 @@ export default function MaterialTable({ handleEdit = null, handleInfo = null } =
 	);
 }
 
+//Table Header Cells with sorting ability
 function ThButton({ children, field = null, handler = null, sortingState = null }) {
 	if (!field || !handler || !sortingState) {
 		return <>{children}</>;
@@ -99,12 +83,13 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 	);
 }
 
-function MaterialTableRow({ materialId, name, unit, tax, price, actions, index = 0 }) {
+//Table Rows
+function MaterialTableRow({ materialId, name, unit, tax, price, index = 0 }) {
 	return (
 		<tr className='hover'>
 			<th>{index + 1}</th>
 			<td className='whitespace-normal'>
-				<span className='font-medium cursor-pointer' onClick={() => actions?.handleInfo(materialId, name)}>
+				<span className='font-medium cursor-pointer' onClick={() => {}}>
 					{name}
 				</span>
 			</td>
@@ -114,16 +99,13 @@ function MaterialTableRow({ materialId, name, unit, tax, price, actions, index =
 			<td>{tax}</td>
 			<td>{price}</td>
 			<td>
-				{actions?.handleEdit && (
-					<button className='btn btn-ghost btn-sm mr-1' onClick={() => actions.handleEdit(materialId)}>
-						<FaPencilAlt />
-					</button>
-				)}
-				{actions?.handleInfo && (
-					<button className='btn btn-ghost btn-sm' onClick={() => actions.handleInfo(materialId, name)}>
-						<FaInfoCircle />
-					</button>
-				)}
+				<button className='btn btn-ghost btn-sm mr-1' onClick={() => {}}>
+					<FaPencilAlt />
+				</button>
+
+				<button className='btn btn-ghost btn-sm' onClick={() => {}}>
+					<FaInfoCircle />
+				</button>
 			</td>
 		</tr>
 	);
