@@ -43,30 +43,22 @@ const useWindowType = () => {
 		//Verify window exists
 		if (typeof window === undefined) return;
 
-		//Define resize handler function
-		function handleWindowResize() {
+		const changeWindowType = () => {
 			const currentWindowType = detectScreenType();
-
-			//Change state only if necessary
 			if (currentWindowType !== windowType) {
-				config.debug.stateChange && console.log(`WindowSize: state changed ${currentWindowType} -> ${windowType}`);
 				setWindowType(currentWindowType);
 			}
-		}
+		};
 
 		//Add resize event listener
-		window.addEventListener('resize', handleWindowResize);
-
-		//Run once for initial value
-		handleWindowResize();
+		window.addEventListener('resize', changeWindowType);
 
 		//remove event listener
-		return () => window.removeEventListener('resize', handleWindowResize);
-
+		return () => window.removeEventListener('resize', changeWindowType);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	
+	config.debug.windowType && console.log(`[WindowSize] ${windowType} `);
 	return { windowType };
 };
 

@@ -90,5 +90,20 @@ export default function useMaterialModel(materials, setMaterials) {
 		return requestedMaterial;
 	};
 
-	return { addMaterial, getMaterials, getCount, getKeys, getNextId, getMaterial, deleteMaterial };
+
+	//Create a material object with methods
+	const addMaterialFunctions = (material) => {
+		material.getPrice = function() {
+			return this.price + ' ' + this.currency;
+		}
+
+		return material;
+	}
+
+	const getMaterialById = (id) => {
+		const m = getMaterial(id);
+		return m ? addMaterialFunctions(m) : null;
+	}
+
+	return { addMaterial, getMaterials, getCount, getKeys, getNextId, getMaterial, deleteMaterial, getMaterialById };
 }

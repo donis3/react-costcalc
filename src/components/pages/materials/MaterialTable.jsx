@@ -29,7 +29,7 @@ export default function MaterialTable({ handleEdit = null, handleInfo = null } =
 			//Sorting a different column. Start with default
 			currentState = { field, asc: true };
 		}
-		
+
 		//set state
 		return setSortingState(currentState);
 	};

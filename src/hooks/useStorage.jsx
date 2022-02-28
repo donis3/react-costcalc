@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import config from '../config/config.json';
+import MaterialController from '../controllers/MaterialController';
 
 export default function useStorage() {
 	const [storage, setStorage] = useState(loadStorage());
@@ -9,6 +10,7 @@ export default function useStorage() {
 		
 		saveStorage(storage);
 	}, [storage]);
+
 
 	const getStoredData = (key = null) => {
 		if (!key) {

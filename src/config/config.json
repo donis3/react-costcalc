@@ -12,6 +12,7 @@
 		"themeHelper": false,
 		"i18next": false,
 		"stateChange": true,
-		"storage": true
+		"storage": true,
+		"windowType" : false
 	}
 }

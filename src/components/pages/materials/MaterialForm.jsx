@@ -129,7 +129,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 	return (
 		<form onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
 			{/* FORM GRID */}
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-2 mb-5 '>
+			<div className='grid md:grid-cols-2 grid-cols-1 gap-x-5 gap-y-2 mb-5 '>
 				{/* Material Name */}
 				<FormInput label={t('form.name')} altLabel={t('form.nameAlt')} className='col-span-2' error={hasError('name')}>
 					<FormInput.Text name='name' value={formState.name} onChange={handleChange} />
@@ -160,7 +160,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 				</FormInput>
 
 				{/* Scale Unit  */}
-				<FormInput label={t('form.unit')} altLabel={t('form.unitAlt')} error={hasError('unit')}>
+				<FormInput label={t('form.unit')} altLabel={t('form.unitAlt')} error={hasError('unit')} className='md:col-span-1 col-span-2'>
 					<FormInput.Select name='unit' options={selectUnitArray()} value={formState.unit} onChange={handleChange} />
 				</FormInput>
 
@@ -170,6 +170,7 @@ export default function MaterialForm({ handleClose = null, loadMaterial = null }
 					altLabel={t('form.densityAlt', { interpolation: { escapeValue: false } })}
 					error={hasError('density')}
 					filter='number' 
+					className='md:col-span-1 col-span-2'
 				>
 					<FormInput.Text
 						name='density'

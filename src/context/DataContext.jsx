@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
+import MaterialController from '../controllers/MaterialController';
 
 import useMaterialModel from '../hooks/useMaterialModel';
 import useStorage from '../hooks/useStorage';
@@ -10,6 +11,8 @@ export function DataContextProvider({ children }) {
 	const [materials, setMaterials] = useState(getMaterialsFromStorage(storage)); //Init state with current storage data
 	const materialModel = useMaterialModel(materials, setMaterials);
 
+	const materialController = new MaterialController(materials, setMaterials);
+
 	//When materials change, save it to local storage
 	useEffect(() => {
 		saveMaterialsToStorage(materials, storage);
@@ -18,6 +21,7 @@ export function DataContextProvider({ children }) {
 
 	const payload = {
 		materials: useMemo(() => materialModel, [materialModel]),
+		materialController
 	};
 
 	return <DataContext.Provider value={payload}>{children}</DataContext.Provider>;

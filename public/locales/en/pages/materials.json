@@ -8,9 +8,20 @@
 		"tax": "Tax",
 		"price": "Price"
 	},
-	"info" : {
+	"info": {
 		"notFound": "Material could not be loaded for material ID: {{id}}",
-		"title" : "Details for {{name}}"
+		"title": "Details for {{name}}"
+	},
+	"details": {
+		"materialId": "Material #",
+		"name": "Name",
+		"unit": "Unit",
+		"tax": "Tax %",
+		"price": "Price",
+		"priceWithTax": "Taxed Price",
+		"currency": "Price Currency",
+		"density": "Density",
+		"localPrice": "Price ({{currency}})"
 	},
 
 	"form": {
