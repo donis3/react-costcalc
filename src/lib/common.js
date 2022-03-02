@@ -9,12 +9,16 @@
  *
  */
 export function getMaxInArray(subject, propertyName, getObject = false) {
+	//If subject is not an array, return the property value of the subject
 	if (Array.isArray(subject) === false) {
 		if (propertyName in subject) {
 			return subject[propertyName];
 		} else {
 			return 0;
 		}
+	}
+	if( subject.length === 0) {
+		return 0;
 	}
 
 	const objectWithMaxValue = subject.reduce((previous, current) => {

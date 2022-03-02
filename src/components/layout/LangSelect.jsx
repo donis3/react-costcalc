@@ -15,7 +15,7 @@ export default function LangSelect({ isOpen = false, setIsOpen }) {
 	}
 
 	return (
-		<ResponsiveModal title={t('langSelect.title')} handleCloseBtn={() => setIsOpen(false)} >
+		<ResponsiveModal title={t('langSelect.title')} handleClose={() => setIsOpen(false)} >
 			<ul>
 				{language.all.map((item, index) => {
 					return (

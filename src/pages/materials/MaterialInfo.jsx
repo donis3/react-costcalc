@@ -1,29 +1,44 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import ResponsiveModal from '../../components/common/ResponsiveModal';
+import { useMaterialContext } from '../../context/MainContext';
 
-
-export default function MaterialInfo({ materialId = null }) {
+export default function MaterialInfo({ handleClose = null, materialId = null }) {
 	//Load dependencies
-	const { materials } = [];
+	const { Materials } = useMaterialContext();
 	const { t } = useTranslation('pages/materials');
+	const material = Materials.findById(materialId, true);
 
-	//Validate material id is int and load material data
-	if (typeof materialId !== 'number') materialId = 0;
-	const currentMaterial = materials.getMaterialById(materialId);
-	if (!currentMaterial) {
-		//Failed to load material
-		return <p className='font-medium text-error-content'>{t('info.notFound', { id: materialId })}</p>;
+	if (!material) {
+		//Show data
+		return (
+			<ResponsiveModal
+				title={t('error.notFound', {ns: 'translation'})}
+				handleClose={handleClose}
+				showSubmit={false}
+				autoFooter={true}
+			>
+				<p className='font-medium text-error-content'>{t('info.notFound', { id: materialId })}</p>
+			</ResponsiveModal>
+		);
 	}
 
-	const detailRows = generateDetailData(currentMaterial, t);
+	const detailRows = generateDetailData(material, t);
 
 	//Show data
 	return (
-		<div className='md:text-xl text-3xl grid grid-cols-12 gap-y-5 gap-x-10'>
-			{detailRows.map((item, index) => {
-				return <React.Fragment key={index}>{item}</React.Fragment>;
-			})}
-		</div>
+		<ResponsiveModal
+			title={t('info.title', { name: material.name })}
+			handleClose={handleClose}
+			showSubmit={false}
+			autoFooter={true}
+		>
+			<div className='md:text-xl text-2xl grid grid-cols-12 gap-y-5 gap-x-10'>
+				{detailRows.map((item, index) => {
+					return <React.Fragment key={index}>{item}</React.Fragment>;
+				})}
+			</div>
+		</ResponsiveModal>
 	);
 }
 
@@ -34,33 +49,48 @@ const generateDetailData = (data = {}, t = null) => {
 	const rows = [];
 
 	//Add each row
+	//name
+	if (data?.name !== null) {
+		rows.push(<MaterialDetailRow left={t('details.name')} right={data.name} />);
+	}
 
 	//id
 	if (data?.materialId !== null) {
 		rows.push(<MaterialDetailRow left={t('details.materialId')} right={data.materialId} />);
 	}
-	//name
-	if (data?.name !== null) {
-		rows.push(<MaterialDetailRow left={t('details.name')} right={data.name} />);
+
+	//Unit
+	if (data?.unit !== null) {
+		rows.push(<MaterialDetailRow left={t('details.unit')} right={data.fullUnit} />);
 	}
+	//density
+	if (data?.density !== null) {
+		rows.push(<MaterialDetailRow left={t('details.density')} right={data.fullDensity} />);
+	}
+
 	//Price
 	if (data?.price !== null) {
-		rows.push(<MaterialDetailRow left={t('details.price')} right={data.getPrice?.()} />);
+		rows.push(<MaterialDetailRow left={t('details.price')} right={data.fullPrice} leaveGap={true} />);
 	}
-    //Unit
-	if (data?.unit !== null) {
-		rows.push(<MaterialDetailRow left={t('details.unit')} right={data.getUnit?.()} />);
+	//Tax
+	if (data?.tax !== null) {
+		rows.push(<MaterialDetailRow left={t('details.tax')} right={data.fullTax} />);
+	}
+	//priceWithTax
+	if (data?.price !== null) {
+		rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={data.priceWithTax} />);
 	}
 
 	return rows;
 };
 
 //Display rows
-const MaterialDetailRow = ({ left = null, right = null }) => {
+const MaterialDetailRow = ({ left = null, right = null, leaveGap = false }) => {
+	const gapClass = leaveGap ? ' mt-5' : '';
 	return (
 		<>
-			<span className='font-bold col-span-4 w-fit h-auto  overflow-x-clip'>{left}</span>
-			<span className='col-span-8'>{right}</span>
+			<span className={'font-bold col-span-4 w-fit h-auto  overflow-x-clip' + gapClass}>{left}</span>
+			<span className={'col-span-8' + gapClass} dangerouslySetInnerHTML={{ __html: right }} />
 		</>
 	);
 };

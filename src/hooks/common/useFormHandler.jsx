@@ -52,10 +52,12 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	const onSubmitHandler = (e, customHandler) => {
 		e.preventDefault();
 		setIsSubmitted(true);
+		
 
 		const data = validateForm(formState);
 		if (!data) {
 			//There are errors do not submit
+			console.log(errors);
 		} else {
 			//there are no errors and we received a clean data object. Pass it down to form caller
 			customHandler(data);

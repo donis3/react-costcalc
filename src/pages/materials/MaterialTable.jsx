@@ -1,11 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCaretDown, FaCaretUp, FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import { useMaterialContext } from '../../context/MainContext';
+import useSortTableByField from '../../hooks/app/useSortTableByField';
 
-export default function MaterialTable({ materials = [], sortingState, sortBy, showInfo, showEdit } = {}) {
+export default function MaterialTable({ openModal = null } = {}) {
 	const { t } = useTranslation('pages/materials');
+	const { Materials } = useMaterialContext();
+	const [sortingState, sortBy] = useSortTableByField('materials', Materials.fields, Materials.fields[0]);
 
-	if (materials.length <= 0) {
+	if (Materials.count() <= 0) {
 		//No data
 		return <></>;
 	}
@@ -40,8 +44,8 @@ export default function MaterialTable({ materials = [], sortingState, sortBy, sh
 					</tr>
 				</thead>
 				<tbody>
-					{materials.map((material, index) => {
-						return <MaterialTableRow key={index} index={index} {...material} showEdit={showEdit} />;
+					{Materials.getAll(sortingState).map((material, index) => {
+						return <MaterialTableRow key={index} index={index} {...material} openModal={openModal} />;
 					})}
 				</tbody>
 			</table>
@@ -72,12 +76,12 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 }
 
 //Table Rows
-function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, showEdit = null }) {
+function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, openModal = null}) {
 	return (
 		<tr className='hover'>
-			<th>{index+1}</th>
+			<th>{index + 1}</th>
 			<td className='whitespace-normal'>
-				<span className='font-medium cursor-pointer' onClick={() => {}}>
+				<span className='font-medium cursor-pointer' onClick={() => openModal?.('info', materialId)}>
 					{name}
 				</span>
 			</td>
@@ -87,11 +91,11 @@ function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, showE
 			<td>{tax}</td>
 			<td>{price}</td>
 			<td>
-				<button className='btn btn-ghost btn-sm mr-1' onClick={() => showEdit(materialId)}>
+				<button className='btn btn-ghost btn-sm mr-1' onClick={() => openModal('edit', materialId)}>
 					<FaPencilAlt />
 				</button>
 
-				<button className='btn btn-ghost btn-sm' onClick={() => {}}>
+				<button className='btn btn-ghost btn-sm' onClick={() => openModal?.('info', materialId)}>
 					<FaInfoCircle />
 				</button>
 			</td>

@@ -2,13 +2,16 @@ import React, { useEffect, useContext } from 'react';
 import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 import AppContext from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
 
 export default function ResponsiveModal({
 	children,
 	title = null,
 	footer = null,
-	handleCloseBtn = null,
 	width = 'lg:max-w-4xl',
+	handleClose = null,
+	showSubmit = false,
+	autoFooter = false,
 }) {
 	const { windowType } = useContext(AppContext);
 
@@ -17,14 +20,14 @@ export default function ResponsiveModal({
 		e.preventDefault();
 		e.stopPropagation();
 
-		handleCloseBtn?.();
+		handleClose?.();
 	};
 	//Close modal when clicked on btn
 	const handleButtonClick = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		handleCloseBtn?.();
+		handleClose?.();
 	};
 	//Don't close modal when clicked inside
 	const handleInsideClick = (e) => {
@@ -71,15 +74,43 @@ export default function ResponsiveModal({
 						{children}
 					</div>
 					{/* Show Modal Footer if exists OR show blank gap*/}
-					{footer ? (
-						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300 bg-base-100'>
-							{footer}
-						</div>
-					) : (
-						<div className='lg:h-10'></div>
-					)}
+					{footer ? <ModalFooter>{footer}</ModalFooter> : <div className='lg:h-10'></div>}
+					{autoFooter && <ModalFooterAuto showSubmit={showSubmit} handleClose={handleClose} />}
 				</div>
 			</div>
 		</div>
 	);
 }
+
+//Auto generate a form submit button and a close modal button
+const ModalFooterAuto = ({ handleClose = null, showSubmit = null } = {}) => {
+	const { t } = useTranslation('translation');
+	if ((!handleClose || typeof handleClose !== 'function') && !showSubmit) {
+		return <></>;
+	}
+
+	return (
+		<ModalFooter>
+			{/* Show Submit Btn */}
+			{showSubmit && (
+				<button type='submit' className='btn btn-primary btn-outline'>
+					{t('buttons.submit')}
+				</button>
+			)}
+			{/* Show Close Btn */}
+			{handleClose && typeof handleClose === 'function' && (
+				<button type='button' className='btn btn-ghost btn-outline' onClick={handleClose}>
+					{t('buttons.close')}
+				</button>
+			)}
+		</ModalFooter>
+	);
+};
+
+const ModalFooter = ({ children }) => {
+	return (
+		<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300 bg-base-100'>
+			{children}
+		</div>
+	);
+};

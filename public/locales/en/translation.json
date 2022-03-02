@@ -1,4 +1,8 @@
 {
+	"error": {
+		"error": "Error",
+		"notFound": "Not Found"
+	},
 	"header": {
 		"home": "Homepage",
 		"notfound": "Not-Found",
@@ -41,19 +45,19 @@
 	"units": {
 		"mass": "Mass",
 		"volume": "Volume",
-		"mg_one": "Milligram",
+		"mg": "Milligram",
 		"mg_other": "Milligrams",
-		"g_one": "Gram",
+		"g": "Gram",
 		"g_other": "Grams",
-		"kg_one": "Kilogram",
+		"kg": "Kilogram",
 		"kg_other": "Kilograms",
-		"t_one": "Tonne",
+		"t": "Tonne",
 		"t_other": "Tonnes",
-		"cc_one": "Cubic Centimeter",
+		"cc": "Cubic Centimeter",
 		"cc_other": "Cubic Centimeters",
-		"mL_one": "Milliliter",
+		"mL": "Milliliter",
 		"mL_other": "Milliliters",
-		"L_one": "Liter",
+		"L": "Liter",
 		"L_other": "Liters"
 	},
 	"currency": {

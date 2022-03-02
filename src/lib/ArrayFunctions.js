@@ -17,6 +17,9 @@ export default class ArrayFunctions {
 				return 0;
 			}
 		}
+		if( subject.length === 0) {
+			return 0;
+		}
 
 		const objectWithMaxValue = subject.reduce((previous, current) => {
 			if (current[propertyName] > previous[propertyName]) {

@@ -12,7 +12,7 @@ export default function ThemeSelect({ isOpen = false, setIsOpen }) {
 	}
 
 	return (
-		<ResponsiveModal title={t('themeSelect.title')} handleCloseBtn={() => setIsOpen(false)}>
+		<ResponsiveModal title={t('themeSelect.title')} handleClose={() => setIsOpen(false)}>
 			<ul>
 				{theme.all.map((item, i) => {
 					return (

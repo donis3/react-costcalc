@@ -9,6 +9,13 @@ export default function materialsReducer(state, { type = null, payload = null, s
 			const nextMaterialId = getMaxInArray(state, 'materialId', false) + 1;
 			//Add to payload
 			payload.materialId = nextMaterialId;
+			//Validate payload
+			payload = validateMaterialData(payload);
+			if(!payload) {
+				//Invalid data
+				error?.();
+				return state;
+			}
 			//callback
 			if (typeof success === 'function') success();
 			//Set new state
@@ -23,6 +30,14 @@ export default function materialsReducer(state, { type = null, payload = null, s
 				error?.();
 				return state;
 			}
+			//Validate payload
+			payload = validateMaterialData(payload);
+			if(!payload) {
+				//Invalid data
+				error?.();
+				return state;
+			}
+
 			//Create new state with updated item
 			const result = state.map((item) => {
 				if( item.materialId !== payload.materialId){
@@ -36,6 +51,23 @@ export default function materialsReducer(state, { type = null, payload = null, s
 			//callback
 			if (typeof success === 'function') success();
 			//
+			return result;
+		}
+
+		/* Delete existing material */
+		case 'delete': {
+			//Confirm material exists
+			if (!state.find((item) => item.materialId === payload.materialId)) {
+				//Couldnt find requested item
+				error?.();
+				return state;
+			}
+			//Create new state without the item
+			const result = state.filter((item) => item.materialId !== payload.materialId );
+
+			//callback
+			if (typeof success === 'function') success();
+			//return new state
 			return result;
 		}
 
@@ -53,7 +85,7 @@ function validateMaterialData(data = null, materialId = null) {
 		return null;
 	}
 	//If a material id is provided, add it to object
-	if (materialId && typeof materialId === 'number' && materialId > 0) {
+	if (materialId && typeof materialId === 'number' ) {
 		data.materialId = materialId;
 	}
 

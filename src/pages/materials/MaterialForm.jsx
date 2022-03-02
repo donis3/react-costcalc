@@ -7,12 +7,7 @@ import ResponsiveModal from '../../components/common/ResponsiveModal';
 //Form is handled by this hook.
 import useMaterialsForm from '../../hooks/materials/useMaterialsForm';
 
-export default function MaterialForm({
-	materials = null,
-	dispatch = null,
-	handleClose = null,
-	materialId = null,
-} = {}) {
+export default function MaterialForm({ handleClose = null, materialId = null } = {}) {
 	//Hooks
 	const { t } = useTranslation('pages/materials', 'translation');
 
@@ -28,13 +23,7 @@ export default function MaterialForm({
 		deleteButtonHandler,
 		config,
 		priceWithTax,
-	} = useMaterialsForm({
-		materials: materials,
-		dispatch: dispatch,
-		materialId: materialId,
-		onSuccess: handleClose,
-		onDelete: handleClose,
-	});
+	} = useMaterialsForm({ materialId: materialId, onSuccess: handleClose, onDelete: handleClose });
 
 	//Footer Elements
 	const footer = (
@@ -48,7 +37,7 @@ export default function MaterialForm({
 		<form onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>
 			<ResponsiveModal
 				title={material ? t('form.updateTitle') : t('form.title')}
-				handleCloseBtn={handleClose}
+				handleClose={handleClose}
 				footer={footer}
 			>
 				{/* FORM GRID */}

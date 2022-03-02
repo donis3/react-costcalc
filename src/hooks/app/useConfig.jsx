@@ -7,6 +7,7 @@ export default function useConfig() {
 	return new Config(config, t);
 }
 
+//==========================================//
 //Define Class
 class Config {
 	//Data storage
@@ -34,6 +35,7 @@ class Config {
 		return getDeepValue(this.configData, name);
 	}
 
+	//===================| CURRENCIES |=======================//
 	checkCurrencies() {
 		if (!this.configData?.applicationData?.currencies) return false;
 		if (!Array.isArray(this.configData.applicationData.currencies)) return false;
@@ -96,6 +98,17 @@ class Config {
 
 		return arrayOfCurrencies;
 	}
+
+	//return symbol if found or code if not
+	getCurrencySymbol(code = null) {
+		const currencies = this.getCurrencies(false);
+		if (!currencies || Array.isArray(currencies) === false || code === null) return code;
+
+		const result = currencies.find((cur) => cur.code === code);
+		return result ? result.symbol : code;
+	}
+
+	//===================| UNITS |=======================//
 
 	getLocalizedUnitSelectOptions({ weight = true, volume = true }) {
 		const units = { weight: this.getUnits('weight'), volume: this.getUnits('volume') };
@@ -161,6 +174,7 @@ class Config {
 		return result ? result.type : null;
 	}
 }
+//==========================================//
 
 //Helper to get deep nested property
 function getDeepValue(o, s) {
