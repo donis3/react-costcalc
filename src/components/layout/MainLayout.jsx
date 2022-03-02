@@ -1,5 +1,4 @@
 import React from 'react';
-import BottomPanel from '../common/BottomPanel';
 import Breadcrumb from './Breadcrumb';
 
 export default function MainLayout({ children, header, footer }) {
@@ -19,7 +18,6 @@ export default function MainLayout({ children, header, footer }) {
 				</main>
 				<footer>{footer}</footer>
 			</div>
-			<BottomPanel></BottomPanel>
 		</>
 	);
 }

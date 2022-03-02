@@ -2,7 +2,7 @@ import { useState } from 'react';
 //Will get 2 keys from config
 // config.debug.storage for verbose errors
 // config.app.localStorageKey for app specific unique storage key
-import config from '../config/config.json'; 
+import config from '../../config/config.json'; 
 
 
 //Store multiple tables at same local storage key
@@ -97,9 +97,19 @@ const getStorageRepo = (repoName = null) => {
 
 //Save data to repo/item and return saved data back
 const saveStorageItem = (repoName = null, itemName = null, data = null) => {
+	//Get repo key
+	const repoKey = getRepoStorageKey(repoName);
+
+	//Try to get old data
+	let currentRepoString = '';
 	try {
-		//Get repo key
-		const repoKey = getRepoStorageKey(repoName);
+		currentRepoString = localStorage.getItem(repoKey);
+	} catch (error) {
+		//Couldnt read old data
+	}
+
+	//Save new data
+	try {
 		if (!repoKey) throw new Error('Repo key could not be generated');
 		//Get current repo
 		const currentRepo = getStorageRepo(repoName);
@@ -107,8 +117,15 @@ const saveStorageItem = (repoName = null, itemName = null, data = null) => {
 		const newRepo = { ...currentRepo, [itemName]: data };
 		//Create Json Data
 		const newRepoString = JSON.stringify(newRepo);
+		//Compare to old data
+		if(currentRepoString === newRepoString) {
+			//Current storage data and new data are the same. No need to save
+			return null;
+		}
 		//Save to storage
 		localStorage.setItem(repoKey, newRepoString);
+
+		config.debug.storage && console.log(`Saved data to ${repoName}/${itemName}`);
 		//return data back
 		return data;
 	} catch (error) {

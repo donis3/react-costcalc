@@ -1,6 +1,22 @@
 {
 	"materials": [
-		{ "materialId": 1, "name": "Potassium Chloride", "unit": "kg", "tax": "18", "price": 8.4, "currency": "USD" },
-		{ "materialId": 2, "name": "Hydrochloric Acid", "unit": "kg", "tax": "18", "price": 2.9, "currency": "USD" }
+		{
+			"materialId": 1,
+			"name": "Potassium Chloride",
+			"unit": "kg",
+			"tax": "18",
+			"price": 8.4,
+			"currency": "USD",
+			"density": 1
+		},
+		{
+			"materialId": 2,
+			"name": "Hydrochloric Acid",
+			"unit": "kg",
+			"tax": "18",
+			"price": 2.9,
+			"currency": "USD",
+			"density": 1
+		}
 	]
 }

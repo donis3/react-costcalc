@@ -1,5 +1,5 @@
-import useStorageRepo from './useStorageRepo';
-import config from '../config/config.json';
+import useStorageRepo from '../common/useStorageRepo';
+import config from '../../config/config.json';
 
 export default function useSortTableByField(tableName = 'tbl', fields = [], defaultField = null) {
 	const [sortState, setSortState] = useStorageRepo(

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import themeConfig from '../../config/theme';
 import { FaBars } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../../img/cost-logo.svg';
 import './Navbar.css';
@@ -18,7 +17,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<nav className={`relative px-3 lg:px-5 py-3 ${themeConfig.navbar.bg}`}>
+			<nav className={`relative px-3 lg:px-5 py-3 bg-neutral`}>
 				<div className='container  mx-auto flex flex-wrap items-center justify-between'>
 					<div className='w-full flex justify-between lg:w-auto'>
 						

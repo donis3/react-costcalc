@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect,  useState } from 'react';
 
 const useFormHandler = ({ formState = null, setFormState = null, schema = null }) => {
 	const [errors, setErrors] = useState([]);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+	const [isSubmitted, setIsSubmitted] = useState(false);
+	
+
+	useEffect(() => {
+		validateForm(formState);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [formState]);
 
 	/**
 	 * Validate a form using schema and return clean data if it passes
@@ -15,26 +22,24 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 
 		const result = schema.validate(formData);
 
-
-        //There are errors
+		//There are errors
 		if (result.error && result.error.details) {
-            const newErrorState = [];
-            //Loop through errors
+			const newErrorState = [];
+			//Loop through errors
 			result.error.details.forEach((err) => {
 				const key = err?.context?.key;
 				const message = err?.message;
 				if (!key) return;
-                //Push the new error to the array
-                newErrorState.push({key, message});
+				//Push the new error to the array
+				newErrorState.push({ key, message });
 			});
-            //Refresh state
-            setErrors(newErrorState);
+			//Refresh state
+			setErrors(newErrorState);
 			return null;
-		}else {
+		} else {
 			//no errors, remove error state
 			setErrors([]);
 		}
-
 		//Return clean validated form data
 		return result?.value;
 	};
@@ -46,13 +51,13 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	 */
 	const onSubmitHandler = (e, customHandler) => {
 		e.preventDefault();
-        setIsSubmitted(true);
+		setIsSubmitted(true);
 
 		const data = validateForm(formState);
 		if (!data) {
-			//There are errors
+			//There are errors do not submit
 		} else {
-            //there are no errors and we received a clean data object. Pass it down to form caller
+			//there are no errors and we received a clean data object. Pass it down to form caller
 			customHandler(data);
 		}
 	};
@@ -67,10 +72,8 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 			if (name in currentState === false) {
 				return currentState;
 			}
-			return {
-				...currentState,
-				[name]: value,
-			};
+			const newState = { ...currentState, [name]: value };
+			return newState;
 		});
 	};
 
@@ -86,13 +89,8 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		}
 		if (name in formState === false) {
 			//This field does not exist in state.
-			console.log(`FormHandler Error: Form State doesnt have a field named [${name}]`);
+			console.log(`FormHandler Error: Form State doesn't have a field named [${name}]`);
 			return;
-		}
-		const newState = { ...formState, [name]: value };
-		if (validateForm(newState) === null) {
-			//There are errors
-            
 		}
 
 		//Set state
@@ -107,24 +105,22 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	/**
 	 * If a form field has errors, return it or return false
 	 * @param {string} fieldName form field name
-     * @returns {boolean, string} message for the field or false
+	 * @returns {boolean, string} message for the field or false
 	 */
 	const hasError = (fieldName) => {
 		const result = errors.find((err) => err.key === fieldName);
 
-        //hide before submit if field is empty
-        if(isSubmitted === false && fieldName in formState && !formState[fieldName] ){
-            //Form field is yet empty and form is not yet submitted. remove error
-            return false;
-        }
+		//hide before submit if field is empty
+		if (isSubmitted === false && fieldName in formState && !formState[fieldName]) {
+			//Form field is yet empty and form is not yet submitted. remove error
+			return false;
+		}
 
-		
-
-        return result ? result.message : false;
+		return result ? result.message : false;
 	};
 
 	//exports
-	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError};
+	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError };
 };
 
 export default useFormHandler;

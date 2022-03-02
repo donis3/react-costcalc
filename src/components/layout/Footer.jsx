@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import Icon from '../common/Icon';
 import config from '../../config/config.json';
 import { useTranslation } from 'react-i18next';
-import ThemeSelect from '../navbar/ThemeSelect';
+import ThemeSelect from './ThemeSelect';
 import AppContext from '../../context/AppContext';
+
 
 export default function Footer() {
 	const { t } = useTranslation();

@@ -1,15 +1,15 @@
-import useJoi from '../useJoi';
-import units from '../../data/units.json';
-import currencies from '../../data/currencies.json';
+import useJoi from '../common/useJoi';
 import { useTranslation } from 'react-i18next';
+import useConfig from '../app/useConfig';
 
 export default function useSchemaMaterials() {
+	const config = useConfig();
 	//Get custom joi instance
 	const Joi = useJoi({ abortEarly: false, convert: true });
 	//Load materials translations
 	const { t } = useTranslation('pages/materials');
 	//Load validation schema
-	const schema = getMaterialFormSchema(Joi, t);
+	const schema = getMaterialFormSchema(Joi, t, config.getUnitsArray(), config.getCurrenciesArray());
 
 	//Define validation function
 	const validate = (data) => {
@@ -20,11 +20,8 @@ export default function useSchemaMaterials() {
 }
 
 // Schema Definition
-const getMaterialFormSchema = (JoiInstance, t) => {
+const getMaterialFormSchema = (JoiInstance, t, allowedUnits = ['kg'], allowedCurrencies = ['TRY']) => {
 	if (!JoiInstance || typeof t !== 'function') return null;
-
-	const allowedUnits = [...units.mass, ...units.volume].map((unit) => unit.name);
-	const allowedCurrencies = currencies.map((cur) => cur.code);
 
 	const materialFormSchema = JoiInstance.object({
 		materialId: JoiInstance.number().min(0).required().label(t('form.materialId')),

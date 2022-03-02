@@ -44,7 +44,9 @@
 		"taxAlt": "Tax Percentage",
 		"materialId": "Material Id",
 		"addSuccess": "Added {{name}} to materials",
+		"addFail": "Couldn't add material.",
 		"updateSuccess": "Updated {{name}}",
+		"updateFail": "Couldn't update material.",
 		"deleteSuccess": "Deleted {{name}} from materials"
 	}
 }

@@ -13,6 +13,70 @@
 		"i18next": false,
 		"stateChange": true,
 		"storage": true,
-		"windowType" : false
+		"windowType": false
+	},
+	"applicationData": {
+		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",
+		"currencies": [
+			{
+				"code": "USD",
+				"value": 14,
+				"symbol": "$",
+				"disabled": false,
+				"default": false
+			},
+			{
+				"code": "EUR",
+				"value": 18,
+				"symbol": "€",
+				"disabled": false,
+				"default": false
+			},
+			{
+				"code": "TRY",
+				"value": 1,
+				"symbol": "₺",
+				"disabled": false,
+				"default": true
+			}
+		],
+		"unitsComment": "Weight value represents x/kg volume value represents x/L",
+		"units": [
+			{
+				"name": "mg",
+				"type": "weight",
+				"value": 0.000001
+			},
+			{
+				"name": "g",
+				"type": "weight",
+				"value": 0.001
+			},
+			{
+				"name": "kg",
+				"type": "weight",
+				"value": 1
+			},
+			{
+				"name": "t",
+				"type": "weight",
+				"value": 1000
+			},
+			{
+				"name": "mL",
+				"type": "volume",
+				"value": 0.001
+			},
+			{
+				"name": "cc",
+				"type": "volume",
+				"value": 0.001
+			},
+			{
+				"name": "L",
+				"type": "volume",
+				"value": 1
+			}
+		]
 	}
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import config from '../config/config.json';
-import MaterialController from '../controllers/MaterialController';
+import config from '../../config/config.json';
 
-export default function useStorage() {
+
+function useStorage() {
 	const [storage, setStorage] = useState(loadStorage());
 
 	//When storage changes, save new state to local storage

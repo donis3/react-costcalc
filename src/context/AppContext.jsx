@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useWindowType from '../hooks/useWindowType';
+import useWindowType from '../hooks/common/useWindowType';
 import { getLangDetails } from '../helpers/languages';
 import { getCurrentTheme, setCurrentTheme, getAllThemes } from '../helpers/themeHelper';
 import config from '../config/config.json';

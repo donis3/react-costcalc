@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import DataContext from '../../../context/DataContext';
+
 
 export default function MaterialInfo({ materialId = null }) {
 	//Load dependencies
-	const { materials } = useContext(DataContext);
+	const { materials } = [];
 	const { t } = useTranslation('pages/materials');
 
 	//Validate material id is int and load material data

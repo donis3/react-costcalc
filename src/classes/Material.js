@@ -1,15 +1,35 @@
-export default class Material {
-	//Material definitions
-	static fields = ['materialId', 'name', 'price', 'tax', 'currency', 'unit', 'density'];
-	static numericFields = ['materialId', 'price', 'tax', 'density'];
-	static textFields = ['name', 'currency', 'unit'];
+import MaterialDefinition from './MaterialDefinition';
 
-	static isFieldNumeric(fieldname) {
-		if (!fieldname || typeof fieldname !== 'string') return false;
-		return Material.numericFields.includes(fieldname);
+export default class Material extends MaterialDefinition {
+	original = null; //Data that is originally loaded
+
+	//Copy given properties to this instance
+	constructor(materialData) {
+		super(materialData); //Mandatory
+		const filteredData = Material.validateData(materialData);
+		if (filteredData) {
+			Object.keys(filteredData).forEach((key) => (this[key] = filteredData[key]));
+			this.original = { ...filteredData }; //Backup original data
+		}
 	}
-    static isFieldString(fieldname) {
-		if (!fieldname || typeof fieldname !== 'string') return false;
-		return Material.textFields.includes(fieldname);
+
+	//If any values are changed, return new object or null
+	isModified() {
+		//Map new data
+		const newData = Material.fields.reduce((accumulator, currentField) => {
+			return { ...accumulator, [currentField]: this[currentField] };
+		}, {});
+		//Compare to original
+		const changedValues = Material.fields.reduce((total, current) => {
+			if (newData[current] === this.original[current]) {
+				//Both data are the same
+				return total;
+			}
+			return total + 1;
+		}, 0);
+		//Nothing to save
+		if( changedValues === 0) return null;
+
+		return newData;
 	}
 }

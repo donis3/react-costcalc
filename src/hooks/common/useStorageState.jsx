@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import config from '../config/config.json';
+//Will get 2 keys from config
+// config.debug.storage for verbose errors
+// config.app.localStorageKey for app specific unique storage key
+import config from '../../config/config.json';
 
 /**
  * Use browser local storage to have persistent state.

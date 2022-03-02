@@ -28,8 +28,8 @@
 		"delete": "Delete",
 		"deleteX": "Delete {{name}}",
 		"deleteConfirm": "Are you sure?",
-		"yes" : "yes",
-		"no" : "no"
+		"yes": "yes",
+		"no": "no"
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
@@ -60,5 +60,10 @@
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira"
+	},
+	"errorBoundary": {
+		"title": "Application Crashed!",
+		"message": "There was an error and application had to stop. You can find more information about the error in the browser console. Please reset the application if error persists.",
+		"button": "Go to Homepage"
 	}
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './components/pages/HomePage';
-import Materials from './components/pages/materials/Materials';
-import NotFound from './components/pages/NotFound';
+import HomePage from './pages/HomePage';
+import Materials from './pages/materials/Materials';
+import NotFound from './pages/NotFound';
 
 
 export default function Router() {

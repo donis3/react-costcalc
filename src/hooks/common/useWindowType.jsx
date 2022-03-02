@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import config from '../config/config.json';
+import config from '../../config/config.json';
 
 /* Configuration */
 const defaultSize = { height: 768, width: 1024 };

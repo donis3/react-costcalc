@@ -3,26 +3,21 @@ import Footer from './components/layout/Footer';
 
 import Router from './Router';
 import { loadThemeFromStorage } from './helpers/themeHelper';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/layout/Navbar';
 import { AppContextProvider } from './context/AppContext';
-import { PanelContextProvider } from './context/PanelContext';
-import { DataContextProvider } from './context/DataContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorBoundary from './components/common/ErrorBoundary';
+
 function App() {
 	loadThemeFromStorage();
 
 	return (
-		<>
+		<ErrorBoundary>
 			<AppContextProvider>
-				<DataContextProvider>
-					<PanelContextProvider>
-						{/* <MainLayout footer={<Footer />} header={<NavBar />}> */}
-						<MainLayout footer={<Footer />} header={<Navbar />}>
-							<Router />
-						</MainLayout>
-					</PanelContextProvider>
-				</DataContextProvider>
+				<MainLayout footer={<Footer />} header={<Navbar />}>
+					<Router />
+				</MainLayout>
 			</AppContextProvider>
 			<ToastContainer
 				position='top-center'
@@ -35,7 +30,7 @@ function App() {
 				draggable={false}
 				pauseOnHover
 			/>
-		</>
+		</ErrorBoundary>
 	);
 }
 

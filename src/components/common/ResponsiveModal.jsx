@@ -72,7 +72,7 @@ export default function ResponsiveModal({
 					</div>
 					{/* Show Modal Footer if exists OR show blank gap*/}
 					{footer ? (
-						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300'>
+						<div className='flex justify-start items-center p-6 space-x-2 rounded-b border-t border-base-300 bg-base-100'>
 							{footer}
 						</div>
 					) : (

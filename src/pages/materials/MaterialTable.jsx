@@ -2,20 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCaretDown, FaCaretUp, FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
 
-
-import mockData from '../../../data/defaultData.json';
-import useSortTableByField from '../../../hooks/useSortTableByField';
-
-export default function MaterialTable({ handleEdit = null, handleInfo = null } = {}) {
-	//const { materials } = useContext(DataContext);
-	const { materials } = mockData;
+export default function MaterialTable({ materials = [], sortingState, sortBy, showInfo, showEdit } = {}) {
 	const { t } = useTranslation('pages/materials');
-	
-
-	const [sortingState, sortBy] = useSortTableByField('materials', ['materialId', 'name', 'unit', 'tax', 'price'], 'materialId');
-	
-
-
 
 	if (materials.length <= 0) {
 		//No data
@@ -52,8 +40,8 @@ export default function MaterialTable({ handleEdit = null, handleInfo = null } =
 					</tr>
 				</thead>
 				<tbody>
-					{mockData.materials.map((material, index) => {
-						return <MaterialTableRow key={index} index={index} {...material} />;
+					{materials.map((material, index) => {
+						return <MaterialTableRow key={index} index={index} {...material} showEdit={showEdit} />;
 					})}
 				</tbody>
 			</table>
@@ -84,10 +72,10 @@ function ThButton({ children, field = null, handler = null, sortingState = null 
 }
 
 //Table Rows
-function MaterialTableRow({ materialId, name, unit, tax, price, index = 0 }) {
+function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, showEdit = null }) {
 	return (
 		<tr className='hover'>
-			<th>{index + 1}</th>
+			<th>{index+1}</th>
 			<td className='whitespace-normal'>
 				<span className='font-medium cursor-pointer' onClick={() => {}}>
 					{name}
@@ -99,7 +87,7 @@ function MaterialTableRow({ materialId, name, unit, tax, price, index = 0 }) {
 			<td>{tax}</td>
 			<td>{price}</td>
 			<td>
-				<button className='btn btn-ghost btn-sm mr-1' onClick={() => {}}>
+				<button className='btn btn-ghost btn-sm mr-1' onClick={() => showEdit(materialId)}>
 					<FaPencilAlt />
 				</button>
 
