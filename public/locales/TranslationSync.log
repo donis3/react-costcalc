@@ -1,5 +1,54 @@
 
 
+[03.03.2022 12:33:09] Sync Started...
+[03.03.2022 12:33:09] [tr] Writing over key [button]
+[03.03.2022 12:33:09] [tr] Writing over key [message]
+[03.03.2022 12:33:09] [tr] Writing over key [title]
+[03.03.2022 12:33:09] [tr] Creating missing key [errorBoundary]
+[03.03.2022 12:33:09] [tr] Writing over key [L]
+[03.03.2022 12:33:09] [tr] Writing over key [mL]
+[03.03.2022 12:33:09] [tr] Writing over key [cc]
+[03.03.2022 12:33:09] [tr] Writing over key [t]
+[03.03.2022 12:33:09] [tr] Writing over key [kg]
+[03.03.2022 12:33:09] [tr] Writing over key [g]
+[03.03.2022 12:33:09] [tr] Writing over key [mg]
+[03.03.2022 12:33:09] [tr] Writing over key [no]
+[03.03.2022 12:33:09] [tr] Writing over key [yes]
+[03.03.2022 12:33:09] [tr] Writing over key [deleteConfirm]
+[03.03.2022 12:33:09] [tr] Writing over key [deleteX]
+[03.03.2022 12:33:09] [tr] Writing over key [delete]
+[03.03.2022 12:33:09] [tr] Writing over key [notFound]
+[03.03.2022 12:33:09] [tr] Writing over key [error]
+[03.03.2022 12:33:09] [tr] Creating missing key [error]
+[03.03.2022 12:33:09] [en] Synchronization started for: public\locales\en\translation.json
+[03.03.2022 12:33:09] [tr] Writing over key [products]
+[03.03.2022 12:33:09] [en] Synchronization started for: public\locales\en\routes.json
+[03.03.2022 12:33:09] [en] Synchronization started for: public\locales\en\pages\notfound.json
+[03.03.2022 12:33:09] [tr] Writing over key [deleteFail]
+[03.03.2022 12:33:09] [tr] Writing over key [deleteSuccess]
+[03.03.2022 12:33:09] [tr] Writing over key [updateFail]
+[03.03.2022 12:33:09] [tr] Writing over key [updateSuccess]
+[03.03.2022 12:33:09] [tr] Writing over key [addFail]
+[03.03.2022 12:33:09] [tr] Writing over key [addSuccess]
+[03.03.2022 12:33:09] [tr] Writing over key [updateTitle]
+[03.03.2022 12:33:09] [tr] Writing over key [defaultName]
+[03.03.2022 12:33:09] [tr] Writing over key [localPrice]
+[03.03.2022 12:33:09] [tr] Writing over key [densityText]
+[03.03.2022 12:33:09] [tr] Writing over key [density]
+[03.03.2022 12:33:09] [tr] Writing over key [currency]
+[03.03.2022 12:33:09] [tr] Writing over key [priceWithTax]
+[03.03.2022 12:33:09] [tr] Writing over key [price]
+[03.03.2022 12:33:09] [tr] Writing over key [tax]
+[03.03.2022 12:33:09] [tr] Writing over key [unit]
+[03.03.2022 12:33:09] [tr] Writing over key [name]
+[03.03.2022 12:33:09] [tr] Writing over key [materialId]
+[03.03.2022 12:33:09] [tr] Creating missing key [details]
+[03.03.2022 12:33:09] [tr] Writing over key [title]
+[03.03.2022 12:33:09] [tr] Writing over key [notFound]
+[03.03.2022 12:33:09] [tr] Creating missing key [info]
+[03.03.2022 12:33:09] [en] Synchronization started for: public\locales\en\pages\materials.json
+[03.03.2022 12:33:09] [en] Synchronization started for: public\locales\en\joi.json
+
 [23.02.2022 09:41:19] Sync Started...
 [23.02.2022 09:41:19] [tr] Writing over key [TRY]
 [23.02.2022 09:41:19] [tr] Writing over key [EUR]

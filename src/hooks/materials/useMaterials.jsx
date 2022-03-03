@@ -90,7 +90,7 @@ export default function useMaterials() {
 	};
 
 	//Hook Returns
-	return { Materials, dispatch };
+	return { Materials, dispatchMaterials: dispatch };
 } //End of hook
 /* ========================================================================================= */
 

@@ -24,6 +24,30 @@
 		"currencyAlt": "",
 		"tax": "Tax / Vat",
 		"taxAlt": "Tax Percentage",
-		"materialId": "Material Id"
+		"materialId": "Material Id",
+		"defaultName": "New Material Name",
+		"updateTitle": "Edit Material",
+		"addSuccess": "Added {{name}} to materials",
+		"addFail": "Couldn't add material.",
+		"updateSuccess": "Updated {{name}}",
+		"updateFail": "Couldn't update material.",
+		"deleteSuccess": "Deleted {{name}} from materials",
+		"deleteFail": "Unable to delete material."
+	},
+	"info": {
+		"notFound": "Material could not be loaded for material ID: {{id}}",
+		"title": "Details for \"{{name, truncate(maxLength: 10)}}\""
+	},
+	"details": {
+		"materialId": "Material #",
+		"name": "Name",
+		"unit": "Unit",
+		"tax": "Tax",
+		"price": "Unit Price",
+		"priceWithTax": "Taxed Price",
+		"currency": "Price Currency",
+		"density": "Density",
+		"densityText": "{{value}} g/cm<sup>3</sup>",
+		"localPrice": "Price ({{currency}})"
 	}
 }

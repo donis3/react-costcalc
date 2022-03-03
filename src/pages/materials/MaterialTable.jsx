@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaCaretDown, FaCaretUp, FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import {  FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import ThSortable from '../../components/common/ThSortable';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
 
@@ -19,28 +20,26 @@ export default function MaterialTable({ openModal = null } = {}) {
 			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
 				<thead>
 					<tr>
-						<th className='w-1/12 font-semibold'>#</th>
-						<th className='w-5/12'>
-							<ThButton field='name' sortingState={sortingState} handler={sortBy}>
-								{t('table.material')}
-							</ThButton>
-						</th>
-						<th className='w-1/12'>
-							<ThButton field='unit' sortingState={sortingState} handler={sortBy}>
-								{t('table.unit')}
-							</ThButton>
-						</th>
-						<th className='w-1/12'>
-							<ThButton field='tax' sortingState={sortingState} handler={sortBy}>
-								{t('table.tax')}
-							</ThButton>
-						</th>
-						<th className='w-2/12'>
-							<ThButton field='price' sortingState={sortingState} handler={sortBy}>
-								{t('table.price')}
-							</ThButton>
-						</th>
-						<th className='w-2/12'></th>
+						{/* Table Headers */}
+						<ThSortable className='w-1/12 font-semibold'>#</ThSortable>
+
+						<ThSortable className='w-5/12' field='name' sortingState={sortingState} handleSort={sortBy}>
+							{t('table.material')}
+						</ThSortable>
+
+						<ThSortable className='w-1/12' field='unit' sortingState={sortingState} handleSort={sortBy}>
+							{t('table.unit')}
+						</ThSortable>
+
+						<ThSortable className='w-1/12' field='tax' sortingState={sortingState} handleSort={sortBy}>
+							{t('table.tax')}
+						</ThSortable>
+
+						<ThSortable className='w-2/12' field='price' sortingState={sortingState} handleSort={sortBy}>
+							{t('table.price')}
+						</ThSortable>
+
+						<ThSortable className='w-2/12'></ThSortable>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,30 +52,8 @@ export default function MaterialTable({ openModal = null } = {}) {
 	);
 }
 
-//Table Header Cells with sorting ability
-function ThButton({ children, field = null, handler = null, sortingState = null }) {
-	if (!field || !handler || !sortingState) {
-		return <>{children}</>;
-	}
-	const btnClass = 'uppercase font-semibold flex items-center gap-1 w-auto mr-1';
-
-	if (sortingState.field === field) {
-		return (
-			<button onClick={() => handler(field)} className={btnClass + ' underline'}>
-				{children}
-				{sortingState.asc ? <FaCaretUp className='opacity-50' /> : <FaCaretDown className='opacity-50' />}
-			</button>
-		);
-	}
-	return (
-		<button onClick={() => handler(field)} className={btnClass}>
-			{children}
-		</button>
-	);
-}
-
 //Table Rows
-function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, openModal = null}) {
+function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, openModal = null }) {
 	return (
 		<tr className='hover'>
 			<th>{index + 1}</th>

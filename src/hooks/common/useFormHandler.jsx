@@ -57,7 +57,8 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		const data = validateForm(formState);
 		if (!data) {
 			//There are errors do not submit
-			console.log(errors);
+			// console.log('Form has errors');
+			// console.table(errors);
 		} else {
 			//there are no errors and we received a clean data object. Pass it down to form caller
 			customHandler(data);

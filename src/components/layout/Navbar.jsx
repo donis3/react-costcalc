@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../../img/cost-logo.svg';
 import './Navbar.css';
@@ -6,7 +6,7 @@ import './Navbar.css';
 import LangSelect from './LangSelect';
 import AppContext from '../../context/AppContext';
 import ReactCountryFlag from 'react-country-flag';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
@@ -14,6 +14,10 @@ export default function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [isLangModalOpen, setLangModalOpen] = useState(false);
 	const { language } = useContext(AppContext);
+	const loc = useLocation();
+	
+	//Close menu when location changes
+	useEffect(() => { setMenuOpen(false)}, [loc.pathname])
 
 	return (
 		<>
@@ -28,10 +32,14 @@ export default function Navbar() {
 							<FaBars />
 						</button>
 					</div>
-					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? ' flex' : ' hidden')}>
+					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? 'flex' : ' hidden')}>
 						<ul className='nav-list  flex flex-wrap'>
 							<NavbarItem to="/">{t('home')}</NavbarItem>
+							{/* Business Links */}
 							<NavbarItem to="/materials">{t('materials')}</NavbarItem>
+							<NavbarItem to="/products">{t('products')}</NavbarItem>
+
+							{/* Language Selector */}
 							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>
 								<button onClick={() => setLangModalOpen(true)} className=' opacity-50 text-sm'>
 									{language.nativeName}

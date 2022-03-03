@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../../components/form/FormInput';
-import { FaCheck, FaTimes, FaTrashAlt } from 'react-icons/fa';
+
 import ResponsiveModal from '../../components/common/ResponsiveModal';
 
 //Form is handled by this hook.
 import useMaterialsForm from '../../hooks/materials/useMaterialsForm';
+import { FormFooterActions } from '../../components/common/FormFooterActions';
 
 export default function MaterialForm({ handleClose = null, materialId = null } = {}) {
 	//Hooks
@@ -20,17 +21,9 @@ export default function MaterialForm({ handleClose = null, materialId = null } =
 		handleSubmit,
 		handleDelete,
 		hasError,
-		deleteButtonHandler,
 		config,
 		priceWithTax,
 	} = useMaterialsForm({ materialId: materialId, onSuccess: handleClose, onDelete: handleClose });
-
-	//Footer Elements
-	const footer = (
-		<MaterialFormFooter handleClose={handleClose}>
-			<MaterialFormDeleteButton deleteButtonHandler={deleteButtonHandler} onConfirmDelete={handleDelete} />
-		</MaterialFormFooter>
-	);
 
 	//Main form
 	return (
@@ -38,7 +31,7 @@ export default function MaterialForm({ handleClose = null, materialId = null } =
 			<ResponsiveModal
 				title={material ? t('form.updateTitle') : t('form.title')}
 				handleClose={handleClose}
-				footer={footer}
+				footer={<FormFooterActions handleClose={handleClose} handleDelete={handleDelete} />}
 			>
 				{/* FORM GRID */}
 				<div className='grid md:grid-cols-2 grid-cols-1 gap-x-5 gap-y-2 mb-5 '>
@@ -111,70 +104,4 @@ export default function MaterialForm({ handleClose = null, materialId = null } =
 			</ResponsiveModal>
 		</form>
 	);
-}
-
-function MaterialFormFooter({ handleClose = null, children } = {}) {
-	const { t } = useTranslation('translation');
-	return (
-		<div className='flex justify-between w-full'>
-			<div>
-				<button type='submit' className='btn btn-primary mr-2'>
-					{t('buttons.save', { ns: 'translation' })}
-				</button>
-				<button className='btn btn-outline' onClick={handleClose}>
-					{t('buttons.cancel', { ns: 'translation' })}
-				</button>
-			</div>
-			{/* Children will have delete button if necessary */}
-			{children}
-		</div>
-	);
-}
-
-function MaterialFormDeleteButton({ deleteButtonHandler, onConfirmDelete = null } = {}) {
-	const { t } = useTranslation('translation');
-
-	//Call the onConfirmDelete function if delete button step reaches 2
-	useEffect(() => {
-		if (deleteButtonHandler?.deleteButtonState?.step === 2) {
-			//Delete Confirmed
-			onConfirmDelete();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [deleteButtonHandler.deleteButtonState.step]);
-
-	if (!deleteButtonHandler) return <></>;
-	const { initiateDelete, confirmDelete, resetDelete, deleteButtonState } = deleteButtonHandler;
-
-	//Disabled Button
-	if (!deleteButtonState.enabled) {
-		return <></>;
-	}
-
-	switch (deleteButtonState.step) {
-		case 1: {
-			return (
-				<div>
-					<span className='mr-2 font-semibold'>{t('buttons.deleteConfirm')}</span>
-					<button className='btn btn-outline' onClick={resetDelete}>
-						<FaTimes className='mr-1' />
-						{t('buttons.no')}
-					</button>
-					<button type='button' className='btn btn-outline ml-2 text-red-600' onClick={confirmDelete}>
-						<FaCheck className='mr-1' />
-						{t('buttons.yes')}
-					</button>
-				</div>
-			);
-		}
-		case 0:
-		default: {
-			return (
-				<button className='btn btn-error' onClick={initiateDelete}>
-					<FaTrashAlt className='mr-1' />
-					{t('buttons.delete')}{' '}
-				</button>
-			);
-		}
-	}
 }

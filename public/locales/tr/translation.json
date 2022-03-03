@@ -24,7 +24,12 @@
 		"close": "Kapat",
 		"cancel": "İptal",
 		"submit": "Gönder",
-		"add": "Add"
+		"add": "Add",
+		"delete": "Delete",
+		"deleteX": "Delete {{name}}",
+		"deleteConfirm": "Are you sure?",
+		"yes": "yes",
+		"no": "no"
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
@@ -49,11 +54,27 @@
 		"mL_one": "Milliliter",
 		"mL_other": "Milliliters",
 		"L_one": "Liter",
-		"L_other": "Liters"
+		"L_other": "Liters",
+		"mg": "Milligram",
+		"g": "Gram",
+		"kg": "Kilogram",
+		"t": "Tonne",
+		"cc": "Cubic Centimeter",
+		"mL": "Milliliter",
+		"L": "Liter"
 	},
 	"currency": {
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira"
+	},
+	"error": {
+		"error": "Error",
+		"notFound": "Not Found"
+	},
+	"errorBoundary": {
+		"title": "Application Crashed!",
+		"message": "There was an error and application had to stop. You can find more information about the error in the browser console. Please reset the application if error persists.",
+		"button": "Go to Homepage"
 	}
 }

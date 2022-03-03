@@ -19,6 +19,7 @@ export default function MainLayout({ children, header, footer }) {
 				</main>
 				<footer>{footer}</footer>
 			</div>
+
 			{/* React-Toastify configured here. */}
 			<ToastContainer
 				position='top-center'

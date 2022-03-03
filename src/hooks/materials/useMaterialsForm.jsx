@@ -37,13 +37,7 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 		setFormState,
 		schema,
 	});
-	//Handle Delete Confirmer
-	const [deleteButtonState, setDeleteButtonState] = useState({ enabled: material ? true : false, step: 0 });
-
-	const initiateDelete = () => setDeleteButtonState({ enabled: material ? true : false, step: 1 });
-	const confirmDelete = () => setDeleteButtonState({ enabled: material ? true : false, step: 2 });
-	const resetDelete = () => setDeleteButtonState({ enabled: material ? true : false, step: 0 });
-
+	
 	//custom Handlers
 	const handleChange = (e) => {
 		//Add special change handlers
@@ -126,7 +120,6 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 		handleDelete,
 		hasError,
 		setFieldState,
-		deleteButtonHandler: { deleteButtonState, initiateDelete, confirmDelete, resetDelete },
 		config,
 		priceWithTax,
 	};

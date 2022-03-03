@@ -1,0 +1,37 @@
+{
+	"title": "Products",
+	"lead": "Manage all products.",
+	"states": {
+		"liquid": "Liquid",
+		"solid": "Solid"
+	},
+	"table": {
+		"name": "Product",
+		"code": "Code",
+		"cost": "Cost",
+		"production": "Production",
+		"costChange": "Previous Cost: {{previous}} Change: {{change}}"
+	},
+	"form": {
+		"defaultName": "New Product",
+		"addTitle": "Add Product",
+		"editTitle": "Update Product",
+		"productId": "Product #",
+		"code": "Product Code",
+		"codeAlt": "Product code",
+		"name": "Name",
+		"nameAlt": "Product Name",
+		"isLiquid": "State",
+		"isLiquidAlt": "Physical state of the product",
+		"density": "Density",
+		"densityAlt": "Material density in g/cm<sup>3</sup>",
+		"production": "Production",
+		"productionAlt": "Production ({{unit}}/Year)",
+		"addSuccess": "Added {{name}} to products.",
+		"addError": "Couldn't add new product",
+		"editSuccess": "Product \"{{name}}\" was updated",
+		"editError": "Couldn't update {{name}}",
+		"deleteSuccess": "{{name}} was deleted",
+		"deleteError": "Couldn't delete {{name}}"
+	}
+}

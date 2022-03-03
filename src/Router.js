@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
+import Products from './pages/products/Products';
 
 
 export default function Router() {
@@ -11,6 +12,7 @@ export default function Router() {
 		<Routes>
 			{/* Business Routes */}
 			<Route path='/materials' element={<Materials />} />
+			<Route path='/products' element={<Products />} />
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

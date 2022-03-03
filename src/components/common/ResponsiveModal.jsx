@@ -93,7 +93,7 @@ const ModalFooterAuto = ({ handleClose = null, showSubmit = null } = {}) => {
 		<ModalFooter>
 			{/* Show Submit Btn */}
 			{showSubmit && (
-				<button type='submit' className='btn btn-primary btn-outline'>
+				<button type='submit' className='btn btn-primary'>
 					{t('buttons.submit')}
 				</button>
 			)}
