@@ -84,7 +84,7 @@ export default function useProductsForm({ productId = null, handleClose = null }
 		formState,
 		handleChange,
 		hasError: formHandler.hasError,
-		handleDelete,
+		handleDelete: product ? handleDelete : null,
 		handleSubmit: (e) => {
 			formHandler.onSubmitHandler(e, handleSubmit);
 		},

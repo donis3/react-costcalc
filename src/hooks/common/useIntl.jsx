@@ -1,0 +1,37 @@
+import { useAppContext } from '../../context/AppContext';
+import useConfig from '../app/useConfig';
+
+export default function useIntl() {
+	const { language } = useAppContext();
+	const config = useConfig();
+
+	/**
+	 * Return string with intl formatted number
+	 * @param {*} amount
+	 * @param {*} currency
+	 */
+	const displayMoney = (amount = 0, currency = 'TRY') => {
+		try {
+			return new Intl.NumberFormat(language.locale, { style: 'currency', currency: currency }).format(amount);
+		} catch (error) {
+			return `${amount.toFixed(2)} ${currency}`;
+		}
+	};
+
+	/**
+	 * Return string with intl formatted number
+	 * @param {*} amount
+	 */
+	const displayNumber = (amount = 0, digits = null) => {
+		try {
+			if (digits !== null && digits > 0) {
+				return new Intl.NumberFormat(language.locale, {  minimumFractionDigits: digits }).format(amount);
+			}
+			return Intl.NumberFormat(language.locale).format(amount);
+		} catch (error) {
+			return amount;
+		}
+	};
+
+	return { displayMoney, displayNumber };
+}

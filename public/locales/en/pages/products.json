@@ -33,5 +33,17 @@
 		"editError": "Couldn't update {{name}}",
 		"deleteSuccess": "{{name}} was deleted",
 		"deleteError": "Couldn't delete {{name}}"
+	},
+	"info": {
+		"notFound": "Requested product (id: {{id}}) couldn't be found.",
+		"noData": "No product data available to display",
+		"title": "Product Details for \"{{name, truncate(maxLength: 10)}}\"",
+		"name": "Commercial Name",
+		"code": "Product Code",
+		"state": "Physical State",
+		"density": "Density",
+		"production": "Production",
+		"productionText": "{{value}} {{unit}}/Year",
+		"cost": "Cost"
 	}
 }

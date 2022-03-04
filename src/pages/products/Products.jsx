@@ -4,18 +4,19 @@ import { FaFileAlt } from 'react-icons/fa';
 import Card from '../../components/common/Card';
 import ProductsTable from './ProductsTable';
 import ProductForm from './ProductForm';
+import ProductInfo from './ProductInfo';
 
 export default function Products() {
 	const { t } = useTranslation('pages/products', 'translation');
-	const [modalState, setModalState] = useState({ isOpen: false, type: 'add', productId: null });
+	const [modalState, setModalState] = useState({ isOpen: false, type: 'info', productId: 0 });
 
 	//Modal Handler
 	const openModal = (type = null, productId = null) => {
 		//Check Type
-		if (['add', 'edit'].includes(type) === false) return;
+		if (['add', 'edit', 'info'].includes(type) === false) return;
 		//Check Product Id
 		productId = parseInt(productId);
-		if (['edit'].includes(type) && isNaN(productId)) return;
+		if (['edit', 'info'].includes(type) && isNaN(productId)) return;
 		//Set State
 		setModalState({ isOpen: true, type, productId });
 	};
@@ -24,7 +25,6 @@ export default function Products() {
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				
 				{/* New Item Button */}
 				<div className='w-full flex justify-end'>
 					<button className='btn btn-primary btn-sm' onClick={() => openModal('add')}>
@@ -45,6 +45,9 @@ export default function Products() {
 			{modalState.isOpen && modalState.type === 'add' && <ProductForm handleClose={closeModal} />}
 			{modalState.isOpen && modalState.type === 'edit' && (
 				<ProductForm handleClose={closeModal} productId={modalState.productId} />
+			)}
+			{modalState.isOpen && modalState.type === 'info' && (
+				<ProductInfo handleClose={closeModal} productId={modalState.productId} />
 			)}
 		</>
 	);

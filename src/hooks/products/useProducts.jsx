@@ -22,6 +22,10 @@ export default function useProducts() {
 			});
 		}
 
+		count() {
+			return Array.isArray(this.data) ? this.data.length : 0;
+		}
+
 		/**
 		 * Get All products sorted by field
 		 * @param {*} param0

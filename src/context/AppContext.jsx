@@ -1,9 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import useWindowType from '../hooks/common/useWindowType';
 import { getLangDetails } from '../helpers/languages';
 import { getCurrentTheme, setCurrentTheme, getAllThemes } from '../helpers/themeHelper';
 import config from '../config/config.json';
+
+//Infer locale like tr_TR through country code
+import { LocaleHelpers } from 'locale-helpers';
 
 const AppContext = createContext();
 
@@ -19,11 +22,23 @@ const AppContextProvider = ({ children }) => {
 		config.debug.stateChange && console.log(`AppContext: lang changed to  ${newLanguage}`);
 		i18n.changeLanguage(newLanguage);
 	};
+	//Calculate locale
+	//Will get a locale like tr_TR
+	let localeString = LocaleHelpers.bestLocaleFor({ language: langDetails.code, country: langDetails.code });
+	//replace _ with -
+	localeString = localeString.replace('_', '-');
+	try {
+		const validLocales = Intl.getCanonicalLocales(localeString);
+		if(validLocales.length > 0 ) {
+			localeString = validLocales[0];
+		}
+	} catch (err) {
+		localeString = 'en-US';
+	}
 
 	//Theme Context
 	const [theme, setTheme] = useState(getCurrentTheme);
 	const handleChangeTheme = (newTheme) => {
-		
 		const result = setCurrentTheme(newTheme);
 		if (result) {
 			config.debug.stateChange && console.log(`AppContext: theme changed to ${result}`);
@@ -40,6 +55,7 @@ const AppContextProvider = ({ children }) => {
 			all: allLanguages,
 			change: handleLanguageChange,
 			...langDetails,
+			locale: localeString,
 		},
 		//Themes
 		theme: {
@@ -54,3 +70,7 @@ const AppContextProvider = ({ children }) => {
 
 export default AppContext;
 export { AppContextProvider };
+
+export const useAppContext = () => {
+	return useContext(AppContext);
+};

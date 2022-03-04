@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaCaretDown, FaCaretUp, FaPencilAlt } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp, FaPencilAlt, FaInfoCircle } from 'react-icons/fa';
 import ThSortable from '../../components/common/ThSortable';
-import {  useProductsContext } from '../../context/MainContext';
+import { useProductsContext } from '../../context/MainContext';
 import ReactTooltip from 'react-tooltip';
 
 import useSortTableByField from '../../hooks/app/useSortTableByField';
@@ -11,9 +11,13 @@ export default function ProductsTable({ handleOpen = null } = {}) {
 	const { t } = useTranslation('pages/products');
 	const [sortingState, sortBy] = useSortTableByField('products', ['name', 'code', 'cost', 'production'], 'productId');
 	const { products } = useProductsContext();
-	
-	
 
+	//Products table is empty
+	if (products.count() === 0) {
+		return <>{/* No product */}</>;
+	}
+
+	//Display products
 	return (
 		<div className='overflow-x-auto my-10'>
 			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
@@ -115,7 +119,9 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 					<ReactTooltip id={tooltipId} type='dark' />
 				</th>
 				{/* Column 2 */}
-				<td className='whitespace-normal'>{data?.name}</td>
+				<td className='whitespace-normal cursor-pointer font-medium' onClick={() => action('info', data.productId)}>
+					{data?.name}
+				</td>
 				{/* Column 3 */}
 				<td className='truncate' title={data?.code}>
 					{data?.code}
@@ -132,6 +138,9 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 				<td>
 					<button type='button' className='btn btn-sm btn-ghost mr-1' onClick={() => action('edit', data.productId)}>
 						<FaPencilAlt />
+					</button>
+					<button type='button' className='btn btn-sm btn-ghost' onClick={() => action('info', data.productId)}>
+						<FaInfoCircle />
 					</button>
 				</td>
 			</tr>

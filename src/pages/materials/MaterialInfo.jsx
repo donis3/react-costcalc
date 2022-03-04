@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ResponsiveModal from '../../components/common/ResponsiveModal';
+import ResponsiveModalError from '../../components/common/ResponsiveModalError';
 import { useMaterialContext } from '../../context/MainContext';
 
 export default function MaterialInfo({ handleClose = null, materialId = null }) {
@@ -12,14 +13,7 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 	if (!material) {
 		//Show data
 		return (
-			<ResponsiveModal
-				title={t('error.notFound', {ns: 'translation'})}
-				handleClose={handleClose}
-				showSubmit={false}
-				autoFooter={true}
-			>
-				<p className='font-medium text-error-content'>{t('info.notFound', { id: materialId })}</p>
-			</ResponsiveModal>
+			<ResponsiveModalError handleClose={handleClose}>{t('info.notFound', { id: materialId })}</ResponsiveModalError>
 		);
 	}
 
