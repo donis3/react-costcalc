@@ -1,8 +1,6 @@
 import React from 'react';
 import Breadcrumb from './Breadcrumb';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import CurrencyRateDisplay from './CurrencyRateDisplay';
 
 export default function MainLayout({ children, header, footer }) {
 	return (
@@ -11,8 +9,9 @@ export default function MainLayout({ children, header, footer }) {
 				<header>{header}</header>
 				<main className='mb-auto flex flex-col items-center'>
 					<div className='container '>
-						<div className='w-full p-3 my-3'>
+						<div className='w-full p-3 my-3 flex  justify-between md:items-center items-start flex-wrap md:flex-row flex-col'>
 							<Breadcrumb />
+							<CurrencyRateDisplay />
 						</div>
 						{children}
 					</div>
@@ -20,18 +19,6 @@ export default function MainLayout({ children, header, footer }) {
 				<footer>{footer}</footer>
 			</div>
 
-			{/* React-Toastify configured here. */}
-			<ToastContainer
-				position='top-center'
-				autoClose={2000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable={false}
-				pauseOnHover
-			/>
 		</>
 	);
 }

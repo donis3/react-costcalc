@@ -2,7 +2,8 @@
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
-		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator."
+		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
+		"savingItem": "Couldn't save {{item}}"
 	},
 	"header": {
 		"home": "Homepage",
@@ -62,6 +63,19 @@
 		"L_other": "Liters"
 	},
 	"currency": {
+		"title": "Conversion Rates",
+		"titlePair": "{{from}}/{{to}} Conversion Rate",
+		"details": "Manually set the conversion rate for {{from}}/{{to}}. This rate will be used to calculate prices that are not set in {{to}}",
+		"selectCurrency": "Please select a currency pair to manually set the conversion rate.",
+		"noCurrencies": "There are no currencies configured in the application. Conversion rates can't be modified",
+		"formRate": "New Conversion Rate",
+		"formRateAlt": "Conversion rate for {{from}}/{{to}}",
+		"addSuccess": "Saved {{from}}/{{to}} conversion rate",
+		"addError": "Couldn't save new conversion rate",
+		"lastUpdate": "Updated on {{date}}",
+		"lastUpdateError": "Never Updated",
+		"historyTitle": "Conversion History",
+		"historyNoData": "No historical data available.",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira"
@@ -70,5 +84,11 @@
 		"title": "Application Crashed!",
 		"message": "There was an error and application had to stop. You can find more information about the error in the browser console. Please reset the application if error persists.",
 		"button": "Go to Homepage"
+	},
+	"fields": {
+		"date": "Date",
+		"name": "Name",
+		"amount": "Amount",
+		"rate": "Rate"
 	}
 }

@@ -2,21 +2,20 @@ import { useState } from 'react';
 //Will get 2 keys from config
 // config.debug.storage for verbose errors
 // config.app.localStorageKey for app specific unique storage key
-import config from '../../config/config.json'; 
-
+import config from '../../config/config.json';
 
 //Store multiple tables at same local storage key
 export default function useStorageRepo(repoName = null, itemName = null, initialData = null) {
-    //Will load data from storage if available, or generate using passed in initialData
+	//Will load data from storage if available, or generate using passed in initialData
 	const initialState = getInitialState(repoName, itemName, initialData);
-    //React state hook with initialState taken from storage
+	//React state hook with initialState taken from storage
 	const [itemState, setItemState] = useState(initialState);
 
 	/**
-     * Set any data at your current repo/item. 
-     * Data will be stored in state and will persist through local storage if available
-     * @param {*} newItemData Data to be stored in state & storage
-     */
+	 * Set any data at your current repo/item.
+	 * Data will be stored in state and will persist through local storage if available
+	 * @param {*} newItemData Data to be stored in state & storage
+	 */
 	const setItem = (newItemData) => {
 		//React State
 		setItemState(newItemData);
@@ -24,9 +23,13 @@ export default function useStorageRepo(repoName = null, itemName = null, initial
 		saveStorageItem(repoName, itemName, newItemData);
 	};
 
-	return [itemState, setItem];
-}
+	//Remove an item from current repo if such a need rises
+	const deleteItem = () => {
+		removeStorageRepoItem(repoName, itemName);
+	}
 
+	return [itemState, setItem, deleteItem];
+}
 
 //Local Storage Helpers
 
@@ -34,7 +37,7 @@ export default function useStorageRepo(repoName = null, itemName = null, initial
 const getInitialState = (repoName, itemName, initialData) => {
 	let currentData = getStorageRepoItem(repoName, itemName);
 	if (currentData === null) {
-		//No data found in repo, create it 
+		//No data found in repo, create it
 		currentData = saveStorageItem(repoName, itemName, initialData);
 	}
 	return currentData;
@@ -67,6 +70,32 @@ const getStorageRepoItem = (repoName = null, itemName = null) => {
 			return data[itemName];
 		}
 		return null;
+	} catch (error) {
+		//Json parse error at key
+		config.debug.storage && console.log(`Storage Error (getStorageRepoItem)`, error);
+		return null;
+	}
+};
+
+const removeStorageRepoItem = (repoName = null, itemName = null) => {
+	try {
+		//Validate Repo & table name
+		const repoKey = getRepoStorageKey(repoName);
+		if (!doesStorageKeyExist(repoKey)) return null;
+		if (!itemName || typeof itemName !== 'string') return null;
+
+		//Get repo and parse
+		const rawData = localStorage.getItem(repoKey);
+		const data = JSON.parse(rawData);
+		//Remove table from data if exists
+		if (typeof data === 'object' && Object.keys(data).length > 0 && Object.keys(data).includes(itemName)) {
+			delete data[itemName];
+			//save new data
+			const newRawData = JSON.stringify(data);
+			localStorage.setItem(repoKey, newRawData);
+			config.debug.storage && console.log(`[StorageRepo] Deleted ${itemName} from ${repoName}.`);
+		}
+		return data;
 	} catch (error) {
 		//Json parse error at key
 		config.debug.storage && console.log(`Storage Error (getStorageRepoItem)`, error);
@@ -118,7 +147,7 @@ const saveStorageItem = (repoName = null, itemName = null, data = null) => {
 		//Create Json Data
 		const newRepoString = JSON.stringify(newRepo);
 		//Compare to old data
-		if(currentRepoString === newRepoString) {
+		if (currentRepoString === newRepoString) {
 			//Current storage data and new data are the same. No need to save
 			return null;
 		}
@@ -130,7 +159,7 @@ const saveStorageItem = (repoName = null, itemName = null, data = null) => {
 		return data;
 	} catch (error) {
 		config.debug.storage && console.log(`Storage Error (saveStorageTable)`, error);
-        //If there was an error, still return data to be able to work with only react state
+		//If there was an error, still return data to be able to work with only react state
 		return data;
 	}
 };

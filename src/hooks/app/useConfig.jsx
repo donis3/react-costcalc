@@ -59,18 +59,37 @@ class Config {
 		}, []);
 	}
 
-	getDefaultCurrency() {
+	getDefaultCurrency(returnCode = false) {
 		if (!this.checkCurrencies()) return null;
 		const result = this.configData.applicationData.currencies.find((item) => item.default === true);
 		if (!result) {
 			console.warn('Config missing default currency');
 		}
-		return result;
+		if (!returnCode) return result;
+		else {
+			return result.code;
+		}
 	}
 
-	getCurrenciesArray() {
+	getCurrenciesArray({ exclude = [] } = {}) {
 		if (!this.checkCurrencies()) return [];
-		return this.getCurrencies(true).map((item) => item.code);
+		//Nothing to exclude
+		if (!exclude || exclude === []) {
+			return this.getCurrencies(true).map((item) => item.code);
+		}
+		const result = [];
+		this.getCurrencies(true).forEach((item) => {
+			if (Array.isArray(exclude) && exclude.includes(item.code)) {
+				//Skip
+				return;
+			}
+			if (typeof exclude === 'string' && exclude === item.code) {
+				//Skip
+				return;
+			}
+			result.push(item.code);
+		});
+		return result;
 	}
 
 	getLocalizedCurrencies({ longNames = true, symbols = false, showOnlyEnabledCurrencies = true }) {
@@ -104,7 +123,7 @@ class Config {
 		const currencies = this.getCurrencies(false);
 		if (!currencies || Array.isArray(currencies) === false || code === null) return code;
 
-		const result = currencies.find((cur) => cur.code === code);
+		const result = currencies.find((cur) => cur.code === code.toUpperCase());
 		return result ? result.symbol : code;
 	}
 
