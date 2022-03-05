@@ -49,8 +49,10 @@ export default function Currency() {
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>
-					{t('currency.titlePair', { from: currency, to: currencies.defaultCurrency })}
+					{/* Title with long currency name */}
+					{t('currency.titleCurrency', { currency: t(`currency.${currency}`) })}
 				</h3>
+				{/* Details text about this module */}
 				<p className='opacity-80'>{t('currency.details', { from: currency, to: currencies.defaultCurrency })}</p>
 
 				<form onSubmit={(e) => onSubmitHandler(e, handleSubmit)}>

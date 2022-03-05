@@ -65,6 +65,7 @@
 	"currency": {
 		"title": "Conversion Rates",
 		"titlePair": "{{from}}/{{to}} Conversion Rate",
+		"titleCurrency": "{{currency}} Conversion Rate",
 		"details": "Manually set the conversion rate for {{from}}/{{to}}. This rate will be used to calculate prices that are not set in {{to}}",
 		"selectCurrency": "Please select a currency pair to manually set the conversion rate.",
 		"noCurrencies": "There are no currencies configured in the application. Conversion rates can't be modified",
@@ -78,7 +79,8 @@
 		"historyNoData": "No historical data available.",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
-		"TRY": "Turkish Lira"
+		"TRY": "Turkish Lira",
+		"DKK": "Danish Krone"
 	},
 	"errorBoundary": {
 		"title": "Application Crashed!",

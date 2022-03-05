@@ -33,6 +33,13 @@
 				"default": false
 			},
 			{
+				"code": "DKK",
+				"value": 18,
+				"symbol": "kr.",
+				"disabled": false,
+				"default": false
+			},
+			{
 				"code": "TRY",
 				"value": 1,
 				"symbol": "₺",
