@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdRefresh } from 'react-icons/md';
 
 import useIntl from '../../hooks/common/useIntl';
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
+import { FaCaretUp, FaCaretDown, FaSpinner } from 'react-icons/fa';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,8 @@ import useTcmbToday from '../../hooks/app/useTcmbToday';
 export default function CurrencyRateDisplay() {
 	const [showDetails, setShowDetails] = useState(false);
 	const { currencies } = useCurrencyContext();
-	const { loading, error, fetchTcmbRates } = useTcmbToday();
+	const { loading, fetchTcmbRates } = useTcmbToday();
+	const { t } = useTranslation('translation');
 
 	//No currency conversion available
 	if (!currencies || currencies.enabledCurrencies === 0) {
@@ -21,7 +22,12 @@ export default function CurrencyRateDisplay() {
 
 	if (loading === true) {
 		//Loading
-		return <>...refreshing</>;
+		return (
+			<div className='flex gap-x-2 items-center'>
+				<span className='opacity-50'>{t('currency.fetchWaiting')}...</span>
+				<FaSpinner className='animate-spin' />
+			</div>
+		);
 	}
 
 	return (

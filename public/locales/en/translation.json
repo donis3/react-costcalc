@@ -1,4 +1,9 @@
 {
+	"general": {
+		"loading": "Loading",
+		"waiting": "Waiting",
+		"fetching": "Fetching"
+	},
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
@@ -82,6 +87,7 @@
 		"fetchError": "Couldn't fetch exchange rates from remote service.",
 		"fetchSuccess": "Exchange rates are updated through remote service.",
 		"fetchNotExpired": "Using latest request results. {{timeLeft}} minutes left before a new request can be made to TCMB",
+		"fetchWaiting": "Awaiting TCMB",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",
