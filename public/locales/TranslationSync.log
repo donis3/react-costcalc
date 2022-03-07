@@ -1,5 +1,13 @@
 
 
+[07.03.2022 17:08:46] Sync Started...
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\translation.json
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\routes.json
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\pages\products.json
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\pages\notfound.json
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\pages\materials.json
+[07.03.2022 17:08:46] [en] Synchronization started for: public\locales\en\joi.json
+
 [07.03.2022 17:03:20] Sync Started...
 [07.03.2022 17:03:20] [tr] Writing over key [monthShort]
 [07.03.2022 17:03:20] [tr] Writing over key [month]

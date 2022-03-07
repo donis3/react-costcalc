@@ -6,10 +6,10 @@ import HomePage from './pages/HomePage';
 import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
 import Products from './pages/products/Products';
-
+import Recipe from './pages/recipes/Recipe';
+import Recipes from './pages/recipes/Recipes';
 
 export default function Router() {
-	
 	return (
 		<Routes>
 			{/* Business Routes */}
@@ -17,6 +17,8 @@ export default function Router() {
 			<Route path='/products' element={<Products />} />
 			<Route path='/currency' element={<CurrencySelectOne />} />
 			<Route path='/currency/:currency' element={<Currency />} />
+			<Route path='/recipes' element={<Recipes />} />
+			<Route path='/recipes/:recipeId' element={<Recipe />} />
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

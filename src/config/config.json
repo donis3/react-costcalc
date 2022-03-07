@@ -4,7 +4,9 @@
 		"icon": "FaCoins",
 		"owner": "Rhinotap",
 		"releaseDate": "2022-02-09",
-		"localStorageKey": "rhinotap.costcalc"
+		"localStorageKey": "rhinotap.costcalc",
+		"title": "Cost Calculator",
+		"extendedTitle": "%PAGE% - Cost Calculator"
 	},
 	"exchangeRates": {
 		"proxy": "https://doncors.herokuapp.com/",

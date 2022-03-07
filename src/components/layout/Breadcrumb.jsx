@@ -1,12 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext';
 import Icon from '../common/Icon';
 
 export default function Breadcrumb() {
 	const { pathname } = useLocation();
-	const {t} = useTranslation('routes');
+	const { t } = useTranslation('routes');
 	const crumbs = pathname.split('/').filter((item) => item && item.length > 0);
 
+	const { page } = useAppContext();
+	
 	const crumbsJsx = [];
 	crumbs.reduce((accumulator, current, index) => {
 		//Add current path to accumulated array
@@ -16,9 +19,17 @@ export default function Breadcrumb() {
 		//Create crumb element
 		const element = (
 			<Crumb currentPath={pathname} targetPath={'/' + linkToCurrent} key={index}>
-				<span className='opacity-50'>
-					{t(`${current}`, {defaultValue: current})}
-				</span>
+				{/* Add reference if this is the last element */}
+				{crumbs.length - 1 === index ? (
+					// This is the last breadcrumb
+					<span className='opacity-50' >
+						{/* Try to get breadcrumb from app context if available. Or fallback to current pathname */}
+						{t(`${current}`, { defaultValue: page.getBreadcrumb(pathname) || current })}
+					</span>
+				) : (
+					//This is normal breadcrumb
+					<span className='opacity-50'>{t(`${current}`, { defaultValue: current })}</span>
+				)}
 			</Crumb>
 		);
 		//Push it to crumbs
@@ -41,7 +52,6 @@ export default function Breadcrumb() {
 }
 
 function Crumb({ currentPath, targetPath, children }) {
-	
 	//This is active link
 	if (currentPath === targetPath) {
 		return <li>{children}</li>;

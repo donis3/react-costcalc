@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useWindowType from '../hooks/common/useWindowType';
 import { getLangDetails } from '../helpers/languages';
@@ -7,6 +7,7 @@ import config from '../config/config.json';
 
 //Infer locale like tr_TR through country code
 import { LocaleHelpers } from 'locale-helpers';
+import { useLocation } from 'react-router-dom';
 
 const AppContext = createContext();
 
@@ -29,7 +30,7 @@ const AppContextProvider = ({ children }) => {
 	localeString = localeString.replace('_', '-');
 	try {
 		const validLocales = Intl.getCanonicalLocales(localeString);
-		if(validLocales.length > 0 ) {
+		if (validLocales.length > 0) {
 			localeString = validLocales[0];
 		}
 	} catch (err) {
@@ -44,6 +45,18 @@ const AppContextProvider = ({ children }) => {
 			config.debug.stateChange && console.log(`AppContext: theme changed to ${result}`);
 			setTheme(result);
 		}
+	};
+
+	//Page context for page name, title etc
+	const [lastBreadcrumb, setLastBreadcrumb] = useState({});
+	const { pathname } = useLocation();
+	//Must be used in useEffect with pathname dependency or will cause too many renders
+	const setBreadcrumb = (text) => {
+		setLastBreadcrumb({ ...lastBreadcrumb, [pathname]: text });
+	};
+	const getBreadcrumb = (pathname) => {
+		if (pathname in lastBreadcrumb) return lastBreadcrumb[pathname];
+		return null;
 	};
 
 	//Payload
@@ -63,6 +76,8 @@ const AppContextProvider = ({ children }) => {
 			change: handleChangeTheme,
 			all: getAllThemes(),
 		},
+		//Page context
+		page: { setBreadcrumb, getBreadcrumb },
 	};
 
 	return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>;

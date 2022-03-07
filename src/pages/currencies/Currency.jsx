@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Card from '../../components/common/Card';
 import FormInput from '../../components/form/FormInput';
@@ -10,13 +10,16 @@ import useIntl from '../../hooks/common/useIntl';
 import useJoi from '../../hooks/common/useJoi';
 import NotFound from '../NotFound';
 import CurrencyError from './CurrencyError';
-import {FaCircle} from 'react-icons/fa'
+import { FaCircle } from 'react-icons/fa';
+import { useAppContext } from '../../context/AppContext';
 
 export default function Currency() {
 	const { t } = useTranslation();
 	const { currency } = useParams();
 	const { currencies } = useCurrencyContext();
 	const { dispatch } = useCurrencyDispatch();
+	const { page } = useAppContext();
+	const { pathname } = useLocation();
 	const Joi = useJoi();
 	const [formState, setFormState] = useState({ rate: 0 });
 	const schema = Joi.object({
@@ -25,8 +28,15 @@ export default function Currency() {
 	const { hasError, onChangeHandler, onSubmitHandler } = useFormHandler({ formState, setFormState, schema });
 
 	useEffect(() => {
+		//
+
 		setFormState({ rate: currencies.getCurrentRate(currency) });
 	}, [currency, currencies]);
+
+	
+	useEffect(() => {
+		page.setBreadcrumb(t('currency.' + currency));
+	}, [pathname]);
 
 	const handleSubmit = (data) => {
 		//new conversion rate submitted, handle it
@@ -103,15 +113,16 @@ function CurrencyHistory({ data = null } = {}) {
 			</thead>
 			<tbody>
 				<tr>
-					<th className='font-light'><FaCircle className='text-success-content' />
-						</th>
+					<th className='font-light'>
+						<FaCircle className='text-success-content' />
+					</th>
 					<td>{displayDate(data.date)}</td>
 					<td>{displayNumber(data.rate, 2)}</td>
 				</tr>
 				{data.history.map((item, index) => {
 					return (
 						<tr key={index}>
-							<th className='font-light'>{index+1}</th>
+							<th className='font-light'>{index + 1}</th>
 							<td>{displayDate(item.date)}</td>
 							<td>{displayNumber(item.rate, 2)}</td>
 						</tr>

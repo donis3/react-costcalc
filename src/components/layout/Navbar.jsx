@@ -38,6 +38,7 @@ export default function Navbar() {
 							{/* Business Links */}
 							<NavbarItem to="/materials">{t('materials')}</NavbarItem>
 							<NavbarItem to="/products">{t('products')}</NavbarItem>
+							<NavbarItem to="/recipes">{t('recipes')}</NavbarItem>
 
 							{/* Language Selector */}
 							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>
