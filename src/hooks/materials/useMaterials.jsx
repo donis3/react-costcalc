@@ -27,7 +27,7 @@ export default function useMaterials() {
 	const [materials, dispatch] = useReducer(materialsReducer, storedMaterials);
 	const { t } = useTranslation('pages/materials');
 	const config = useConfig();
-	const { displayMoney, displayNumber } = useIntl();
+	const { displayNumber } = useIntl();
 	const { displayMoney: displayConvertedMoney, convert } = useCurrencyConversion();
 
 	//Write to repo when materials change

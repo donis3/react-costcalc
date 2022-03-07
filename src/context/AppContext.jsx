@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useRef } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import useWindowType from '../hooks/common/useWindowType';
 import { getLangDetails } from '../helpers/languages';

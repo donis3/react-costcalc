@@ -7,7 +7,6 @@ import ReactTooltip from 'react-tooltip';
 
 import useSortTableByField from '../../hooks/app/useSortTableByField';
 import useIntl from '../../hooks/common/useIntl';
-import useConfig from '../../hooks/app/useConfig';
 
 export default function ProductsTable({ handleOpen = null } = {}) {
 	const { t } = useTranslation('pages/products');

@@ -33,9 +33,9 @@ export default function Currency() {
 		setFormState({ rate: currencies.getCurrentRate(currency) });
 	}, [currency, currencies]);
 
-	
 	useEffect(() => {
 		page.setBreadcrumb(t('currency.' + currency));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pathname]);
 
 	const handleSubmit = (data) => {
