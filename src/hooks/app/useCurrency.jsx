@@ -1,9 +1,7 @@
 import { useReducer, useEffect } from 'react';
-
 import useStorageRepo from '../common/useStorageRepo';
 import currenciesReducer from './currenciesReducer';
 import useConfig from './useConfig';
-import useRemoteCurrency from './useRemoteCurrency';
 
 export default function useCurrency() {
 	//Get enabled currencies
@@ -15,45 +13,19 @@ export default function useCurrency() {
 	//Set up repo for rates
 	const [ratesRepo, setRatesRepo] = useStorageRepo('application', 'currencies', initialData);
 	const [rates, dispatch] = useReducer(currenciesReducer, ratesRepo);
-	const { exchangeRates, fetchRates, isLoading, updatedAt } = useRemoteCurrency();
+
 
 	useEffect(() => {
 		setRatesRepo(rates);
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rates]);
 
-	//When a new exchange rate is fetched, add it
-	useEffect(() => {
-		if (!exchangeRates || Object.keys(exchangeRates).length === 0) return;
-		if (updatedAt === getLatestDate()) return;
-		const timeSinceUpdate = Date.now()-updatedAt;
-		if( timeSinceUpdate > 1000) return; //Dont update if 1 second or more passed
-
-		//A new data is available check if anything changed
-		Object.keys(exchangeRates).forEach((key) => {
-			if (enabledCurrencies.includes(key) === false) return;
-			const latest = getRateFor({ from: key });
-
-			if (latest && 'rate' in latest) {
-				const diff = Math.abs(parseFloat(latest.rate) - parseFloat(exchangeRates[key]));
-				//Not enough change to justify adding new data
-				if (diff < 0.005) return;
-			}
-			//Add new rate
-			config.get('debug.exchangeRates') && console.log(`[useCurrency] Adding new rate for ${key}: ${exchangeRates[key]}`);
-			const newRate = { from: key, to: defaultCurrency, rate: exchangeRates[key] };
-			dispatch({ type: 'add', payload: newRate });
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [exchangeRates, updatedAt]);
-
-	const refreshCurrencies = () => {
-		//
-		fetchRates();
-	};
-
-	//Get current rate for a currency, optionally include historical data
+	/**
+	 * Get current rate object for currency
+	 * Including history of the currency if available and requested
+	 * @param {object} param0 from: currency code, history: number of historical data to be included
+	 * @returns object
+	 */
 	const getRateFor = ({ from = null, history = 0 }) => {
 		const defaultData = { rate: 1, date: Date.now(), history: [] };
 		if (!from || from === defaultCurrency) return defaultData;
@@ -82,6 +54,11 @@ export default function useCurrency() {
 		return result;
 	};
 
+	/**
+	 * Return the latest exchange rate for currency if available or return 1 if not
+	 * @param {string} currency currency code
+	 * @returns float
+	 */
 	const getCurrentRate = (currency = null) => {
 		if (!currencies || enabledCurrencies.includes(currency) === false || currency in rates === false) return 1;
 		if (Array.isArray(rates[currency]) && rates[currency].length > 0) {
@@ -91,7 +68,10 @@ export default function useCurrency() {
 		return 1;
 	};
 
-	//Find the newest date in currency data
+	/**
+	 * Find the newest exchange rate data and extract its date
+	 * @returns date in epoch timestamp
+	 */
 	const getLatestDate = () => {
 		const keys = Object.keys(rates);
 		let result = 0;
@@ -109,11 +89,10 @@ export default function useCurrency() {
 
 	//Context Payload
 	const currencies = {
-		isLoading,
 		rates,
 		defaultCurrency,
 		enabledCurrencies,
-		refreshCurrencies,
+
 		getRateFor,
 		getLatestDate,
 		getCurrentRate,
@@ -124,6 +103,12 @@ export default function useCurrency() {
 
 //==================// Helpers //==================//
 
+/**
+ * Generate exchange rates for a number of currencies with todays date and conversion rate of 1
+ * @param {string} defaultCurrency currency code
+ * @param {[string]} availableCurrencies array of currency codes
+ * @returns object with currency codes as keys
+ */
 const generateInitialData = (defaultCurrency = 'TRY', availableCurrencies = []) => {
 	if (!defaultCurrency || !availableCurrencies || availableCurrencies.length === 0) return {};
 

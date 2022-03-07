@@ -9,7 +9,8 @@
 	"exchangeRates": {
 		"proxy": "https://doncors.herokuapp.com/",
 		"url": "https://www.tcmb.gov.tr/kurlar/today.xml",
-		"xmlKey": "ForexSelling"
+		"xmlKey": "ForexSelling",
+		"xmlCacheDurationMinutes": 30
 	},
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],

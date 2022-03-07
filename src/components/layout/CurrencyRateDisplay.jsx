@@ -7,18 +7,19 @@ import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useCurrencyContext } from '../../context/MainContext';
+import useTcmbToday from '../../hooks/app/useTcmbToday';
 
 export default function CurrencyRateDisplay() {
 	const [showDetails, setShowDetails] = useState(false);
 	const { currencies } = useCurrencyContext();
+	const { loading, error, fetchTcmbRates } = useTcmbToday();
 
-	
 	//No currency conversion available
 	if (!currencies || currencies.enabledCurrencies === 0) {
 		return <></>;
 	}
 
-	if( currencies.isLoading === true) {
+	if (loading === true) {
 		//Loading
 		return <>...refreshing</>;
 	}
@@ -31,11 +32,7 @@ export default function CurrencyRateDisplay() {
 				onMouseOut={() => setShowDetails(false)}
 			>
 				{/* Last updated & refresh buttons */}
-				<CurrencyDisplayDetails
-					show={showDetails}
-					action={currencies.refreshCurrencies}
-					latestDate={currencies.getLatestDate()}
-				/>
+				<CurrencyDisplayDetails show={showDetails} action={fetchTcmbRates} latestDate={currencies.getLatestDate()} />
 
 				{/* Rate Items */}
 				{currencies.enabledCurrencies.map((cur, i) => {
