@@ -64,7 +64,7 @@ export default function currenciesReducer(state, action) {
 			//add new rate as the first element
 			currentCurrencyRates = [newRate, ...currentCurrencyRates];
 			//Remove last element if max history size is exceeded
-			if (currentCurrencyRates.length > currencySettings.maxHistoricalData) {
+			if (currentCurrencyRates.length > currencySettings.maxHistoricalData+1) {
 				currentCurrencyRates.pop();
 			}
 			//console.log(`[Currencies] New ${newRate.from} rate: ${newRate.rate.toFixed(2)}`);

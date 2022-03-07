@@ -71,6 +71,7 @@ class Config {
 		}
 	}
 
+	//get currency code array
 	getCurrenciesArray({ exclude = [] } = {}) {
 		if (!this.checkCurrencies()) return [];
 		//Nothing to exclude

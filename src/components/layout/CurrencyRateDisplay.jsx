@@ -18,6 +18,11 @@ export default function CurrencyRateDisplay() {
 		return <></>;
 	}
 
+	if( currencies.isLoading === true) {
+		//Loading
+		return <>...refreshing</>;
+	}
+
 	return (
 		<div className=''>
 			<ul

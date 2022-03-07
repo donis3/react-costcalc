@@ -10,6 +10,7 @@ import useIntl from '../../hooks/common/useIntl';
 import useJoi from '../../hooks/common/useJoi';
 import NotFound from '../NotFound';
 import CurrencyError from './CurrencyError';
+import {FaCircle} from 'react-icons/fa'
 
 export default function Currency() {
 	const { t } = useTranslation();
@@ -74,7 +75,7 @@ export default function Currency() {
 				</form>
 				<div className='w-full mt-10 font-light'>
 					<h3 className='text-sm font-medium my-1'>{t('currency.historyTitle')}</h3>
-					<CurrencyHistory data={currencies.getRateFor({ from: currency, history: 100 })} />
+					<CurrencyHistory data={currencies.getRateFor({ from: currency, history: 6 })} />
 				</div>
 			</Card>
 		</>
@@ -101,10 +102,16 @@ function CurrencyHistory({ data = null } = {}) {
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<th className='font-light'><FaCircle className='text-success-content' />
+						</th>
+					<td>{displayDate(data.date)}</td>
+					<td>{displayNumber(data.rate, 2)}</td>
+				</tr>
 				{data.history.map((item, index) => {
 					return (
 						<tr key={index}>
-							<th className='font-light'>{index}</th>
+							<th className='font-light'>{index+1}</th>
 							<td>{displayDate(item.date)}</td>
 							<td>{displayNumber(item.rate, 2)}</td>
 						</tr>

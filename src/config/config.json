@@ -6,6 +6,11 @@
 		"releaseDate": "2022-02-09",
 		"localStorageKey": "rhinotap.costcalc"
 	},
+	"exchangeRates": {
+		"proxy": "https://doncors.herokuapp.com/",
+		"url": "https://www.tcmb.gov.tr/kurlar/today.xml",
+		"xmlKey": "ForexSelling"
+	},
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
 	"debug": {
@@ -13,7 +18,8 @@
 		"i18next": false,
 		"stateChange": true,
 		"storage": true,
-		"windowType": false
+		"windowType": false,
+		"exchangeRates": true
 	},
 	"applicationData": {
 		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",
@@ -36,7 +42,7 @@
 				"code": "DKK",
 				"value": 18,
 				"symbol": "kr.",
-				"disabled": false,
+				"disabled": true,
 				"default": false
 			},
 			{
