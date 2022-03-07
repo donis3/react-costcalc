@@ -7,10 +7,12 @@ import ResponsiveModal from '../../components/common/ResponsiveModal';
 //Form is handled by this hook.
 import useMaterialsForm from '../../hooks/materials/useMaterialsForm';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
+import useCurrencyConversion from '../../hooks/app/useCurrencyConversion';
 
 export default function MaterialForm({ handleClose = null, materialId = null } = {}) {
 	//Hooks
 	const { t } = useTranslation('pages/materials', 'translation');
+	const { displayMoney, defaultCurrency } = useCurrencyConversion();
 
 	//Logic for this form
 	const {
@@ -48,7 +50,10 @@ export default function MaterialForm({ handleClose = null, materialId = null } =
 					{/* Unit price and currency */}
 					<FormInput
 						label={t('form.price')}
-						altLabel={t('form.priceAlt', { amount: priceWithTax().toFixed(2) })}
+						altLabel={t('form.priceAlt', {
+							amount: displayMoney(priceWithTax(), formState.currency, defaultCurrency),
+							unit: formState.unit,
+						})}
 						className='col-span-2'
 						error={[hasError('price'), hasError('currency')]}
 					>

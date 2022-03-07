@@ -4,6 +4,8 @@ import { useEffect, useReducer } from 'react';
 import materialsReducer from './materialsReducer';
 import { useTranslation } from 'react-i18next';
 import useConfig from '../app/useConfig';
+import useIntl from '../common/useIntl';
+import useCurrencyConversion from '../app/useCurrencyConversion';
 
 /**
  * Define fields and defaults for a material
@@ -25,6 +27,8 @@ export default function useMaterials() {
 	const [materials, dispatch] = useReducer(materialsReducer, storedMaterials);
 	const { t } = useTranslation('pages/materials');
 	const config = useConfig();
+	const { displayMoney, displayNumber } = useIntl();
+	const { displayMoney: displayConvertedMoney, convert } = useCurrencyConversion();
 
 	//Write to repo when materials change
 	useEffect(() => {
@@ -53,7 +57,7 @@ export default function useMaterials() {
 			const result = this.materials.find((item) => item.materialId === materialId);
 			if (!result) return null;
 
-			return classObject ? new Material(result, t, config) : result;
+			return classObject ? new Material(result, t, config, displayConvertedMoney, displayNumber, convert) : result;
 		},
 
 		search: function (query = null) {
@@ -102,11 +106,19 @@ class Material {
 	fields = Object.keys(fields);
 	config = {};
 	taxedPrice = 0;
+	displayMoney = (amount, currency) => currency + ' ' + amount;
+	displayNumber = (n) => n;
+	convert = (amount, currency, target) => null;
+	defaultCurrency = null;
 
-	constructor(data = null, translate = null, config = null) {
+	constructor(data = null, translate = null, config = null, displayMoney = null, displayNumber = null, convert = null) {
 		if (!data || typeof data !== 'object' || Object.keys(data).length === 0) return null;
 		if (translate && typeof translate === 'function') this.t = translate;
 		if (config && typeof config === 'object') this.config = config;
+
+		if (typeof displayMoney === 'function') this.displayMoney = displayMoney;
+		if (typeof displayNumber === 'function') this.displayNumber = displayNumber;
+		if (typeof convert === 'function') this.convert = convert;
 
 		//Get all data
 		Object.keys(data).forEach((key) => {
@@ -114,19 +126,22 @@ class Material {
 			this[key] = data[key];
 		});
 
+		//Get default currency for conversions
+		this.defaultCurrency = this.config.getDefaultCurrency(true);
+
 		this.calculatePriceWithTax();
 	}
 
-	calculatePriceWithTax () {
+	calculatePriceWithTax() {
 		let p = parseFloat(this.price);
 		let t = parseFloat(this.tax);
-		if( !p || !t) return;
-		if(!t) return this.taxedPrice = p;
-		this.taxedPrice = p + ( (p/100) * t );
+		if (!p || !t) return;
+		if (!t) return (this.taxedPrice = p);
+		this.taxedPrice = p + (p / 100) * t;
 	}
 
 	get fullPrice() {
-		return `${parseFloat(this.price).toFixed(2)} ${this.config.getCurrencySymbol(this.currency)}`;
+		return this.displayMoney(this.price, this.currency);
 	}
 
 	get fullUnit() {
@@ -134,15 +149,34 @@ class Material {
 	}
 
 	get fullDensity() {
-		return `${this.t('details.densityText', { value: parseFloat(this.density).toFixed(2) })}`;
+		return `${this.t('details.densityText', { value: this.displayNumber(this.density, 2) })}`;
 	}
 	get fullTax() {
-		return `%${parseFloat(this.tax).toFixed(2) }`;
+		return `% ${this.displayNumber(this.tax, 2)}`;
 	}
 
 	get priceWithTax() {
-		
-		
-		return `${parseFloat(this.taxedPrice).toFixed(2)} ${this.config.getCurrencySymbol(this.currency)} / ${this.unit}`;
+		return this.displayMoney(this.taxedPrice, this.currency);
+	}
+
+	get localPriceWithTax() {
+		const localPriceObj = this.convert(this.taxedPrice, this.currency, this.defaultCurrency);
+		return localPriceObj ? localPriceObj.amount : null;
+	}
+
+	get localPrice() {
+		const localPriceObj = this.convert(this.price, this.currency, this.defaultCurrency);
+		return localPriceObj ? localPriceObj.amount : null;
+	}
+
+	get localPriceString() {
+		return this.displayMoney(this.localPrice, this.defaultCurrency);
+	}
+	get localPriceWithTaxString() {
+		return this.displayMoney(this.localPriceWithTax, this.defaultCurrency);
+	}
+
+	get isForeignCurrency() {
+		return this.defaultCurrency !== this.currency;
 	}
 }

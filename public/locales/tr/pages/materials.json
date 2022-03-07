@@ -49,5 +49,6 @@
 		"density": "Density",
 		"densityText": "{{value}} g/cm<sup>3</sup>",
 		"localPrice": "Price ({{currency}})"
-	}
+	},
+	"showLocalPrice": "Show price in local currency?"
 }

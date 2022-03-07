@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 
 import { getMaxInArray, sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
+import useConfig from '../app/useConfig';
 import useStorageRepo from '../common/useStorageRepo';
 import productsReducer from './productsReducer';
 
@@ -10,6 +11,9 @@ export default function useProducts() {
 	//Reducer for react state
 	const [productsState, dispatch] = useReducer(productsReducer, productsRepo);
 
+	const config = useConfig();
+	const defaultCurrency = config.getDefaultCurrency(true);
+
 	useEffect(() => {
 		setProductsRepo(productsState);
 	}, [productsState, setProductsRepo]);
@@ -18,7 +22,7 @@ export default function useProducts() {
 		data = [];
 		constructor() {
 			this.data = productsState.map((item) => {
-				return new Product(item);
+				return new Product(item, defaultCurrency);
 			});
 		}
 
@@ -147,8 +151,9 @@ class Product {
 	 */
 	//Default product data
 	product = null;
+	defaultCurrency = null;
 
-	constructor(data = null) {
+	constructor(data = null, defaultCurrency = null) {
 		//Data Check
 		if (!data || typeof data !== 'object' || data?.productId === undefined) return;
 		//Put data in product if key exists in fields static prop
@@ -159,6 +164,8 @@ class Product {
 		});
 		//Save original data
 		this.product = { ...data };
+
+		if (defaultCurrency) this.defaultCurrency = defaultCurrency;
 	}
 
 	//Dynamic Getters
@@ -192,7 +199,7 @@ class Product {
 	 * @param {*} param0
 	 */
 	getCostWithStyle() {
-		const result = { cost: 0, previous: 0, currency: 'TRY', change: 0 };
+		const result = { cost: 0, previous: 0, change: 0 };
 		const currentCost = Math.abs(parseFloat(this.cost));
 		const previousCost = Math.abs(parseFloat(this.previousCost));
 		//Special conditions
@@ -201,6 +208,15 @@ class Product {
 		//Calc difference
 		const diff = currentCost - previousCost;
 		const percentage = Math.round((diff / previousCost) * 1000) / 10; // % value rounded with 1 decimal place
-		return { ...result, cost: currentCost, change: percentage, previous: previousCost };
+		return { ...result, cost: currentCost, change: percentage, previous: previousCost, currency: this.defaultCurrency };
+	}
+
+	get productionMass() {
+		if (this.isLiquid === false) return this.production;
+		if (this.density > 0) {
+			return this.production * this.density;
+		} else {
+			return 0;
+		}
 	}
 }

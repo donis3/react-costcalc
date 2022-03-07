@@ -6,6 +6,8 @@ import { useProductsContext } from '../../context/MainContext';
 import ReactTooltip from 'react-tooltip';
 
 import useSortTableByField from '../../hooks/app/useSortTableByField';
+import useIntl from '../../hooks/common/useIntl';
+import useConfig from '../../hooks/app/useConfig';
 
 export default function ProductsTable({ handleOpen = null } = {}) {
 	const { t } = useTranslation('pages/products');
@@ -58,53 +60,61 @@ export default function ProductsTable({ handleOpen = null } = {}) {
 
 //Table Rows
 function ProductTableRow({ data = null, index = 0, action = null }) {
-	const { t } = useTranslation('pages/products');
+	const { t } = useTranslation('pages/products', 'translation');
+	const { displayNumber, displayMoney } = useIntl();
+	
 
 	//Data Check
 	if (!data || typeof data !== 'object' || Object.keys(data).includes('productId') === false) return <></>;
 	const costWithStyle = data.getCostWithStyle();
+	
+	//const costWithStyle = {cost: 50.2, previous: 25.2, currency: 'TRY', change: 10};
 
 	//Tooltips
 	const tooltipId = `Products-${index}`;
 
 	//Stylized Cost
 	let costClass = '';
-	let costContent = costWithStyle.cost.toFixed(2);
+	let costContent = displayMoney(costWithStyle.cost, costWithStyle.currency);
 	let costTitle = null;
 
 	if (costWithStyle.change > 0) {
+		//Cost increase
 		costClass = 'font-medium';
 		costContent = (
 			<div className='flex'>
-				{costWithStyle.cost.toFixed(2)} <FaCaretUp className='text-error-content' />
+				{displayMoney(costWithStyle.cost, costWithStyle.currency)} <FaCaretUp className='text-error-content' />
 			</div>
 		);
 		costTitle = t('table.costChange', {
-			previous: costWithStyle.previous.toFixed(2),
-			change: `+%${costWithStyle.change}`,
+			previous: displayMoney(costWithStyle.previous, costWithStyle.currency),
+			change: `+%${displayNumber(costWithStyle.change, 2)}`,
 		});
 	} else if (costWithStyle.change < 0) {
+		//Cost decrease
 		costClass = 'font-medium';
 		costContent = (
 			<div className='flex'>
-				{costWithStyle.cost.toFixed(2)} <FaCaretDown className='text-success-content' />
+				{displayMoney(costWithStyle.cost, costWithStyle.currency)} <FaCaretDown className='text-success-content' />
 			</div>
 		);
 		costTitle = t('table.costChange', {
-			previous: costWithStyle.previous.toFixed(2),
-			change: `-%${Math.abs(costWithStyle.change)}`,
+			previous: displayMoney(costWithStyle.previous, costWithStyle.currency),
+			change: `-%${displayNumber(Math.abs(costWithStyle.change), 2)}`,
 		});
 	}
 
 	//Production
 	let productionText = '';
 	let productionTitle = '';
-	if (data?.production && data.production > 0) {
-		if (data.production < 1000) {
-			productionText = data.production.toFixed(2) + ' kg';
+	if (data?.productionMass && data.productionMass > 0) {
+		if (data.productionMass < 1000) {
+			//Show in kg
+			productionText = displayNumber(data.productionMass, 2) + ' kg';
 		} else {
-			productionText = (data.production / 1000).toFixed(2) + ' T';
-			productionTitle = data.production.toFixed(2) + ' kg';
+			//Show in T
+			productionText = displayNumber(data.productionMass / 1000, 2) + ' T';
+			productionTitle = displayNumber(data.productionMass, 2) + ' kg';
 		}
 	}
 
@@ -116,7 +126,7 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 				<th>
 					{index + 1}
 					{/* Tooltip Component for products page */}
-					<ReactTooltip id={tooltipId} type='dark' />
+					<ReactTooltip id={tooltipId} type='light'  />
 				</th>
 				{/* Column 2 */}
 				<td className='whitespace-normal cursor-pointer font-medium' onClick={() => action('info', data.productId)}>

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useCurrencyDispatch } from '../../context/MainContext';
-const axiosOptions = { timeout: 10000 };
+const axiosOptions = { timeout: 20000 };
 
 /**
  * This hook will connect to TCMB today xml and parse it, 

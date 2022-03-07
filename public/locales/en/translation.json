@@ -4,6 +4,12 @@
 		"waiting": "Waiting",
 		"fetching": "Fetching"
 	},
+	"dates": {
+		"year": "Year",
+		"yearShort": "Y",
+		"month": "Month",
+		"monthShort": "M"
+	},
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
@@ -44,7 +50,8 @@
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
-		"minLength_other": "Must be at least {{count}} characters long"
+		"minLength_other": "Must be at least {{count}} characters long",
+		"checkboxLabel": "Enabled?"
 	},
 	"panel": {
 		"title": "Panel Title"
@@ -88,6 +95,7 @@
 		"fetchSuccess": "Exchange rates are updated through remote service.",
 		"fetchNotExpired": "Using latest request results. {{timeLeft}} minutes left before a new request can be made to TCMB",
 		"fetchWaiting": "Awaiting TCMB",
+		"convertPrice": "Show prices in local currency?",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",

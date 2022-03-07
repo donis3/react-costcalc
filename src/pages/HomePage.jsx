@@ -1,8 +1,12 @@
+import useCurrencyConversion from "../hooks/app/useCurrencyConversion";
+
 export default function HomePage() {
 	let arr = [];
 	for (let i = 0; i < 10; i++) {
 		arr[i] = 'Dynamic Content Height Generation - Row: ' + (i + 1);
 	}
+
+	const asfaf = useCurrencyConversion();
 
 	return (
 		<div className='text-center hero-content mx-auto'>

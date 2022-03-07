@@ -43,9 +43,9 @@
 		"state": "Physical State",
 		"density": "Density",
 		"production": "Production",
-		"productionMass": "Production (kg)",
 		"productionText": "{{value}} {{unit}}/Year",
-		"productionMassText": "{{value}} kg/Year",
-		"cost": "Cost"
+		"cost": "Cost",
+		"productionMass": "Production (kg)",
+		"productionMassText": "{{value}} kg/Year"
 	}
 }

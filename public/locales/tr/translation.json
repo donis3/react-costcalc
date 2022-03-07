@@ -33,7 +33,8 @@
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
-		"minLength_other": "Must be at least {{count}} characters long"
+		"minLength_other": "Must be at least {{count}} characters long",
+		"checkboxLabel": "Enabled?"
 	},
 	"panel": {
 		"title": "Panel Title"
@@ -66,15 +67,56 @@
 	"currency": {
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
-		"TRY": "Turkish Lira"
+		"TRY": "Turkish Lira",
+		"title": "Conversion Rates",
+		"titlePair": "{{from}}/{{to}} Conversion Rate",
+		"titleCurrency": "{{currency}} Conversion Rate",
+		"details": "Manually set the conversion rate for {{from}}/{{to}}. This rate will be used to calculate prices that are not set in {{to}}",
+		"selectCurrency": "Please select a currency pair to manually set the conversion rate.",
+		"noCurrencies": "There are no currencies configured in the application. Conversion rates can't be modified",
+		"formRate": "New Conversion Rate",
+		"formRateAlt": "Conversion rate for {{from}}/{{to}}",
+		"addSuccess": "Saved {{from}}/{{to}} conversion rate",
+		"addError": "Couldn't save new conversion rate",
+		"tcmbParseError": "Couldn't refresh exchange rates using TCMB data.",
+		"tcmbSuccess": "TCMB exchange rates are saved",
+		"lastUpdate": "Updated on {{date}}",
+		"lastUpdateError": "Never Updated",
+		"historyTitle": "Conversion History",
+		"historyNoData": "No historical data available.",
+		"fetchError": "Couldn't fetch exchange rates from remote service.",
+		"fetchSuccess": "Exchange rates are updated through remote service.",
+		"fetchNotExpired": "Using latest request results. {{timeLeft}} minutes left before a new request can be made to TCMB",
+		"fetchWaiting": "Awaiting TCMB",
+		"DKK": "Danish Krone",
+		"convertPrice": "Show prices in local currency?"
 	},
 	"error": {
 		"error": "Error",
-		"notFound": "Not Found"
+		"notFound": "Not Found",
+		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
+		"savingItem": "Couldn't save {{item}}"
 	},
 	"errorBoundary": {
 		"title": "Application Crashed!",
 		"message": "There was an error and application had to stop. You can find more information about the error in the browser console. Please reset the application if error persists.",
 		"button": "Go to Homepage"
+	},
+	"general": {
+		"loading": "Loading",
+		"waiting": "Waiting",
+		"fetching": "Fetching"
+	},
+	"fields": {
+		"date": "Date",
+		"name": "Name",
+		"amount": "Amount",
+		"rate": "Rate"
+	},
+	"dates": {
+		"year": "Year",
+		"yearShort": "Y",
+		"month": "Month",
+		"monthShort": "M"
 	}
 }

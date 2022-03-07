@@ -68,6 +68,12 @@ const InfoDetails = ({ product = [] }) => {
 	});
 	rows.push({ left: t('info.production'), right: productionText });
 
+	//Yearly production mass
+	if( product.isLiquid === true) {
+		let txt = t('info.productionMassText', {value: displayNumber(product.productionMass)});
+		rows.push({ left: t('info.productionMass'), right: txt });
+	}
+
 	// cost
 	let costText = ` ${displayMoney(product.cost, 'TRY')} <small>/${product.isLiquid ? 'L' : 'kg'} </small>`;
 	rows.push({ left: t('info.cost'), right: costText });

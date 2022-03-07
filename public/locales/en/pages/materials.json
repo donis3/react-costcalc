@@ -2,6 +2,7 @@
 	"title": "Materials",
 	"lead": "Available materials and details.",
 	"btnNew": "New",
+	"showLocalPrice": "Show price in local currency?",
 	"table": {
 		"material": "Material",
 		"unit": "Unit",
@@ -21,8 +22,7 @@
 		"priceWithTax": "Taxed Price",
 		"currency": "Price Currency",
 		"density": "Density",
-		"densityText": "{{value}} g/cm<sup>3</sup>",
-		"localPrice": "Price ({{currency}})"
+		"densityText": "{{value}} g/cm<sup>3</sup>"
 	},
 
 	"form": {
@@ -38,7 +38,7 @@
 		"density": "Material Density",
 		"densityAlt": "Density of the material (g/cm<sup>3</sup>)",
 		"price": "Unit Price (Without Tax)",
-		"priceAlt": "Taxed Price: {{amount}}",
+		"priceAlt": "Taxed Price: {{amount}}/{{unit}}",
 		"currency": "Currency",
 		"currencyAlt": "",
 		"tax": "Tax / Vat",

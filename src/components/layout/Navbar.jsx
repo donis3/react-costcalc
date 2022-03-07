@@ -60,7 +60,7 @@ export default function Navbar() {
 function NavbarItem({ children, to = '/' }) {
 	const activeLink = ({ isActive }) => {
 		if (isActive) {
-			return 'border-b  border-white';
+			return 'nav-active';
 		} else {
 			return '';
 		}

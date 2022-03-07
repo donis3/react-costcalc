@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {  FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import { FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
 import ThSortable from '../../components/common/ThSortable';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
+import useIntl from '../../hooks/common/useIntl';
 
 export default function MaterialTable({ openModal = null } = {}) {
 	const { t } = useTranslation('pages/materials');
@@ -27,15 +28,13 @@ export default function MaterialTable({ openModal = null } = {}) {
 							{t('table.material')}
 						</ThSortable>
 
-						<ThSortable className='w-1/12' field='unit' sortingState={sortingState} handleSort={sortBy}>
-							{t('table.unit')}
-						</ThSortable>
 
 						<ThSortable className='w-1/12' field='tax' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.tax')}
+							
 						</ThSortable>
 
-						<ThSortable className='w-2/12' field='price' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-3/12' field='price' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.price')}
 						</ThSortable>
 
@@ -44,7 +43,7 @@ export default function MaterialTable({ openModal = null } = {}) {
 				</thead>
 				<tbody>
 					{Materials.getAll(sortingState).map((material, index) => {
-						return <MaterialTableRow key={index} index={index} {...material} openModal={openModal} />;
+						return <MaterialTableRow key={index} index={index} data={material} openModal={openModal} />;
 					})}
 				</tbody>
 			</table>
@@ -53,7 +52,11 @@ export default function MaterialTable({ openModal = null } = {}) {
 }
 
 //Table Rows
-function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, openModal = null }) {
+function MaterialTableRow({ data = null, index = 0, openModal = null }) {
+	const { displayMoney, displayNumber } = useIntl();
+	if (!data) return <></>;
+	const { materialId, name, unit, tax, price, currency } = data;
+
 	return (
 		<tr className='hover'>
 			<th>{index + 1}</th>
@@ -62,11 +65,11 @@ function MaterialTableRow({ materialId, name, unit, tax, price, index = 0, openM
 					{name}
 				</span>
 			</td>
-			<td className='truncate' title={unit}>
-				{unit}
+			<td>{displayNumber(tax, 2)}<span className='text-xs ml-1 opacity-70'>%</span></td>
+			<td>
+				{displayMoney(price, currency)}
+				<span className='text-xs ml-1 opacity-70'>/{unit}</span>
 			</td>
-			<td>{tax}</td>
-			<td>{price}</td>
 			<td>
 				<button className='btn btn-ghost btn-sm mr-1' onClick={() => openModal('edit', materialId)}>
 					<FaPencilAlt />
