@@ -4,5 +4,7 @@
 	"home": "Home",
 	"products": "Products",
 	"currency": "Conversion Rates",
-	"recipes": "Recipes"
+	"recipes": "Recipes",
+	"add": "Add",
+	"edit": "Edit"
 }

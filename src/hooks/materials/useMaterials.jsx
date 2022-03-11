@@ -88,6 +88,21 @@ export default function useMaterials() {
 			}
 		},
 
+		/**
+		 * Create array that is suitable for FormInput.Select
+		 * This will be used for generating a select item with all materials
+		 */
+		getSelectOptions: function () {
+			const data = this.getAll({ field: 'name', asc: true });
+			return data.map((item) => ({ name: item.name, value: item.materialId }));
+		},
+
+		getDefaultSelectId: function () {
+			const data = this.getAll({ field: 'name', asc: true });
+			if (data && Array.isArray(data) && data.length > 0) return data[0].materialId;
+			return null;
+		},
+
 		count: function () {
 			return this.materials.length;
 		},
@@ -178,5 +193,13 @@ class Material {
 
 	get isForeignCurrency() {
 		return this.defaultCurrency !== this.currency;
+	}
+
+	get baseUnit() {
+		return this.config.getBaseUnit(this.unit);
+	}
+
+	get isLiquid() {
+		return this.config.isLiquid(this.unit);
 	}
 }

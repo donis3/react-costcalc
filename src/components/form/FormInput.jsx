@@ -136,6 +136,7 @@ const InputGroup = ({ children, ...props }) => {
 
 /**
  * Generate jsx for form select
+ * Example options: {name, value, disabled}
  */
 const SelectInput = ({ options = [], name, value, ...props }) => {
 	if (props?.children) delete props.children;

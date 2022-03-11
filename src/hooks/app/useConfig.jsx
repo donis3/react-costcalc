@@ -193,6 +193,22 @@ class Config {
 		);
 		return result ? result.type : null;
 	}
+
+	getBaseUnit(unitName = null) {
+		if (this.getUnitType(unitName) === 'volume') {
+			return 'L';
+		} else {
+			return 'kg';
+		}
+	}
+
+	isLiquid(unitName = null) {
+		if (this.getUnitType(unitName) === 'volume') {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 //==========================================//
 

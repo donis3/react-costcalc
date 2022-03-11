@@ -3,6 +3,9 @@ import { useLocation, Link } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import Icon from '../common/Icon';
 
+//These paths wont be shown as links
+const linkBlacklist  = ['/recipes/edit'];
+
 export default function Breadcrumb() {
 	const { pathname } = useLocation();
 	const { t } = useTranslation('routes');
@@ -53,7 +56,7 @@ export default function Breadcrumb() {
 
 function Crumb({ currentPath, targetPath, children }) {
 	//This is active link
-	if (currentPath === targetPath) {
+	if (currentPath === targetPath || linkBlacklist.includes(targetPath)) {
 		return <li>{children}</li>;
 	}
 

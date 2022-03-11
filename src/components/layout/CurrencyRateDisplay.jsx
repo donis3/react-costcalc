@@ -112,14 +112,14 @@ const CurrencyDisplayItem = ({ from = 'USD', to = 'TRY', currency = 'USD', rateD
 
 	return (
 		<Link to={`/currency/${currency}`}>
-			<li className='flex items-center bg-slate-100 px-2 py-1 rounded-lg' title={changeDetails}>
+			<li className='flex items-center bg-base-300 text-base-content px-2 py-1 rounded-lg' title={changeDetails}>
 				{/* Display symbols */}
 				<span className='mr-1 font-light text-xs'>{`${from}/${to}`}</span>
 				{/* Display Conversion Rate */}
 				<span>{displayNumber(parseFloat(rateData.rate), 2)}</span>
 				{/* Displa up/down icon */}
-				{isUp === true && <FaCaretUp className='text-success-content text-xs' />}
-				{isUp === false && <FaCaretDown className='text-error-content text-xs' />}
+				{isUp === true && <FaCaretUp className='text-green-700 text-xs' />}
+				{isUp === false && <FaCaretDown className='text-red-600 text-xs' />}
 			</li>
 		</Link>
 	);

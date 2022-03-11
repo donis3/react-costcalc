@@ -7,6 +7,7 @@ import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
 import Products from './pages/products/Products';
 import Recipe from './pages/recipes/Recipe';
+import RecipeForm from './pages/recipes/RecipeForm';
 import Recipes from './pages/recipes/Recipes';
 
 export default function Router() {
@@ -19,6 +20,8 @@ export default function Router() {
 			<Route path='/currency/:currency' element={<Currency />} />
 			<Route path='/recipes' element={<Recipes />} />
 			<Route path='/recipes/:recipeId' element={<Recipe />} />
+			<Route path='/recipes/add' element={<RecipeForm />}  />
+			<Route path='/recipes/edit/:recipeId' element={<RecipeForm />}  />
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

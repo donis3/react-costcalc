@@ -14,7 +14,14 @@
 		"error": "Error",
 		"notFound": "Not Found",
 		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
-		"savingItem": "Couldn't save {{item}}"
+		"savingItem": "Couldn't save {{item}}",
+		"invalidItem": "Invalid item.",
+		"add": "Item couldn't be added due to an error.",
+		"update": "Item couldn't be updated due to an error"
+	},
+	"success": {
+		"add": "\"{{name}}\" was successfully added.",
+		"update": "\"{{name}}\" was successfully updated."
 	},
 	"header": {
 		"home": "Homepage",
@@ -38,6 +45,7 @@
 	"buttons": {
 		"accept": "Accept",
 		"save": "Save",
+		"reset": "Reset",
 		"close": "Close",
 		"cancel": "Cancel",
 		"submit": "Submit",

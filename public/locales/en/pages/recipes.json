@@ -1,0 +1,22 @@
+{
+	"form": {
+		"titleAdd": "New Recipe",
+		"leadAdd": "Add a new recipe by giving it a name and selecting the product this recipe is for. ",
+		"titleUpdate": "Edit: {{name}}",
+		"leadUpdate": "Update the recipe details and materials.",
+		"titleMeta": "Recipe Details",
+		"titleMaterials": "Recipe Content",
+		"noContent": "Please add materials to recipe.",
+		"contentStats": "Total content weight: {{amount}} kg"
+	},
+	"formDefaults": {
+		"name": ""
+	},
+	"labels": {
+		"name": "Recipe Name",
+		"product": "Product",
+		"productAlt": "Which product is this recipe for?",
+		"yield": "Yield",
+		"yieldAlt": "The amount of product that this recipe will yield"
+	}
+}
