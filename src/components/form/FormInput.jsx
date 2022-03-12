@@ -60,7 +60,7 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
  * Generate jsx for form input type = text
  */
 const TextInput = (props) => {
-	const { name, value, filter, onChange, ...attributes } = props;
+	const { name, value, filter, onChange, reference = null, ...attributes } = props;
 	if (attributes?.children) delete attributes.children;
 	if (attributes?.type) delete attributes.type;
 	if (!name) console.warn('Input field is missing name attribute');
@@ -69,22 +69,21 @@ const TextInput = (props) => {
 	const handleChange = (e) => {
 		if (filter && filter === 'number') {
 			let filteredValue = e.target.value;
-			
+
 			if (filteredValue.length > 0) {
-				
 				filteredValue = filteredValue.replace(',', '.'); //replace comma with dot
 				filteredValue = filteredValue.replace(/[^0-9.-]/g, ''); //remove non number chars
 				//Remove leading zero
 				filteredValue = filteredValue.replace(/^0+/, '');
-				if( filteredValue.length === 0) filteredValue = '0';
+				if (filteredValue.length === 0) filteredValue = '0';
 				filteredValue = filteredValue === '.' ? '0.' : filteredValue; //Replace one dot with 0.
-			}else {
+			} else {
 				filteredValue = '0';
 			}
 
 			e.target.value = filteredValue;
 		}
-		onChange(e);
+		onChange?.(e);
 	};
 
 	return (
@@ -93,6 +92,7 @@ const TextInput = (props) => {
 			name={name}
 			value={value}
 			onChange={handleChange}
+			ref={reference}
 			{...attributes}
 			className={props.className ? props.className : 'input input-bordered w-full max-w-lg'}
 		/>
@@ -120,6 +120,18 @@ const NumberInput = ({ step = 1, min = 0, max = null, ...props }) => {
 			className={props.className ? props.className : 'input input-bordered w-full max-w-lg'}
 		/>
 	);
+};
+
+/**
+ * Generate jsx for textarea
+ */
+const TextareaInput = (props) => {
+	const { name, value, ...attributes } = props;
+	if (attributes?.children) delete attributes.children;
+	if (attributes?.type) delete attributes.type;
+	if (!name) console.warn('Textarea field is missing name attribute');
+
+	return <textarea className='textarea textarea-bordered' {...attributes} name={name} value={value} />;
 };
 
 const InputGroup = ({ children, ...props }) => {
@@ -196,4 +208,5 @@ FormInput.Text = TextInput;
 FormInput.Select = SelectInput;
 FormInput.Number = NumberInput;
 FormInput.Group = InputGroup;
+FormInput.Textarea = TextareaInput;
 export default FormInput;

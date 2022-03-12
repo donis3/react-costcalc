@@ -1,5 +1,6 @@
 .form-error input,
-.form-error select {
+.form-error select,
+.form-error textarea {
 	@apply border-error-content;
 }
 .form-error span {

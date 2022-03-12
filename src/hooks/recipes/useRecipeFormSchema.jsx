@@ -8,10 +8,11 @@ export default function useRecipeFormSchema() {
 
 	//Create defaults
 	const defaults = {
-		name: t('formDefaults.name'),
+		name: '',
 		recipeId: 0,
 		productId: 0,
 		yield: 0,
+		notes: '',
 		materials: [], //[{materialId, amount, unit (baseUnit) }] //amount in baseUnit
 	};
 
@@ -20,6 +21,9 @@ export default function useRecipeFormSchema() {
 
 	//Recipe Name
 	partialSchemas.name = Joi.string().min(3).max(50).required().label(t('labels.name'));
+
+	//Recipe Notes
+	partialSchemas.notes = Joi.string().min(0).max(500).label(t('labels.notes'));
 
 	//Recipe Id
 	partialSchemas.recipeId = Joi.number().integer().min(0).label(t('labels.recipeId'));

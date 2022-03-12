@@ -50,8 +50,11 @@
 		"cancel": "Cancel",
 		"submit": "Submit",
 		"add": "Add",
+		"edit": "Edit",
+		"update": "Update",
 		"delete": "Delete",
 		"deleteX": "Delete {{name}}",
+		"remove": "Remove",
 		"deleteConfirm": "Are you sure?",
 		"yes": "yes",
 		"no": "no"

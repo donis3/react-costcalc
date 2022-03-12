@@ -80,7 +80,7 @@ export default function RecipeForm() {
 					{/* Recipe Meta Information */}
 					<div className='grid grid-cols-1 gap-y-5 w-full '>
 						{/* Form meta title */}
-						<h1 className='text-xl m-0 p-0 border-b'>{t('form.titleMeta')}</h1>
+						<h1 className='text-xl m-0 p-0 border-b-8'>{t('form.titleMeta')}</h1>
 						{/* Recipe Meta Data */}
 						<FormInput label={t('labels.name')} error={hasError('name')}>
 							<FormInput.Text name='name' value={formState.name} onChange={onFieldChange} />
@@ -115,6 +115,12 @@ export default function RecipeForm() {
 					{/* Recipe Contents (MAterials in the recipe) */}
 					<div className='w-full'>
 						<RecipeFormMaterials formState={formState} setFormState={setFormState} />
+					</div>
+					<div className='w-full'>
+						<h1 className='text-xl mb-3 p-0 border-b-8'>{t('form.titleOther')}</h1>
+						<FormInput label={t('labels.notes')} error={hasError('notes')}>
+							<FormInput.Textarea name='notes' value={formState.notes} onChange={onFieldChange} />
+						</FormInput>
 					</div>
 
 					{/* End of form body container */}
