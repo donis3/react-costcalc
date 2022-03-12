@@ -7,7 +7,7 @@
 		"titleMeta": "Recipe Details",
 		"titleMaterials": "Recipe Content",
 		"noContent": "Please add materials to recipe.",
-		"contentStats": "Total content weight: {{amount}} kg"
+		"contentStats": "Total {{amount}} kg / {{max}} kg"
 	},
 	"formDefaults": {
 		"name": ""
