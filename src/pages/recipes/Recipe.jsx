@@ -16,7 +16,6 @@ import {
 } from 'react-icons/fa';
 import FormInput from '../../components/form/FormInput';
 
-
 export default function Recipe() {
 	const { page } = useAppContext();
 	const { recipeId } = useParams();
@@ -51,7 +50,13 @@ export default function Recipe() {
 	}
 	return (
 		<>
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<div className='mb-1'>
+				<Link to='/recipes'>
+					<Button.Back />
+				</Link>
+			</div>
+
+			<Card className='w-100 px-3 py-5 ' shadow='shadow-lg'>
 				{/* Header */}
 				<div className='w-full flex justify-between items-center border-b'>
 					{/* Card Title */}

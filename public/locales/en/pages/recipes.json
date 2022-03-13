@@ -1,4 +1,5 @@
 {
+	"name": "Recipe",
 	"form": {
 		"titleAdd": "New Recipe",
 		"leadAdd": "Add a new recipe by giving it a name and selecting the product this recipe is for. ",
@@ -27,5 +28,9 @@
 		"noContent": "Recipe has no content.",
 		"unitCost": "Unit Cost",
 		"unitCostTax": "{{taxedCost}}/{{unit}} with tax"
+	},
+	"recipes": {
+		"title": "All Recipes",
+		"lead": "Listing all recipes"
 	}
 }

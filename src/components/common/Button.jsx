@@ -9,6 +9,8 @@ import {
 	FaUndo as ResetIcon,
 	FaTimes as CancelIcon,
 	FaTimes as CloseIcon,
+	FaPlus as AddIcon,
+	FaArrowLeft as BackIcon,
 } from 'react-icons/fa';
 
 function Button({ children, type, ...attributes }) {
@@ -165,6 +167,70 @@ function RemoveButton({ children, hasText = true, ...attributes }) {
 	);
 }
 
+function AddButton({ children, iconFirst = true, ...attributes }) {
+	const { t } = useTranslation('translation');
+	if (!children) {
+		children = (
+			<>
+				{iconFirst && <AddIcon className='mr-1' />}
+				{t('buttons.add')}
+				{!iconFirst && <AddIcon className='ml-1' />}
+			</>
+		);
+	}
+	return (
+		<button className='btn btn-primary btn-sm' {...attributes}>
+			{children}
+		</button>
+	);
+}
+
+function NewButton({ children, iconFirst = true, name = '', ...attributes }) {
+	const { t } = useTranslation('translation');
+	if (!children) {
+		children = (
+			<>
+				{iconFirst && <AddIcon className='mr-1' />}
+				{t('buttons.new')}
+				{name && ` ${name}`}
+				{!iconFirst && <AddIcon className='ml-1' />}
+			</>
+		);
+	}
+	return (
+		<button className='btn btn-primary btn-sm' {...attributes}>
+			{children}
+		</button>
+	);
+}
+
+function EditSmall({ ...attributes }) {
+	return (
+		<button className='btn btn-ghost btn-sm' {...attributes}>
+			<EditIcon />
+		</button>
+	);
+}
+
+function BackButton({ children, iconFirst = true, name = '', ...attributes }) {
+	const { t } = useTranslation('translation');
+	if (!children) {
+		children = (
+			<>
+				{iconFirst && <BackIcon className='mr-1' />}
+				{t('buttons.back')}
+				{name && ` ${name}`}
+				{!iconFirst && <BackIcon className='ml-1' />}
+			</>
+		);
+	}
+	return (
+		<button className='btn btn-ghost btn-sm' {...attributes}>
+			{children}
+		</button>
+	);
+}
+
 //Add custom buttons
 Button.Save = SaveButton;
 Button.Submit = SubmitButton;
@@ -174,5 +240,9 @@ Button.Close = CloseButton;
 Button.Edit = EditButton;
 Button.Delete = DeleteButton;
 Button.Remove = RemoveButton;
+Button.Add = AddButton;
+Button.New = NewButton;
+Button.EditSmall = EditSmall;
+Button.Back = BackButton;
 
 export default Button;

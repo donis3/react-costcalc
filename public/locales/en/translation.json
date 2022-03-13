@@ -57,7 +57,9 @@
 		"remove": "Remove",
 		"deleteConfirm": "Are you sure?",
 		"yes": "yes",
-		"no": "no"
+		"no": "no",
+		"new": "New",
+		"back": "Back"
 	},
 	"labels": {
 		"price": "Price",
