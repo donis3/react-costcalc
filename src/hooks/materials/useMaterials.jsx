@@ -125,6 +125,8 @@ class Material {
 	displayNumber = (n) => n;
 	convert = (amount, currency, target) => null;
 	defaultCurrency = null;
+	baseUnitPrice = 0; //Converted price from other units to L or KG
+	baseUnitPriceWithTax = 0;//Converted price from other units to L or KG
 
 	constructor(data = null, translate = null, config = null, displayMoney = null, displayNumber = null, convert = null) {
 		if (!data || typeof data !== 'object' || Object.keys(data).length === 0) return null;
@@ -145,6 +147,7 @@ class Material {
 		this.defaultCurrency = this.config.getDefaultCurrency(true);
 
 		this.calculatePriceWithTax();
+		this.calculateBaseUnitPrice();
 	}
 
 	calculatePriceWithTax() {
@@ -201,5 +204,23 @@ class Material {
 
 	get isLiquid() {
 		return this.config.isLiquid(this.unit);
+	}
+
+	/**
+	 * Should run at constructor
+	 * Convert price to per base unit
+	 * For example if the price is per tonne convert it to per kg
+	 */
+	calculateBaseUnitPrice() {
+		//get unit conversion
+		const unit = this.config.getUnit(this.unit);
+		if (!unit || 'value' in unit === false || isNaN(parseFloat(unit.value))) return;
+		//This is the ratio between unit/base unit. 
+		//to get the base price, we must divide normal price to this ratio
+		const unitToBaseUnitRatio = parseFloat(unit.value);
+		if( unitToBaseUnitRatio <= 0 ) return;
+		//Calculate prices
+		this.baseUnitPrice = this.price / unitToBaseUnitRatio;
+		this.baseUnitPriceWithTax = this.taxedPrice / unitToBaseUnitRatio;
 	}
 }

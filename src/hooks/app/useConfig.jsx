@@ -202,6 +202,14 @@ class Config {
 		}
 	}
 
+	getUnit(unitName = null) {
+		if (!this.checkUnits()) return null;
+		if (typeof unitName !== 'string') return null;
+		return this.configData.applicationData.units.find(
+			(item) => item.name.toLowerCase() === unitName.toLowerCase()
+		);
+	}
+
 	isLiquid(unitName = null) {
 		if (this.getUnitType(unitName) === 'volume') {
 			return true;

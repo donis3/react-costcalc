@@ -24,6 +24,8 @@
 	"recipe": {
 		"changeYield": "Change yield",
 		"newYield": "New yield amount ({{unit}})",
-		"noContent": "Recipe has no content."
+		"noContent": "Recipe has no content.",
+		"unitCost": "Unit Cost",
+		"unitCostTax": "{{taxedCost}}/{{unit}} with tax"
 	}
 }

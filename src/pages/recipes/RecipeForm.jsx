@@ -110,18 +110,18 @@ export default function RecipeForm() {
 								</span>
 							</FormInput.Group>
 						</FormInput>
+
+						<h1 className='text-xl mt-5 p-0 border-b-8'>{t('form.titleOther')}</h1>
+						<FormInput label={t('labels.notes')} error={hasError('notes')}>
+							<FormInput.Textarea name='notes' value={formState.notes} onChange={onFieldChange} rows='4' />
+						</FormInput>
 					</div>
 
 					{/* Recipe Contents (MAterials in the recipe) */}
 					<div className='w-full'>
 						<RecipeFormMaterials formState={formState} setFormState={setFormState} />
 					</div>
-					<div className='w-full'>
-						<h1 className='text-xl mb-3 p-0 border-b-8'>{t('form.titleOther')}</h1>
-						<FormInput label={t('labels.notes')} error={hasError('notes')}>
-							<FormInput.Textarea name='notes' value={formState.notes} onChange={onFieldChange} />
-						</FormInput>
-					</div>
+					
 
 					{/* End of form body container */}
 				</div>

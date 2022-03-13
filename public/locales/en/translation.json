@@ -59,6 +59,17 @@
 		"yes": "yes",
 		"no": "no"
 	},
+	"labels": {
+		"price": "Price",
+		"unitPrice": "Unit Price",
+		"unit": "Unit",
+		"tax": "Tax",
+		"cost": "Cost",
+		"total": "Total",
+		"totalWitTax": "Taxed Total",
+		"taxPercent": "Tax %{{percent}}",
+		"taxTotal": "Total Tax"
+	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
 		"minLength_other": "Must be at least {{count}} characters long",
