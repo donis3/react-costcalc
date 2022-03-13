@@ -27,7 +27,7 @@ export default function RecipeFormMaterialItem({ material, amount, unit, handleD
 			<span className={'col-span-3 p-1 pr-3 ' + rowColor}>{material.name}</span>
 			<span className={'col-span-2 p-1 pr-3 ' + rowColor} title={amountTitle}>{`${displayNumber(amount, 2)} ${unit}`}</span>
 			<span className={'col-span-1 p-1 flex items-center justify-center ' + rowColor}>
-				<button
+				<button type="button"
 					className='btn btn-ghost btn-outline btn-xs text-error-content text-md'
 					onClick={() => handleDelete(material.materialId)}
 				>
