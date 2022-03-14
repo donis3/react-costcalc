@@ -1,22 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import useJoi from '../common/useJoi';
 
+export const defaultRecipeSchema = {
+	name: '',
+	recipeId: 0,
+	productId: 0,
+	yield: 0,
+	notes: '',
+	materials: [],
+	createdAt: Date.now(),
+	updatedAt: Date.now(),
+};
+
 export default function useRecipeFormSchema() {
 	//Load custom joi instance and load translation
 	const { t } = useTranslation('pages/recipes');
 	const Joi = useJoi();
-
-	//Create defaults
-	const defaults = {
-		name: '',
-		recipeId: 0,
-		productId: 0,
-		yield: 0,
-		notes: '',
-		materials: [], //[{materialId, amount, unit (baseUnit) }] //amount in baseUnit
-		createdAt: Date.now(),
-		updatedAt: Date.now(),
-	};
 
 	// Create individual field schemas
 	const partialSchemas = {};
@@ -48,5 +47,5 @@ export default function useRecipeFormSchema() {
 		...partialSchemas,
 	}).options({ abortEarly: false });
 
-	return { partialSchemas, schema, defaults };
+	return { partialSchemas, schema, defaults: defaultRecipeSchema };
 }

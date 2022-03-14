@@ -161,14 +161,13 @@ class Recipe {
 		if (isNaN(newYield) === false && newYield > 0) {
 			ratio = newYield / this.recipe.yield; //Get ratio using original yield
 		}
-		console.log(ratio);
 		//re-eval the recipe
 		this.loadRecipe(this.recipe, ratio);
 		return this;
 	}
 
 	resetRecipeYield() {
-		this.loadRecipe(this.recipe, 1);
+		this.loadRecipe(this.recipe, 1); //Load original data with ratio 1
 		return this;
 	}
 }
