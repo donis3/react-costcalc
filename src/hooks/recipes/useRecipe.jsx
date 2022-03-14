@@ -14,7 +14,7 @@ class Recipe {
 	productsClass = null;
 	materialsClass = null;
 	convert = null;
-	recipe = {};
+	recipe = {}; //Store original recipe data in this.
 	product = null;
 	materials = [];
 
@@ -43,10 +43,10 @@ class Recipe {
 	} //End of constructor
 
 	//Load recipe and materials according to yield ratio
-	loadRecipe(data, newYield = 1) {
+	loadRecipe(data, newYieldRatio = 1) {
 		//Validate yield ratio
-		const yieldRatio = parseFloat(newYield);
-		if (isNaN(yieldRatio) || yieldRatio < 0) throw new Error(`Invalid yield ratio: ${newYield}`);
+		const yieldRatio = parseFloat(newYieldRatio);
+		if (isNaN(yieldRatio) || yieldRatio < 0) throw new Error(`Invalid yield ratio: ${newYieldRatio}`);
 		this.yieldRatio = yieldRatio;
 
 		//Assign recipe values to obj keys
@@ -63,6 +63,13 @@ class Recipe {
 		} else {
 			this.unit = 'kg';
 		}
+		//Reset costs to default
+		this.cost = 0;
+		this.costWithTax = 0;
+		this.unitCost = 0;
+		this.unitCostWithTax = 0;
+		this.costDetails = [];
+
 		//Change values that are affected by yield ratio
 		this.yield = data.yield * this.yieldRatio;
 
@@ -147,11 +154,14 @@ class Recipe {
 		);
 	}
 
+	//A new yield value is given. Calculate ratio
 	changeRecipeYield(newYield = 0) {
 		newYield = parseFloat(newYield);
-		if (isNaN(newYield) || newYield < 0 || newYield === this.yield) return null;
-		//Calculate ratio
-		const ratio = newYield / this.yield;
+		let ratio = 1;
+		if (isNaN(newYield) === false && newYield > 0) {
+			ratio = newYield / this.recipe.yield; //Get ratio using original yield
+		}
+		console.log(ratio);
 		//re-eval the recipe
 		this.loadRecipe(this.recipe, ratio);
 		return this;
