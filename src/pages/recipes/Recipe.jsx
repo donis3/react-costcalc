@@ -335,11 +335,12 @@ function MaterialsTableFooterRow({ text = '', amount = 0 }) {
 }
 
 function MaterialsTableRow({ index, data, openMaterial = null }) {
-	const { name = '', price = 0, tax = 0, amount = 0, unit = 'kg', cost = 0 } = data;
+	const { name = '', price = 0, tax = 0, amount = 0, unit = 'kg', cost = 0, currency = ''} = data;
 	const { displayNumber, displayMoney } = useIntl();
 	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
 	const additionalClass = ' p-3 ';
 
+	
 	return (
 		<>
 			<div className={'col-span-4 ' + stripeClass + additionalClass}>
@@ -351,7 +352,7 @@ function MaterialsTableRow({ index, data, openMaterial = null }) {
 					{name}
 				</button>
 			</div>
-			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price)}</div>
+			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price,currency )}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>% {displayNumber(tax, 1)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>
 				{displayNumber(amount, 2)} {unit}

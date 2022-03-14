@@ -1,14 +1,17 @@
 import { useAppContext } from '../../context/AppContext';
+import useConfig from '../app/useConfig';
 
 export default function useIntl() {
 	const { language } = useAppContext();
+	const config = useConfig();
+	const defaultCurrency = config.getDefaultCurrency(true);
 
 	/**
 	 * Return string with intl formatted number
 	 * @param {*} amount
 	 * @param {*} currency
 	 */
-	const displayMoney = (amount = 0, currency = 'TRY') => {
+	const displayMoney = (amount = 0, currency = defaultCurrency) => {
 		try {
 			return new Intl.NumberFormat(language.locale, { style: 'currency', currency: currency }).format(amount);
 		} catch (error) {

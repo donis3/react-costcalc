@@ -65,6 +65,21 @@ class Config {
 		if (!result) {
 			console.warn('Config missing default currency');
 		}
+
+		//Check local storage
+		const storageKey = this.getUniqueKey('defaultCurrency');
+
+		try {
+			const storedCurrencyData = localStorage.getItem(storageKey);
+			const storedCurrency = storedCurrencyData && JSON.parse(storedCurrencyData);
+			if (storedCurrency && this.getCurrenciesArray().includes(storedCurrency.toUpperCase())) {
+				return storedCurrency.toUpperCase();
+			}
+		} catch (error) {
+			//Error trying to parse default currency. remove it
+			localStorage.removeItem(storageKey);
+		}
+
 		if (!returnCode) return result;
 		else {
 			return result.code;
@@ -205,9 +220,7 @@ class Config {
 	getUnit(unitName = null) {
 		if (!this.checkUnits()) return null;
 		if (typeof unitName !== 'string') return null;
-		return this.configData.applicationData.units.find(
-			(item) => item.name.toLowerCase() === unitName.toLowerCase()
-		);
+		return this.configData.applicationData.units.find((item) => item.name.toLowerCase() === unitName.toLowerCase());
 	}
 
 	isLiquid(unitName = null) {
@@ -217,7 +230,18 @@ class Config {
 			return false;
 		}
 	}
-}
+
+	//Get unique key for this state
+	getUniqueKey(identifier = null) {
+		if (!identifier) return null;
+		//Clean the identifier
+		identifier = identifier.replace(/\s/g, '_');
+		identifier = identifier.replace(/\W/g, '');
+		//check again
+		if (identifier.length === 0) return null;
+		return `${this.configData.app.localStorageKey}.${identifier}`;
+	}
+} //End of class
 //==========================================//
 
 //Helper to get deep nested property

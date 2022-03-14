@@ -75,7 +75,7 @@ const InfoDetails = ({ product = [] }) => {
 	}
 
 	// cost
-	let costText = ` ${displayMoney(product.cost, 'TRY')} <small>/${product.isLiquid ? 'L' : 'kg'} </small>`;
+	let costText = ` ${displayMoney(product.cost)} <small>/${product.isLiquid ? 'L' : 'kg'} </small>`;
 	rows.push({ left: t('info.cost'), right: costText });
 
 	//Display data here

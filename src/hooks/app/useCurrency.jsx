@@ -75,6 +75,7 @@ export default function useCurrency() {
 	const getLatestDate = () => {
 		const keys = Object.keys(rates);
 		let result = 0;
+		
 		keys.forEach((key) => {
 			if (rates[key] && Array.isArray(rates[key]) && rates[key].length > 0) {
 				const item = rates[key][0]; //get the first item

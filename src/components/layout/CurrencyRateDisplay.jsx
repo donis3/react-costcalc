@@ -14,6 +14,7 @@ export default function CurrencyRateDisplay() {
 	const { currencies } = useCurrencyContext();
 	const { loading, fetchTcmbRates } = useTcmbToday();
 	const { t } = useTranslation('translation');
+	
 
 	//No currency conversion available
 	if (!currencies || currencies.enabledCurrencies === 0) {
@@ -61,6 +62,12 @@ export default function CurrencyRateDisplay() {
 const CurrencyDisplayDetails = ({ show = false, action = null, latestDate = null }) => {
 	const { t } = useTranslation();
 	const { displayDate } = useIntl();
+	const { currencies } = useCurrencyContext();
+
+	//This component only works with TRY as default currency
+	if(currencies.defaultCurrency !== 'TRY') {
+		return <></>;
+	}
 
 	let detailsText = t('currency.lastUpdateError');
 	if (latestDate) {

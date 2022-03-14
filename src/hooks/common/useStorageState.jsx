@@ -3,6 +3,7 @@ import { useState } from 'react';
 // config.debug.storage for verbose errors
 // config.app.localStorageKey for app specific unique storage key
 import config from '../../config/config.json';
+import useConfig from '../app/useConfig';
 
 /**
  * Use browser local storage to have persistent state.
@@ -11,10 +12,13 @@ import config from '../../config/config.json';
  * @returns {Array} [value, setValue]
  */
 export default function useStorageState(identifier = null, initialValue = null) {
-	const [state, setState] = useState(getInitialValue(identifier, initialValue));
-	const localStorageKey = getUniqueKey(identifier);
+	//Generate storage key
+	const configHook = useConfig();
+	const localStorageKey = configHook.getUniqueKey(identifier);
+	//Initialize state
+	const [state, setState] = useState(getInitialValue(localStorageKey, initialValue));
 	if (!localStorageKey) return returnDefault(initialValue);
-
+	
 	//setState function that will save state in local storage
 	const handleSetState = (newState) => {
 		//If a function is passed, pass current state to it and get the result
@@ -102,8 +106,7 @@ const getData = (key = null) => {
 //     }
 // }
 
-const getInitialValue = (identifier = null, initialValue = null) => {
-	const key = getUniqueKey(identifier);
+const getInitialValue = (key = null, initialValue = null) => {
 	if (!key) return null;
 
 	//Check if key exists in local. If it does, return data in local,

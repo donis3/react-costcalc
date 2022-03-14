@@ -32,7 +32,7 @@
 				"value": 14,
 				"symbol": "$",
 				"disabled": false,
-				"default": false
+				"default": true
 			},
 			{
 				"code": "EUR",
@@ -53,7 +53,7 @@
 				"value": 1,
 				"symbol": "₺",
 				"disabled": false,
-				"default": true
+				"default": false
 			}
 		],
 		"unitsComment": "Weight value represents x/kg volume value represents x/L",

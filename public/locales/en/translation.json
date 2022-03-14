@@ -20,7 +20,7 @@
 		"invalidItem": "Invalid item.",
 		"add": "Item couldn't be added due to an error.",
 		"update": "Item couldn't be updated due to an error",
-		"delete": "Item couldn't be deleted."		
+		"delete": "Item couldn't be deleted."
 	},
 	"success": {
 		"add": "\"{{name}}\" was successfully added.",
@@ -124,6 +124,8 @@
 		"fetchNotExpired": "Using latest request results. {{timeLeft}} minutes left before a new request can be made to TCMB",
 		"fetchWaiting": "Awaiting TCMB",
 		"convertPrice": "Show prices in local currency?",
+		"changeDefault": "Change Default Currency?",
+		"changeDefaultWarning": "This action will remove saved conversion rates",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",

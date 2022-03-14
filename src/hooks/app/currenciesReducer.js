@@ -75,6 +75,10 @@ export default function currenciesReducer(state, action) {
 				[newRate.from]: currentCurrencyRates,
 			});
 		}
+		case 'reset': {
+			//Return empty object as state
+			return onSuccess({});
+		}
 
 		default: {
 			throw new Error(`[Currencies] Invalid dispatch request: ${type}`);
