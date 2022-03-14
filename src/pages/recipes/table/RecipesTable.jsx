@@ -14,7 +14,7 @@ export default function RecipesTable({ handleOpen = null } = {}) {
 
 	//Products table is empty
 	if (recipes.count() === 0) {
-		return <>{/* No product */}</>;
+		return <div className='mt-10 opacity-50'>{t('recipes.noRecipes')}</div>;
 	}
 
 	//Display products

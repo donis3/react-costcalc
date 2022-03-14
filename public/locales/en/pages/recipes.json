@@ -31,6 +31,7 @@
 	},
 	"recipes": {
 		"title": "All Recipes",
-		"lead": "Listing all recipes"
+		"lead": "Listing all recipes",
+		"noRecipes": "There are no recipes yet. Click new recipe button to start."
 	}
 }

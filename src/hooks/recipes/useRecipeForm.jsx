@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecipesDispatchContext } from '../../context/MainContext';
 
@@ -10,6 +11,8 @@ export default function useRecipeForm({ recipe = undefined } = {}) {
 	const storageKey = recipe ? 'edit-recipe-form' : 'add-recipe-form';
 	const { t } = useTranslation('translation');
 	const { dispatch } = useRecipesDispatchContext();
+
+	const navigate = useNavigate();
 
 	//Form Schema
 	const { partialSchemas, schema, defaults } = useRecipeFormSchema();
@@ -114,6 +117,15 @@ export default function useRecipeForm({ recipe = undefined } = {}) {
 		}
 	};
 
+	const onDelete = () => {
+		const success = (recipeId = null) => {
+			toast.success(t('success.delete', { name: formState.name }));
+			navigate('/recipes');
+		};
+		const error = () => toast.error(t('error.delete'));
+		dispatch({ type: 'delete', payload: recipe.recipeId, success, error });
+	};
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 		//Validate
@@ -122,13 +134,19 @@ export default function useRecipeForm({ recipe = undefined } = {}) {
 		//ADD or UPDATE
 		if (result && !recipe) {
 			//Data is valid
-			const success = () => toast.success(t('success.add', { name: formState.name }));
+			const success = (recipeId = null) => {
+				toast.success(t('success.add', { name: formState.name }));
+				if (recipeId !== null) navigate('/recipes/' + recipeId);
+			};
 			const error = () => toast.error(t('error.add'));
 			dispatch({ type: 'add', payload: result, success, error });
 			resetForm();
 		} else if (result && recipe) {
 			//Data is valid
-			const success = () => toast.success(t('success.update', { name: formState.name }));
+			const success = (recipeId = null) => {
+				toast.success(t('success.update', { name: formState.name }));
+				if (recipeId !== null) navigate('/recipes/' + recipeId);
+			};
 			const error = () => toast.error(t('error.update'));
 			dispatch({ type: 'update', payload: result, success, error });
 			resetForm();
@@ -143,7 +161,7 @@ export default function useRecipeForm({ recipe = undefined } = {}) {
 		setErrors(() => ({}));
 	};
 
-	return { formState, setFormState, onFieldChange, hasError, onSubmit, resetForm };
+	return { formState, setFormState, onFieldChange, hasError, onSubmit, resetForm, onDelete };
 }
 
 //Helpers

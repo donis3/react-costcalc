@@ -9,6 +9,7 @@ import useRecipeForm, { selectRecipeArrayGenerator } from '../../hooks/recipes/u
 import { useAppContext } from '../../context/AppContext';
 import RecipeFormMaterials from './formComponents/RecipeFormMaterials';
 import Button from '../../components/common/Button';
+import { FormFooterActions } from '../../components/common/FormFooterActions';
 
 export default function RecipeForm() {
 	const { t } = useTranslation('pages/recipes');
@@ -17,12 +18,12 @@ export default function RecipeForm() {
 	const navigate = useNavigate();
 
 	const { recipes } = useRecipesContext();
-	const recipe = recipes.findById(recipeId, true); //Get recipe data for form
+	const recipe = recipes.findById(recipeId);
 
 	const { products } = useProductsContext();
 	const productList = products.getAllSorted({ field: 'name' });
 
-	const { formState, setFormState, onFieldChange, hasError, onSubmit, resetForm } = useRecipeForm({ recipe });
+	const { formState, setFormState, onFieldChange, hasError, onSubmit, resetForm, onDelete } = useRecipeForm({ recipe });
 	const [details, setDetails] = useState({ product: null });
 	const { displayNumber } = useIntl();
 
@@ -132,7 +133,8 @@ export default function RecipeForm() {
 						{/* End of form body container */}
 					</div>
 					{/* Form Footer */}
-					<div className='mt-10 border-t-2 py-5'>
+
+					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={recipe ? onDelete : null}>
 						<button type='submit' className='btn btn-primary mr-1'>
 							{t('buttons.save', { ns: 'translation' })}
 						</button>
@@ -140,7 +142,7 @@ export default function RecipeForm() {
 						<button type='button' className='btn btn-default mr-1' onClick={resetForm}>
 							{t('buttons.reset', { ns: 'translation' })}
 						</button>
-					</div>
+					</FormFooterActions>
 				</form>
 			</Card>
 		</>

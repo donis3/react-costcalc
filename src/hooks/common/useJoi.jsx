@@ -1,6 +1,11 @@
 import Joi from 'joi';
 import { useTranslation } from 'react-i18next';
 
+const appDefaultOptions = {
+	stripUnknown: true,
+	abortEarly: false,
+};
+
 /**
  * Custom hook for Joi & i18n implementation in react.
  * @returns
@@ -9,6 +14,8 @@ export default function useJoi(defaultOptions = null) {
 	//Load joi.json translation file into i18n
 	const { t, i18n } = useTranslation('joi');
 
+	if( defaultOptions === null) defaultOptions = appDefaultOptions;
+
 	//Load localized joi messages from i18n
 	const messages = t('messages', { returnObjects: true });
 
@@ -16,7 +23,7 @@ export default function useJoi(defaultOptions = null) {
 
 	const joiInstance = initializeJoi(messages, i18n.language, defaultOptions);
 
-    return joiInstance;
+	return joiInstance;
 }
 
 /**

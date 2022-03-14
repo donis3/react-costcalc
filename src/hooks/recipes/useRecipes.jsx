@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from 'react';
-import { useProductsContext } from '../../context/MainContext';
+
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
-import useConfig from '../app/useConfig';
+
 import useStorageRepo from '../common/useStorageRepo';
 import useProducts from '../products/useProducts';
 import recipesReducer from './recipesReducer';
@@ -17,21 +17,14 @@ export default function useRecipes() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipesState]);
 
-	const config = useConfig();
-
 	//Products repo
 	const { products } = useProducts();
 
 	//Recipes API
-	const findById = (recipeId = null, isForForm = false) => {
+	const findById = (recipeId = null) => {
 		if (isNaN(parseInt(recipeId))) return;
 		recipeId = parseInt(recipeId);
 		const result = recipesState.find((item) => item.recipeId === recipeId);
-		//Remove unnecessary fields if this data will be used for edit recipe form
-		if (isForForm && result) {
-			delete result.updatedAt;
-			delete result.costs;
-		}
 		return result;
 	};
 

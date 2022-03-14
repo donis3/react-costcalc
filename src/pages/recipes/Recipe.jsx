@@ -15,6 +15,7 @@ import {
 	FaCaretRight,
 } from 'react-icons/fa';
 import FormInput from '../../components/form/FormInput';
+import MaterialInfo from '../materials/MaterialInfo';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -23,7 +24,12 @@ export default function Recipe() {
 	const { displayNumber } = useIntl();
 	const { recipe } = useRecipe(recipeId);
 	const { t } = useTranslation('pages/recipes', 'translation');
-	const [recipeState, setRecipeState] = useState({ showChangeYield: false, recipe: recipe });
+	const [recipeState, setRecipeState] = useState({
+		showChangeYield: false,
+		recipe: recipe,
+		showMaterial: false,
+		materialId: null,
+	});
 	const newYieldRef = useRef();
 
 	//Handle recipeId change
@@ -44,6 +50,10 @@ export default function Recipe() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);
+
+	//Show /Hide material modal
+	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
+	const openMaterial = (materialId) => setRecipeState((state) => ({ ...state, showMaterial: true, materialId }));
 
 	if (!recipeState.recipe) {
 		return <></>;
@@ -118,10 +128,11 @@ export default function Recipe() {
 				{recipeState.recipe.materials && recipeState.recipe.materials.length > 0 && (
 					<div className='py-3 px-3 w-full overflow-x-auto'>
 						<h4 className='text-base-content opacity-50 text-sm mb-3'>{t('labels.contents')}</h4>
-						<MaterialsTable recipe={recipeState.recipe} />
+						<MaterialsTable recipe={recipeState.recipe} openMaterial={openMaterial} />
 					</div>
 				)}
 			</Card>
+			{recipeState.showMaterial && <MaterialInfo handleClose={closeMaterial} materialId={recipeState.materialId} />}
 		</>
 	);
 }
@@ -198,7 +209,7 @@ function EditableYield({ state, setState, yieldRef }) {
 	);
 }
 
-function MaterialsTable({ recipe = null } = {}) {
+function MaterialsTable({ recipe = null, openMaterial = null } = {}) {
 	const { t } = useTranslation('pages/recipes', 'translation');
 
 	if (!recipe || !recipe.materials || !Array.isArray(recipe.materials) || recipe.materials.length === 0) {
@@ -216,7 +227,7 @@ function MaterialsTable({ recipe = null } = {}) {
 			</div>
 			<div className='grid grid-cols-12  leading-snug'>
 				{recipe.materials.map((data, i) => (
-					<MaterialsTableRow index={i} data={data} key={i} />
+					<MaterialsTableRow index={i} data={data} key={i} openMaterial={openMaterial} />
 				))}
 			</div>
 			<MaterialsTableFooter cost={recipe.cost} costWithTax={recipe.costWithTax} costDetails={recipe.getTaxCosts()} />
@@ -281,7 +292,7 @@ function MaterialsTableFooterRow({ text = '', amount = 0 }) {
 	);
 }
 
-function MaterialsTableRow({ index, data }) {
+function MaterialsTableRow({ index, data, openMaterial = null }) {
 	const { name = '', price = 0, tax = 0, amount = 0, unit = 'kg', cost = 0 } = data;
 	const { displayNumber, displayMoney } = useIntl();
 	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
@@ -289,7 +300,15 @@ function MaterialsTableRow({ index, data }) {
 
 	return (
 		<>
-			<div className={'col-span-4 ' + stripeClass + additionalClass}>{name}</div>
+			<div className={'col-span-4 ' + stripeClass + additionalClass}>
+				<button
+					type='button'
+					onClick={() => openMaterial(data.materialId)}
+					className='font-semibold border-b border-dotted border-base-content'
+				>
+					{name}
+				</button>
+			</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>% {displayNumber(tax, 1)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>

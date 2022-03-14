@@ -17,11 +17,13 @@
 		"savingItem": "Couldn't save {{item}}",
 		"invalidItem": "Invalid item.",
 		"add": "Item couldn't be added due to an error.",
-		"update": "Item couldn't be updated due to an error"
+		"update": "Item couldn't be updated due to an error",
+		"delete": "Item couldn't be deleted."
 	},
 	"success": {
 		"add": "\"{{name}}\" was successfully added.",
-		"update": "\"{{name}}\" was successfully updated."
+		"update": "\"{{name}}\" was successfully updated.",
+		"delete": "\"{{name}}\" was successfully deleted."
 	},
 	"header": {
 		"home": "Homepage",

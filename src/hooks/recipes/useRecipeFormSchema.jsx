@@ -14,6 +14,8 @@ export default function useRecipeFormSchema() {
 		yield: 0,
 		notes: '',
 		materials: [], //[{materialId, amount, unit (baseUnit) }] //amount in baseUnit
+		createdAt: Date.now(),
+		updatedAt: Date.now(),
 	};
 
 	// Create individual field schemas
@@ -32,10 +34,15 @@ export default function useRecipeFormSchema() {
 	partialSchemas.productId = Joi.number().integer().min(0).label(t('labels.productId'));
 
 	//Yield
-	partialSchemas.yield = Joi.number().min(0).label(t('labels.yield'));
+	partialSchemas.yield = Joi.number().min(0.01).label(t('labels.yield'));
 
 	//Materials
 	partialSchemas.materials = Joi.array().label(t('labels.materialId'));
+
+	//Updated At
+	partialSchemas.updatedAt = Joi.any();
+	//Created At
+	partialSchemas.createdAt = Joi.any();
 
 	const schema = Joi.object({
 		...partialSchemas,

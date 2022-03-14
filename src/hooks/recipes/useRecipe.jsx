@@ -43,10 +43,10 @@ class Recipe {
 	} //End of constructor
 
 	//Load recipe and materials according to yield ratio
-	loadRecipe(data, yieldRatio = 1) {
+	loadRecipe(data, newYield = 1) {
 		//Validate yield ratio
-		yieldRatio = parseFloat(yieldRatio);
-		if (isNaN(yieldRatio) || yieldRatio < 0) throw new Error('Invalid yield ratio');
+		const yieldRatio = parseFloat(newYield);
+		if (isNaN(yieldRatio) || yieldRatio < 0) throw new Error(`Invalid yield ratio: ${newYield}`);
 		this.yieldRatio = yieldRatio;
 
 		//Assign recipe values to obj keys
