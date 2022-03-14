@@ -33,7 +33,8 @@ export default function useMaterials() {
 	//Write to repo when materials change
 	useEffect(() => {
 		setStoredMaterials(materials);
-	}, [materials, setStoredMaterials]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [materials]);
 
 	//Materials Presentation Object. Will not manipulate original material state. Safe to pass to UI
 	const Materials = {
@@ -126,7 +127,7 @@ class Material {
 	convert = (amount, currency, target) => null;
 	defaultCurrency = null;
 	baseUnitPrice = 0; //Converted price from other units to L or KG
-	baseUnitPriceWithTax = 0;//Converted price from other units to L or KG
+	baseUnitPriceWithTax = 0; //Converted price from other units to L or KG
 
 	constructor(data = null, translate = null, config = null, displayMoney = null, displayNumber = null, convert = null) {
 		if (!data || typeof data !== 'object' || Object.keys(data).length === 0) return null;
@@ -215,10 +216,10 @@ class Material {
 		//get unit conversion
 		const unit = this.config.getUnit(this.unit);
 		if (!unit || 'value' in unit === false || isNaN(parseFloat(unit.value))) return;
-		//This is the ratio between unit/base unit. 
+		//This is the ratio between unit/base unit.
 		//to get the base price, we must divide normal price to this ratio
 		const unitToBaseUnitRatio = parseFloat(unit.value);
-		if( unitToBaseUnitRatio <= 0 ) return;
+		if (unitToBaseUnitRatio <= 0) return;
 		//Calculate prices
 		this.baseUnitPrice = this.price / unitToBaseUnitRatio;
 		this.baseUnitPriceWithTax = this.taxedPrice / unitToBaseUnitRatio;

@@ -180,8 +180,12 @@ class Recipe {
 	}
 
 	getLatestUnitCost(field = null) {
-		if (!this.recipe.unitCosts || !Array.isArray(this.recipe.unitCosts) || this.recipe.unitCosts.length === 0)
+		if (!this.recipe.unitCosts || !Array.isArray(this.recipe.unitCosts) || this.recipe.unitCosts.length === 0) {
+			//Cant find cost data yet. If available, return current object's data
+			if (field === 'cost') return this.unitCost;
+			if (field === 'costWithTax') return this.unitCostWithTax;
 			return null;
+		}
 		//First element will be the newest cost
 		const result = this.recipe.unitCosts[0];
 

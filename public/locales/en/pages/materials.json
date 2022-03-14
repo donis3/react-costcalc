@@ -49,6 +49,7 @@
 		"updateSuccess": "Updated {{name}}",
 		"updateFail": "Couldn't update material.",
 		"deleteSuccess": "Deleted {{name}} from materials",
-		"deleteFail": "Unable to delete material."
+		"deleteFail": "Unable to delete material.",
+		"boundRecipeError": "There are {{count}} recipes using this material. You can't delete a material that is bound to a recipe."
 	}
 }

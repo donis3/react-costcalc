@@ -5,6 +5,7 @@ export default function productsReducer(state, action) {
 	if (typeof success !== 'function') success = () => {};
 	if (typeof error !== 'function') error = () => {};
 
+	//console.log('Got new dispatch request:', action);
 	switch (type) {
 		case 'delete': {
 			if (isNaN(parseInt(payload))) {
@@ -20,7 +21,7 @@ export default function productsReducer(state, action) {
 				return state;
 			}
 			//Delete requested item
-            success();
+			success();
 			return state.filter((item) => item.productId !== payload);
 		}
 		case 'add': {

@@ -7,8 +7,8 @@ export function FormFooterActions({ handleDelete = null, handleClose = null, chi
 	const [deleteBtnState, setDeleteBtnState] = useState(typeof handleDelete === 'function' ? { step: 0 } : null);
 
 	return (
-		<div className={className}>
-			<div className='w-full flex justify-between'>
+		<div className={`w-full ${className}`}>
+			<div className='w-full flex justify-between '>
 				<div>
 					{children ? (
 						children
@@ -25,14 +25,14 @@ export function FormFooterActions({ handleDelete = null, handleClose = null, chi
 				</div>
 
 				{deleteBtnState && deleteBtnState.step === 0 && (
-					<div>
+					<div className='flex justify-end items-center  w-1/2 '>
 						<button className='btn btn-error btn-md' type='button' onClick={() => setDeleteBtnState({ step: 1 })}>
 							{t('buttons.delete')}
 						</button>
 					</div>
 				)}
 				{deleteBtnState && deleteBtnState.step === 1 && (
-					<div className='flex justify-end items-center  w-1/2'>
+					<div className='flex justify-end items-center  w-1/2 '>
 						<span className='hidden md:inline mr-2 font-semibold'>{t('buttons.deleteConfirm')}</span>
 						<button type='button' className='btn btn-outline btn-md' onClick={() => setDeleteBtnState({ step: 0 })}>
 							<FaTimes className='mr-1' />

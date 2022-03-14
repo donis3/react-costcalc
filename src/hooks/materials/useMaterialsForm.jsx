@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useMaterialContext, useMaterialDispatchContext } from '../../context/MainContext';
+import { useMaterialContext, useMaterialDispatchContext, useRecipesContext } from '../../context/MainContext';
 import useConfig from '../app/useConfig';
 import useFormHandler from '../common/useFormHandler';
 import useSchemaMaterials from './useSchemaMaterials';
@@ -12,8 +12,9 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 	//Load translation
 	const { t } = useTranslation('pages/materials');
 	//Load context
-	const {Materials} = useMaterialContext();
-	const {dispatch} = useMaterialDispatchContext();
+	const { Materials } = useMaterialContext();
+	const { dispatch } = useMaterialDispatchContext();
+	const { recipes } = useRecipesContext();
 
 	if (Materials === null) throw new Error('Material Form is Missing dependencies');
 
@@ -37,7 +38,10 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 		setFormState,
 		schema,
 	});
-	
+
+	//Load recipes that are bound to this material
+	const boundRecipes = recipes.getByMaterial(materialId);
+
 	//custom Handlers
 	const handleChange = (e) => {
 		//Add special change handlers
@@ -50,7 +54,6 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 
 	//Will be called automatically if form is submitted and has no errors.
 	const handleSubmit = (data) => {
-		
 		//If material exists, this is update form
 		if (material && material?.materialId !== null && typeof material.materialId === 'number') {
 			dispatch({
@@ -81,14 +84,20 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 
 	const handleDelete = () => {
 		if (!material) return;
+		//If any recipe is using this material, disallow
+		if (boundRecipes && Array.isArray(boundRecipes) && boundRecipes.length > 0) {
+			toast.error(t('form.boundRecipeError', { count: boundRecipes.length }));
+			return;
+		}
+
 		const successCallback = () => {
 			toast.success(t('form.deleteSuccess', { name: material.name }));
 			onDelete?.();
 			onSuccess?.();
-		}
+		};
 		const errorCallback = () => {
 			toast.success(t('form.deleteFail'));
-		}
+		};
 
 		dispatch({
 			type: 'delete',
@@ -96,7 +105,6 @@ export default function useMaterialsForm({ materialId = null, onSuccess = null, 
 			success: successCallback,
 			error: errorCallback,
 		});
-
 	};
 
 	//Helpers

@@ -11,7 +11,6 @@ import MainContext from './context/MainContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function App() {
 	loadThemeFromStorage();
 
@@ -20,7 +19,7 @@ function App() {
 			{/* React-Toastify configured here. */}
 			<ToastContainer
 				position='top-center'
-				autoClose={2000}
+				autoClose={3000}
 				hideProgressBar={false}
 				newestOnTop={false}
 				closeOnClick
@@ -28,6 +27,7 @@ function App() {
 				pauseOnFocusLoss
 				draggable={false}
 				pauseOnHover
+				
 			/>
 			<AppContextProvider>
 				{/* Main context has multiple context in it */}

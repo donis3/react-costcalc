@@ -16,7 +16,8 @@ export default function useProducts() {
 
 	useEffect(() => {
 		setProductsRepo(productsState);
-	}, [productsState, setProductsRepo]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [productsState]);
 
 	class Products {
 		data = [];

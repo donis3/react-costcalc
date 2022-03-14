@@ -56,13 +56,32 @@ export default function RecipeForm() {
 
 	//Helper function to display yield in kg if product is liquid
 	const showYieldWeight = () => {
-		if (details.product === null) return null;
+		if (!details.product) return null;
 		if ('isLiquid' in details.product === false || details.product.isLiquid === false) return null;
 		const currentYield = formState?.yield;
 		const density = details?.product?.density;
 		if (!currentYield || !density) return `${displayNumber(0)} kg`;
 		return `${displayNumber(currentYield * density, 2)} kg`;
 	};
+
+	//Unable to add recipe if no products are available
+	if (!productList || !Array.isArray(productList) || productList.length === 0) {
+		console.log(productList);
+		return (
+			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+				<h3 className='text-2xl py-2 font-semibold'>
+					{/* Form title depending on context */}
+					{recipe ? t('form.titleUpdate', { name: recipe.name }) : t('form.titleAdd')}
+				</h3>
+				<p>{t('form.noProducts')}</p>
+				<div className='flex justify-center py-3'>
+					<Link to='/products' className='btn btn-primary'>
+						{t('form.goToProducts')}
+					</Link>
+				</div>
+			</Card>
+		);
+	}
 
 	return (
 		<>
@@ -127,7 +146,7 @@ export default function RecipeForm() {
 
 						{/* Recipe Contents (MAterials in the recipe) */}
 						<div className='w-full'>
-							<RecipeFormMaterials formState={formState} setFormState={setFormState} />
+							<RecipeFormMaterials formState={formState} setFormState={setFormState} details={details} />
 						</div>
 
 						{/* End of form body container */}

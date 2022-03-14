@@ -1,9 +1,9 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormInput from '../../../components/form/FormInput';
 import useConfig from '../../../hooks/app/useConfig';
 import useJoi from '../../../hooks/common/useJoi';
-import {FaPlus as PlusIcon} from 'react-icons/fa'
+import { FaPlus as PlusIcon } from 'react-icons/fa';
 
 export default function RecipeFormMaterialRow({ materials = null, addMaterial = null }) {
 	const newMaterialState = (materialId = null) => {
@@ -25,19 +25,22 @@ export default function RecipeFormMaterialRow({ materials = null, addMaterial = 
 	const defaultMaterial = () => {
 		return newMaterialState(materials.getDefaultSelectId(), 0);
 	};
+
 	const config = useConfig();
-	const [mat, setMat] = useState(defaultMaterial);
+	const [mat, setMat] = useState(defaultMaterial());
+	const materialId = mat?.materialId ? mat.materialId : null;
 	const { t } = useTranslation('translation');
 	const Joi = useJoi();
 	const schema = Joi.number().min(0.01).required().label(t('fields.amount'));
 
 	//Load new selected material
 	useEffect(() => {
+		if (!mat) return;
 		if (isNaN(parseInt(mat.materialId))) return;
 		const newState = newMaterialState(mat.materialId, mat.amount);
 		setMat(newState);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [mat.materialId]);
+	}, [materialId]);
 
 	//Handle form change
 	const onChangeHandler = (e) => {
@@ -72,7 +75,7 @@ export default function RecipeFormMaterialRow({ materials = null, addMaterial = 
 		setMat(defaultMaterial());
 	};
 
-	if (!materials) return <></>;
+	if (!materials || !mat) return <></>;
 	return (
 		<div className='grid grid-cols-6 items-end gap-x-5 mt-10'>
 			<FormInput label={t('fields.name')} className='col-span-3'>

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ProgressBar from '../../../components/common/ProgressBar';
 import { useMaterialContext } from '../../../context/MainContext';
@@ -6,11 +6,17 @@ import useIntl from '../../../hooks/common/useIntl';
 import RecipeFormMaterialItem from './RecipeFormMaterialItem';
 import RecipeFormMaterialRow from './RecipeFormMaterialRow';
 
-export default function RecipeFormMaterials({ formState = null, setFormState = null } = {}) {
+export default function RecipeFormMaterials({ formState = null, setFormState = null, details = null } = {}) {
 	const { Materials } = useMaterialContext();
 	const { t } = useTranslation('pages/recipes');
 	const { displayNumber } = useIntl();
-	const [stats, setStats] = useState({ totalWeight: 0, itemCount: 0, progress: 0, progressBar: 'progress-primary' });
+	const [stats, setStats] = useState({
+		yieldWeight: 0,
+		totalWeight: 0,
+		itemCount: 0,
+		progress: 0,
+		progressBar: 'progress-primary',
+	});
 
 	useEffect(() => {
 		if (Array.isArray(formState.materials) === false || formState.materials.length === 0) {
@@ -31,16 +37,20 @@ export default function RecipeFormMaterials({ formState = null, setFormState = n
 
 	//When yield or material weight changes, our progress percentage changes
 	useEffect(() => {
-		const ratio = stats.totalWeight / parseFloat(formState.yield);
+		//When yield changes, calculate yield weight
+		let yieldWeight = formState.yield;
+		if (details.product && details.product.isLiquid && details.product.density > 0) {
+			yieldWeight = parseFloat(formState.yield) * details.product.density;
+		}
+		const ratio = stats.totalWeight / parseFloat(yieldWeight);
 		const percentage = Math.round(ratio * 100);
 		let progressBar = 'bg-primary';
 		if (percentage > 50) progressBar = 'bg-warning-content';
 		if (percentage > 100) progressBar = 'bg-error-content';
-		setStats((currentState) => ({ ...currentState, progress: percentage, progressBar }));
-	}, [formState.yield, stats.totalWeight]);
+		setStats((currentState) => ({ ...currentState, progress: percentage, progressBar, yieldWeight }));
+	}, [formState.yield, stats.totalWeight, details]);
 
-
-    //========================== Material API add/remove methods
+	//========================== Material API add/remove methods
 	const addMaterial = ({ materialId = null, amount = 0, unit = 'kg' } = {}) => {
 		if (materialId === null || !unit) return;
 		if (isNaN(parseFloat(amount))) return;
@@ -85,9 +95,12 @@ export default function RecipeFormMaterials({ formState = null, setFormState = n
 		});
 	};
 
-
-    //========================== JSX
+	//========================== JSX
 	if (!formState || !setFormState) return <></>;
+
+	if (Materials.count() === 0) {
+		return <div className='text-red-600 p-3 bg-red-100 rounded-lg'>{t('form.noMaterials')}</div>;
+	}
 
 	return (
 		<>
@@ -100,7 +113,7 @@ export default function RecipeFormMaterials({ formState = null, setFormState = n
 				<div className='text-secondary text-sm'>
 					{t('form.contentStats', {
 						amount: displayNumber(stats.totalWeight, 2),
-						max: displayNumber(formState.yield, 2),
+						max: displayNumber(stats.yieldWeight, 2),
 					})}
 				</div>
 			</div>
@@ -119,7 +132,7 @@ export default function RecipeFormMaterials({ formState = null, setFormState = n
 						return (
 							<RecipeFormMaterialItem
 								key={i}
-                                index={i}
+								index={i}
 								material={Material}
 								amount={item.amount}
 								unit={item.unit}

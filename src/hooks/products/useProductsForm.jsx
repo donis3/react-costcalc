@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useProductDispatchContext, useProductsContext } from '../../context/MainContext';
+import { useProductDispatchContext, useProductsContext, useRecipesContext } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useSchemaProducts from './useSchemaProducts';
 
@@ -10,6 +10,9 @@ export default function useProductsForm({ productId = null, handleClose = null }
 	const { products } = useProductsContext();
 	const { dispatch } = useProductDispatchContext();
 	const product = products.findById(productId);
+
+	const { recipes } = useRecipesContext();
+	const boundRecipes = recipes.getByProduct(1);
 
 	const formInitialState = products.generateFormInitialState({ productId, name: t('form.defaultName') });
 	const [formState, setFormState] = useState(formInitialState);
@@ -66,6 +69,10 @@ export default function useProductsForm({ productId = null, handleClose = null }
 	const handleDelete = () => {
 		if (!product) {
 			//No product to delete
+			return;
+		}
+		if (boundRecipes.length > 0) {
+			toast.error(t('form.boundRecipeError', { count: boundRecipes.length }));
 			return;
 		}
 		//Handle delete product

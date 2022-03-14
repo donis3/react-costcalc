@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 
@@ -11,6 +12,7 @@ export default function useRecipes() {
 	const [recipesRepo, setRecipesRepo] = useStorageRepo('application', 'recipes', []);
 	//Reducer for react state
 	const [recipesState, dispatch] = useReducer(recipesReducer, recipesRepo);
+	const { t } = useTranslation();
 	//Save to local
 	useEffect(() => {
 		setRecipesRepo(recipesState);
@@ -34,6 +36,17 @@ export default function useRecipes() {
 		const result = recipesState.map((item) => {
 			//Find product
 			const product = products.findById(item.productId);
+			if (!product) {
+				console.log(`Couldn't find requested product for this recipe. ID: ${item.productId}`);
+				return {
+					...item,
+					unit: 'kg',
+					product: t('error.error'),
+					isLiquid: false,
+					density: 1,
+					yieldWeight: item.yield,
+				};
+			}
 			//calculate yield weight
 			const yieldWeight = product.isLiquid ? item.yield * product.density : item.yield;
 			//Add relevant data to item and return
@@ -49,7 +62,7 @@ export default function useRecipes() {
 
 		return result;
 	};
-	getAll();
+
 	const getAllSorted = ({ field = null, asc = null } = {}) => {
 		if (typeof asc !== 'boolean') asc = true;
 		if (['name', 'notes', 'product'].includes(field)) {
@@ -62,10 +75,31 @@ export default function useRecipes() {
 		}
 	};
 
+	//Get all recipes that are bound to this product
+	const getByProduct = (productId = null) => {
+		if (productId === null || isNaN(productId)) return [];
+		if (!recipesState || recipesState.length === 0) return [];
+		return recipesState.filter((item) => item.productId === productId);
+	};
+
+	//Get all recipes that have this material
+	const getByMaterial = (materialId = null) => {
+		if (materialId === null || isNaN(materialId)) return [];
+		if (!recipesState || recipesState.length === 0) return [];
+
+		const result = recipesState.filter((item) => {
+			return item.materials.find((mat) => mat.materialId === materialId);
+		});
+		
+		return result ? result : [];
+	};
+
 	const recipes = {
 		recipesState,
 		findById,
 		count: () => recipesState.length,
+		getByProduct,
+		getByMaterial,
 		getAllSorted,
 	};
 
