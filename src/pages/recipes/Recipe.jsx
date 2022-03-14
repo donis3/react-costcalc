@@ -13,6 +13,7 @@ import {
 	FaUndo as ResetYieldIcon,
 	FaCaretDown,
 	FaCaretRight,
+	FaCaretUp,
 } from 'react-icons/fa';
 import FormInput from '../../components/form/FormInput';
 import MaterialInfo from '../materials/MaterialInfo';
@@ -47,6 +48,9 @@ export default function Recipe() {
 
 		//Set yield amount for change yield input
 		newYieldRef.current.value = recipe.yield;
+
+		//save cost if needed
+		recipe.saveUnitCost();
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);
@@ -132,8 +136,32 @@ export default function Recipe() {
 					</div>
 				)}
 			</Card>
+			<RecipeDateDetails recipe={recipe} />
+
 			{recipeState.showMaterial && <MaterialInfo handleClose={closeMaterial} materialId={recipeState.materialId} />}
 		</>
+	);
+}
+
+function RecipeDateDetails({ recipe = null } = {}) {
+	const { displayDate } = useIntl();
+	const { t } = useTranslation('translation');
+
+	return (
+		<div className='p-1 flex justify-between'>
+			{recipe.updatedAt && (
+				<p className='text-xs italic opacity-50'>
+					<span className='text-xs mr-1'>{t('dates.lastUpdate')}:</span>
+					<span className='font-medium'>{displayDate(recipe.updatedAt)}</span>
+				</p>
+			)}
+			{recipe.createdAt && (
+				<p className='text-xs italic opacity-50'>
+					<span className='text-xs mr-1'>{t('dates.createdAt')}: </span>
+					<span className='font-medium'>{displayDate(recipe.createdAt)}</span>
+				</p>
+			)}
+		</div>
 	);
 }
 
@@ -141,18 +169,32 @@ function RecipeUnitCost({ recipe = null }) {
 	const { t } = useTranslation('pages/recipes');
 	const { displayMoney } = useIntl();
 
+	const priceChange = recipe.getCostChangePercent();
+
+	const showPriceChange = (
+		<span className={`text-sm flex items-center ${priceChange > 0 ? 'text-green-600' : 'text-red-600'}`}>
+			{/* indicator */}
+			{priceChange} % {priceChange > 0 ? <FaCaretUp /> : <FaCaretDown />}
+		</span>
+	);
+
 	if (!recipe) return <></>;
 	return (
 		<div className='stats shadow'>
 			<div className='stat'>
-				<div className='stat-title'>{t('recipe.unitCost')}</div>
+				<div className='stat-title flex justify-between gap-x-10'>
+					<span>{t('recipe.unitCost')}</span>
+					{/* Price change indicator */}
+					{priceChange !== 0 && showPriceChange}
+				</div>
+
 				<div className='stat-value text-3xl'>
-					{displayMoney(recipe.unitCost)}
+					{displayMoney(recipe.getLatestUnitCost('cost'))}
 					<span className='text-base font-semibold'>/{recipe.unit}</span>
 				</div>
 				<div className='stat-desc'>
 					{t('recipe.unitCostTax', {
-						taxedCost: displayMoney(recipe.unitCostWithTax),
+						taxedCost: displayMoney(recipe.getLatestUnitCost('costWithTax')),
 						unit: recipe.unit,
 					})}
 				</div>

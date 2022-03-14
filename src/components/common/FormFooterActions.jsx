@@ -32,8 +32,8 @@ export function FormFooterActions({ handleDelete = null, handleClose = null, chi
 					</div>
 				)}
 				{deleteBtnState && deleteBtnState.step === 1 && (
-					<div className='flex flex-col justify-end items-end md:block'>
-						<span className='mr-2 font-semibold'>{t('buttons.deleteConfirm')}</span>
+					<div className='flex justify-end items-center  w-1/2'>
+						<span className='hidden md:inline mr-2 font-semibold'>{t('buttons.deleteConfirm')}</span>
 						<button type='button' className='btn btn-outline btn-md' onClick={() => setDeleteBtnState({ step: 0 })}>
 							<FaTimes className='mr-1' />
 							{t('buttons.no')}

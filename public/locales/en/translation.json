@@ -8,7 +8,9 @@
 		"year": "Year",
 		"yearShort": "Y",
 		"month": "Month",
-		"monthShort": "M"
+		"monthShort": "M",
+		"lastUpdate": "Last Update",
+		"createdAt": "Created"
 	},
 	"error": {
 		"error": "Error",

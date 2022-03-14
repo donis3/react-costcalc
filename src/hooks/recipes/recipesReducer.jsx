@@ -54,6 +54,39 @@ export default function recipesReducer(state, action) {
 				}
 			});
 		}
+		case 'addUnitCost': {
+			const { recipeId } = payload;
+			//Find this recipe
+			const recipe = state.find((item) => item.recipeId === recipeId);
+			if (!recipe) return state; //No such recipe
+			//Make sure unitCosts array exists
+			if ('unitCosts' in recipe === false || !Array.isArray(recipe.unitCosts) || recipe.unitCosts.length === 0) {
+				recipe.unitCosts = [];
+			}
+			//compare old and new dates
+			if (recipe.unitCosts.find((oldCostObject) => oldCostObject.date === payload.date)) {
+				//Same exact date already exists. Dont add this
+				console.warn('Add Unit Cost action was called twice.');
+				return state;
+			}
+			//Insert new cost at the start of the array
+			recipe.unitCosts.unshift(payload);
+
+			//Remove last element if more than max
+			if (recipe.unitCosts.length > 10) {
+				recipe.unitCosts.splice(10);
+			}
+
+			//Update state array
+			return state.map((item) => {
+				if (item.recipeId === recipeId) {
+					//this one needs updating. Merge old and new data
+					return { ...item, ...payload };
+				} else {
+					return item;
+				}
+			});
+		}
 		/* Delete recipe */
 		case 'delete': {
 			//get the id

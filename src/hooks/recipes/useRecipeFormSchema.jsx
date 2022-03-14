@@ -10,6 +10,7 @@ export const defaultRecipeSchema = {
 	materials: [],
 	createdAt: Date.now(),
 	updatedAt: Date.now(),
+	unitCosts: [], //{ date: Date.now(), cost: 0, costWithTax: 0 }
 };
 
 export default function useRecipeFormSchema() {

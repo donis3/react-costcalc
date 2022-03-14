@@ -1,19 +1,26 @@
-import { useMaterialContext, useProductsContext, useRecipesContext } from '../../context/MainContext';
+import {
+	useMaterialContext,
+	useProductsContext,
+	useRecipesContext,
+	useRecipesDispatchContext,
+} from '../../context/MainContext';
 import useCurrencyConversion from '../app/useCurrencyConversion';
 
 export default function useRecipe(recipeId) {
 	const { recipes } = useRecipesContext();
+	const { dispatch } = useRecipesDispatchContext();
 	const { products } = useProductsContext();
 	const { Materials: materials } = useMaterialContext();
 	const { convert } = useCurrencyConversion();
 
-	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert) };
+	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert, dispatch) };
 } //========================// End of hook
 
 class Recipe {
 	productsClass = null;
 	materialsClass = null;
 	convert = null;
+	dispatch = null;
 	recipe = {}; //Store original recipe data in this.
 	product = null;
 	materials = [];
@@ -28,7 +35,7 @@ class Recipe {
 	unitCostWithTax = 0;
 	costDetails = [];
 
-	constructor(data, productsClass, materialsClass, convert) {
+	constructor(data, productsClass, materialsClass, convert, dispatch) {
 		if (!data || typeof data !== 'object' || 'recipeId' in data === false) return null;
 		if (!productsClass || typeof productsClass !== 'object') return null;
 		if (!materialsClass || typeof materialsClass !== 'object') return null;
@@ -36,6 +43,7 @@ class Recipe {
 		this.productsClass = productsClass;
 		this.materialsClass = materialsClass;
 		this.convert = convert;
+		this.dispatch = typeof dispatch === 'function' ? dispatch : null;
 		//Save original recipe data
 		this.recipe = { ...data };
 		//Assign each key-value pair to this obj
@@ -169,5 +177,58 @@ class Recipe {
 	resetRecipeYield() {
 		this.loadRecipe(this.recipe, 1); //Load original data with ratio 1
 		return this;
+	}
+
+	getLatestUnitCost(field = null) {
+		if (!this.recipe.unitCosts || !Array.isArray(this.recipe.unitCosts) || this.recipe.unitCosts.length === 0)
+			return null;
+		//First element will be the newest cost
+		const result = this.recipe.unitCosts[0];
+
+		if (field in result) return result[field];
+		return result;
+	}
+
+	saveUnitCost() {
+		if (typeof this.dispatch !== 'function') return;
+		//Get the last saved unit cost
+		const oldCost = this.getLatestUnitCost();
+
+		//Generate current cost
+		const newCost = {
+			recipeId: this.recipeId,
+			date: Date.now(),
+			cost: this.unitCost,
+			costWithTax: this.unitCostWithTax,
+		};
+
+		//Compare new and old cost
+		if (
+			oldCost &&
+			Math.abs(oldCost.cost - newCost.cost) <= 0.01 &&
+			Math.abs(oldCost.costWithTax - newCost.costWithTax) <= 0.01
+		) {
+			//Old and new costs are basically the same. No need to save
+			//console.log('No need for dispatch');
+			return;
+		}
+
+		//Add new cost
+		this.dispatch({ type: 'addUnitCost', payload: newCost });
+	}
+
+	getCostChangePercent() {
+		//This function requires at least 2 cost data
+		if (!this.recipe.unitCosts || !Array.isArray(this.recipe.unitCosts) || this.recipe.unitCosts.length <= 1) return 0;
+		const current = this.recipe.unitCosts[0];
+		const previous = this.recipe.unitCosts[1];
+		if (!current || !previous || 'cost' in current === false || 'cost' in previous === false) return 0;
+
+		//calculate difference
+		const delta = Math.abs(current.cost - previous.cost);
+		if (isNaN(delta) || delta <= 0.01) return 0;
+		const percent = Math.round((delta / previous.cost) * 10000) / 100;
+
+		return current.cost > previous.cost ? percent : -percent;
 	}
 }
