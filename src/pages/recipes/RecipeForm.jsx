@@ -48,8 +48,15 @@ export default function RecipeForm() {
 	//Handle Product Id Change
 	useEffect(() => {
 		//Load active product when component initializes
+		const activeProduct = products.findById(formState.productId);
+		if (!activeProduct) {
+			//Product not found! get default productId and set it to form state
+			const { productId } = products.getDefaultProduct();
+			if (productId !== formState.productId) setFormState((state) => ({ ...state, productId }));
+			return;
+		}
 		setDetails((state) => {
-			return { ...state, product: products.findById(formState.productId) };
+			return { ...state, product: activeProduct };
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState.productId]);

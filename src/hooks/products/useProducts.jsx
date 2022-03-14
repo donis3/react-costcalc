@@ -48,6 +48,11 @@ export default function useProducts() {
 			return this.data ? this.data : [];
 		}
 
+		getDefaultProduct() {
+			if (this.data && Array.isArray(this.data) && this.data.length > 0) return this.data[0];
+			return null;
+		}
+
 		/**
 		 * Get single product by its id
 		 * @param {*} productId
