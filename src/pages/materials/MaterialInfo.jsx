@@ -174,7 +174,7 @@ const generateDetailData = (data = {}, t = null, showLocalPrice = false, showBas
 				const localPriceContent = (
 					<>
 						{data.displayMoney(data.localBaseUnitPrice)}
-						<small className='ml-1 text-xs'>/{data.unit}</small>
+						<small className='ml-1 text-xs'>/{data.baseUnit}</small>
 					</>
 				);
 				rows.push(<MaterialDetailRow left={t('details.price')} right={localPriceContent} />);
@@ -184,7 +184,7 @@ const generateDetailData = (data = {}, t = null, showLocalPrice = false, showBas
 				const localPriceContent = (
 					<>
 						{data.displayMoney(data.localBaseUnitPriceWithTax)}
-						<small className='ml-1 text-xs'>/{data.unit}</small>
+						<small className='ml-1 text-xs'>/{data.baseUnit}</small>
 					</>
 				);
 				rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={localPriceContent} />);
