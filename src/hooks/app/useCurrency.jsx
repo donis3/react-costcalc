@@ -54,19 +54,23 @@ export default function useCurrency() {
 		return result;
 	};
 
+	
+
 	/**
 	 * Return the latest exchange rate for currency if available or return 1 if not
 	 * @param {string} currency currency code
 	 * @returns float
 	 */
 	const getCurrentRate = (currency = null) => {
-		if (!currencies || enabledCurrencies.includes(currency) === false || currency in rates === false) return 1;
+		if (!enabledCurrencies || enabledCurrencies.includes(currency) === false || currency in rates === false) return 1;
 		if (Array.isArray(rates[currency]) && rates[currency].length > 0) {
 			const result = rates[currency][0];
 			return isNaN(parseFloat(result.rate)) ? 1 : Math.round(parseFloat(result.rate) * 100) / 100;
 		}
 		return 1;
 	};
+
+	
 
 	/**
 	 * Find the newest exchange rate data and extract its date
@@ -89,7 +93,7 @@ export default function useCurrency() {
 	};
 
 	//Context Payload
-	const currencies = {
+	const payload = {
 		rates,
 		defaultCurrency,
 		enabledCurrencies,
@@ -99,7 +103,9 @@ export default function useCurrency() {
 		getCurrentRate,
 		symbol: (code) => config.getCurrencySymbol(code),
 	};
-	return { currencies, dispatchCurrencies: dispatch };
+
+	
+	return { currencies: payload, dispatchCurrencies: dispatch };
 } //End of hook
 
 //==================// Helpers //==================//

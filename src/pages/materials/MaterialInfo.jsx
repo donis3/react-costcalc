@@ -11,7 +11,10 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 	const { Materials } = useMaterialContext();
 	const { t } = useTranslation('pages/materials');
 	const material = Materials.findById(materialId, true);
-	const [showLocalPrice, setShowLocalPrice] = useStorageState('showLocalPrice', false);
+	const [displayState, setDisplayState] = useStorageState('displaySettings', { localPrice: true, baseUnit: false });
+
+	const showLocalPrice = (value = true) => setDisplayState((state) => ({ ...state, localPrice: value }));
+	const showBaseUnit = (value = true) => setDisplayState((state) => ({ ...state, baseUnit: value }));
 
 	if (!material) {
 		//Show data
@@ -20,19 +23,22 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 		);
 	}
 
-	const detailRows = generateDetailData(material, t, showLocalPrice);
+	const detailRows = generateDetailData(material, t, displayState.localPrice, displayState.baseUnit);
 
 	const footer = (
-		<div className='flex justify-between w-full items-center'>
+		<div className='flex justify-between w-full items-start'>
 			<button className='btn btn-primary' onClick={handleClose}>
 				{t('buttons.close', { ns: 'translation' })}
 			</button>
-			{/* Only show local currency checkbox if needed */}
-			{material.isForeignCurrency === true ? (
-				<OptionControl state={showLocalPrice} setState={setShowLocalPrice} text={t('showLocalPrice')} />
-			) : (
-				''
-			)}
+			<div>
+				{/* Only show local currency checkbox if needed */}
+				{material.isForeignCurrency === true && (
+					<OptionControl state={displayState.localPrice} setState={showLocalPrice} text={t('showLocalPrice')} />
+				)}
+				{material.isBaseUnit === false && (
+					<OptionControl state={displayState.baseUnit} setState={showBaseUnit} text={t('showBaseUnit')} />
+				)}
+			</div>
 		</div>
 	);
 
@@ -48,12 +54,13 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 	);
 }
 
-const generateDetailData = (data = {}, t = null, showLocalPrice = false) => {
+const generateDetailData = (data = {}, t = null, showLocalPrice = false, showBaseUnit = false) => {
 	if (!data || Object.keys(data).length === 0 || typeof t !== 'function') {
 		return { detailKeys: [], detailValues: [] };
 	}
 	//Remove local price if this is already local currency
 	if (data.isForeignCurrency === false) showLocalPrice = false;
+	if (data.isBaseUnit === true) showBaseUnit = false; //No need for unit conversion. Its already a basic unit
 
 	const rows = [];
 
@@ -83,49 +90,107 @@ const generateDetailData = (data = {}, t = null, showLocalPrice = false) => {
 
 	//if showLocalPrice id disabled
 	if (!showLocalPrice) {
-		//Add original currency prices
+		//==================// Original Currency Original Unit Price //========================//
+		if (showBaseUnit === false) {
+			//Add original currency prices
 
-		//Price
-		if (data?.price !== null) {
-			const priceContent = (
-				<>
-					{data.fullPrice}
-					<small className='ml-1 text-xs'>/{data.unit}</small>
-				</>
-			);
-			rows.push(<MaterialDetailRow left={t('details.price')} right={priceContent} />);
+			//Price
+			if (data?.price !== null) {
+				const priceContent = (
+					<>
+						{data.fullPrice}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.price')} right={priceContent} />);
+			}
+			//Taxed Price
+			if (data?.price !== null) {
+				const priceContent = (
+					<>
+						{data.priceWithTax}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={priceContent} />);
+			}
 		}
-		//Taxed Price
-		if (data?.price !== null) {
-			const priceContent = (
-				<>
-					{data.priceWithTax}
-					<small className='ml-1 text-xs'>/{data.unit}</small>
-				</>
-			);
-			rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={priceContent} />);
+		//==================// ENDOF Original Currency Original Unit Price //========================//
+
+		//==================// Original Currency Base Unit Price //========================//
+		if (showBaseUnit === true) {
+			//Base Price
+			if (data?.baseUnitPrice !== null) {
+				const priceContent = (
+					<>
+						{data.displayMoney(data.baseUnitPrice, data.currency)}
+						<small className='ml-1 text-xs'>/{data.baseUnit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.price')} right={priceContent} />);
+			}
+			//Base Price w tax
+			if (data?.baseUnitPriceWithTax !== null) {
+				const priceContent = (
+					<>
+						{data.displayMoney(data.baseUnitPriceWithTax, data.currency)}
+						<small className='ml-1 text-xs'>/{data.baseUnit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={priceContent} />);
+			}
 		}
+		//==================// ENDOF Original Currency Base Unit Price //========================//
 	} else {
-		//Local Price without tax
-		if (data?.isForeignCurrency) {
-			const localPriceContent = (
-				<>
-					{data.localPriceString}
-					<small className='ml-1 text-xs'>/{data.unit}</small>
-				</>
-			);
-			rows.push(<MaterialDetailRow left={t('details.price')} right={localPriceContent} />);
+		//==================// Converted Original Unit Price //========================//
+		if (showBaseUnit === false) {
+			//Local Price without tax
+			if (data?.localPriceString !== null) {
+				const localPriceContent = (
+					<>
+						{data.localPriceString}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.price')} right={localPriceContent} />);
+			}
+			//priceWithTax
+			if (data?.localPriceWithTaxString !== null) {
+				const localPriceContent = (
+					<>
+						{data.localPriceWithTaxString}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={localPriceContent} />);
+			}
 		}
-		//priceWithTax
-		if (data?.price !== null) {
-			const localPriceContent = (
-				<>
-					{data.localPriceWithTaxString}
-					<small className='ml-1 text-xs'>/{data.unit}</small>
-				</>
-			);
-			rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={localPriceContent} />);
+		//==================// ENDOFConverted Original Unit Price //========================//
+
+		//==================// Converted Base Unit Price //========================//
+		if (showBaseUnit === true) {
+			//Local base unit Price without tax
+			if (data?.localBaseUnitPrice !== null) {
+				const localPriceContent = (
+					<>
+						{data.displayMoney(data.localBaseUnitPrice)}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.price')} right={localPriceContent} />);
+			}
+			//base unit local priceWithTax
+			if (data?.localBaseUnitPriceWithTax !== null) {
+				const localPriceContent = (
+					<>
+						{data.displayMoney(data.localBaseUnitPriceWithTax)}
+						<small className='ml-1 text-xs'>/{data.unit}</small>
+					</>
+				);
+				rows.push(<MaterialDetailRow left={t('details.priceWithTax')} right={localPriceContent} />);
+			}
 		}
+		//==================// ENDOF Converted Base Unit Price //========================//
 	}
 
 	return rows;

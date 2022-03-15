@@ -49,17 +49,6 @@ const returnDefault = (defaultValue = null) => {
 	return [defaultValue, defaultSetter];
 };
 
-//Get unique key for this state
-const getUniqueKey = (identifier = null) => {
-	if (!identifier) return null;
-	//Clean the identifier
-	identifier = identifier.replace(/\s/g, '_');
-	identifier = identifier.replace(/\W/g, '');
-	//check again
-	if (identifier.length === 0) return null;
-	return `${config.app.localStorageKey}.${identifier}`;
-};
-
 const setData = (key = null, data) => {
 	if (!key) return false;
 

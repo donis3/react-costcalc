@@ -126,6 +126,7 @@ class Material {
 	displayNumber = (n) => n;
 	convert = (amount, currency, target) => null;
 	defaultCurrency = null;
+	isBaseUnit = false;
 	baseUnitPrice = 0; //Converted price from other units to L or KG
 	baseUnitPriceWithTax = 0; //Converted price from other units to L or KG
 
@@ -149,13 +150,16 @@ class Material {
 
 		this.calculatePriceWithTax();
 		this.calculateBaseUnitPrice();
+
+		//Determine if this materials unit is already a base unit
+		if (config.getBaseUnit(data.unit) === data.unit) this.isBaseUnit = true;
 	}
 
 	calculatePriceWithTax() {
 		let p = parseFloat(this.price);
 		let t = parseFloat(this.tax);
-		if (!p || !t) return;
-		if (!t) return (this.taxedPrice = p);
+		if (isNaN(p) || isNaN(t)) return (this.taxedPrice = p);
+		if (t === 0) return (this.taxedPrice = p);
 		this.taxedPrice = p + (p / 100) * t;
 	}
 
@@ -205,6 +209,17 @@ class Material {
 
 	get isLiquid() {
 		return this.config.isLiquid(this.unit);
+	}
+
+	get localBaseUnitPrice() {
+		if (!this.isForeignCurrency) return this.baseUnitPrice;
+		const result = this.convert(this.baseUnitPrice, this.currency);
+		return result ? result.amount : null;
+	}
+	get localBaseUnitPriceWithTax() {
+		if (!this.isForeignCurrency) return this.baseUnitPriceWithTax;
+		const result = this.convert(this.baseUnitPriceWithTax, this.currency);
+		return result ? result.amount : null;
 	}
 
 	/**

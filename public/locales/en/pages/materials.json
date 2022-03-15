@@ -3,6 +3,7 @@
 	"lead": "Available materials and details.",
 	"btnNew": "New",
 	"showLocalPrice": "Show price in local currency?",
+	"showBaseUnit": "Convert to base unit?",
 	"table": {
 		"material": "Material",
 		"unit": "Unit",
