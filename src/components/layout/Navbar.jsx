@@ -34,11 +34,12 @@ export default function Navbar() {
 					</div>
 					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? 'flex' : ' hidden')}>
 						<ul className='nav-list  flex flex-wrap'>
-							<NavbarItem to="/">{t('home')}</NavbarItem>
+							
 							{/* Business Links */}
 							<NavbarItem to="/materials">{t('materials')}</NavbarItem>
 							<NavbarItem to="/products">{t('products')}</NavbarItem>
 							<NavbarItem to="/recipes">{t('recipes')}</NavbarItem>
+							<NavbarItem to="/packages">{t('packages')}</NavbarItem>
 
 							{/* Language Selector */}
 							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>

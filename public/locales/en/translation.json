@@ -2,7 +2,9 @@
 	"general": {
 		"loading": "Loading",
 		"waiting": "Waiting",
-		"fetching": "Fetching"
+		"fetching": "Fetching",
+		"show": "Show",
+		"hide": "Hide"
 	},
 	"dates": {
 		"year": "Year",
@@ -20,7 +22,8 @@
 		"invalidItem": "Invalid item.",
 		"add": "Item couldn't be added due to an error.",
 		"update": "Item couldn't be updated due to an error",
-		"delete": "Item couldn't be deleted."
+		"delete": "Item couldn't be deleted.",
+		"noData": "No data"
 	},
 	"success": {
 		"add": "\"{{name}}\" was successfully added.",
@@ -72,7 +75,9 @@
 		"tax": "Tax",
 		"cost": "Cost",
 		"total": "Total",
+		"subTotal": "Sub Total",
 		"totalWitTax": "Taxed Total",
+		"totalWithTax": "Taxed Total",
 		"taxPercent": "Tax %{{percent}}",
 		"taxTotal": "Total Tax"
 	},
@@ -101,6 +106,15 @@
 		"mL_other": "Milliliters",
 		"L": "Liter",
 		"L_other": "Liters"
+	},
+	"packageTypes": {
+		"box": "Box",
+		"container": "Container",
+		"other": "Other"
+	},
+	"physicalStates": {
+		"liquid": "Liquid",
+		"solid": "Solid"
 	},
 	"currency": {
 		"title": "Conversion Rates",

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCheck, FaTimes } from 'react-icons/fa';
+import Button from './Button';
 
 export function FormFooterActions({ handleDelete = null, handleClose = null, children, className = null }) {
 	const { t } = useTranslation('translation');
@@ -26,9 +27,7 @@ export function FormFooterActions({ handleDelete = null, handleClose = null, chi
 
 				{deleteBtnState && deleteBtnState.step === 0 && (
 					<div className='flex justify-end items-center  w-1/2 '>
-						<button className='btn btn-error btn-md' type='button' onClick={() => setDeleteBtnState({ step: 1 })}>
-							{t('buttons.delete')}
-						</button>
+						<Button.Delete className='btn btn-md btn-error' onClick={() => setDeleteBtnState({ step: 1 })} />
 					</div>
 				)}
 				{deleteBtnState && deleteBtnState.step === 1 && (

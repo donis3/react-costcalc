@@ -94,7 +94,7 @@ const TextInput = (props) => {
 			onChange={handleChange}
 			ref={reference}
 			{...attributes}
-			className={props.className ? props.className : 'input input-bordered w-full max-w-lg'}
+			className={props.className ? props.className : 'input input-bordered w-full'}
 		/>
 	);
 };
@@ -117,7 +117,7 @@ const NumberInput = ({ step = 1, min = 0, max = null, ...props }) => {
 			name={name}
 			value={value}
 			{...attributes}
-			className={props.className ? props.className : 'input input-bordered w-full max-w-lg'}
+			className={props.className ? props.className : 'input input-bordered w-full'}
 		/>
 	);
 };
@@ -162,7 +162,7 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 			name={name}
 			value={value}
 			{...props}
-			className={props.className ? props.className : 'select select-bordered w-full max-w-lg'}
+			className={props.className ? props.className : 'select select-bordered w-full'}
 		>
 			{options.map((opt, index) => {
 				let name = 'Option Name';

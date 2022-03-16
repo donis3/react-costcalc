@@ -112,7 +112,7 @@ export default function RecipeForm() {
 					{/* Flex Container for form */}
 					<div className='flex flex-col justify-between gap-10 items-start xl:flex-row gap-y-20 xl:gap-y-0 gap-x-10'>
 						{/* Recipe Meta Information */}
-						<div className='grid grid-cols-1 gap-y-5 w-full '>
+						<div className='grid grid-cols-1 gap-y-5 w-full max-w-lg md:max-w-xl'>
 							{/* Form meta title */}
 							<h1 className='text-xl m-0 p-0 border-b-8'>{t('form.titleMeta')}</h1>
 							{/* Recipe Meta Data */}
@@ -130,7 +130,7 @@ export default function RecipeForm() {
 							</FormInput>
 
 							<FormInput
-								className='max-w-lg'
+								className=''
 								label={t('labels.yield')}
 								error={hasError('yield')}
 								altLabel={showYieldWeight()}

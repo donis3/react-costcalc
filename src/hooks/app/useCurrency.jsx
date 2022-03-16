@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import useStorageRepo from '../common/useStorageRepo';
 import currenciesReducer from './currenciesReducer';
 import useConfig from './useConfig';
@@ -14,6 +15,7 @@ export default function useCurrency() {
 	const [ratesRepo, setRatesRepo] = useStorageRepo('application', 'currencies', initialData);
 	const [rates, dispatch] = useReducer(currenciesReducer, ratesRepo);
 
+	const { t } = useTranslation('translation');
 
 	useEffect(() => {
 		setRatesRepo(rates);
@@ -54,8 +56,6 @@ export default function useCurrency() {
 		return result;
 	};
 
-	
-
 	/**
 	 * Return the latest exchange rate for currency if available or return 1 if not
 	 * @param {string} currency currency code
@@ -70,8 +70,6 @@ export default function useCurrency() {
 		return 1;
 	};
 
-	
-
 	/**
 	 * Find the newest exchange rate data and extract its date
 	 * @returns date in epoch timestamp
@@ -79,7 +77,7 @@ export default function useCurrency() {
 	const getLatestDate = () => {
 		const keys = Object.keys(rates);
 		let result = 0;
-		
+
 		keys.forEach((key) => {
 			if (rates[key] && Array.isArray(rates[key]) && rates[key].length > 0) {
 				const item = rates[key][0]; //get the first item
@@ -92,19 +90,39 @@ export default function useCurrency() {
 		return result > 0 ? result : null;
 	};
 
+	/**
+	 * Return all currencies with default as first item in an array of objects
+	 * [...{name, value}]
+	 */
+	const getCurrencySelectArray = ({ fullNames = true, symbols = true } = {}) => {
+		const allCurrencies = [defaultCurrency, ...enabledCurrencies];
+		if (allCurrencies.length === 0) return [];
+
+		return allCurrencies.map((code) => {
+			const item = { name: code, value: code };
+			item.name = fullNames === true ? t(`currency.${code}`) : code;
+
+			if (symbols === true) {
+				item.name = `${item.name} (${config.getCurrencySymbol(code)})`;
+			}
+
+			return item;
+		});
+	};
+
 	//Context Payload
 	const payload = {
 		rates,
 		defaultCurrency,
 		enabledCurrencies,
-
+		allCurrencies: [defaultCurrency, ...enabledCurrencies],
+		getCurrencySelectArray,
 		getRateFor,
 		getLatestDate,
 		getCurrentRate,
 		symbol: (code) => config.getCurrencySymbol(code),
 	};
 
-	
 	return { currencies: payload, dispatchCurrencies: dispatch };
 } //End of hook
 
