@@ -60,7 +60,7 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
  * Generate jsx for form input type = text
  */
 const TextInput = (props) => {
-	const { name, value, filter, onChange, reference = null, ...attributes } = props;
+	const { defaultValue = null, name, value = '', filter, onChange, reference = null, ...attributes } = props;
 	if (attributes?.children) delete attributes.children;
 	if (attributes?.type) delete attributes.type;
 	if (!name) console.warn('Input field is missing name attribute');
@@ -86,17 +86,37 @@ const TextInput = (props) => {
 		onChange?.(e);
 	};
 
-	return (
-		<input
-			type='text'
-			name={name}
-			value={value}
-			onChange={handleChange}
-			ref={reference}
-			{...attributes}
-			className={props.className ? props.className : 'input input-bordered w-full'}
-		/>
-	);
+	const defaultValueCalculated = () => {
+		if (filter === 'number' && defaultValue === null) return 0;
+		if (defaultValue !== null) return defaultValue;
+		return '';
+	};
+
+	if (defaultValue === null) {
+		return (
+			<input
+				type='text'
+				name={name}
+				value={value}
+				onChange={handleChange}
+				ref={reference}
+				{...attributes}
+				className={props.className ? props.className : 'input input-bordered w-full'}
+			/>
+		);
+	} else {
+		return (
+			<input
+				type='text'
+				name={name}
+				defaultValue={defaultValueCalculated()}
+				onChange={handleChange}
+				ref={reference}
+				{...attributes}
+				className={props.className ? props.className : 'input input-bordered w-full'}
+			/>
+		);
+	}
 };
 
 /**
@@ -126,12 +146,12 @@ const NumberInput = ({ step = 1, min = 0, max = null, ...props }) => {
  * Generate jsx for textarea
  */
 const TextareaInput = (props) => {
-	const { name, value, ...attributes } = props;
+	const { name, value, reference, ...attributes } = props;
 	if (attributes?.children) delete attributes.children;
 	if (attributes?.type) delete attributes.type;
 	if (!name) console.warn('Textarea field is missing name attribute');
 
-	return <textarea className='textarea textarea-bordered' {...attributes} name={name} value={value} />;
+	return <textarea ref={reference} className='textarea textarea-bordered' {...attributes} name={name} value={value} />;
 };
 
 const InputGroup = ({ children, ...props }) => {
@@ -150,7 +170,7 @@ const InputGroup = ({ children, ...props }) => {
  * Generate jsx for form select
  * Example options: {name, value, disabled}
  */
-const SelectInput = ({ options = [], name, value, ...props }) => {
+const SelectInput = ({ options = [], name, value, reference, ...props }) => {
 	if (props?.children) delete props.children;
 	if (props?.type) delete props.type;
 
@@ -161,6 +181,7 @@ const SelectInput = ({ options = [], name, value, ...props }) => {
 		<select
 			name={name}
 			value={value}
+			ref={reference}
 			{...props}
 			className={props.className ? props.className : 'select select-bordered w-full'}
 		>

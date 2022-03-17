@@ -15,6 +15,7 @@
 		"addItem": "Add Item"
 	},
 	"labels": {
+		"packageId": "Package ID",
 		"name": "Package Name",
 		"productType": "Product Type",
 		"productTypeAlt": "Physical state of the product that this package will contain",
