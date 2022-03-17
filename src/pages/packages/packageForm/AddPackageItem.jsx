@@ -149,7 +149,7 @@ export default function AddPackageItem({ onAddItem = null } = {}) {
 						</FormInput>
 					)}
 					<div className='col-span-full flex justify-center items-center'>
-						<Button.Add className='btn btn-block' onClick={handleAddItem}>
+						<Button.Add className='btn btn-block' type="button" onClick={handleAddItem}>
 							<Icon icon='FaArrowCircleUp' className='mr-1' /> {t('form.addItem')}
 						</Button.Add>
 					</div>

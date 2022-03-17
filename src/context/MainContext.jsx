@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import useCurrency from '../hooks/app/useCurrency';
 import useMaterials from '../hooks/materials/useMaterials';
+import usePackages from '../hooks/packages/usePackages';
 import useProducts from '../hooks/products/useProducts';
 import useRecipes from '../hooks/recipes/useRecipes';
 
@@ -15,18 +16,23 @@ const CurrencyDispatch = createContext();
 const RecipesContext = createContext();
 const RecipesDispatch = createContext();
 
+const PackagesContext = createContext();
+const PackagesDispatch = createContext();
+
 /* Providers */
 export default function MainContext({ children }) {
 	const { Materials, dispatchMaterials } = useMaterials();
 	const { products, dispatchProducts } = useProducts();
 	const { currencies, dispatchCurrencies } = useCurrency();
 	const { recipes, dispatchRecipes } = useRecipes();
-	
+	const [packages, dispatchPackages] = usePackages();
+
 	//Memoize repos
 	const materialsMemoized = useMemo(() => ({ Materials }), [Materials]);
 	const productsMemoized = useMemo(() => ({ products }), [products]);
 	const currenciesMemoized = useMemo(() => ({ currencies }), [currencies]);
 	const recipesMemoized = useMemo(() => ({ recipes }), [recipes]);
+	const packagesMemoized = useMemo(() => ({ packages }), [packages]);
 
 	//All Context Providers wrapped
 	return (
@@ -42,8 +48,13 @@ export default function MainContext({ children }) {
 								{/* Recipes */}
 								<RecipesContext.Provider value={recipesMemoized}>
 									<RecipesDispatch.Provider value={{ dispatch: dispatchRecipes }}>
-										{/* Wrap the whole app with the context */}
-										{children}
+										{/* Packages */}
+										<PackagesContext.Provider value={packagesMemoized}>
+											<PackagesDispatch.Provider value={{ dispatch: dispatchPackages }}>
+												{/* Wrap the whole app with the context */}
+												{children}
+											</PackagesDispatch.Provider>
+										</PackagesContext.Provider>
 									</RecipesDispatch.Provider>
 								</RecipesContext.Provider>
 							</MaterialDispatch.Provider>
@@ -87,4 +98,12 @@ export function useRecipesContext() {
 }
 export function useRecipesDispatchContext() {
 	return useContext(RecipesDispatch);
+}
+
+//Packages
+export function usePackagesContext() {
+	return useContext(PackagesContext);
+}
+export function usePackagesDispatch() {
+	return useContext(PackagesDispatch);
 }

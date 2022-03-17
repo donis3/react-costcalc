@@ -3,9 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
+import { usePackagesContext } from '../../context/MainContext';
 
 export default function Packages() {
 	const { t } = useTranslation('pages/packages');
+	const { packages } = usePackagesContext();
+	// <Button.Reset onClick={packages.clearPackages} /> // Clear all packages
+
+	console.log(packages.getAllSorted({ field: 'cost', asc: false }));
+
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>

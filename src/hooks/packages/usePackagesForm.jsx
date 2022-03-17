@@ -1,31 +1,41 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { usePackagesDispatch } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
+import { defaultPackage } from './usePackages';
 
-const defaultState = {
-	name: '',
-	productType: 'liquid',
-	packageCapacity: 0,
-	notes: '',
-	items: [],
-};
 
 export default function usePackagesForm({ pack = null } = {}) {
-	const [formState, setFormState] = useState(defaultState);
+	const navigate = useNavigate();
+	const { t } = useTranslation('translation');
+	const [formState, setFormState] = useState(defaultPackage);
 	const schema = usePackageSchema();
-	const { onChangeHandler, hasError, onSubmitHandler } = useFormHandler({ formState, setFormState, schema });
+	const { onChangeHandler, hasError, onSubmitHandler, resetForm } = useFormHandler({ formState, setFormState, schema });
+	const { dispatch } = usePackagesDispatch();
 
 	const onSubmit = (e) => {
-		onSubmitHandler(e, (formData) => {
-			console.log('Submitting Data');
-			console.table(formData);
-			return;
+		
+		const onSuccess = () => {
+			toast.success(t('success.add', { name: formState.name }));
+			navigate('/packages');
+		};
+		const onError = () => {
+			toast.success(t('error.add'));
+		};
+		const errors = onSubmitHandler(e, (formData) => {
+			dispatch({
+				type: 'add',
+				payload: formData,
+				onSuccess,
+				onError,
+			});
 		});
-	};
-
-	const onResetForm = () => {
-		setFormState((state) => defaultState);
+		if (errors && errors?.length > 0) {
+			console.log('Couldn\'t Add package. Errors:', errors);
+		}
 	};
 
 	const onAddItem = (newItem = null) => {
@@ -46,7 +56,7 @@ export default function usePackagesForm({ pack = null } = {}) {
 		});
 	};
 
-	return { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, onResetForm };
+	return { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm };
 } //End of hook
 
 //=======================================//
@@ -58,7 +68,7 @@ function usePackageSchema() {
 	const types = ['liquid', 'solid'];
 
 	const schema = Joi.object({
-		packageId: Joi.number().min(0).required().label(t('labels.packageId')),
+		packageId: Joi.number().min(0).label(t('labels.packageId')),
 		name: Joi.string().min(3).max(100).required().label(t('labels.name')),
 		productType: Joi.string()
 			.min(0)

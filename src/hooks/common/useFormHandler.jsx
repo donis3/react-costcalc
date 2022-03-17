@@ -1,9 +1,23 @@
-import { useEffect,  useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useFormHandler = ({ formState = null, setFormState = null, schema = null }) => {
 	const [errors, setErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	
+	const [defaultState, setDefaultState] = useState({});
+
+	//On initial mount, save default state
+	useEffect(() => {
+		if (formState && Object.keys(formState).length > 0) {
+			setDefaultState((state) => ({ ...formState }));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const resetForm = () => {
+		if (!setFormState) return;
+		if (defaultState && typeof defaultState === 'object') setFormState((state) => ({ ...defaultState }));
+		setIsSubmitted(() => false);
+	};
 
 	useEffect(() => {
 		validateForm(formState);
@@ -52,13 +66,13 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	const onSubmitHandler = (e, customHandler) => {
 		e.preventDefault();
 		setIsSubmitted(true);
-		
 
 		const data = validateForm(formState);
 		if (!data) {
 			//There are errors do not submit
 			// console.log('Form has errors');
 			// console.table(errors);
+			return [...errors];
 		} else {
 			//there are no errors and we received a clean data object. Pass it down to form caller
 			customHandler(data);
@@ -123,7 +137,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	};
 
 	//exports
-	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError };
+	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError, resetForm};
 };
 
 export default useFormHandler;

@@ -12,7 +12,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 	const { packageId } = useParams();
 	const navigate = useNavigate();
 	const { t } = useTranslation('pages/packages', 'translation');
-	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, onResetForm } = usePackagesForm();
+	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm } = usePackagesForm();
 
 	useEffect(() => {
 		//verify package if this is edit mode
@@ -80,7 +80,12 @@ export default function PackageForm({ isEdit = false } = {}) {
 								altLabel={t('labels.packageCapacityAlt')}
 							>
 								<FormInput.Group>
-									<FormInput.Text name='packageCapacity' filter='number' onChange={onChangeHandler} value={formState.packageCapacity}/>
+									<FormInput.Text
+										name='packageCapacity'
+										filter='number'
+										onChange={onChangeHandler}
+										value={formState.packageCapacity}
+									/>
 									{/* Unit depends on physical state kg/L */}
 									<span>
 										{formState.productType === 'liquid'
@@ -112,7 +117,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 						}}
 					>
 						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
-						<Button.Reset className='btn btn-md' type='button' onClick={onResetForm} />
+						<Button.Reset className='btn btn-md' type='button' onClick={resetForm} />
 					</FormFooterActions>
 				</form>
 			</Card>
