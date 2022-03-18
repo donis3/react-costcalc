@@ -20,8 +20,8 @@
 		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
 		"savingItem": "Couldn't save {{item}}",
 		"invalidItem": "Invalid item.",
-		"add": "Item couldn't be added due to an error.",
-		"update": "Item couldn't be updated due to an error",
+		"add": "Item couldn't be added.",
+		"update": "Item couldn't be updated.",
 		"delete": "Item couldn't be deleted.",
 		"noData": "No data"
 	},

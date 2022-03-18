@@ -12,13 +12,17 @@ export default function PackageForm({ isEdit = false } = {}) {
 	const { packageId } = useParams();
 	const navigate = useNavigate();
 	const { t } = useTranslation('pages/packages', 'translation');
-	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm } = usePackagesForm();
+	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm, onDelete } =
+		usePackagesForm({
+			packageId,
+		});
 
 	useEffect(() => {
 		//verify package if this is edit mode
 		if (isEdit === true && isNaN(parseInt(packageId))) {
 			return navigate('/packages');
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [packageId, isEdit]);
 
@@ -112,9 +116,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 
 					<FormFooterActions
 						className='mt-10 border-t-2 py-5'
-						handleDelete={() => {
-							console.log('ok');
-						}}
+						handleDelete={onDelete}
 					>
 						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
 						<Button.Reset className='btn btn-md' type='button' onClick={resetForm} />

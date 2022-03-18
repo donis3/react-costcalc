@@ -2,42 +2,81 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { usePackagesDispatch } from '../../context/MainContext';
+import { usePackagesContext, usePackagesDispatch } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
 import { defaultPackage } from './usePackages';
 
-
-export default function usePackagesForm({ pack = null } = {}) {
+export default function usePackagesForm({ packageId = null } = {}) {
 	const navigate = useNavigate();
 	const { t } = useTranslation('translation');
-	const [formState, setFormState] = useState(defaultPackage);
+	const { packages } = usePackagesContext();
+	const pack = packageId === null ? null : packages.findById(packageId, true);
+	const originalState = pack ? { ...pack } : { ...defaultPackage };
+
+	const [formState, setFormState] = useState(originalState);
 	const schema = usePackageSchema();
-	const { onChangeHandler, hasError, onSubmitHandler, resetForm } = useFormHandler({ formState, setFormState, schema });
+	const { onChangeHandler, hasError, onSubmitHandler } = useFormHandler({ formState, setFormState, schema });
 	const { dispatch } = usePackagesDispatch();
 
 	const onSubmit = (e) => {
-		
-		const onSuccess = () => {
-			toast.success(t('success.add', { name: formState.name }));
-			navigate('/packages');
-		};
-		const onError = () => {
-			toast.success(t('error.add'));
-		};
 		const errors = onSubmitHandler(e, (formData) => {
-			dispatch({
-				type: 'add',
-				payload: formData,
-				onSuccess,
-				onError,
-			});
+			const dispatchAction = pack ? getUpdateDispatchAction(formData) : getAddDispatchAction(formData);
+			dispatch(dispatchAction);
 		});
 		if (errors && errors?.length > 0) {
-			console.log('Couldn\'t Add package. Errors:', errors);
+			console.log('Dispatch error:', errors);
 		}
 	};
 
+	const onDelete = () => {
+		if(!pack) return;
+		const dispatchAction = getDeleteDispatchAction(formState);
+		dispatch(dispatchAction);
+	}
+
+	//Submit States
+	const getAddDispatchAction = (formData) => {
+		return {
+			type: 'add',
+			payload: formData,
+			onSuccess: function () {
+				toast.success(t('success.add', { name: formState.name }));
+				navigate('/packages');
+			},
+			onError: function () {
+				toast.error(t('error.add'));
+			},
+		};
+	};
+	const getUpdateDispatchAction = (formData) => {
+		return {
+			type: 'update',
+			payload: formData,
+			onSuccess: function () {
+				toast.success(t('success.update', { name: formState.name }));
+				navigate('/packages');
+			},
+			onError: function () {
+				toast.error(t('error.update'));
+			},
+		};
+	};
+	const getDeleteDispatchAction = (formState = null) => {
+		return {
+			type: 'delete',
+			payload: formState.packageId,
+			onSuccess: function () {
+				toast.success(t('success.delete', { name: formState.name }));
+				navigate('/packages');
+			},
+			onError: function () {
+				toast.error(t('error.delete'));
+			},
+		};
+	};
+
+	//Event Handlers
 	const onAddItem = (newItem = null) => {
 		if (!newItem) return;
 		setFormState((state) => ({ ...state, items: [...state.items, newItem] }));
@@ -50,13 +89,17 @@ export default function usePackagesForm({ pack = null } = {}) {
 		if (!formState.items[index]) return;
 		//Set state
 		setFormState((state) => {
-			let newItemsArray = state.items;
-			newItemsArray.splice(index, 1);
-			return { ...state, items: newItemsArray };
+			let newItemsArray = [...state.items]; //Copy items
+			newItemsArray.splice(index, 1); //Remove at specified index
+			return { ...state, items: newItemsArray }; //Send back to state
 		});
 	};
 
-	return { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm };
+	const resetForm = () => {
+		setFormState((state) => ({ ...originalState }));
+	};
+
+	return { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm, onDelete };
 } //End of hook
 
 //=======================================//

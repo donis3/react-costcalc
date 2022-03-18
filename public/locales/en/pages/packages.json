@@ -34,6 +34,8 @@
 		"itemType": "Type",
 		"itemPrice": "Price",
 		"itemTax": "Tax",
-		"itemCurrency": "Currency"
+		"itemCurrency": "Currency",
+		"cost": "Cost",
+		"costUnit": "/item"
 	}
 }

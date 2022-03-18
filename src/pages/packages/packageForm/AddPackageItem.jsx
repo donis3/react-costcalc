@@ -37,7 +37,7 @@ export default function AddPackageItem({ onAddItem = null } = {}) {
 		itemCurrency: Joi.string()
 			.valid(...currencies.allCurrencies)
 			.label(t('labels.itemCurrency')),
-		boxCapacity: Joi.number().min(0).precision(2).required().label(t('labels.boxCapacity')),
+		boxCapacity: Joi.number().min(1).precision(2).required().label(t('labels.boxCapacity')),
 	});
 
 	const itemTypes = [

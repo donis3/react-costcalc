@@ -26,6 +26,7 @@ export const defaultPackage = {
     tax: 0,
     costWithTax: 0,
     costHistory: [],
+	unit: 'kg',
     */
 };
 
@@ -55,12 +56,24 @@ export default function usePackages() {
 	/**
 	 * Get single package by its id
 	 */
-	const getById = (packageId = null) => {
+	const findById = (packageId = null, getOnlyFormData = false) => {
 		packageId = parseInt(packageId);
 		if (isNaN(packageId)) return null;
 		const pack = packagesState.find((item) => item.packageId === packageId);
 		if (!pack) return null;
-		return pack;
+
+		if (getOnlyFormData === false) return pack;
+
+		//Return only form fields. Make a deep copy of the object including items array
+		return Object.keys(defaultPackage).reduce(
+			(accumulator, key) => {
+				if( key === 'items' && Array.isArray(pack[key])) {
+					return { ...accumulator, [key]: [...pack[key]] }
+				}
+				return key in pack ? { ...accumulator, [key]: pack[key] } : accumulator;
+			},
+			{ packageId }
+		); //Start with empty obj with only package ID prop
 	};
 
 	const getAllSorted = ({ field = null, asc = true } = {}) => {
@@ -151,6 +164,8 @@ export default function usePackages() {
 				addCostHistory(previousCost, result.cost, result.currency);
 			}
 		}
+
+		//result.unit = result?.productType === 'liquid' ? 'L' : 'kg'; //Determine unit
 		return result;
 	}; //End of calculate
 
@@ -159,7 +174,8 @@ export default function usePackages() {
 		data: packagesState,
 		clearPackages,
 		getAllSorted,
-		getById,
+		findById,
+		count: () => (Array.isArray(packagesState) ? packagesState.length : 0),
 	};
 	return [payload, dispatch];
 }

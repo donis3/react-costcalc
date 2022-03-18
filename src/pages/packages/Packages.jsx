@@ -3,14 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
-import { usePackagesContext } from '../../context/MainContext';
+import PackagesTable from './table/PackagesTable';
+
 
 export default function Packages() {
 	const { t } = useTranslation('pages/packages');
-	const { packages } = usePackagesContext();
-	// <Button.Reset onClick={packages.clearPackages} /> // Clear all packages
-
-	console.log(packages.getAllSorted({ field: 'cost', asc: false }));
+	
 
 	return (
 		<>
@@ -24,6 +22,7 @@ export default function Packages() {
 				</div>
 				{/* Lead Text */}
 				<p className='opacity-80'>{t('packages.lead')}</p>
+				<PackagesTable />
 			</Card>
 		</>
 	);

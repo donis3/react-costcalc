@@ -16,6 +16,7 @@ export default function packagesReducer(state, action) {
 		tax: 0,
 		costWithTax: 0,
 		costHistory: [],
+		unit: 'kg',
 	};
 
 	//Callbacks
@@ -37,11 +38,46 @@ export default function packagesReducer(state, action) {
 			}
 			//Calculate next id
 			emptyPackage.packageId = getNextId(state);
+			//Change unit if needed
+			payload.unit = payload?.productType === 'liquid' ? 'L' : 'kg';
 
 			//create new item by merging empty object and payload
 			const newItem = { ...emptyPackage, ...payload };
 			//Add to state
 			return success([...state, newItem]);
+		}
+		case 'update': {
+			if (!payload || typeof payload !== 'object' || Object.keys(payload).length < Object.keys(defaultPackage).length) {
+				//Erroneous
+				return error();
+			}
+			//get id
+			const { packageId } = payload;
+
+			//Find the target package
+			const targetPackage = state.find((item) => item.packageId === packageId);
+			if (!targetPackage) return error(); //Couldnt find target item
+			//merge old data and new data
+			const newPackage = { ...targetPackage, ...payload };
+			//Compare old data to new data
+			if (JSON.stringify(newPackage) === JSON.stringify(targetPackage)) {
+				//No changed were made. No need to update
+				return error();
+			}
+			//Proceed to update. Add update time
+			newPackage.updatedAt = Date.now();
+			//Map state and update this item
+			const newState = state.map((item) => (item.packageId !== packageId ? item : newPackage));
+
+			return success(newState);
+		}
+		case 'delete': {
+			const packageId = parseInt(payload);
+			if (isNaN(packageId)) return error();
+			const targetPackage = state.find((item) => item.packageId === packageId);
+			if (!targetPackage) return error();
+			//Target to delete is found, remove it from state
+			return success(state.filter((item) => item.packageId !== packageId));
 		}
 		case 'updateAll': {
 			//Replace state with given array

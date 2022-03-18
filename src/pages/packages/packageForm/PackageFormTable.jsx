@@ -104,6 +104,7 @@ function PackageFormTableRow({ item = null, index = 0, onRemove = null } = {}) {
 			<div className='py-2 px-2 col-span-3'>{displayMoney(item.itemPrice, item.itemCurrency)}</div>
 			<div className='py-2 px-2 col-span-1 flex justify-center items-center'>
 				<Button.Remove
+					type='button'
 					hasText={false}
 					className='bg-red-700 p-1 text-white rounded-md hover:bg-red-500'
 					onClick={() => onRemove(index)}
