@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 import useCurrency from '../app/useCurrency';
 
@@ -48,6 +49,8 @@ export default function usePackages() {
 		currencies: { defaultCurrency },
 	} = useCurrency();
 
+	const {t} = useTranslation('pages/packages');
+
 	//===================== PACKAGE API ===================//
 	const clearPackages = () => {
 		dispatch({ type: 'reset', payload: null });
@@ -62,13 +65,18 @@ export default function usePackages() {
 		const pack = packagesState.find((item) => item.packageId === packageId);
 		if (!pack) return null;
 
-		if (getOnlyFormData === false) return pack;
+		if (getOnlyFormData === false) {
+			//Add additional fields
+			pack.itemsForCostTable = getItemsForCostTable(pack.items);
+			pack.itemCostDetails = getItemsCostDetails(pack.items);
+			return pack;
+		}
 
 		//Return only form fields. Make a deep copy of the object including items array
 		return Object.keys(defaultPackage).reduce(
 			(accumulator, key) => {
-				if( key === 'items' && Array.isArray(pack[key])) {
-					return { ...accumulator, [key]: [...pack[key]] }
+				if (key === 'items' && Array.isArray(pack[key])) {
+					return { ...accumulator, [key]: [...pack[key]] };
 				}
 				return key in pack ? { ...accumulator, [key]: pack[key] } : accumulator;
 			},
@@ -99,6 +107,95 @@ export default function usePackages() {
 			return;
 		}
 		//console.log('No need for package update');
+	};
+
+	//Convert items array suitable for costs table
+	const getItemsForCostTable = (items = null) => {
+		if (!Array.isArray(items) || items.length === 0) return null;
+
+		const result = items.map((item) => {
+			const mutatedItem = {
+				unit: 'pcs',
+				name: item.name,
+				price: item.itemPrice,
+				tax: item.itemTax,
+				quantity: 1,
+				currency: item.itemCurrency,
+				amount: item.itemPrice, //Convert to local price
+			};
+			//Convert to local
+			if (item.itemCurrency !== defaultCurrency) {
+				const { amount } = convert(mutatedItem.amount, mutatedItem.currency, defaultCurrency);
+				mutatedItem.amount = amount;
+			}
+			//Other operations
+			if (item.packageType === 'box') {
+				mutatedItem.name = t('labels.boxName', {name: mutatedItem.name, capacity: item.boxCapacity});
+			}
+			return mutatedItem;
+		});
+
+		return result;
+	};
+
+	//Prepare an object with local currency cost details reduced from all items in the package
+	const getItemsCostDetails = (items = null) => {
+		const defaultData = {
+			total: 0,
+			totalWithTax: 0,
+			totalTax: 0,
+			tax: [
+				//{percent: 0, amount: 0}
+			],
+		};
+		if (!Array.isArray(items) || items.length === 0) return defaultData;
+		//Go through all items and add them all together. Convert foreign
+		return items.reduce((accumulator, item) => {
+			console.log(item);
+			//Extract items
+			let { itemPrice: price, itemCurrency: currency, itemTax: tax, packageType = null, boxCapacity = 1 } = item;
+			let quantity = 1;
+			price = parseFloat(price);
+			tax = parseFloat(tax);
+			if (isNaN(tax) || tax <= 0) tax = 0;
+
+			//Convert price to local currency
+			if (currency !== defaultCurrency) {
+				const conversion = convert(price, currency, defaultCurrency);
+				price = conversion.amount;
+			}
+
+			//Calculate amount and taxed amount
+			let amount = price * quantity;
+			//IF item is box, divide the amount by box capacity
+			if (packageType === 'box' && isNaN(parseFloat(boxCapacity)) === false && parseFloat(boxCapacity) > 1) {
+				amount = amount / parseFloat(boxCapacity);
+			}
+			const totalTax = tax > 0 ? amount * (tax / 100) : 0;
+			const amountWithTax = tax > 0 ? amount * (1 + tax / 100) : amount;
+
+			let allTaxes = [...accumulator.tax];
+			//Find old tax data
+			if (accumulator.tax.find((taxData) => taxData.percent === tax)) {
+				//There already is an item with the same tax percentage. Add this tax amount to that
+				allTaxes.map((taxItem) => {
+					if (taxItem.percent !== tax) return taxItem; //This is other tax percentage item
+					return { percent: tax, amount: taxItem.amount + totalTax };
+				});
+			} else {
+				//This tax percentage is new to the array
+				allTaxes.push({ percent: tax, amount: totalTax });
+			}
+			//Sort tax array
+			allTaxes = sortArrayNumeric(allTaxes, 'percent', true);
+			//return accumulator with new tax array AND add amounts to accumulated totals
+			return {
+				total: accumulator.total + amount,
+				totalWithTax: accumulator.totalWithTax + amountWithTax,
+				totalTax: accumulator.totalTax + totalTax,
+				tax: allTaxes,
+			};
+		}, defaultData); //Start with default data
 	};
 
 	//Calculate current cost of a package bundle using Convert

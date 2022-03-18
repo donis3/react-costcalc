@@ -12,11 +12,12 @@ import {
 	FaTimes as CancelYieldIcon,
 	FaUndo as ResetYieldIcon,
 	FaCaretDown,
-	FaCaretRight,
 	FaCaretUp,
 } from 'react-icons/fa';
 import FormInput from '../../components/form/FormInput';
 import MaterialInfo from '../materials/MaterialInfo';
+import DocumentDates from '../../components/common/DocumentDates';
+import CostTable from '../../components/CostTable/CostTable';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -70,7 +71,7 @@ export default function Recipe() {
 				</Link>
 			</div>
 
-			<Card className='w-100 px-3 py-5 ' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
 				{/* Header */}
 				<div className='w-full flex justify-between items-center border-b'>
 					{/* Card Title */}
@@ -132,36 +133,20 @@ export default function Recipe() {
 				{recipeState.recipe.materials && recipeState.recipe.materials.length > 0 && (
 					<div className='py-3 px-3 w-full overflow-x-auto'>
 						<h4 className='text-base-content opacity-50 text-sm mb-3'>{t('labels.contents')}</h4>
-						<MaterialsTable recipe={recipeState.recipe} openMaterial={openMaterial} />
+						{/* <MaterialsTable recipe={recipeState.recipe} openMaterial={openMaterial} /> */}
+						<CostTable
+							costs={recipeState.recipe.getCostDetailsForTable()}
+							items={recipeState.recipe.getMaterialsForTable()}
+							itemCallback={openMaterial}
+						/>
 					</div>
 				)}
 			</Card>
-			<RecipeDateDetails recipe={recipe} />
+
+			<DocumentDates updatedAt={recipe?.updatedAt} createdAt={recipe?.createdAt} />
 
 			{recipeState.showMaterial && <MaterialInfo handleClose={closeMaterial} materialId={recipeState.materialId} />}
 		</>
-	);
-}
-
-function RecipeDateDetails({ recipe = null } = {}) {
-	const { displayDate } = useIntl();
-	const { t } = useTranslation('translation');
-
-	return (
-		<div className='p-1 flex justify-between'>
-			{recipe.updatedAt && (
-				<p className='text-xs italic opacity-50'>
-					<span className='text-xs mr-1'>{t('dates.lastUpdate')}:</span>
-					<span className='font-medium'>{displayDate(recipe.updatedAt)}</span>
-				</p>
-			)}
-			{recipe.createdAt && (
-				<p className='text-xs italic opacity-50'>
-					<span className='text-xs mr-1'>{t('dates.createdAt')}: </span>
-					<span className='font-medium'>{displayDate(recipe.createdAt)}</span>
-				</p>
-			)}
-		</div>
 	);
 }
 
@@ -248,116 +233,5 @@ function EditableYield({ state, setState, yieldRef }) {
 				</button>
 			</div>
 		</div>
-	);
-}
-
-function MaterialsTable({ recipe = null, openMaterial = null } = {}) {
-	const { t } = useTranslation('pages/recipes', 'translation');
-
-	if (!recipe || !recipe.materials || !Array.isArray(recipe.materials) || recipe.materials.length === 0) {
-		return <p className='mt-1 text-sm italic'>{t('recipe.noContent')}</p>;
-	}
-
-	return (
-		<div className='w-full'>
-			<div className='grid grid-cols-12 font-semibold uppercase bg-base-300 text-base-content rounded-t-md'>
-				<div className='col-span-4 p-3'>{t('labels.material')}</div>
-				<div className='col-span-2 p-3'>{t('labels.unitPrice', { ns: 'translation' })}</div>
-				<div className='col-span-2 p-3'>{t('labels.tax', { ns: 'translation' })}</div>
-				<div className='col-span-2 p-3'>{t('labels.amount')}</div>
-				<div className='col-span-2 p-3'>{t('labels.cost', { ns: 'translation' })}</div>
-			</div>
-			<div className='grid grid-cols-12  leading-snug'>
-				{recipe.materials.map((data, i) => (
-					<MaterialsTableRow index={i} data={data} key={i} openMaterial={openMaterial} />
-				))}
-			</div>
-			<MaterialsTableFooter cost={recipe.cost} costWithTax={recipe.costWithTax} costDetails={recipe.getTaxCosts()} />
-		</div>
-	);
-}
-
-function MaterialsTableFooter({ cost, costWithTax, costDetails }) {
-	const { t } = useTranslation('translation');
-	const { displayMoney } = useIntl();
-	const [showDetails, setShowDetails] = useState(false);
-
-	const toggleDetails = () => {
-		setShowDetails((state) => !state);
-	};
-
-	return (
-		<div className='grid grid-cols-12  leading-snug border-t-4 pt-2 gap-y-1'>
-			{/* Taxed Total always shown */}
-			<div className='col-span-10 px-3 flex justify-end'>
-				<button onClick={toggleDetails} className='flex gap-x-1 items-center'>
-					{showDetails ? <FaCaretDown className='text-blue-600' /> : <FaCaretRight className='text-blue-600' />}
-					<span className='border-b border-neutral border-dotted'>{t('labels.totalWitTax')}</span>
-				</button>
-			</div>
-			<div className='col-span-2 px-3  text-left font-medium'>{displayMoney(costWithTax)}</div>
-
-			{/* Optional Details */}
-			{showDetails ? (
-				// Show Details
-				<>
-					<MaterialsTableFooterRow text={t('labels.total')} amount={cost} />
-					{Object.keys(costDetails).map((key, i) => {
-						if (key === 'total') {
-							return <MaterialsTableFooterRow key={i} text={t('labels.taxTotal')} amount={costDetails[key]} />;
-						} else {
-							return (
-								<MaterialsTableFooterRow
-									key={i}
-									text={t('labels.taxPercent', { percent: key })}
-									amount={costDetails[key]}
-								/>
-							);
-						}
-					})}
-				</>
-			) : (
-				// Dont show details
-				<></>
-			)}
-		</div>
-	);
-}
-
-function MaterialsTableFooterRow({ text = '', amount = 0 }) {
-	const { displayMoney } = useIntl();
-	return (
-		<>
-			<div className='col-span-10 px-3 text-right '>{text}</div>
-			<div className='col-span-2 px-3  text-left font-medium'>{displayMoney(amount)}</div>
-		</>
-	);
-}
-
-function MaterialsTableRow({ index, data, openMaterial = null }) {
-	const { name = '', price = 0, tax = 0, amount = 0, unit = 'kg', cost = 0, currency = ''} = data;
-	const { displayNumber, displayMoney } = useIntl();
-	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
-	const additionalClass = ' p-3 ';
-
-	
-	return (
-		<>
-			<div className={'col-span-4 ' + stripeClass + additionalClass}>
-				<button
-					type='button'
-					onClick={() => openMaterial(data.materialId)}
-					className='font-semibold border-b border-dotted border-base-content'
-				>
-					{name}
-				</button>
-			</div>
-			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price,currency )}</div>
-			<div className={'col-span-2 ' + stripeClass + additionalClass}>% {displayNumber(tax, 1)}</div>
-			<div className={'col-span-2 ' + stripeClass + additionalClass}>
-				{displayNumber(amount, 2)} {unit}
-			</div>
-			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(cost)}</div>
-		</>
 	);
 }

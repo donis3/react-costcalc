@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 //Create a checkbox with text to control its state
-export default function OptionControl({ state = true, setState = null, text = null }) {
+export default function OptionControl({ state = true, setState = null, text = null, checkboxFirst = false }) {
 	const { t } = useTranslation('translation');
 	if (text === null) text = t('form.checkboxLabel');
 
@@ -16,9 +16,10 @@ export default function OptionControl({ state = true, setState = null, text = nu
 	};
 	return (
 		<div className='form-control'>
-			<label className='cursor-pointer label'>
-				<span className='label-text mr-1'>{text}</span>
+			<label className={`cursor-pointer flex items-center gap-x-2 ${!checkboxFirst && ' justify-between'}`}>
+				{!checkboxFirst && <span className='label-text'>{text}</span>}
 				<input type='checkbox' checked={state} className='checkbox checkbox-primary' onChange={handleChange} />
+				{checkboxFirst && <span className='label-text'>{text}</span>}
 			</label>
 		</div>
 	);

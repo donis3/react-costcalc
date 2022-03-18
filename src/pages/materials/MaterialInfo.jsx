@@ -11,7 +11,7 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 	const { Materials } = useMaterialContext();
 	const { t } = useTranslation('pages/materials');
 	const material = Materials.findById(materialId, true);
-	const [displayState, setDisplayState] = useStorageState('displaySettings', { localPrice: true, baseUnit: false });
+	const [displayState, setDisplayState] = useStorageState('displaySettings', { localPrice: true, baseUnit: false, showTax: false });
 
 	const showLocalPrice = (value = true) => setDisplayState((state) => ({ ...state, localPrice: value }));
 	const showBaseUnit = (value = true) => setDisplayState((state) => ({ ...state, baseUnit: value }));

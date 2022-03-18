@@ -4,6 +4,7 @@ import {
 	useRecipesContext,
 	useRecipesDispatchContext,
 } from '../../context/MainContext';
+import { sortArrayNumeric } from '../../lib/common';
 import useCurrencyConversion from '../app/useCurrencyConversion';
 
 export default function useRecipe(recipeId) {
@@ -11,15 +12,16 @@ export default function useRecipe(recipeId) {
 	const { dispatch } = useRecipesDispatchContext();
 	const { products } = useProductsContext();
 	const { Materials: materials } = useMaterialContext();
-	const { convert } = useCurrencyConversion();
+	const { convert, defaultCurrency } = useCurrencyConversion();
 
-	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert, dispatch) };
+	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert, dispatch, defaultCurrency) };
 } //========================// End of hook
 
 class Recipe {
 	productsClass = null;
 	materialsClass = null;
 	convert = null;
+	defaultCurrency = null;
 	dispatch = null;
 	recipe = {}; //Store original recipe data in this.
 	product = null;
@@ -35,7 +37,7 @@ class Recipe {
 	unitCostWithTax = 0;
 	costDetails = [];
 
-	constructor(data, productsClass, materialsClass, convert, dispatch) {
+	constructor(data, productsClass, materialsClass, convert, dispatch, defaultCurrency) {
 		if (!data || typeof data !== 'object' || 'recipeId' in data === false) return null;
 		if (!productsClass || typeof productsClass !== 'object') return null;
 		if (!materialsClass || typeof materialsClass !== 'object') return null;
@@ -43,6 +45,7 @@ class Recipe {
 		this.productsClass = productsClass;
 		this.materialsClass = materialsClass;
 		this.convert = convert;
+		this.defaultCurrency = defaultCurrency;
 		this.dispatch = typeof dispatch === 'function' ? dispatch : null;
 		//Save original recipe data
 		this.recipe = { ...data };
@@ -162,6 +165,30 @@ class Recipe {
 		);
 	}
 
+	getTaxesArray() {
+		return this.costDetails.reduce((accumulator, current) => {
+			//Extract tax percentage and total tax amount for this material
+			const { tax, totalTax } = current;
+
+			let allTaxes = [...accumulator];
+			//Find old tax data
+			if (accumulator.find((taxData) => taxData.percent === tax)) {
+				//There already is an item with the same tax percentage. Add this tax amount to that
+				allTaxes.map((taxItem) => {
+					if (taxItem.percent !== tax) return taxItem; //This is other tax percentage item
+					return { percent: tax, amount: taxItem.amount + totalTax };
+				});
+			} else {
+				//This tax percentage is new to the array
+				allTaxes.push({ percent: tax, amount: totalTax });
+			}
+			//Sort tax array
+			allTaxes = sortArrayNumeric(allTaxes, 'percent', true);
+
+			return allTaxes;
+		}, []);
+	}
+
 	//A new yield value is given. Calculate ratio
 	changeRecipeYield(newYield = 0) {
 		newYield = parseFloat(newYield);
@@ -234,5 +261,54 @@ class Recipe {
 		const percent = Math.round((delta / previous.cost) * 10000) / 100;
 
 		return current.cost > previous.cost ? percent : -percent;
+	}
+
+	getCostDetailsForTable() {
+		return {
+			total: this.cost,
+			totalWithTax: this.costWithTax,
+			totalTax: this.costWithTax - this.cost,
+			tax: this.getTaxesArray(),
+		};
+	}
+
+	/*
+	{
+    "unit": "pcs",
+    "name": "Nice Item",
+    "price": 4.2,
+    "tax": 18,
+    "quantity": 1,
+    "currency": "USD",
+    "amount": 61.32
+  },
+	*/
+	getMaterialsForTable() {
+		//Mutate materials for costTable requirements
+		return this.materials.map((item) => {
+			const newItem = {
+				id: item.materialId,
+				unit: item.unit,
+				name: item.name,
+				price: parseFloat(item.price),
+				tax: parseFloat(item.tax),
+				quantity: parseFloat(item.amount),
+				currency: item.currency,
+				amount: null,
+			};
+			//Validate
+			if (isNaN(newItem.price)) newItem.price = 0;
+			if (isNaN(newItem.tax)) newItem.tax = 0;
+			if (isNaN(newItem.quantity)) newItem.quantity = 0;
+			//Calculate amount
+			newItem.amount = newItem.price > 0 && newItem.quantity > 0 ? newItem.price * newItem.quantity : 0;
+			//Conversion
+			if (this.defaultCurrency !== newItem.currency) {
+				const { amount } = this.convert(newItem.amount, newItem.currency, this.defaultCurrency);
+				//replace converted value
+				if (isNaN(amount) === false) newItem.amount = amount;
+			}
+			return newItem;
+		});
 	}
 }

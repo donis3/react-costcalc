@@ -79,6 +79,22 @@
 		"totalWitTax": "Taxed Total",
 		"totalWithTax": "Taxed Total",
 		"taxPercent": "Tax %{{percent}}",
+		"taxTotal": "Total Tax",
+		"noTax": "Without Tax",
+		"withTax": "With Tax"
+	},
+	"costTable": {
+		"noContent": "There are no items to display",
+		"item": "Item",
+		"unitPrice": "Unit Price",
+		"tax": "Tax",
+		"quantity": "Quantity",
+		"amount": "Amount",
+		"total": "Total",
+		"subTotal": "Sub Total",
+		"totalWitTax": "Taxed Total",
+		"totalWithTax": "Taxed Total",
+		"taxPercent": "Tax %{{percent}}",
 		"taxTotal": "Total Tax"
 	},
 	"form": {
@@ -105,7 +121,20 @@
 		"mL": "Milliliter",
 		"mL_other": "Milliliters",
 		"L": "Liter",
-		"L_other": "Liters"
+		"L_other": "Liters",
+		"pcs": "piece",
+		"pcs_other": "pieces"
+	},
+	"unitsShort": {
+		"mg": "mg",
+		"g": "g",
+		"kg": "kg",
+		"t": "t",
+		"cc": "cc",
+		"mL": "mL",
+		"L": "L",
+		"pcs": "pc",
+		"pcs_other": "pcs"
 	},
 	"packageTypes": {
 		"box": "Box",

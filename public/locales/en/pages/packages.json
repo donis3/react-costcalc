@@ -5,6 +5,11 @@
 		"lead": "Listing all packaging options",
 		"noPackage": "There are currently no packages. Please start by clicking the \"New\" button"
 	},
+	"package": {
+		"tabDetails": "Details",
+		"tabCosts": "Cost Analysis",
+		"noItems": "No items available in package."
+	},
 	"form": {
 		"addTitle": "New Package Bundle",
 		"details": "Please define a package bundle, which may consist of a package, label, cap, box, etc..",
@@ -17,6 +22,7 @@
 	"labels": {
 		"packageId": "Package ID",
 		"name": "Package Name",
+		"boxName": "{{name}} [For {{capacity}} pcs]",
 		"productType": "Product Type",
 		"productTypeAlt": "Physical state of the product that this package will contain",
 		"packageCapacity": "Package Capacity",

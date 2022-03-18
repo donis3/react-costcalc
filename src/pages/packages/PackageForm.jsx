@@ -99,8 +99,8 @@ export default function PackageForm({ isEdit = false } = {}) {
 								</FormInput.Group>
 							</FormInput>
 							{/* Notes */}
-							<FormInput label={t('labels.notes')} error={hasError('notes')} value={formState.notes}>
-								<FormInput.Textarea name='notes' rows='1' onChange={onChangeHandler} />
+							<FormInput label={t('labels.notes')} error={hasError('notes')}>
+								<FormInput.Textarea name='notes' rows='1' onChange={onChangeHandler} value={formState.notes} />
 							</FormInput>
 						</div>
 
@@ -114,10 +114,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 					</div>
 					{/* Form Footer */}
 
-					<FormFooterActions
-						className='mt-10 border-t-2 py-5'
-						handleDelete={onDelete}
-					>
+					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={onDelete}>
 						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
 						<Button.Reset className='btn btn-md' type='button' onClick={resetForm} />
 					</FormFooterActions>
