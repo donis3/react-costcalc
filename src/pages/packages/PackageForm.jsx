@@ -5,6 +5,7 @@ import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import FormInput from '../../components/form/FormInput';
+
 import usePackagesForm from '../../hooks/packages/usePackagesForm';
 import PackageFormTable from './packageForm/PackageFormTable';
 
@@ -12,6 +13,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 	const { packageId } = useParams();
 	const navigate = useNavigate();
 	const { t } = useTranslation('pages/packages', 'translation');
+
 	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm, onDelete } =
 		usePackagesForm({
 			packageId,
@@ -114,7 +116,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 					</div>
 					{/* Form Footer */}
 
-					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={onDelete}>
+					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={isEdit ? onDelete : null}>
 						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
 						<Button.Reset className='btn btn-md' type='button' onClick={resetForm} />
 					</FormFooterActions>

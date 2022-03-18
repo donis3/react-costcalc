@@ -129,12 +129,7 @@ export default function RecipeForm() {
 								/>
 							</FormInput>
 
-							<FormInput
-								className=''
-								label={t('labels.yield')}
-								error={hasError('yield')}
-								altLabel={showYieldWeight()}
-							>
+							<FormInput className='' label={t('labels.yield')} error={hasError('yield')} altLabel={showYieldWeight()}>
 								<FormInput.Group>
 									<FormInput.Text name='yield' value={formState.yield} onChange={onFieldChange} filter='number' />
 									<span>

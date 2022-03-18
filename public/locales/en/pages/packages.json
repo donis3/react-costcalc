@@ -7,7 +7,7 @@
 	},
 	"package": {
 		"tabDetails": "Details",
-		"tabCosts": "Cost Analysis",
+		"tabCosts": "Cost History",
 		"noItems": "No items available in package."
 	},
 	"form": {

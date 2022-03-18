@@ -25,12 +25,14 @@ export default function Router() {
 			<Route path='/recipes/:recipeId' element={<Recipe />} />
 			<Route path='/recipes/add' element={<RecipeForm />} />
 			<Route path='/recipes/edit/:recipeId' element={<RecipeForm />} />
+			
 
 			{/* Packages */}
 			<Route path='/packages' element={<Packages />} />
 			<Route path='/packages/add' element={<PackageForm isEdit={false} />} />
 			<Route path='/packages/:packageId' element={<Package />} />
 			<Route path='/packages/edit/:packageId' element={<PackageForm isEdit={true} />} />
+			
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

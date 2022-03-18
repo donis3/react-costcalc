@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import './CardWithTabs.css';
 
-export default function CardWithTabs({ tabs = [], className = '' } = {}) {
+export default function CardWithTabs({ tabs = [], className = '', headerContent = null } = {}) {
 	const [tabState, setTabState] = useState({ active: 0 });
 	if (!tabs || Array.isArray(tabs) === false || tabs.length === 0) {
 		return <></>;
@@ -36,7 +36,7 @@ export default function CardWithTabs({ tabs = [], className = '' } = {}) {
 						/>
 					);
 				})}
-				<TabEmptySpace />
+				<TabEmptySpace headerContent={headerContent} />
 			</div>
 			<div className='w-full px-3 py-5 tab-card'>
 				{/* Card Body */}
@@ -56,6 +56,7 @@ function TabButton({ index = null, text = null, isActive = false, selectTab = nu
 		</button>
 	);
 }
-function TabEmptySpace() {
-	return <div className='tab tab-lifted flex-1 cursor-default'></div>;
+function TabEmptySpace({ headerContent = null } = {}) {
+	if (!headerContent) return <div className='tab-empty-space'>{headerContent}</div>;
+	return <div className='tab-empty-space pb-1'>{headerContent}</div>;
 }

@@ -93,8 +93,6 @@ export default function packagesReducer(state, action) {
 			throw new Error(`Unknown reducer action received: ${type}`);
 		}
 	}
-
-	return state;
 }
 
 const getNextId = (state = null) => {

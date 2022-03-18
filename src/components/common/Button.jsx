@@ -14,6 +14,7 @@ import {
 } from 'react-icons/fa';
 
 function Button({ children, type, ...attributes }) {
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	return (
 		<button type={type} className='btn btn-primary' {...attributes}>
 			{children}
@@ -28,6 +29,8 @@ Button.defaultProps = {
 
 function SaveButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'submit'; //Default to submit
+
 	if (!children) {
 		children = (
 			<>
@@ -46,6 +49,7 @@ function SaveButton({ children, iconFirst = true, ...attributes }) {
 
 function SubmitButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'submit'; //Default to submit
 	if (!children) {
 		children = (
 			<>
@@ -64,6 +68,7 @@ function SubmitButton({ children, iconFirst = true, ...attributes }) {
 
 function ResetButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -81,6 +86,7 @@ function ResetButton({ children, iconFirst = true, ...attributes }) {
 }
 function CancelButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -98,6 +104,7 @@ function CancelButton({ children, iconFirst = true, ...attributes }) {
 }
 function CloseButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -116,6 +123,7 @@ function CloseButton({ children, iconFirst = true, ...attributes }) {
 
 function EditButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -134,6 +142,7 @@ function EditButton({ children, iconFirst = true, ...attributes }) {
 
 function DeleteButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -152,6 +161,7 @@ function DeleteButton({ children, iconFirst = true, ...attributes }) {
 
 function RemoveButton({ children, hasText = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -169,6 +179,7 @@ function RemoveButton({ children, hasText = true, ...attributes }) {
 
 function AddButton({ children, iconFirst = true, ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -187,6 +198,7 @@ function AddButton({ children, iconFirst = true, ...attributes }) {
 
 function NewButton({ children, iconFirst = true, name = '', ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>
@@ -205,6 +217,7 @@ function NewButton({ children, iconFirst = true, name = '', ...attributes }) {
 }
 
 function EditSmall({ ...attributes }) {
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	return (
 		<button className='btn btn-ghost btn-sm' {...attributes}>
 			<EditIcon />
@@ -214,6 +227,7 @@ function EditSmall({ ...attributes }) {
 
 function BackButton({ children, iconFirst = true, name = '', ...attributes }) {
 	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	if (!children) {
 		children = (
 			<>

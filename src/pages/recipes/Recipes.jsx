@@ -14,10 +14,10 @@ export default function Recipes() {
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				{/* Page Header */}
-				<div className='w-full flex justify-between'>
+				<div className='w-full flex justify-between items-center'>
 					<h3 className='text-2xl py-2 font-semibold'>{t('recipes.title')}</h3>
 					<Link to='/recipes/add'>
-						<Button.New name={t('name')} />
+						<Button.New type="button" name={t('name')} />
 					</Link>
 				</div>
 				{/* Lead Text */}

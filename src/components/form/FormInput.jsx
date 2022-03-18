@@ -60,7 +60,7 @@ const FormInput = ({ children, label = null, error = null, altLabel = null, ...p
  * Generate jsx for form input type = text
  */
 const TextInput = (props) => {
-	const { defaultValue = null, name, value = '', filter, onChange, reference = null, ...attributes } = props;
+	const { defaultValue = null, name, value, filter, onChange, reference = null, ...attributes } = props;
 	if (attributes?.children) delete attributes.children;
 	if (attributes?.type) delete attributes.type;
 	if (!name) console.warn('Input field is missing name attribute');
@@ -80,7 +80,7 @@ const TextInput = (props) => {
 			} else {
 				filteredValue = '0';
 			}
-
+			
 			e.target.value = filteredValue;
 		}
 		onChange?.(e);

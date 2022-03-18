@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaFileAlt } from 'react-icons/fa';
 import Card from '../../components/common/Card';
 import ProductsTable from './ProductsTable';
 import ProductForm from './ProductForm';
 import ProductInfo from './ProductInfo';
+import Button from '../../components/common/Button';
 
 export default function Products() {
 	const { t } = useTranslation('pages/products', 'translation');
@@ -26,15 +26,12 @@ export default function Products() {
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				{/* New Item Button */}
-				<div className='w-full flex justify-end'>
-					<button className='btn btn-primary btn-sm' onClick={() => openModal('add')}>
-						<FaFileAlt className='mr-1' />
-						{t('buttons.add', { ns: 'translation' })}
-					</button>
+				<div className='w-full flex justify-between items-center'>
+					{/* Title & Lead Text */}
+					<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
+					<Button.Add type='button' onClick={() => openModal('add')} />
 				</div>
 
-				{/* Title & Lead Text */}
-				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
 				<p className='opacity-80'>{t('lead')}</p>
 
 				{/* Main Table */}

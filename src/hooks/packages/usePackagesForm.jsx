@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAppContext } from '../../context/AppContext';
 import { usePackagesContext, usePackagesDispatch } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
@@ -14,10 +15,20 @@ export default function usePackagesForm({ packageId = null } = {}) {
 	const pack = packageId === null ? null : packages.findById(packageId, true);
 	const originalState = pack ? { ...pack } : { ...defaultPackage };
 
+	const { page } = useAppContext();
+
 	const [formState, setFormState] = useState(originalState);
 	const schema = usePackageSchema();
 	const { onChangeHandler, hasError, onSubmitHandler } = useFormHandler({ formState, setFormState, schema });
 	const { dispatch } = usePackagesDispatch();
+
+	useEffect(() => {
+		//Set page breadcrumb if applicable
+		if (pack) {
+			page.setBreadcrumb(pack.name);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const onSubmit = (e) => {
 		const errors = onSubmitHandler(e, (formData) => {
@@ -30,10 +41,10 @@ export default function usePackagesForm({ packageId = null } = {}) {
 	};
 
 	const onDelete = () => {
-		if(!pack) return;
+		if (!pack) return;
 		const dispatchAction = getDeleteDispatchAction(formState);
 		dispatch(dispatchAction);
-	}
+	};
 
 	//Submit States
 	const getAddDispatchAction = (formData) => {

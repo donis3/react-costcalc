@@ -5,6 +5,7 @@ import Card from '../../components/common/Card';
 import MaterialTable from './MaterialTable';
 import MaterialForm from './MaterialForm';
 import MaterialInfo from './MaterialInfo';
+import Button from '../../components/common/Button';
 
 export default function Materials() {
 	//Translation
@@ -28,13 +29,13 @@ export default function Materials() {
 	//JSX
 	return (
 		<>
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<div className='w-full flex justify-end'>
-					<button className='btn btn-primary btn-sm' onClick={() => openModal('add')}>
-						{'+' + t('btnNew')}
-					</button>
+			<Card className='w-full px-3 py-5' shadow='shadow-lg'>
+				{/* New Item Button */}
+				<div className='w-full flex justify-between items-center'>
+					{/* Title & Lead Text */}
+					<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
+					<Button.Add type='button' onClick={() => openModal('add')} />
 				</div>
-				<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
 				<p className='opacity-80'>{t('lead')}</p>
 
 				<MaterialTable openModal={openModal} />

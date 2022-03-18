@@ -29,6 +29,9 @@ export default function Package() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [packageId]);
 
+	//Stop component if pack not found
+	if (!pack) return <></>;
+
 	//Define tabs
 	const tabs = [
 		{
@@ -57,7 +60,14 @@ export default function Package() {
 					<Button.Back />
 				</Link>
 			</div>
-			<CardWithTabs tabs={tabs} />
+			<CardWithTabs
+				tabs={tabs}
+				headerContent={
+					<Link to={`/packages/edit/${pack?.packageId}`}>
+						<Button.Edit type='button' className='btn btn-sm' />
+					</Link>
+				}
+			/>
 			<DocumentDates updatedAt={pack?.updatedAt} createdAt={pack?.createdAt} />
 		</>
 	);

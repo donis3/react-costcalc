@@ -151,7 +151,6 @@ export default function usePackages() {
 		if (!Array.isArray(items) || items.length === 0) return defaultData;
 		//Go through all items and add them all together. Convert foreign
 		return items.reduce((accumulator, item) => {
-			console.log(item);
 			//Extract items
 			let { itemPrice: price, itemCurrency: currency, itemTax: tax, packageType = null, boxCapacity = 1 } = item;
 			let quantity = 1;
