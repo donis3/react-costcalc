@@ -83,6 +83,10 @@
 		"noTax": "Without Tax",
 		"withTax": "With Tax"
 	},
+	"charts": {
+		"costHistory": "Cost History",
+		"price": "Prices"
+	},
 	"costTable": {
 		"noContent": "There are no items to display",
 		"item": "Item",

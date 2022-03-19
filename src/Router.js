@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import Currency from './pages/currencies/Currency';
 import CurrencySelectOne from './pages/currencies/CurrencySelectOne';
 import HomePage from './pages/HomePage';
@@ -32,6 +33,8 @@ export default function Router() {
 			<Route path='/packages/add' element={<PackageForm isEdit={false} />} />
 			<Route path='/packages/:packageId' element={<Package />} />
 			<Route path='/packages/edit/:packageId' element={<PackageForm isEdit={true} />} />
+
+
 			
 
 			{/* Homepage */}

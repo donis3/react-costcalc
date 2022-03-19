@@ -8,6 +8,7 @@
 	"package": {
 		"tabDetails": "Details",
 		"tabCosts": "Cost History",
+		"costHistoryTitle": "\"{{item}}\" cost history",
 		"noItems": "No items available in package."
 	},
 	"form": {
