@@ -6,6 +6,7 @@ import MaterialTable from './MaterialTable';
 import MaterialForm from './MaterialForm';
 import MaterialInfo from './MaterialInfo';
 import Button from '../../components/common/Button';
+import MaterialPriceHistory from './MaterialPriceHistory';
 
 export default function Materials() {
 	//Translation
@@ -14,8 +15,8 @@ export default function Materials() {
 	const [modalState, setModalState] = useState({ isOpen: false, type: 'info', materialId: null });
 
 	const openModal = (type = '', materialId = null) => {
-		if (['add', 'edit', 'info'].includes(type) === false) return;
-		if (['edit', 'info'].includes(type)) {
+		if (['add', 'edit', 'info', 'history'].includes(type) === false) return;
+		if (['edit', 'info', 'history'].includes(type)) {
 			materialId = parseInt(materialId);
 			if (isNaN(materialId)) return;
 		}
@@ -47,6 +48,9 @@ export default function Materials() {
 			)}
 			{modalState.isOpen && modalState.type === 'info' && (
 				<MaterialInfo handleClose={closeModal} materialId={modalState.materialId} />
+			)}
+			{modalState.isOpen && modalState.type === 'history' && (
+				<MaterialPriceHistory handleClose={closeModal} materialId={modalState.materialId} />
 			)}
 		</>
 	);

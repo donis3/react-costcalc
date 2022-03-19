@@ -95,7 +95,7 @@ export default function materialsReducer(state, { type = null, payload = null, s
 			const diff = Math.abs(Math.round((priceItem.amount - latestPrice) * 100) / 100);
 			if (diff <= 0) return state; //No need to update.
 			//Copy price history
-			let priceHistory = [...material.priceHistory];
+			let priceHistory = material.priceHistory ? [...material.priceHistory] : [];
 			if (priceHistory.length > 9) {
 				priceHistory.splice(9);
 			}

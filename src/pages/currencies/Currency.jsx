@@ -12,6 +12,7 @@ import NotFound from '../NotFound';
 import CurrencyError from './CurrencyError';
 import { FaCircle } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
+import CurrencyChart from './CurrencyChart';
 
 export default function Currency() {
 	const { t } = useTranslation();
@@ -83,52 +84,15 @@ export default function Currency() {
 						</FormInput>
 					</div>
 				</form>
-				<div className='w-full mt-10 font-light'>
-					<h3 className='text-sm font-medium my-1'>{t('currency.historyTitle')}</h3>
-					<CurrencyHistory data={currencies.getRateFor({ from: currency, history: 6 })} />
+
+				<div className='mt-5 w-full lg:w-4/6 lg:mx-auto'>
+					<CurrencyChart
+						data={currencies.getRateFor({ from: currency, history: 6 })}
+						from={currency}
+						to={currencies.defaultCurrency}
+					/>
 				</div>
 			</Card>
 		</>
-	);
-}
-
-function CurrencyHistory({ data = null } = {}) {
-	const { t } = useTranslation();
-	const { displayNumber, displayDate } = useIntl();
-
-	//No data available
-	if (!data || data.history.length === 0) {
-		return <>{t('currency.historyNoData')}</>;
-	}
-
-	//Show table
-	return (
-		<table className='table w-full table-zebra table-compact font-normal'>
-			<thead>
-				<tr>
-					<th className='w-1/12'>#</th>
-					<th className='w-4/12'>{t('fields.date')}</th>
-					<th className='w-7/12'>{t('fields.rate')}</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th className='font-light'>
-						<FaCircle className='text-success-content' />
-					</th>
-					<td>{displayDate(data.date)}</td>
-					<td>{displayNumber(data.rate, 2)}</td>
-				</tr>
-				{data.history.map((item, index) => {
-					return (
-						<tr key={index}>
-							<th className='font-light'>{index + 1}</th>
-							<td>{displayDate(item.date)}</td>
-							<td>{displayNumber(item.rate, 2)}</td>
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
 	);
 }

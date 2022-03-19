@@ -18,6 +18,7 @@ import FormInput from '../../components/form/FormInput';
 import MaterialInfo from '../materials/MaterialInfo';
 import DocumentDates from '../../components/common/DocumentDates';
 import CostTable from '../../components/CostTable/CostTable';
+import RecipeCostHistory from './details/RecipeCostHistory';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -31,6 +32,7 @@ export default function Recipe() {
 		recipe: recipe,
 		showMaterial: false,
 		materialId: null,
+		showCostHistory: false,
 	});
 	const newYieldRef = useRef();
 
@@ -59,6 +61,8 @@ export default function Recipe() {
 	//Show /Hide material modal
 	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
 	const openMaterial = (materialId) => setRecipeState((state) => ({ ...state, showMaterial: true, materialId }));
+	const openCostHistory = () => setRecipeState((state) => ({ ...state, showCostHistory: true }));
+	const closeCostHistory = () => setRecipeState((state) => ({ ...state, showCostHistory: false }));
 
 	if (!recipeState.recipe) {
 		return <></>;
@@ -77,9 +81,14 @@ export default function Recipe() {
 					{/* Card Title */}
 					<h3 className='text-4xl py-2 font-semibold'>{recipeState.recipe.name}</h3>
 					{/* Action Button */}
-					<Link to={`/recipes/edit/${recipeState.recipe.recipeId}`}>
-						<Button.Edit />
-					</Link>
+					<div className='flex items-center gap-x-1'>
+						<Button.Chart forceIcon onClick={openCostHistory}>
+							{t('charts.costHistory', { ns: 'translation' })}
+						</Button.Chart>
+						<Link to={`/recipes/edit/${recipeState.recipe.recipeId}`}>
+							<Button.Edit />
+						</Link>
+					</div>
 				</div>
 
 				{/* Half / Half divided */}
@@ -144,7 +153,7 @@ export default function Recipe() {
 			</Card>
 
 			<DocumentDates updatedAt={recipe?.updatedAt} createdAt={recipe?.createdAt} />
-
+			{recipeState.showCostHistory && <RecipeCostHistory handleClose={closeCostHistory} recipe={recipeState.recipe} />}
 			{recipeState.showMaterial && <MaterialInfo handleClose={closeMaterial} materialId={recipeState.materialId} />}
 		</>
 	);

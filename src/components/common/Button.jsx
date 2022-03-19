@@ -11,6 +11,7 @@ import {
 	FaTimes as CloseIcon,
 	FaPlus as AddIcon,
 	FaArrowLeft as BackIcon,
+	FaChartLine as ChartIcon,
 } from 'react-icons/fa';
 
 function Button({ children, type, ...attributes }) {
@@ -245,6 +246,28 @@ function BackButton({ children, iconFirst = true, name = '', ...attributes }) {
 	);
 }
 
+function ChartButton({ children, iconFirst = true, name = '', forceIcon = false, ...attributes }) {
+	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
+	if (!children) {
+		children = (
+			<>
+				{iconFirst && <ChartIcon className='mr-1' />}
+				{t('buttons.chart')}
+				{name && ` ${name}`}
+				{!iconFirst && <ChartIcon className='ml-1' />}
+			</>
+		);
+	}
+	return (
+		<button className='btn btn-secondary btn-outline btn-sm' {...attributes}>
+			{forceIcon && iconFirst && <ChartIcon className='mr-1' />}
+			{children}
+			{forceIcon && !iconFirst && <ChartIcon className='ml-1' />}
+		</button>
+	);
+}
+
 //Add custom buttons
 Button.Save = SaveButton;
 Button.Submit = SubmitButton;
@@ -258,5 +281,6 @@ Button.Add = AddButton;
 Button.New = NewButton;
 Button.EditSmall = EditSmall;
 Button.Back = BackButton;
+Button.Chart = ChartButton;
 
 export default Button;

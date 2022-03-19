@@ -14,6 +14,10 @@
 		"notFound": "Material could not be loaded for material ID: {{id}}",
 		"title": "Details for \"{{name, truncate(maxLength: 10)}}\""
 	},
+	"priceHistory": {
+		"chartTitle": "Price Chart",
+		"title": "Price history for \"{{name, truncate(maxLength: 10)}}\""
+	},
 	"details": {
 		"materialId": "Material #",
 		"name": "Name",

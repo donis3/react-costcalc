@@ -12,6 +12,7 @@ export default function ResponsiveModal({
 	handleClose = null,
 	showSubmit = false,
 	autoFooter = false,
+	icon = null,
 }) {
 	const { windowType } = useContext(AppContext);
 
@@ -58,10 +59,17 @@ export default function ResponsiveModal({
 					{/* Show header if exists or show gap */}
 					{title ? (
 						<div className='flex justify-between items-center px-5 pt-5 pb-5 rounded-t border-b border-base-300'>
-							<h3 className='text-3xl font-semibold min-h-8 lg:text-2xl'>{title}</h3>
+							{icon ? (
+								<div className='flex gap-x-2 items-center'>
+									{icon}
+									<h3 className='text-3xl font-semibold min-h-8 lg:text-2xl'>{title}</h3>
+								</div>
+							) : (
+								<h3 className='text-3xl font-semibold min-h-8 lg:text-2xl '>{title}</h3>
+							)}
 						</div>
 					) : (
-						<div className='h-16 lg:border-b border-base-300'></div>
+						<div className='h-16 lg:border-b border-base-300 flex items-center p-5'>{icon}</div>
 					)}
 					{/* Absolute Positioned Close Button */}
 					<div className='absolute top-5 right-5  text-base-content '>
@@ -70,7 +78,7 @@ export default function ResponsiveModal({
 						</button>
 					</div>
 					{/* Body */}
-					<div className='p-6 space-y-6 lg:overflow-y-auto lg:max-h-96 lg:block text-base-content flex-1'>
+					<div className='p-6 space-y-6 lg:overflow-y-auto lg:max-h-[700px] lg:block text-base-content flex-1'>
 						{children}
 					</div>
 					{/* Show Modal Footer if exists OR show blank gap*/}

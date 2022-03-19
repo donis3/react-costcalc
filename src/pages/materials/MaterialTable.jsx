@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaInfoCircle, FaPencilAlt } from 'react-icons/fa';
+import { FaInfoCircle, FaPencilAlt, FaChartLine } from 'react-icons/fa';
 import ThSortable from '../../components/common/ThSortable';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
@@ -24,21 +24,19 @@ export default function MaterialTable({ openModal = null } = {}) {
 						{/* Table Headers */}
 						<ThSortable className='w-1/12 font-semibold'>#</ThSortable>
 
-						<ThSortable className='w-5/12' field='name' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-4/12' field='name' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.material')}
 						</ThSortable>
 
-
 						<ThSortable className='w-1/12' field='tax' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.tax')}
-							
 						</ThSortable>
 
 						<ThSortable className='w-3/12' field='price' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.price')}
 						</ThSortable>
 
-						<ThSortable className='w-2/12'></ThSortable>
+						<ThSortable className='w-3/12'></ThSortable>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,22 +58,28 @@ function MaterialTableRow({ data = null, index = 0, openModal = null }) {
 	return (
 		<tr className='hover'>
 			<th>{index + 1}</th>
-			<td className='whitespace-normal'>
+			<td className='whitespace-normal truncate'>
 				<span className='font-medium cursor-pointer' onClick={() => openModal?.('info', materialId)}>
 					{name}
 				</span>
 			</td>
-			<td>{displayNumber(tax, 2)}<span className='text-xs ml-1 opacity-70'>%</span></td>
+			<td>
+				{displayNumber(tax, 2)}
+				<span className='text-xs ml-1 opacity-70'>%</span>
+			</td>
 			<td>
 				{displayMoney(price, currency)}
 				<span className='text-xs ml-1 opacity-70'>/{unit}</span>
 			</td>
-			<td>
-				<button className='btn btn-ghost btn-sm mr-1' onClick={() => openModal('edit', materialId)}>
+			<td className='flex flex-wrap gap-x-1'>
+				<button className='btn btn-ghost btn-xs' onClick={() => openModal('edit', materialId)}>
 					<FaPencilAlt />
 				</button>
+				<button className='btn btn-ghost btn-xs' onClick={() => openModal('history', materialId)}>
+					<FaChartLine />
+				</button>
 
-				<button className='btn btn-ghost btn-sm' onClick={() => openModal?.('info', materialId)}>
+				<button className='btn btn-ghost btn-xs' onClick={() => openModal?.('info', materialId)}>
 					<FaInfoCircle />
 				</button>
 			</td>
