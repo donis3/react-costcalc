@@ -34,6 +34,7 @@ const getMaterialFormSchema = (JoiInstance, t, allowedUnits = ['kg'], allowedCur
 		density: JoiInstance.number().positive().precision(2).required().label(t('form.density')),
 		tax: JoiInstance.number().min(0).precision(2).required().label(t('form.tax')),
 		price: JoiInstance.number().min(0).precision(2).required().label(t('form.price')),
+		priceHistory: JoiInstance.array(),
 		currency: JoiInstance.string()
 			.uppercase()
 			.min(1)

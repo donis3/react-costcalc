@@ -49,7 +49,7 @@ export default function usePackages() {
 		currencies: { defaultCurrency },
 	} = useCurrency();
 
-	const {t} = useTranslation('pages/packages');
+	const { t } = useTranslation('pages/packages');
 
 	//===================== PACKAGE API ===================//
 	const clearPackages = () => {
@@ -130,7 +130,7 @@ export default function usePackages() {
 			}
 			//Other operations
 			if (item.packageType === 'box') {
-				mutatedItem.name = t('labels.boxName', {name: mutatedItem.name, capacity: item.boxCapacity});
+				mutatedItem.name = t('labels.boxName', { name: mutatedItem.name, capacity: item.boxCapacity });
 			}
 			return mutatedItem;
 		});
@@ -258,6 +258,10 @@ export default function usePackages() {
 			if (isNaN(previousCost) || Math.round(previousCost * 100) / 100 !== Math.round(result.cost * 100) / 100) {
 				//New cost is different. Add new cost to history
 				addCostHistory(previousCost, result.cost, result.currency);
+			}
+			//Historical Data Limit
+			if (result.costHistory.length > 10) {
+				result.costHistory.splice(10);
 			}
 		}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import OptionControl from '../../components/common/OptionControl';
 import ResponsiveModal from '../../components/common/ResponsiveModal';
@@ -11,10 +11,19 @@ export default function MaterialInfo({ handleClose = null, materialId = null }) 
 	const { Materials } = useMaterialContext();
 	const { t } = useTranslation('pages/materials');
 	const material = Materials.findById(materialId, true);
-	const [displayState, setDisplayState] = useStorageState('displaySettings', { localPrice: true, baseUnit: false, showTax: false });
+	const [displayState, setDisplayState] = useStorageState('displaySettings', {
+		localPrice: true,
+		baseUnit: false,
+		showTax: false,
+	});
 
 	const showLocalPrice = (value = true) => setDisplayState((state) => ({ ...state, localPrice: value }));
 	const showBaseUnit = (value = true) => setDisplayState((state) => ({ ...state, baseUnit: value }));
+
+	useEffect(() => {
+		Materials.recordPriceForMaterial(material);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [material]);
 
 	if (!material) {
 		//Show data

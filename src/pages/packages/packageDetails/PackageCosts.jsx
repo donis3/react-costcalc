@@ -8,7 +8,7 @@ export default function PackageCosts({ packageData } = {}) {
 	//IF no data to show, render no data text
 	const { costHistory } = packageData;
 	if (!costHistory || !Array.isArray(costHistory) || costHistory.length === 0) {
-		return <p className='text-sm opacity-75 italic'>{t('error.noData')}</p>;
+		return <p className='text-sm opacity-75 italic'>{t('error.noData', {ns: 'translation'})}</p>;
 	}
 
 	//Sort ascending dates

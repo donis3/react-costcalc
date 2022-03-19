@@ -61,6 +61,9 @@ export default function PackageInfo({ packageData } = {}) {
 }
 
 function PackageInfoItem({ title = null, children, ...attributes } = {}) {
+	if( typeof children === 'string' && children.trim().length === 0) {
+		return <></>;
+	}
 	return (
 		<div {...attributes}>
 			{/* Product Name */}

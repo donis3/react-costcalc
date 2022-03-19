@@ -41,7 +41,7 @@ export default function DateMoneyChart({ data = null, title = '', currency = nul
 	useEffect(() => {
 		async function loadDateLocale() {
 			let { [language.code]: newLocale } = await import('date-fns/locale');
-			setDateLocale((state) => newLocale);
+			setDateLocale(() => newLocale);
 		}
 		loadDateLocale();
 	}, [language.code]);
