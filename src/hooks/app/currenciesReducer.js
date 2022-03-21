@@ -1,5 +1,5 @@
 const currencySettings = {
-	maxHistoricalData: 5, //Per currency
+	maxHistoricalData: 10, //Per currency
 };
 
 export default function currenciesReducer(state, action) {

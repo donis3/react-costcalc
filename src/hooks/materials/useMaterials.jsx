@@ -30,7 +30,7 @@ export default function useMaterials() {
 	const { t } = useTranslation('pages/materials');
 	const config = useConfig();
 	const { displayNumber } = useIntl();
-	const { displayMoney: displayConvertedMoney, convert, defaultCurrency } = useCurrencyConversion();
+	const { displayMoney: displayConvertedMoney, convert } = useCurrencyConversion();
 
 	//Write to repo when materials change
 	useEffect(() => {

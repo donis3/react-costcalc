@@ -6,11 +6,11 @@ import Card from '../../components/common/Card';
 import FormInput from '../../components/form/FormInput';
 import { useCurrencyContext, useCurrencyDispatch } from '../../context/MainContext';
 import useFormHandler from '../../hooks/common/useFormHandler';
-import useIntl from '../../hooks/common/useIntl';
+
 import useJoi from '../../hooks/common/useJoi';
 import NotFound from '../NotFound';
 import CurrencyError from './CurrencyError';
-import { FaCircle } from 'react-icons/fa';
+
 import { useAppContext } from '../../context/AppContext';
 import CurrencyChart from './CurrencyChart';
 
