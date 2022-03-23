@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import FormInput from '../../components/form/FormInput';
+import { useAppContext } from '../../context/AppContext';
 import { useEndProductsContext } from '../../context/MainContext';
 
 import useEndproductsForm from '../../hooks/endproducts/useEndproductsForm';
 
 export default function EndProductForm({ isEdit = false } = {}) {
 	const { endId } = useParams();
-	const {endProducts} = useEndProductsContext();
-	console.log(endProducts.getAllSorted())
+	const { endProducts } = useEndProductsContext();
+	const navigate = useNavigate();
+	const endProduct = isEdit ? endProducts.findById(endId) : null;
+	const { page } = useAppContext();
+
+	useEffect(() => {
+		//If endproduct is not found in edit mode, send to 404
+		if (isEdit && !endProduct) {
+			return navigate('/notfound');
+		}
+		//In edit mode, set breadcrumb manually
+		if (isEdit && endProduct) {
+			page?.setBreadcrumb?.(endProduct.name);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isEdit, endProduct, navigate]);
+
 	const { t } = useTranslation('pages/endproducts', 'translation');
-	const {  handleSubmit, handleChange, hasError, formState, selectRecipe, selectPackage, recipe } =
-		useEndproductsForm();
+	const { onReset, handleSubmit, handleChange, hasError, onDelete, formState, selectRecipe, selectPackage, recipe } =
+		useEndproductsForm({ endProduct });
 
 	//Render
 	if (selectRecipe.length === 0) return <NoRecipeError />;
@@ -29,7 +45,7 @@ export default function EndProductForm({ isEdit = false } = {}) {
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>
 					{/* Form title depending on context */}
-					{t('form.addTitle')}
+					{isEdit ? t('form.editTitle') : t('form.addTitle')}
 				</h3>
 				<p className='opacity-80'>
 					{/* Form lead depending on context */}
@@ -92,12 +108,9 @@ export default function EndProductForm({ isEdit = false } = {}) {
 					</div>
 					{/* Form Footer */}
 
-					<FormFooterActions
-						className='mt-10 border-t-2 py-5'
-						handleDelete={isEdit ? () => console.log('Delete Product') : null}
-					>
+					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={isEdit ? onDelete : null}>
 						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
-						<Button.Reset className='btn btn-md' type='button' onClick={null} />
+						<Button.Reset className='btn btn-md' type='button' onClick={onReset} />
 					</FormFooterActions>
 				</form>
 			</Card>

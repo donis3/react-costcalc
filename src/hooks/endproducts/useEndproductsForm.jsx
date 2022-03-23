@@ -1,11 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useEndProductsDispatch, usePackagesContext, useRecipesContext } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
 
 export default function useEndproductsForm({ endProduct = null } = {}) {
+	const { t } = useTranslation('pages/endproducts', 'translation');
+	const navigate = useNavigate();
 	//Load end product dispatch
 	const { dispatch } = useEndProductsDispatch();
 	//Load recipes & packages & memoize them
@@ -42,22 +45,64 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 
 	//Handle Submit
 	const onSubmit = (formData) => {
-		const action = {
-			type: 'add',
-			payload: { ...formData },
+		if (!endProduct) {
+			return dispatch({
+				type: 'add',
+				payload: { ...formData },
+				onSuccess: function () {
+					toast.success(t('success.add', { name: formData.name, ns: 'translation' }), { toastId: 'productAdd' });
+					navigate('/endproducts');
+				},
+				onError: function (errCode) {
+					if (errCode === 'duplicate') {
+						return toast.error(t('error.duplicate'));
+					}
+					return toast.error(t('error.add', { name: formData.name, ns: 'translation' }), { toastId: 'productAdd' });
+				},
+			});
+		}
+		if (endProduct) {
+			return dispatch({
+				type: 'update',
+				payload: { ...formData, endId: endProduct.endId },
+				onSuccess: function () {
+					toast.success(t('success.update', { name: formData.name, ns: 'translation' }), {
+						toastId: 'productUpdate',
+					});
+					navigate('/endproducts');
+				},
+				onError: function (errCode = null) {
+					let toastMsg = t('error.update', { name: formData.name, ns: 'translation' });
+					if (errCode) toastMsg = t('error.' + errCode, { name: formData.name });
+					return toast.error(toastMsg, { toastId: 'productUpdate' });
+				},
+			});
+		}
+
+		//dispatch({ type: 'reset' });
+	};
+
+	const onDelete = () => {
+		if (!endProduct) return;
+
+		return dispatch({
+			type: 'delete',
+			payload: endProduct.endId,
 			onSuccess: function () {
-				toast.success('Added new product');
+				toast.success(t('success.delete', { name: endProduct.name, ns: 'translation' }), { toastId: 'productDelete' });
+				navigate('/endproducts');
 			},
 			onError: function (errCode) {
-				if (errCode === 'duplicate') {
-					return toast.error('This combo already exists');
-				}
-				return toast.error('Failed to add item');
+				let toastMsg = t('error.delete', { name: endProduct.name, ns: 'translation' });
+				if (errCode) toastMsg = t('error.' + errCode, { name: endProduct.name });
+				return toast.error(toastMsg, { toastId: 'productDelete' });
 			},
-		};
+		});
+	};
 
-		dispatch(action);
-		//dispatch({ type: 'reset' });
+	const onReset = () => {
+		const newState = getInitialState(endProduct, selectData);
+		return setFormState((state) => ({ ...state, ...newState }));
 	};
 
 	//Hook Exports
@@ -67,6 +112,8 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 		handleChange: onChangeHandler,
 		hasError,
 		handleSubmit: (e) => onSubmitHandler(e, onSubmit),
+		onReset,
+		onDelete,
 		formState,
 		recipe: { isLiquid: false },
 	};
@@ -86,7 +133,7 @@ const getInitialState = (endProduct = null, selectData = null) => {
 	const { packageId } = selectData.getDefaultPackage();
 	if (endProduct && 'endId' in endProduct) {
 		//Export data from endproduct as initial state
-		result = Object.keys(endProduct).forEach((key) => {
+		Object.keys(endProduct).forEach((key) => {
 			if (key in result) result[key] = endProduct[key];
 		});
 		//Add id

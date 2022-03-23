@@ -25,10 +25,20 @@ export default function useEndProducts() {
 		}
 	}
 
+	function findById(endId = null) {
+		endId = parseInt(endId);
+		if (isNaN(endId)) return null;
+		const result = this.data.find((item) => item.endId === endId);
+
+		if (!result) return null;
+		return result;
+	}
+
 	//Exports
 	const endProductPayload = {
 		data: endProductsState,
 		getAllSorted,
+		findById,
 	};
 	return [endProductPayload, dispatch];
 }

@@ -6,9 +6,15 @@
 		"noRecipeError": "Please add at least 1 recipe before creating a product.",
 		"noPackageError": "There are no package bundles suitable for this product type ({{productType}})",
 		"addTitle": "New Product",
+		"editTitle": "Edit Product",
 		"details": "Define a product by selecting the package and manufacturing recipe.",
 		"subtitle": "Product Details",
 		"subtitle2": "Other"
+	},
+	"error": {
+		"duplicate": "A product with the same recipe & package is already defined.",
+		"invalidId": "Save failed. Invalid product ID",
+		"notFound": "Product couldn't be found"
 	},
 	"labels": {
 		"endId": "Product ID",
