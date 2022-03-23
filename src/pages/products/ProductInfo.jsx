@@ -38,7 +38,7 @@ export default function ProductInfo({ productId = null, handleClose = null }) {
 //Product Details Component
 const InfoDetails = ({ product = [] }) => {
 	const { t } = useTranslation('pages/products');
-	const { displayNumber, displayMoney } = useIntl();
+	const { displayNumber } = useIntl();
 
 	if (!product || typeof product !== 'object' || 'productId' in product === false) {
 		return <div className='col-span-12 font-light'>{t('info.noData')}</div>;
@@ -74,9 +74,9 @@ const InfoDetails = ({ product = [] }) => {
 		rows.push({ left: t('info.productionMass'), right: txt });
 	}
 
-	// cost
-	let costText = ` ${displayMoney(product.cost)} <small>/${product.isLiquid ? 'L' : 'kg'} </small>`;
-	rows.push({ left: t('info.cost'), right: costText });
+	// // cost
+	// let costText = ` ${displayMoney(product.cost)} <small>/${product.isLiquid ? 'L' : 'kg'} </small>`;
+	// rows.push({ left: t('info.cost'), right: costText });
 
 	//Display data here
 	return <>{rows && rows.map((item, i) => <InfoDetailRow key={i} left={item.left} right={item.right} />)}</>;

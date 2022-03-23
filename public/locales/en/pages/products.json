@@ -1,6 +1,6 @@
 {
-	"title": "Products",
-	"lead": "Manage all products.",
+	"title": "Product Definitions",
+	"lead": "Define each base product and their properties.",
 	"states": {
 		"liquid": "Liquid",
 		"solid": "Solid"
@@ -38,7 +38,7 @@
 	"info": {
 		"notFound": "Requested product (id: {{id}}) couldn't be found.",
 		"noData": "No product data available to display",
-		"title": "Product Details for \"{{name, truncate(maxLength: 10)}}\"",
+		"title": "Product Definitions for \"{{name, truncate(maxLength: 10)}}\"",
 		"name": "Commercial Name",
 		"code": "Product Code",
 		"state": "Physical State",

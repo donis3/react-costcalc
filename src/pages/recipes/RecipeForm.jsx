@@ -8,8 +8,8 @@ import useIntl from '../../hooks/common/useIntl';
 import useRecipeForm, { selectRecipeArrayGenerator } from '../../hooks/recipes/useRecipeForm';
 import { useAppContext } from '../../context/AppContext';
 import RecipeFormMaterials from './formComponents/RecipeFormMaterials';
-import Button from '../../components/common/Button';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
+import BackButton from '../../components/common/BackButton';
 
 export default function RecipeForm() {
 	const { t } = useTranslation('pages/recipes');
@@ -92,11 +92,8 @@ export default function RecipeForm() {
 
 	return (
 		<>
-			<div className='mb-1'>
-				<Link to='/recipes'>
-					<Button.Back />
-				</Link>
-			</div>
+			{/* Back Button */}
+			<BackButton />
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>
 					{/* Form title depending on context */}

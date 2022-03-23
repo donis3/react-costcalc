@@ -98,8 +98,8 @@ export default function DateMoneyChart({ data = null, title = '', currency = nul
 				},
 			},
 			yAxis: {
-				min: 0,
-				suggestedMax: 100,
+				// min: 0,
+				// suggestedMax: 100,
 				suggestedMin: 0,
 				ticks: {
 					// For a category axis, the val is the index so the lookup via getLabelForValue is needed

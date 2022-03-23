@@ -57,6 +57,7 @@ export default function Recipe() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);
+	
 
 	//Show /Hide material modal
 	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
@@ -100,6 +101,20 @@ export default function Recipe() {
 							<p className='text-base-content text-base font-medium mb-3'>
 								{recipeState.recipe.product && recipeState.recipe.product.name}
 							</p>
+							{recipeState.recipe.isLiquid() ? (
+								<>
+									{/* Product Density */}
+									<h4 className='text-base-content opacity-50 text-sm'>{t('labels.density', { ns: 'translation' })}</h4>
+									<p className='text-base-content text-base font-medium mb-3'>
+										{displayNumber(recipeState.recipe.getDensity(), 2)}
+										<span className='ml-1 text-xs opacity-50'>
+											g/cm<sup>3</sup>
+										</span>
+									</p>
+								</>
+							) : (
+								''
+							)}
 						</div>
 						<div>
 							{/* Editable Yield Section */}

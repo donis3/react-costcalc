@@ -1,5 +1,3 @@
-import config from '../../config/config.json';
-
 export default function productsReducer(state, action) {
 	let { type = null, payload = null, success = () => {}, error = () => {} } = action;
 	if (typeof success !== 'function') success = () => {};
@@ -27,7 +25,6 @@ export default function productsReducer(state, action) {
 		case 'add': {
 			if (payload && typeof payload === 'object' && 'productId' in payload) {
 				//Valid payload
-				payload.costHistory = defaultCostHistory();
 				success();
 				return [...state, payload];
 			} else {
@@ -50,7 +47,7 @@ export default function productsReducer(state, action) {
 				error();
 				return state;
 			}
-			//create new payload but save current items data that arent sent through form (example: cost history)
+			//create new payload but save current items data that aren't sent through form (example: cost history)
 			const newItem = { ...result, ...payload }; //Overwrite new data to existing
 
 			//Call success
@@ -82,17 +79,3 @@ export default function productsReducer(state, action) {
 		}
 	}
 }
-
-const defaultCostHistory = () => {
-	//get default currency from config
-	const defaultCurrency = config.applicationData.currencies.find((item) => item.defaultCurrency === true)?.code;
-
-	//create default data
-	return [
-		{
-			date: new Date().getTime(),
-			cost: 0,
-			currency: defaultCurrency,
-		},
-	];
-};

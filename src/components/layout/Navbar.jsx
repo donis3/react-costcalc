@@ -10,7 +10,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
-	const { t } = useTranslation('routes');
+	const { t } = useTranslation('routes', 'translation');
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [isLangModalOpen, setLangModalOpen] = useState(false);
 	const { language } = useContext(AppContext);
@@ -18,7 +18,7 @@ export default function Navbar() {
 
 	//Close menu when location changes
 	useEffect(() => {
-		setMenuOpen(true);
+		setMenuOpen(false);
 	}, [loc.pathname]);
 
 	return (
@@ -36,13 +36,12 @@ export default function Navbar() {
 					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? 'flex' : ' hidden')}>
 						<ul className='nav-list  flex flex-wrap'>
 							{/* Business Links */}
+							<NavbarItem to='/endproducts'>{t('endproducts')}</NavbarItem>
 							<NavbarItem to='/materials'>{t('materials')}</NavbarItem>
-							<NavbarItem to='/products'>{t('products')}</NavbarItem>
-							<NavbarItem to='/recipes'>{t('recipes')}</NavbarItem>
 							<NavbarItem to='/packages'>{t('packages')}</NavbarItem>
-							<NavbarDropdown>
-								<NavbarItem to='/recipes'>{t('recipes')}</NavbarItem>
-								<NavbarItem to='/packages'>{t('packages')}</NavbarItem>
+							<NavbarDropdown text={t('nav.manufacturing', { ns: 'translation' })}>
+								<NavbarItem to='/products'>{t('nav.products', { ns: 'translation' })}</NavbarItem>
+								<NavbarItem to='/recipes'>{t('nav.recipes', { ns: 'translation' })}</NavbarItem>
 							</NavbarDropdown>
 							{/* Language Selector */}
 							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>
@@ -79,7 +78,7 @@ function NavbarItem({ children, to = '/' }) {
 	);
 }
 
-function NavbarDropdown({ children }) {
+function NavbarDropdown({ text = 'dropdown', children }) {
 	const [isOpen, setOpen] = useState(false);
 	const handleClick = () => setOpen((state) => !state);
 	const openDropdown = () => setOpen(() => true);
@@ -91,7 +90,7 @@ function NavbarDropdown({ children }) {
 	return (
 		<li className='nav-dropdown '>
 			<button onClick={handleClick} onMouseOver={openDropdown}>
-				BUton
+				{text}
 			</button>
 
 			<ul style={{ display: isOpen ? null : 'none' }} onMouseLeave={closeDropdown}>

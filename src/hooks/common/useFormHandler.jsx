@@ -104,7 +104,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 			console.log(`FormHandler Error: field name is empty`);
 			return;
 		}
-		if (name in formState === false) {
+		if (formState && name in formState === false) {
 			//This field does not exist in state.
 			console.log(`FormHandler Error: Form State doesn't have a field named [${name}]`);
 			return;
@@ -128,7 +128,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		const result = errors.find((err) => err.key === fieldName);
 
 		//hide before submit if field is empty
-		if (isSubmitted === false && fieldName in formState && !formState[fieldName]) {
+		if (formState && isSubmitted === false && fieldName in formState && !formState[fieldName]) {
 			//Form field is yet empty and form is not yet submitted. remove error
 			return false;
 		}

@@ -1,0 +1,24 @@
+{
+	"name": "Product",
+	"title": "Products",
+	"lead": "Define all the product variants using recipes and package bundles.",
+	"form": {
+		"noRecipeError": "Please add at least 1 recipe before creating a product.",
+		"noPackageError": "There are no package bundles suitable for this product type ({{productType}})",
+		"addTitle": "New Product",
+		"details": "Define a product by selecting the package and manufacturing recipe.",
+		"subtitle": "Product Details",
+		"subtitle2": "Other"
+	},
+	"labels": {
+		"endId": "Product ID",
+		"commercialName": "Commercial Name",
+		"commercialNameAlt": "Product Commercial Name for customers",
+		"name": "Name",
+		"recipe": "Recipe",
+		"notes": "Notes",
+		"recipeAlt": "Will be used for physical properties and cost analysis",
+		"package": "Package",
+		"packageAlt": "Will be used to determine weight/volume and cost analysis"
+	}
+}

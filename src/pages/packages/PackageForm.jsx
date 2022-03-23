@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
@@ -38,11 +39,7 @@ export default function PackageForm({ isEdit = false } = {}) {
 	return (
 		<>
 			{/* Back Button */}
-			<div className='mb-1'>
-				<Link to='/packages'>
-					<Button.Back />
-				</Link>
-			</div>
+			<BackButton />
 			{/* Form */}
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>

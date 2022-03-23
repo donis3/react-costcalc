@@ -37,6 +37,9 @@ export default function DateConversionRateChart({ data = null, from = null, to =
 	const [dateLocale, setDateLocale] = useState(null);
 	const { t } = useTranslation('translation');
 
+	const max = Array.isArray(data) ? Math.max(...data.map((item) => item.y)) : 0;
+	const min = Array.isArray(data) ? Math.min(...data.map((item) => item.y)) : 0;
+
 	//Will lazy load a locale for date functions to be able to localize dates
 	useEffect(() => {
 		async function loadDateLocale() {
@@ -95,9 +98,9 @@ export default function DateConversionRateChart({ data = null, from = null, to =
 				},
 			},
 			yAxis: {
-				min: 0,
-				suggestedMax: 100,
-				suggestedMin: 0,
+				// min: 0,
+				suggestedMax: max + 1,
+				suggestedMin: min > 0 ? min - 1 : 0,
 				ticks: {
 					// For a category axis, the val is the index so the lookup via getLabelForValue is needed
 					callback: function (val, index) {

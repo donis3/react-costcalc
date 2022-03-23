@@ -12,7 +12,7 @@ export default function useProductsForm({ productId = null, handleClose = null }
 	const product = products.findById(productId);
 
 	const { recipes } = useRecipesContext();
-	const boundRecipes = recipes.getByProduct(1);
+	const boundRecipes = recipes.getByProduct(productId);
 
 	const formInitialState = products.generateFormInitialState({ productId, name: t('form.defaultName') });
 	const [formState, setFormState] = useState(formInitialState);

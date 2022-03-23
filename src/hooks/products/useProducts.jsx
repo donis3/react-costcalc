@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react';
 
 import { getMaxInArray, sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
-import useConfig from '../app/useConfig';
 import useStorageRepo from '../common/useStorageRepo';
 import productsReducer from './productsReducer';
 
@@ -10,9 +9,6 @@ export default function useProducts() {
 	const [productsRepo, setProductsRepo] = useStorageRepo('application', 'products', []);
 	//Reducer for react state
 	const [productsState, dispatch] = useReducer(productsReducer, productsRepo);
-
-	const config = useConfig();
-	const defaultCurrency = config.getDefaultCurrency(true);
 
 	useEffect(() => {
 		setProductsRepo(productsState);
@@ -23,7 +19,7 @@ export default function useProducts() {
 		data = [];
 		constructor() {
 			this.data = productsState.map((item) => {
-				return new Product(item, defaultCurrency);
+				return new Product(item);
 			});
 		}
 
@@ -123,8 +119,8 @@ class Product {
 		isLiquid: { type: 'boolean', default: true, formField: true },
 		density: { type: 'numeric', default: 1, formField: true },
 		production: { type: 'numeric', default: 0, formField: true },
-		costHistory: { type: 'array', default: [], formField: false },
 	};
+
 	static defaultProductData(overrideData = null, exclude = []) {
 		if (exclude && Array.isArray(exclude) === false) {
 			if (typeof exclude === 'string') {
@@ -157,9 +153,8 @@ class Product {
 	 */
 	//Default product data
 	product = null;
-	defaultCurrency = null;
 
-	constructor(data = null, defaultCurrency = null) {
+	constructor(data = null) {
 		//Data Check
 		if (!data || typeof data !== 'object' || data?.productId === undefined) return;
 		//Put data in product if key exists in fields static prop
@@ -170,51 +165,6 @@ class Product {
 		});
 		//Save original data
 		this.product = { ...data };
-
-		if (defaultCurrency) this.defaultCurrency = defaultCurrency;
-	}
-
-	//Dynamic Getters
-	get cost() {
-		if (!this.product || !this?.costHistory || Array.isArray(this.costHistory) === false) return 0;
-		const costObj = this.costHistory[0];
-		if (costObj && 'cost' in costObj && 'currency' in costObj && isNaN(parseFloat(costObj.cost)) === false) {
-			return parseFloat(costObj.cost);
-		}
-		return 0;
-	}
-
-	get previousCost() {
-		if (!this.product || !this?.costHistory || Array.isArray(this.costHistory) === false) return 0;
-		//Get current cost
-		const currentCost = this.cost;
-		//Not enough data for previous cost
-		if (this.costHistory.length < 2) return currentCost;
-		//Previous cost is the second data
-		const costObj = this.costHistory[1];
-		//return it if its valid
-		if (costObj && 'cost' in costObj && 'currency' in costObj && isNaN(parseFloat(costObj.cost)) === false) {
-			return parseFloat(costObj.cost);
-		}
-		//return fallback
-		return currentCost;
-	}
-
-	/**
-	 * Return styled cost. With conditional classes if it has gone down or up
-	 * @param {*} param0
-	 */
-	getCostWithStyle() {
-		const result = { cost: 0, previous: 0, change: 0 };
-		const currentCost = Math.abs(parseFloat(this.cost));
-		const previousCost = Math.abs(parseFloat(this.previousCost));
-		//Special conditions
-		if (isNaN(currentCost) || currentCost === 0) return result;
-		if (isNaN(previousCost) || previousCost === 0) return { ...result, cost: currentCost };
-		//Calc difference
-		const diff = currentCost - previousCost;
-		const percentage = Math.round((diff / previousCost) * 1000) / 10; // % value rounded with 1 decimal place
-		return { ...result, cost: currentCost, change: percentage, previous: previousCost, currency: this.defaultCurrency };
 	}
 
 	get productionMass() {

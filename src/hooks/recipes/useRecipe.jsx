@@ -92,6 +92,15 @@ class Recipe {
 		this.unitCostWithTax = this.costWithTax / this.yield;
 	}
 
+	getDensity() {
+		if (!this.product || !this.product.density || isNaN(parseFloat(this.product.density))) return 1;
+		return parseFloat(this.product.density);
+	}
+	isLiquid() {
+		if (this.product && this.product?.isLiquid) return true;
+		return false;
+	}
+
 	//Go through materials array and calculate costs etc...
 	evaluateMaterials() {
 		//Reset current costs and materials

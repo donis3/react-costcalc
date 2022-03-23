@@ -3,6 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 
 import Currency from './pages/currencies/Currency';
 import CurrencySelectOne from './pages/currencies/CurrencySelectOne';
+import EndProduct from './pages/endproducts/EndProduct';
+import EndProductForm from './pages/endproducts/EndProductForm';
+import EndProducts from './pages/endproducts/EndProducts';
 import HomePage from './pages/HomePage';
 import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
@@ -33,6 +36,12 @@ export default function Router() {
 			<Route path='/packages/add' element={<PackageForm isEdit={false} />} />
 			<Route path='/packages/:packageId' element={<Package />} />
 			<Route path='/packages/edit/:packageId' element={<PackageForm isEdit={true} />} />
+
+			{/* EndProducts */}
+			<Route path='/endproducts' element={<EndProducts />} />
+			<Route path='/endproducts/add' element={<EndProductForm isEdit={false} />} />
+			<Route path='/endproducts/:endId' element={<EndProduct />} />
+			<Route path='/endproducts/edit/:endId' element={<EndProductForm isEdit={true} />} />
 
 
 			

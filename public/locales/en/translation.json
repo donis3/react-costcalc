@@ -35,6 +35,11 @@
 		"notfound": "Not-Found",
 		"theme": "Theme"
 	},
+	"nav": {
+		"manufacturing": "Manufacturing",
+		"products": "Product Definitions",
+		"recipes": "Recipes"
+	},
 	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
 	"themes": {
 		"emerald": "Emerald Theme",
@@ -70,6 +75,11 @@
 		"chart": "Chart"
 	},
 	"labels": {
+		"name": "Name",
+		"item": "Item",
+		"package": "Package",
+		"recipe": "Recipe",
+		"product": "Product",
 		"price": "Price",
 		"unitPrice": "Unit Price",
 		"unit": "Unit",
@@ -82,7 +92,8 @@
 		"taxPercent": "Tax %{{percent}}",
 		"taxTotal": "Total Tax",
 		"noTax": "Without Tax",
-		"withTax": "With Tax"
+		"withTax": "With Tax",
+		"density": "Density"
 	},
 	"charts": {
 		"costHistory": "Cost History",
