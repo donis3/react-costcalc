@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import useCurrency from '../hooks/app/useCurrency';
+import useEndProducts from '../hooks/endproducts/useEndProducts';
 import useMaterials from '../hooks/materials/useMaterials';
 import usePackages from '../hooks/packages/usePackages';
 import useProducts from '../hooks/products/useProducts';
@@ -19,6 +20,9 @@ const RecipesDispatch = createContext();
 const PackagesContext = createContext();
 const PackagesDispatch = createContext();
 
+const EndProductsContext = createContext();
+const EndProductsDispatch = createContext();
+
 /* Providers */
 export default function MainContext({ children }) {
 	const { Materials, dispatchMaterials } = useMaterials();
@@ -26,6 +30,7 @@ export default function MainContext({ children }) {
 	const { currencies, dispatchCurrencies } = useCurrency();
 	const { recipes, dispatchRecipes } = useRecipes();
 	const [packages, dispatchPackages] = usePackages();
+	const [endProducts, dispatchEndProducts] = useEndProducts();
 
 	//Memoize repos
 	const materialsMemoized = useMemo(() => ({ Materials }), [Materials]);
@@ -33,6 +38,7 @@ export default function MainContext({ children }) {
 	const currenciesMemoized = useMemo(() => ({ currencies }), [currencies]);
 	const recipesMemoized = useMemo(() => ({ recipes }), [recipes]);
 	const packagesMemoized = useMemo(() => ({ packages }), [packages]);
+	const endProductsMemoized = useMemo(() => ({ endProducts }), [endProducts]);
 
 	//All Context Providers wrapped
 	return (
@@ -51,8 +57,13 @@ export default function MainContext({ children }) {
 										{/* Packages */}
 										<PackagesContext.Provider value={packagesMemoized}>
 											<PackagesDispatch.Provider value={{ dispatch: dispatchPackages }}>
-												{/* Wrap the whole app with the context */}
-												{children}
+												{/* EndProducts */}
+												<EndProductsContext.Provider value={endProductsMemoized}>
+													<EndProductsDispatch.Provider value={{ dispatch: dispatchEndProducts }}>
+														{/* Wrap the whole app with the context */}
+														{children}
+													</EndProductsDispatch.Provider>
+												</EndProductsContext.Provider>
 											</PackagesDispatch.Provider>
 										</PackagesContext.Provider>
 									</RecipesDispatch.Provider>
@@ -106,4 +117,12 @@ export function usePackagesContext() {
 }
 export function usePackagesDispatch() {
 	return useContext(PackagesDispatch);
+}
+
+//End Products
+export function useEndProductsContext() {
+	return useContext(EndProductsContext);
+}
+export function useEndProductsDispatch() {
+	return useContext(EndProductsDispatch);
 }

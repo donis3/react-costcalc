@@ -1,18 +1,22 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import FormInput from '../../components/form/FormInput';
+import { useEndProductsContext } from '../../context/MainContext';
 
 import useEndproductsForm from '../../hooks/endproducts/useEndproductsForm';
 
 export default function EndProductForm({ isEdit = false } = {}) {
 	const { endId } = useParams();
+	const {endProducts} = useEndProductsContext();
+	console.log(endProducts.getAllSorted())
 	const { t } = useTranslation('pages/endproducts', 'translation');
-	const { handleSubmit, handleChange, hasError, formState, selectRecipe, selectPackage, recipe } = useEndproductsForm();
+	const {  handleSubmit, handleChange, hasError, formState, selectRecipe, selectPackage, recipe } =
+		useEndproductsForm();
 
 	//Render
 	if (selectRecipe.length === 0) return <NoRecipeError />;
@@ -20,6 +24,7 @@ export default function EndProductForm({ isEdit = false } = {}) {
 		<>
 			{/* Back Button */}
 			<BackButton />
+
 			{/* Form */}
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>

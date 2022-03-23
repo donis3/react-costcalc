@@ -9,7 +9,7 @@ export default function packagesReducer(state, action) {
 		//Auto Generated & Constant fields
 		packageId: null,
 		//Calculated Fields
-		createdAt: Date.now(),
+		//createdAt: Date.now(),
 		updatedAt: Date.now(),
 		cost: 0,
 		currency: 0,
@@ -42,7 +42,7 @@ export default function packagesReducer(state, action) {
 			payload.unit = payload?.productType === 'liquid' ? 'L' : 'kg';
 
 			//create new item by merging empty object and payload
-			const newItem = { ...emptyPackage, ...payload };
+			const newItem = { ...emptyPackage, ...payload, createdAt: Date.now() };
 			//Add to state
 			return success([...state, newItem]);
 		}

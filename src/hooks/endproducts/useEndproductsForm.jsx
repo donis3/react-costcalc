@@ -1,52 +1,21 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { usePackagesContext, useRecipesContext } from '../../context/MainContext';
+import { toast } from 'react-toastify';
+import { useEndProductsDispatch, usePackagesContext, useRecipesContext } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
 
-//Create initial state
-const initialState = {
-	endId: null,
-	recipeId: '',
-	packageId: '',
-
-	name: '',
-	commercialName: '',
-	notes: '',
-};
-
 export default function useEndproductsForm({ endProduct = null } = {}) {
+	//Load end product dispatch
+	const { dispatch } = useEndProductsDispatch();
 	//Load recipes & packages & memoize them
-	const packageContext = usePackagesContext();
-	const recipeContext = useRecipesContext();
-	const recipes = useMemo(() => {
-		const result = recipeContext?.recipes?.getAllSorted?.({ field: 'name' });
-		return Array.isArray(result) ? result : [];
-	}, [recipeContext]);
-	const packages = useMemo(() => {
-		const result = packageContext?.packages?.getAllSorted?.({ field: 'name' });
-		return Array.isArray(result) ? result : [];
-	}, [packageContext]);
+	const { packages: packageRepo } = usePackagesContext();
+	const { recipes: recipeRepo } = useRecipesContext();
+	//Load select options
+	const selectData = useMemo(() => generateSelectOptions(recipeRepo, packageRepo), [recipeRepo, packageRepo]);
 
-	const initialFormState = getInitialFormState(recipes, packages, null);
-	//Form state
-	const [formState, setFormState] = useState(initialFormState);
-
-	//Select Arrays (Will auto update according to formState.)
-	const selectRecipeArray = useMemo(() => generateRecipeSelectArray(recipes), [recipes]);
-	const selectPackageArray = useMemo(
-		() => generatePackageSelectArray(packages, recipes, formState.recipeId),
-		[packages, recipes, formState.recipeId]
-	);
-
-	const recipe = useMemo(
-		() => recipes.find((item) => item.recipeId === formState.recipeId),
-		[formState.recipeId, recipes]
-	);
-	const pack = useMemo(
-		() => packages.find((item) => item.packageId === formState.packageId),
-		[formState.packageId, packages]
-	);
+	//Form State
+	const [formState, setFormState] = useState(getInitialState(endProduct, selectData));
 
 	//Load form handler
 	const { hasError, onChangeHandler, onSubmitHandler, setFieldState, errors } = useFormHandler({
@@ -55,99 +24,202 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 		schema: useEndProductsSchema(),
 	});
 
-	//When recipe changes, must check if package array changed and packageId should change
+	//When recipe changes, change selected package if needed
 	useEffect(() => {
-		if (selectPackageArray.length === 0) return;
-		const selectedPackage = selectPackageArray.find((item) => parseInt(item.value) === parseInt(formState.packageId));
-		if (!selectedPackage) {
-			//Selected package was not found in available packages array. Change to default
-			setFieldState('packageId', selectPackageArray[0].value);
+		const recipeId = parseInt(formState.recipeId);
+		if (isNaN(recipeId) === false) {
+			//check if selected package is suitable
+			if (!selectData.isPackageSuitable(recipeId, formState.packageId)) {
+				//Selected package is not suitable
+				const { packageId } = selectData.getDefaultPackage(recipeId);
+				if (!isNaN(parseInt(packageId)) && parseInt(packageId) !== parseInt(formState.packageId)) {
+					setFormState((state) => ({ ...state, packageId: parseInt(packageId) }));
+				}
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectPackageArray]);
+	}, [formState.recipeId]);
 
 	//Handle Submit
 	const onSubmit = (formData) => {
-		console.log(formData)
+		const action = {
+			type: 'add',
+			payload: { ...formData },
+			onSuccess: function () {
+				toast.success('Added new product');
+			},
+			onError: function (errCode) {
+				if (errCode === 'duplicate') {
+					return toast.error('This combo already exists');
+				}
+				return toast.error('Failed to add item');
+			},
+		};
+
+		dispatch(action);
+		//dispatch({ type: 'reset' });
 	};
 
-	
 	//Hook Exports
 	return {
-		selectRecipe: selectRecipeArray,
-		selectPackage: selectPackageArray,
+		selectRecipe: selectData.recipes,
+		selectPackage: selectData.getPackages(formState.recipeId),
 		handleChange: onChangeHandler,
 		hasError,
 		handleSubmit: (e) => onSubmitHandler(e, onSubmit),
 		formState,
-
-		recipe,
-		pack,
+		recipe: { isLiquid: false },
 	};
 } //End of hook
+//=======================================//
+// Initial form state
+//=======================================//
+const getInitialState = (endProduct = null, selectData = null) => {
+	let result = {
+		recipeId: '',
+		packageId: '',
+		name: '',
+		commercialName: '',
+		notes: '',
+	};
+	const { recipeId } = selectData.getDefaultRecipe();
+	const { packageId } = selectData.getDefaultPackage();
+	if (endProduct && 'endId' in endProduct) {
+		//Export data from endproduct as initial state
+		result = Object.keys(endProduct).forEach((key) => {
+			if (key in result) result[key] = endProduct[key];
+		});
+		//Add id
+		result.endId = endProduct.endId;
+		//Validate recipeId and PackageId
+		const selectedRecipe = selectData.recipes.find((item) => item.recipeId === endProduct.recipeId);
 
-//====================// FORM SELECT ARRAYS //===========================//
-const generateRecipeSelectArray = (recipes = null) => {
-	//Form requires at least 1 recipe
-	if (!Array.isArray(recipes)) return null;
-
-	return recipes.map((item) => {
-		return { name: item.name, value: item.recipeId };
-	});
-};
-
-//use default recipe id if not provided
-const generatePackageSelectArray = (packages = null, recipes = null, recipeId = null) => {
-	//Form requires at least 1 recipe & package
-	if (!Array.isArray(packages) || !Array.isArray(recipes) || recipes.length === 0) return [];
-	if (packages.length === 0) return [];
-	recipeId = parseInt(recipeId);
-
-	//Validate recipe id or provide default
-	if (isNaN(recipeId) || recipeId < 0) {
-		recipeId = parseInt(recipes[0].recipeId) ? parseInt(recipes[0].recipeId) : null;
-		if (recipeId === null) return [];
-	}
-
-	//Find recipe
-	const recipe = recipes.find((item) => item.recipeId === recipeId);
-	if (!recipe) return [];
-
-	//Filter packages for this product type. Recipe determines this.
-	const productType = recipe.isLiquid ? 'liquid' : 'solid';
-
-	return packages.reduce((accumulator, current) => {
-		if (current.productType === productType) {
-			return [...accumulator, { name: current.name, value: current.packageId }];
+		if (!selectedRecipe) {
+			//This recipe is not available in the list, revert to default
+			if (recipeId !== undefined) result.recipeId = recipeId;
+			if (packageId !== undefined) result.packageId = packageId;
+		} else {
+			//selected recipe is available but check if selected package is also available
+			//must validate if the product package is suitable for this recipe
+			if (!selectData.isPackageSuitable(endProduct.recipeId, endProduct.packageId)) {
+				//package is not suitable. Must revert to default package for this type
+				const defaultPackage = selectData.getDefaultPackage(endProduct.recipeId);
+				if (defaultPackage) {
+					result.packageId = defaultPackage.packageId;
+				}
+			}
 		}
-		return accumulator;
-	}, []);
+	}
+	//Replace recipeId and packageId with defaults
+	if (!endProduct && selectData) {
+		if (recipeId !== undefined) result.recipeId = recipeId;
+		if (packageId !== undefined) result.packageId = packageId;
+	}
+	return result;
 };
 
-//Initial form state requires calculation
-const getInitialFormState = (recipes = null, packages = null, endproduct = null) => {
-	if (!recipes || !Array.isArray(recipes) || !packages || !Array.isArray(packages)) {
-		console.log('There needs to be recipes & packages available to be able to define end product');
-		return initialState;
-	}
-	if (recipes.length === 0 || !recipes[0] || 'recipeId' in recipes[0] === false) return initialState;
-	//Get default recipe
-	const { recipeId, isLiquid } = recipes[0];
-	if (isNaN(parseInt(recipeId)) || typeof isLiquid !== 'boolean') return initialState;
-	initialState.recipeId = parseInt(recipeId);
-	const productType = isLiquid ? 'liquid' : 'solid';
-	//Find the first suitable package from packages array
-	const pack = packages.find((item) => item.productType === productType);
-	//get its id
-	if (!pack) return initialState;
-	initialState.packageId = parseInt(pack.packageId);
+//=======================================//
+// Dynamic and dependand select options for recipe & package
+//=======================================//
+const generateSelectOptions = (recipes = null, packages = null) => {
+	//Default Result
+	const result = {
+		recipes: [],
+		packages: {
+			solid: [],
+			liquid: [],
+		},
+		getPackages: function (recipeId = null) {
+			if (!Array.isArray(this.recipes) || this.recipes.length === 0) return [];
+			recipeId = parseInt(recipeId);
+			//If given recipe ID is invalid or not in available recipes, revert to default
+			if (isNaN(recipeId) || !this.recipes.find((item) => item.recipeId === recipeId)) {
+				recipeId = this.recipes[0].recipeId;
+			}
+			//Get type for this recipe
+			const recipeType = this.getRecipeType(recipeId);
 
-	//Id endproduct is null, this is a new product form not edit
-	if(!endproduct) {
-		delete initialState.endId;
-	}
+			return this.packages[recipeType];
+		},
 
-	return initialState;
+		getDefaultPackage: function (recipeId = null) {
+			if (recipeId !== null && isNaN(parseInt(recipeId)) === false) {
+				//A recipe id is provided. Get default package for this
+				const recipeType = this.getRecipeType(recipeId);
+				if (this.packages[recipeType].length > 0) {
+					//A suitable package was found
+					return this.packages[recipeType][0];
+				}
+				return null;
+			}
+			if (!this.getDefaultRecipe()) return null;
+			const type = this.getDefaultRecipe().isLiquid ? 'liquid' : 'solid';
+			if (this.packages[type].length === 0) return null;
+			return this.packages[type][0];
+		},
+		getDefaultRecipe: function () {
+			if (this.recipes.length === 0) return null;
+			return this.recipes[0];
+		},
+		getRecipeType: function (recipeId = null) {
+			recipeId = parseInt(recipeId);
+			let recipe = this.recipes.find((item) => item.recipeId === recipeId);
+			if (!recipe) {
+				recipe = this.getDefaultRecipe();
+				if (!recipe) return 'solid';
+				return recipe.isLiquid ? 'liquid' : 'solid';
+			} else {
+				return recipe.isLiquid ? 'liquid' : 'solid';
+			}
+		},
+		isPackageSuitable: function (recipeId = null, packageId = null) {
+			recipeId = parseInt(recipeId);
+			packageId = parseInt(packageId);
+			if (isNaN(recipeId) || isNaN(packageId)) return false;
+			//Find recipe type
+			const type = this.getRecipeType(recipeId);
+			//check if the package id is in the array of packages for this type
+			const pack = this.packages[type].find((item) => item.packageId === packageId);
+			if (!pack) {
+				//Package is not suitable
+				return false;
+			}
+			return true;
+		},
+	};
+	//Validate Recipes
+	if (!recipes || typeof recipes.getAllSorted !== 'function') return result;
+	//Load recipes and map them for select options (Include isLiquid data)
+	const sortedRecipes = recipes.getAllSorted({ field: 'name', asc: true });
+	if (!Array.isArray(sortedRecipes) || sortedRecipes.length === 0) return result;
+	result.recipes = sortedRecipes.map((item) => ({
+		name: item.name,
+		value: item.recipeId,
+		isLiquid: item.isLiquid,
+		recipeId: item.recipeId,
+	}));
+
+	//Validate packages
+	if (!packages || typeof packages.getAllSorted !== 'function') return result;
+	//Load packages
+	const sortedPackages = packages.getAllSorted({ field: 'name' });
+	const solidPackages = sortedPackages.filter((item) => item.productType === 'solid');
+	const liquidPackages = sortedPackages.filter((item) => item.productType === 'liquid');
+	//Map them for select opts
+	result.packages.liquid = liquidPackages.map((item) => ({
+		name: item.name,
+		value: item.packageId,
+		packageId: item.packageId,
+	}));
+	result.packages.solid = solidPackages.map((item) => ({
+		name: item.name,
+		value: item.packageId,
+		packageId: item.packageId,
+	}));
+
+	//console.log('Select Options Generated');
+	//Return result
+	return result;
 };
 
 //=======================================//
