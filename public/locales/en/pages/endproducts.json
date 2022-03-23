@@ -26,5 +26,8 @@
 		"recipeAlt": "Will be used for physical properties and cost analysis",
 		"package": "Package",
 		"packageAlt": "Will be used to determine weight/volume and cost analysis"
+	},
+	"endProducts": {
+		"noData": "There are no products to display"
 	}
 }

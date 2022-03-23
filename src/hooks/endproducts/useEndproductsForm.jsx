@@ -21,7 +21,7 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 	const [formState, setFormState] = useState(getInitialState(endProduct, selectData));
 
 	//Load form handler
-	const { hasError, onChangeHandler, onSubmitHandler, setFieldState, errors } = useFormHandler({
+	const { hasError, onChangeHandler, onSubmitHandler } = useFormHandler({
 		formState,
 		setFormState,
 		schema: useEndProductsSchema(),

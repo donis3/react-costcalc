@@ -1,47 +1,58 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ThSortable from '../../../components/common/ThSortable';
+import { useEndProductsContext } from '../../../context/MainContext';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useIntl from '../../../hooks/common/useIntl';
+import EndProductsTableRow from './EndProductsTableRow';
 
 export default function EndProductsTable() {
 	const { t } = useTranslation('pages/endproducts', 'translation');
-	const [sortingState, sortBy] = useSortTableByField('endproducts', ['name', 'product', 'package', 'cost'], 'name');
+	const [sortingState, sortBy] = useSortTableByField(
+		'endproducts',
+		['name', 'recipeName', 'packageName', 'cost'],
+		'name'
+	);
 	const { displayNumber, displayMoney } = useIntl();
+	const { endProducts } = useEndProductsContext();
+	const sortedProducts = endProducts?.getAllSorted?.(sortingState) || [];
 
-	//No package
-	if (0) {
-		return <div className='mt-10 opacity-50'>{t('endproducts.noPackage')}</div>;
+	//No Product
+	if (sortedProducts.length === 0) {
+		return <div className='mt-10 opacity-50'>{t('endProducts.noData')}</div>;
 	}
 	//Show Table
 	return (
 		<div className='overflow-x-auto my-10'>
-
 			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
 				<thead>
 					<tr>
 						{/* Table Headers */}
-						
+
 						<ThSortable className='w-3/12' field='name' sortingState={sortingState} handleSort={sortBy}>
 							{t('labels.name', { ns: 'translation' })}
 						</ThSortable>
 
-						<ThSortable className='w-3/12' field='product' sortingState={sortingState} handleSort={sortBy}>
-							{t('labels.product', { ns: 'translation' })}
+						<ThSortable className='w-3/12' field='recipeName' sortingState={sortingState} handleSort={sortBy}>
+							{t('labels.recipe', { ns: 'translation' })}
 						</ThSortable>
 
-						<ThSortable className='w-3/12' field='package' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-3/12' field='packageName' sortingState={sortingState} handleSort={sortBy}>
 							{t('labels.package', { ns: 'translation' })}
 						</ThSortable>
 
-                        <ThSortable className='w-2/12' field='cost' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-2/12' field='cost' sortingState={sortingState} handleSort={sortBy}>
 							{t('labels.cost', { ns: 'translation' })}
 						</ThSortable>
 
 						<ThSortable className='w-1/12'></ThSortable>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+					{sortedProducts.map((item, i) => (
+						<EndProductsTableRow key={i} data={item} />
+					))}
+				</tbody>
 			</table>
 		</div>
 	);
