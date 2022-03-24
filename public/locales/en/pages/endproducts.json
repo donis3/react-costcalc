@@ -29,5 +29,11 @@
 	},
 	"endProducts": {
 		"noData": "There are no products to display"
+	},
+	"endProduct": {
+		"tabDetails": "Details",
+		"tabCost": "Cost Analysis",
+		"tabCostHistory": "Cost History",
+		"costHistoryTitle": "Product Cost History"
 	}
 }

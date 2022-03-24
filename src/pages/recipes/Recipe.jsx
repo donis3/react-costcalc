@@ -19,6 +19,7 @@ import MaterialInfo from '../materials/MaterialInfo';
 import DocumentDates from '../../components/common/DocumentDates';
 import CostTable from '../../components/CostTable/CostTable';
 import RecipeCostHistory from './details/RecipeCostHistory';
+import BackButton from '../../components/common/BackButton';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -57,7 +58,6 @@ export default function Recipe() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);
-	
 
 	//Show /Hide material modal
 	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
@@ -70,11 +70,7 @@ export default function Recipe() {
 	}
 	return (
 		<>
-			<div className='mb-1'>
-				<Link to='/recipes'>
-					<Button.Back />
-				</Link>
-			</div>
+			<BackButton />
 
 			<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
 				{/* Header */}

@@ -3,17 +3,17 @@ import { useTranslation } from 'react-i18next';
 import ThSortable from '../../../components/common/ThSortable';
 import { useEndProductsContext } from '../../../context/MainContext';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
-import useIntl from '../../../hooks/common/useIntl';
+
 import EndProductsTableRow from './EndProductsTableRow';
 
 export default function EndProductsTable() {
 	const { t } = useTranslation('pages/endproducts', 'translation');
 	const [sortingState, sortBy] = useSortTableByField(
 		'endproducts',
-		['name', 'recipeName', 'packageName', 'cost'],
+		['name', 'recipeName', 'packageName', 'totalCostWithTax'],
 		'name'
 	);
-	const { displayNumber, displayMoney } = useIntl();
+
 	const { endProducts } = useEndProductsContext();
 	const sortedProducts = endProducts?.getAllSorted?.(sortingState) || [];
 
@@ -41,7 +41,7 @@ export default function EndProductsTable() {
 							{t('labels.package', { ns: 'translation' })}
 						</ThSortable>
 
-						<ThSortable className='w-2/12' field='cost' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-2/12' field='totalCostWithTax' sortingState={sortingState} handleSort={sortBy}>
 							{t('labels.cost', { ns: 'translation' })}
 						</ThSortable>
 

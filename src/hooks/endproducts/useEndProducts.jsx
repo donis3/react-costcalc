@@ -38,7 +38,7 @@ export default function useEndProducts() {
 			//Sort and return
 			if (['name', 'notes', 'commercialName', 'recipeName', 'packageName'].includes(field)) {
 				return sortArrayAlphabetic(endProductsArray, field, asc);
-			} else if (['endId', 'recipeId', 'packageId'].includes(field)) {
+			} else if (['endId', 'recipeId', 'packageId', 'totalCostWithTax', 'totalCost'].includes(field)) {
 				return sortArrayNumeric(endProductsArray, field, asc);
 			} else {
 				return endProductsArray;
@@ -148,6 +148,10 @@ class EndProduct {
 	recipeName = null;
 	packageName = null;
 
+	//cost fields for sorting. Actual cost data is in this.cost object
+	totalCostWithTax = 0;
+	totalCost = 0;
+
 	//Constructor
 	constructor(endId = null) {
 		//Check end id
@@ -171,6 +175,10 @@ class EndProduct {
 		if (pack) {
 			this.package = pack;
 			this.packageName = pack.name;
+		}
+		if (this.cost && 'totalWithTax' in this.cost) {
+			this.totalCostWithTax = parseFloat(this.cost.totalWithTax);
+			this.totalCost = parseFloat(this.cost.total);
 		}
 	}
 

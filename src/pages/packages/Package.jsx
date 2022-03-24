@@ -9,6 +9,7 @@ import { FaInfo as InfoIcon, FaChartLine as CostIcon } from 'react-icons/fa';
 import PackageInfo from './packageDetails/PackageInfo';
 import PackageCosts from './packageDetails/PackageCosts';
 import DocumentDates from '../../components/common/DocumentDates';
+import BackButton from '../../components/common/BackButton';
 
 export default function Package() {
 	const { packageId } = useParams();
@@ -55,11 +56,7 @@ export default function Package() {
 	//Render
 	return (
 		<>
-			<div className='mb-1'>
-				<Link to='/packages'>
-					<Button.Back />
-				</Link>
-			</div>
+			<BackButton />
 			<CardWithTabs
 				tabs={tabs}
 				headerContent={

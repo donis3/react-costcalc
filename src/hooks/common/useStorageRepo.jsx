@@ -11,6 +11,9 @@ export default function useStorageRepo(repoName = null, itemName = null, initial
 	//React state hook with initialState taken from storage
 	const [itemState, setItemState] = useState(initialState);
 
+	//Make a copy of the state object to avoid direct mutation by other parts of the app
+	const itemStateCopy = JSON.parse(JSON.stringify(itemState));
+
 	/**
 	 * Set any data at your current repo/item.
 	 * Data will be stored in state and will persist through local storage if available
@@ -26,9 +29,9 @@ export default function useStorageRepo(repoName = null, itemName = null, initial
 	//Remove an item from current repo if such a need rises
 	const deleteItem = () => {
 		removeStorageRepoItem(repoName, itemName);
-	}
+	};
 
-	return [itemState, setItem, deleteItem];
+	return [itemStateCopy, setItem, deleteItem];
 }
 
 //Local Storage Helpers
