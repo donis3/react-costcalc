@@ -21,7 +21,7 @@ export default function EndProductForm({ isEdit = false } = {}) {
 	useEffect(() => {
 		//If endproduct is not found in edit mode, send to 404
 		if (isEdit && !endProduct) {
-			return navigate('/notfound');
+			return navigate('/endproducts');
 		}
 		//In edit mode, set breadcrumb manually
 		if (isEdit && endProduct) {

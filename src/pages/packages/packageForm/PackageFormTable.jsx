@@ -92,6 +92,7 @@ function PackageFormTableRow({ item = null, index = 0, onRemove = null } = {}) {
 	const { t } = useTranslation('translation');
 	const { displayNumber, displayMoney } = useIntl();
 
+	
 	return (
 		<div className={`grid grid-cols-12 gap-x-2 ${index % 2 === 0 ? '' : 'bg-base-200'}`}>
 			<div className='py-2 px-2 col-span-3 truncate'>{item.name}</div>

@@ -81,7 +81,7 @@ function NavbarItem({ children, to = '/' }) {
 function NavbarDropdown({ text = 'dropdown', children }) {
 	const [isOpen, setOpen] = useState(false);
 	const handleClick = () => setOpen((state) => !state);
-	const openDropdown = () => setOpen(() => true);
+	//const openDropdown = () => setOpen(() => true);
 	const closeDropdown = () => setOpen(() => false);
 
 	if (!children) {
@@ -89,7 +89,7 @@ function NavbarDropdown({ text = 'dropdown', children }) {
 	}
 	return (
 		<li className='nav-dropdown '>
-			<button onClick={handleClick} onMouseOver={openDropdown}>
+			<button onClick={handleClick}>
 				{text}
 			</button>
 

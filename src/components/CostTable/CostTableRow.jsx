@@ -9,6 +9,8 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 	const additionalClass = ' p-3 ';
     const {t} = useTranslation('translation');
 
+	
+
 	//Clickable button if callback provided
 	const itemName =
 		typeof itemCallback === 'function' ? (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../../components/common/BackButton';
@@ -16,18 +16,20 @@ export default function EndProduct() {
 	const { page } = useAppContext();
 	const navigate = useNavigate();
 	const { endProducts } = useEndProductsContext();
-	const endProduct = endProducts?.findById?.(endId);
+	const endProduct = useMemo(() => endProducts.findById(endId, true), [endId, endProducts]);
 	const { t } = useTranslation('pages/endproducts');
 
 	//Product not found ?
 	useEffect(() => {
-		if (!endProduct) return navigate('/notfound');
-
-		if (endProduct && page) {
-			page.setBreadcrumb(endProduct.name);
-		}
+		if (!endProduct) return navigate('/endproducts');
+		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [endProduct]);
+
+	useEffect(() => {
+		page.setBreadcrumb(endProduct?.name);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [endProduct?.name]);
 
 	if (!endProduct) return <></>;
 

@@ -34,6 +34,8 @@
 		"tabDetails": "Details",
 		"tabCost": "Cost Analysis",
 		"tabCostHistory": "Cost History",
-		"costHistoryTitle": "Product Cost History"
+		"costHistoryTitle": "Product Cost History",
+		"costWithTax": "Cost - Tax Included",
+		"cost": "Cost"
 	}
 }

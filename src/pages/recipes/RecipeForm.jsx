@@ -22,6 +22,7 @@ export default function RecipeForm() {
 
 	const { products } = useProductsContext();
 	const productList = products.getAllSorted({ field: 'name' });
+	const product = recipe ? products.findById(recipe.productId) : null;
 
 	const { formState, setFormState, onFieldChange, hasError, onSubmit, resetForm, onDelete } = useRecipeForm({ recipe });
 	const [details, setDetails] = useState({ product: null });
@@ -117,14 +118,20 @@ export default function RecipeForm() {
 								<FormInput.Text name='name' value={formState.name} onChange={onFieldChange} />
 							</FormInput>
 
-							<FormInput label={t('labels.product')} error={hasError('productId')}>
-								<FormInput.Select
-									name='productId'
-									options={selectRecipeArrayGenerator(productList)}
-									value={formState.productId}
-									onChange={onFieldChange}
-								/>
-							</FormInput>
+							{recipe ? (
+								<FormInput label={t('labels.product')}>
+									<input type='text' disabled className='input input-bordered' value={product.name} />
+								</FormInput>
+							) : (
+								<FormInput label={t('labels.product')} error={hasError('productId')}>
+									<FormInput.Select
+										name='productId'
+										options={selectRecipeArrayGenerator(productList)}
+										value={formState.productId}
+										onChange={onFieldChange}
+									/>
+								</FormInput>
+							)}
 
 							<FormInput className='' label={t('labels.yield')} error={hasError('yield')} altLabel={showYieldWeight()}>
 								<FormInput.Group>

@@ -93,7 +93,10 @@
 		"taxTotal": "Total Tax",
 		"noTax": "Without Tax",
 		"withTax": "With Tax",
-		"density": "Density"
+		"density": "Density",
+		"packageCapacity": "Package Capacity",
+		"physicalState": "Physical State",
+		"weight": "Weight"
 	},
 	"charts": {
 		"costHistory": "Cost History",

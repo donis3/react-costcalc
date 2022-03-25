@@ -64,21 +64,23 @@ export default function usePackages() {
 		if (isNaN(packageId)) return null;
 		const pack = packagesState.find((item) => item.packageId === packageId);
 		if (!pack) return null;
+		//Create deep copy
+		const packageData = JSON.parse(JSON.stringify(pack));
 
 		if (getOnlyFormData === false) {
 			//Add additional fields
-			pack.itemsForCostTable = getItemsForCostTable(pack.items);
-			pack.itemCostDetails = getItemsCostDetails(pack.items);
-			return pack;
+			packageData.itemsForCostTable = getItemsForCostTable(pack.items);
+			packageData.itemCostDetails = getItemsCostDetails(pack.items);
+			return packageData;
 		}
 
 		//Return only form fields. Make a deep copy of the object including items array
 		return Object.keys(defaultPackage).reduce(
 			(accumulator, key) => {
-				if (key === 'items' && Array.isArray(pack[key])) {
-					return { ...accumulator, [key]: [...pack[key]] };
+				if (key === 'items' && Array.isArray(packageData[key])) {
+					return { ...accumulator, [key]: [...packageData[key]] };
 				}
-				return key in pack ? { ...accumulator, [key]: pack[key] } : accumulator;
+				return key in packageData ? { ...accumulator, [key]: packageData[key] } : accumulator;
 			},
 			{ packageId }
 		); //Start with empty obj with only package ID prop
@@ -121,12 +123,16 @@ export default function usePackages() {
 				tax: item.itemTax,
 				quantity: 1,
 				currency: item.itemCurrency,
-				amount: item.itemPrice, //Convert to local price
+				amount: item.itemPrice, //Convert to local price and add tax
 			};
 			//Convert to local
 			if (item.itemCurrency !== defaultCurrency) {
 				const { amount } = convert(mutatedItem.amount, mutatedItem.currency, defaultCurrency);
 				mutatedItem.amount = amount;
+			}
+			//Add tax to amount
+			if (isNaN(parseFloat(mutatedItem.tax)) === false && mutatedItem.tax > 0) {
+				mutatedItem.amount = mutatedItem.amount * (1 + mutatedItem.tax / 100);
 			}
 			//Other operations
 			if (item.packageType === 'box') {

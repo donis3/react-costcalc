@@ -63,19 +63,29 @@ export default function PackageForm({ isEdit = false } = {}) {
 							<FormInput label={t('labels.name')} error={hasError('name')}>
 								<FormInput.Text name='name' onChange={onChangeHandler} value={formState.name} />
 							</FormInput>
-							{/* productType */}
-							<FormInput
-								label={t('labels.productType')}
-								error={hasError('productType')}
-								altLabel={t('labels.productTypeAlt')}
-							>
-								<FormInput.Select
-									name='productType'
-									options={physicalStates}
-									onChange={onChangeHandler}
-									value={formState.productType}
-								/>
-							</FormInput>
+							{isEdit === false ? (
+								<FormInput
+									label={t('labels.productType')}
+									error={hasError('productType')}
+									altLabel={t('labels.productTypeAlt')}
+								>
+									<FormInput.Select
+										name='productType'
+										options={physicalStates}
+										onChange={onChangeHandler}
+										value={formState.productType}
+									/>
+								</FormInput>
+							) : (
+								<FormInput label={t('labels.productType')}>
+									<input
+										type='text'
+										disabled
+										className='input input-bordered'
+										value={t('physicalStates.' + formState.productType, { ns: 'translation' })}
+									/>
+								</FormInput>
+							)}
 							{/* capacity */}
 							<FormInput
 								label={t('labels.packageCapacity')}

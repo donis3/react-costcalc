@@ -45,13 +45,13 @@ export default function useEndProducts() {
 			}
 		},
 		//Attach to export object
-		findById: function (endId = null) {
+		findById: function (endId = null, returnClass = false) {
 			endId = parseInt(endId);
 			if (isNaN(endId)) return null;
 			const result = this.data.find((item) => item.endId === endId);
-
 			if (!result) return null;
-			return result;
+
+			return returnClass ? new EndProduct(endId) : result;
 		},
 	}; //EOC
 
@@ -159,12 +159,12 @@ class EndProduct {
 		if (isNaN(endId)) return null;
 		this.endId = endId;
 
-		//Load
+		//Load from static repo
 		const endProduct = EndProduct.endProducts.find((item) => item.endId === endId);
 		if (!endProduct) return null;
-		this.data = { ...endProduct }; //Copy data as new obj
+		this.data = JSON.parse(JSON.stringify(endProduct)); //Copy data as new obj
 		//Copy each key as instance property
-		Object.keys(endProduct).forEach((key) => (this[key] = endProduct[key]));
+		Object.keys(this.data).forEach((key) => (this[key] = this.data[key]));
 		//Find related recipe
 		const recipe = EndProduct.recipes.find((item) => item.recipeId === this.recipeId);
 		const pack = EndProduct.packages.find((item) => item.packageId === this.packageId);
@@ -196,5 +196,24 @@ class EndProduct {
 			return withTax ? parseFloat(this.cost.totalWithTax) : parseFloat(this.cost.total);
 		}
 		return 0;
+	}
+
+	getWeight() {
+		//Get density
+		let density = NaN;
+		if (this.recipe && this.recipe.isLiquid === true && this.recipe.density) {
+			density = parseFloat(this.recipe.density);
+		}
+		if (isNaN(density)) density = 1;
+
+		//Get volume
+		let volume = NaN;
+		if (this.package && this.package.packageCapacity) {
+			volume = parseFloat(this.package.packageCapacity);
+		}
+		if (isNaN(volume)) volume = 1;
+
+		//Get Weight
+		return volume * density;
 	}
 }

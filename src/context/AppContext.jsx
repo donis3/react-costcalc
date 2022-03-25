@@ -51,8 +51,10 @@ const AppContextProvider = ({ children }) => {
 	const [lastBreadcrumb, setLastBreadcrumb] = useState({});
 	const { pathname } = useLocation();
 	//Must be used in useEffect with pathname dependency or will cause too many renders
-	const setBreadcrumb = (text) => {
-		setLastBreadcrumb({ ...lastBreadcrumb, [pathname]: text });
+	const setBreadcrumb = (text = '') => {
+		if(!text || typeof text !== 'string') text = '';
+		const newBreadcrumb = text;
+		setLastBreadcrumb({ ...lastBreadcrumb, [pathname]: newBreadcrumb });
 	};
 	const getBreadcrumb = (pathname) => {
 		if (pathname in lastBreadcrumb) return lastBreadcrumb[pathname];

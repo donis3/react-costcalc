@@ -32,14 +32,32 @@ export default function recipesReducer(state, action) {
 			//get the id
 			const { recipeId } = payload;
 
-			//Validate id
-			if (!state.find((item) => item.recipeId === recipeId)) {
+			//Find recipe
+			const recipe = state.find((item) => item.recipeId === recipeId);
+			if (!recipe) {
 				//Update cant be done. Item not found
 				if (typeof error === 'function') error();
 				return state;
 			}
+			//Merge old and new data
+			const newRecipe = { ...recipe, ...payload };
+
+			//Make sure product id is not changed
+			if (newRecipe.productId !== recipe.productId) {
+				//Invalid update. Cant change product
+				if (typeof error === 'function') error();
+				return state;
+			}
+
+			//Check for changes
+			if (JSON.stringify(newRecipe) === JSON.stringify(recipe)) {
+				//No change, exit
+				if (typeof error === 'function') error();
+				return state;
+			}
+
 			//update item update time
-			payload.updatedAt = Date.now();
+			newRecipe.updatedAt = Date.now();
 
 			//Update state array
 			return state.map((item) => {
@@ -48,7 +66,7 @@ export default function recipesReducer(state, action) {
 					if (typeof success === 'function') success(recipeId);
 
 					//this one needs updating. Merge old and new data
-					return { ...item, ...payload };
+					return { ...item, ...newRecipe };
 				} else {
 					return item;
 				}
