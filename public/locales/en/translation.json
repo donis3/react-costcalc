@@ -162,6 +162,7 @@
 	},
 	"packageTypes": {
 		"box": "Box",
+		"boxWithCapacity": "[box/{{capacity}} pcs]",
 		"container": "Container",
 		"other": "Other"
 	},
@@ -198,6 +199,9 @@
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",
 		"DKK": "Danish Krone"
+	},
+	"toggles": {
+		"includeTax": "Include tax?"
 	},
 	"errorBoundary": {
 		"title": "Application Crashed!",

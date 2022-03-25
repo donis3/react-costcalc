@@ -3,14 +3,17 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import NumericUnit from '../../../components/common/NumericUnit';
 import PricePerUnit from '../../../components/common/PricePerUnit';
+import CostTable from '../../../components/CostTable/CostTable';
+import useEndProductCostAnalysis from '../../../hooks/endproducts/useEndProductCostAnalysis';
 import ProductInfo from '../../products/ProductInfo';
 
-export default function EndProductInfo({ data = null } = {}) {
+export default function EndProductInfo({ data = null, recipeItems, packageItems } = {}) {
 	const { t } = useTranslation('pages/endproducts');
-
 	const [modalState, setModalState] = useState({ modal: 'product', isOpen: false });
 	const openModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: true }));
 	const closeModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: false }));
+
+	const { costItems, costTotals } = useEndProductCostAnalysis({ recipeItems, packageItems });
 
 	if (!data) return <></>;
 
@@ -91,6 +94,10 @@ export default function EndProductInfo({ data = null } = {}) {
 				</InfoItem>
 
 				{/* Grid End */}
+			</div>
+			<div className='mt-10'>
+				<h3 className='py-2 font-medium'>{t('endProduct.costTableTitle')}</h3>
+				<CostTable items={costItems} costs={costTotals} />
 			</div>
 
 			{/* Modals */}

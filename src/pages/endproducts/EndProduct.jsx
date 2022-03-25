@@ -1,28 +1,29 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import CardWithTabs from '../../components/common/CardWithTabs';
 import DocumentDates from '../../components/common/DocumentDates';
-import { useEndProductsContext } from '../../context/MainContext';
-import { FaInfo as InfoIcon, FaChartLine as CostIcon } from 'react-icons/fa';
+
+import { FaInfo as InfoIcon, FaChartLine as CostIcon, FaChartPie as AnalysisIcon } from 'react-icons/fa';
 import EndProductInfo from './details/EndProductInfo';
 import EndProductCost from './details/EndProductCost';
 import { useAppContext } from '../../context/AppContext';
+import EndProductAnalysis from './details/EndProductAnalysis';
+import useEndProduct from '../../hooks/endproducts/useEndProduct';
 
 export default function EndProduct() {
 	const { endId } = useParams();
 	const { page } = useAppContext();
 	const navigate = useNavigate();
-	const { endProducts } = useEndProductsContext();
-	const endProduct = useMemo(() => endProducts.findById(endId, true), [endId, endProducts]);
+	const { endProduct, recipeItems, packageItems } = useEndProduct(endId);
 	const { t } = useTranslation('pages/endproducts');
 
 	//Product not found ?
 	useEffect(() => {
 		if (!endProduct) return navigate('/endproducts');
-		
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [endProduct]);
 
@@ -41,7 +42,15 @@ export default function EndProduct() {
 					<InfoIcon /> {t('endProduct.tabDetails')}
 				</span>
 			),
-			body: <EndProductInfo data={endProduct} />,
+			body: <EndProductInfo data={endProduct} recipeItems={recipeItems} packageItems={packageItems} />,
+		},
+		{
+			name: (
+				<span className='flex items-center gap-x-1'>
+					<AnalysisIcon /> {t('endProduct.tabCostAnalysis')}
+				</span>
+			),
+			body: <EndProductAnalysis data={endProduct} recipeItems={recipeItems} packageItems={packageItems} />,
 		},
 		{
 			name: (

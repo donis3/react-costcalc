@@ -59,10 +59,12 @@ export default function useMaterials() {
 			if (!materialId || isNaN(parseInt(materialId))) return null;
 			const result = this.materials.find((item) => item.materialId === materialId);
 			if (!result) return null;
+			//Deep copy
+			const materialData = JSON.parse(JSON.stringify(result));
 
 			const material = classObject
-				? new Material(result, t, config, displayConvertedMoney, displayNumber, convert)
-				: result;
+				? new Material(materialData, t, config, displayConvertedMoney, displayNumber, convert)
+				: materialData;
 
 			return material;
 		},

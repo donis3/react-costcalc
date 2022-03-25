@@ -34,8 +34,17 @@
 		"tabDetails": "Details",
 		"tabCost": "Cost Analysis",
 		"tabCostHistory": "Cost History",
+		"tabCostAnalysis": "Cost Analysis",
 		"costHistoryTitle": "Product Cost History",
 		"costWithTax": "Cost - Tax Included",
-		"cost": "Cost"
+		"cost": "Cost",
+		"costTableTitle": "Cost Breakdown"
+	},
+	"costAnalysis": {
+		"title": "Product Cost Analysis",
+		"subtitle": "Cost Details Chart",
+		"recipeCost": "Materials",
+		"packageCost": "Packaging",
+		"showAllMaterialsCost": "Show Deep Analysis"
 	}
 }

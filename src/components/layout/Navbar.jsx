@@ -82,7 +82,7 @@ function NavbarDropdown({ text = 'dropdown', children }) {
 	const [isOpen, setOpen] = useState(false);
 	const handleClick = () => setOpen((state) => !state);
 	//const openDropdown = () => setOpen(() => true);
-	const closeDropdown = () => setOpen(() => false);
+	//const closeDropdown = () => setOpen(() => false);
 
 	if (!children) {
 		return <></>;
@@ -93,7 +93,7 @@ function NavbarDropdown({ text = 'dropdown', children }) {
 				{text}
 			</button>
 
-			<ul style={{ display: isOpen ? null : 'none' }} onMouseLeave={closeDropdown}>
+			<ul style={{ display: isOpen ? null : 'none' }}>
 				{/* Must have nav item childs */}
 				{children}
 			</ul>
