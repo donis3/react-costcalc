@@ -28,7 +28,7 @@ export default function EndProductCost({ data = null } = {}) {
 
 	//Render chart
 	return (
-		<div className='w-full flex justify-center'>
+		<div className='w-full flex justify-center min-h-[300px]'>
 			<div className='flex-1 lg:max-w-2xl'>
 				<DateMoneyChart data={chartData} label={data.name} title={t('endProduct.costHistoryTitle', { item: data.name })} />
 			</div>

@@ -7,14 +7,12 @@ export default function useCurrencyConversion() {
 	} = useCurrency();
 	const { displayMoney: moneyIntl } = useIntl();
 
-	
-
 	/**
 	 * Convert a monetary value between currencies
 	 * @param {*} from
 	 * @param {*} to
 	 */
-	const convert = (amount = 0, from = null, to = null) => {
+	const convert = (amount = 0, from = null, to = null, round = true) => {
 		const result = { currency: from, amount: amount };
 
 		if (typeof from === 'string') from = from.toUpperCase();
@@ -36,7 +34,11 @@ export default function useCurrencyConversion() {
 
 		//if to is default currency no need for further conversion
 		if (to === defaultCurrency) {
-			return { currency: to, amount: Math.round(defaultAmount * 100) / 100 };
+			if (round) {
+				return { currency: to, amount: Math.round(defaultAmount * 100) / 100 };
+			} else {
+				return { currency: to, amount: defaultAmount };
+			}
 		}
 
 		//get conversion rate for target currency
@@ -45,7 +47,11 @@ export default function useCurrencyConversion() {
 		//Find amount using   targetRate * amount = defaultAmount
 		const targetAmount = parseFloat(defaultAmount / rateToTarget);
 
-		return { currency: to, amount: Math.round(targetAmount * 100) / 100 };
+		if (round) {
+			return { currency: to, amount: Math.round(targetAmount * 100) / 100 };
+		} else {
+			return { currency: to, amount: targetAmount };
+		}
 	};
 
 	const displayMoney = (amount = null, currency = null, convertTo = null) => {

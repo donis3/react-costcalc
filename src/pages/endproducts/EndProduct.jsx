@@ -19,6 +19,7 @@ export default function EndProduct() {
 	const navigate = useNavigate();
 	const { endProduct, recipeItems, packageItems } = useEndProduct(endId);
 	const { t } = useTranslation('pages/endproducts');
+	
 
 	//Product not found ?
 	useEffect(() => {

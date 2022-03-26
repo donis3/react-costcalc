@@ -1,8 +1,9 @@
+import { useEndProductsContext } from '../../context/MainContext';
 import useRecipe from '../recipes/useRecipe';
-import useEndProducts from './useEndProducts';
 
 export default function useEndProduct(endId = null) {
-	const [endProducts] = useEndProducts();
+	const {endProducts} = useEndProductsContext();
+	
 	const endProduct = endProducts ? endProducts.findById(endId, true) : null;
 	const { recipe } = useRecipe(endProduct?.recipeId);
 
@@ -17,7 +18,7 @@ export default function useEndProduct(endId = null) {
 			}
 		}
 	}
-
+	
 	let packageItems = [];
 	if (endProduct && endProduct.package && endProduct.package.items) {
 		if (Array.isArray(endProduct.package.items)) {

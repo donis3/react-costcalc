@@ -1,11 +1,11 @@
 import { useEffect, useReducer } from 'react';
+
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 import useStorageRepo from '../common/useStorageRepo';
-import usePackages from '../packages/usePackages';
-import useRecipes from '../recipes/useRecipes';
+
 import endProductsReducer from './endProductsReducer';
 
-export default function useEndProducts() {
+export default function useEndProducts(recipes = null, packages = null) {
 	//Load local storage for this repo
 	const [endProductsRepo, setEndProductsRepo] = useStorageRepo('application', 'endproducts', []);
 	//Initialize state using local storage data
@@ -17,9 +17,8 @@ export default function useEndProducts() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [endProductsState]);
 
-	//Load external dependencies to EndProduct item statically
-	const { recipes } = useRecipes();
-	const [packages] = usePackages();
+	
+	
 	EndProduct.loadDependencies({
 		recipes: recipes.getAllSorted(),
 		packages: packages.getAllSorted(),
@@ -91,6 +90,7 @@ export default function useEndProducts() {
 			packageCapacity = parseFloat(packageCapacity);
 			cost = parseFloat(cost);
 			tax = parseFloat(tax);
+			
 			if (isNaN(packageCapacity) === false) quantity = packageCapacity;
 			if (isNaN(cost) === false) costData.packageCost = cost;
 			if (isNaN(tax) === false) costData.packageTax = tax;
@@ -100,6 +100,7 @@ export default function useEndProducts() {
 		if (product.recipe && Array.isArray(product.recipe.unitCosts) && product.recipe.unitCosts.length > 0) {
 			let recipeUnitCost = { ...product.recipe.unitCosts[0] };
 			let { cost, costWithTax } = recipeUnitCost;
+			
 			cost = parseFloat(cost);
 			costWithTax = parseFloat(costWithTax);
 			if (isNaN(cost) === false) costData.recipeCost = quantity * cost;

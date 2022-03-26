@@ -22,7 +22,9 @@ export default function useEndProductCostAnalysis({ recipeItems = [], packageIte
 	recipeItems.forEach((material) => {
 		const labelText = `${material.name} - ${displayNumber(material.amount, 2)} ${material.unit}`;
 		chartData.labels.push(labelText);
-		let cost = material.amount * material.localPrice;
+		//let cost = material.amount * material.localPrice;
+		let costWithoutTax = convert(material.amount * material.price, material.currency, defaultCurrency, false).amount;
+		let cost = costWithoutTax;
 		//Add tax if requested
 		if (showTax && material.tax > 0) {
 			cost = cost * (1 + material.tax / 100);
@@ -36,7 +38,7 @@ export default function useEndProductCostAnalysis({ recipeItems = [], packageIte
 			tax: material.tax,
 			quantity: material.amount,
 			unit: material.unit,
-			amount: cost,
+			amount: costWithoutTax, //must be cost without tax
 			currency: material.currency,
 		};
 		costItems.push(costItem);
@@ -123,6 +125,7 @@ function generateCostTotals(costItems = []) {
 		amount = parseFloat(amount);
 		if (isNaN(tax) || isNaN(amount) || tax <= 0) return accumulator;
 
+		
 		//calculate tax cost
 		const taxAmount = amount * (tax / 100);
 
@@ -146,6 +149,7 @@ function generateCostTotals(costItems = []) {
 		tax = parseFloat(tax);
 		amount = parseFloat(amount);
 		if (isNaN(amount)) return accumulator;
+		
 
 		let amountWithTax = amount;
 		let taxAmount = 0;

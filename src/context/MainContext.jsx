@@ -14,7 +14,7 @@ const ProductsDispatch = createContext();
 const CurrencyContext = createContext();
 const CurrencyDispatch = createContext();
 
-const RecipesContext = createContext();
+export const RecipesContext = createContext();
 const RecipesDispatch = createContext();
 
 const PackagesContext = createContext();
@@ -30,7 +30,7 @@ export default function MainContext({ children }) {
 	const { currencies, dispatchCurrencies } = useCurrency();
 	const { recipes, dispatchRecipes } = useRecipes();
 	const [packages, dispatchPackages] = usePackages();
-	const [endProducts, dispatchEndProducts] = useEndProducts();
+	const [endProducts, dispatchEndProducts] = useEndProducts(recipes, packages);
 
 	//Memoize repos
 	const materialsMemoized = useMemo(() => ({ Materials }), [Materials]);
@@ -39,6 +39,7 @@ export default function MainContext({ children }) {
 	const recipesMemoized = useMemo(() => ({ recipes }), [recipes]);
 	const packagesMemoized = useMemo(() => ({ packages }), [packages]);
 	const endProductsMemoized = useMemo(() => ({ endProducts }), [endProducts]);
+	
 
 	//All Context Providers wrapped
 	return (

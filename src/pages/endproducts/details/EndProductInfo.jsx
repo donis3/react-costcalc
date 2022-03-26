@@ -13,9 +13,10 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems 
 	const openModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: true }));
 	const closeModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: false }));
 
-	const { costItems, costTotals } = useEndProductCostAnalysis({ recipeItems, packageItems });
+	const { costItems, costTotals } = useEndProductCostAnalysis({ recipeItems, packageItems, showTax: false });
 
 	if (!data) return <></>;
+	
 
 	const linkClass = 'border-b border-dotted border-base-content font-medium';
 	return (

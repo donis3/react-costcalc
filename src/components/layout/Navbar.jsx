@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../../img/cost-logo.svg';
 import './Navbar.css';
@@ -8,6 +8,7 @@ import AppContext from '../../context/AppContext';
 import ReactCountryFlag from 'react-country-flag';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import useClickOutside from '../../hooks/common/useClickOutside';
 
 export default function Navbar() {
 	const { t } = useTranslation('routes', 'translation');
@@ -82,16 +83,16 @@ function NavbarDropdown({ text = 'dropdown', children }) {
 	const [isOpen, setOpen] = useState(false);
 	const handleClick = () => setOpen((state) => !state);
 	//const openDropdown = () => setOpen(() => true);
-	//const closeDropdown = () => setOpen(() => false);
+	const closeDropdown = () => setOpen(() => false);
+	const dropdownElement = useRef();
+	useClickOutside(dropdownElement, closeDropdown);
 
 	if (!children) {
 		return <></>;
 	}
 	return (
-		<li className='nav-dropdown '>
-			<button onClick={handleClick}>
-				{text}
-			</button>
+		<li className='nav-dropdown ' ref={dropdownElement}>
+			<button onClick={handleClick}>{text}</button>
 
 			<ul style={{ display: isOpen ? null : 'none' }}>
 				{/* Must have nav item childs */}
