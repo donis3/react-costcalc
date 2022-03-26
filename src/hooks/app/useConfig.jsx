@@ -61,24 +61,29 @@ class Config {
 
 	getDefaultCurrency(returnCode = false) {
 		if (!this.checkCurrencies()) return null;
-		const result = this.configData.applicationData.currencies.find((item) => item.default === true);
-		if (!result) {
-			console.warn('Config missing default currency');
+		const results = this.configData.applicationData.currencies.filter((item) => item.default === true);
+		let result = null;
+		if (results.length === 1) {
+			result = results[0];
+		} else if (results.length > 1) {
+			throw new Error('Application has multiple default currencies. Please edit config.json');
+		} else {
+			throw new Error('Application has no default currency. Please edit config.json');
 		}
+		
+		// //Check local storage
+		// const storageKey = this.getUniqueKey('defaultCurrency');
 
-		//Check local storage
-		const storageKey = this.getUniqueKey('defaultCurrency');
-
-		try {
-			const storedCurrencyData = localStorage.getItem(storageKey);
-			const storedCurrency = storedCurrencyData && JSON.parse(storedCurrencyData);
-			if (storedCurrency && this.getCurrenciesArray().includes(storedCurrency.toUpperCase())) {
-				return storedCurrency.toUpperCase();
-			}
-		} catch (error) {
-			//Error trying to parse default currency. remove it
-			localStorage.removeItem(storageKey);
-		}
+		// try {
+		// 	const storedCurrencyData = localStorage.getItem(storageKey);
+		// 	const storedCurrency = storedCurrencyData && JSON.parse(storedCurrencyData);
+		// 	if (storedCurrency && this.getCurrenciesArray().includes(storedCurrency.toUpperCase())) {
+		// 		return storedCurrency.toUpperCase();
+		// 	}
+		// } catch (error) {
+		// 	//Error trying to parse default currency. remove it
+		// 	localStorage.removeItem(storageKey);
+		// }
 
 		if (!returnCode) return result;
 		else {

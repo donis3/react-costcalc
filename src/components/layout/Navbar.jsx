@@ -17,6 +17,9 @@ export default function Navbar() {
 	const { language } = useContext(AppContext);
 	const loc = useLocation();
 
+	const navbarRef = useRef();
+	useClickOutside(navbarRef, () => setMenuOpen(false));
+
 	//Close menu when location changes
 	useEffect(() => {
 		setMenuOpen(false);
@@ -24,7 +27,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<nav className={`relative px-3 lg:px-5 py-3 bg-neutral`}>
+			<nav ref={navbarRef} className={`relative px-3 lg:px-5 py-3 bg-neutral`}>
 				<div className='container  mx-auto flex flex-wrap items-center justify-between'>
 					<div className='w-full flex justify-between lg:w-auto'>
 						<Link to='/' className='text-neutral-content'>
