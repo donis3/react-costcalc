@@ -11,7 +11,14 @@ export default function useEndProduct(endId = null) {
 	let recipeItems = [];
 	if (recipe && endProduct && endProduct.package && endProduct.package.packageCapacity) {
 		if (parseFloat(endProduct.package.packageCapacity) > 0) {
-			const { materials } = recipe.changeRecipeYield(endProduct.package.packageCapacity);
+			let materials = [];
+			try {
+				const yieldChangedRecipe = recipe.changeRecipeYield(endProduct.package.packageCapacity);
+				materials = yieldChangedRecipe.materials;
+			} catch(e) {
+				console.log('Recipe load error: ', e.message)
+			}
+			
 			//Deep copy materials as recipeItems
 			if (Array.isArray(materials)) {
 				recipeItems = materials.map((mat) => ({ ...mat }));

@@ -14,6 +14,7 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 	//Load recipes & packages & memoize them
 	const { packages: packageRepo } = usePackagesContext();
 	const { recipes: recipeRepo } = useRecipesContext();
+
 	//Load select options
 	const selectData = useMemo(() => generateSelectOptions(recipeRepo, packageRepo), [recipeRepo, packageRepo]);
 
@@ -34,7 +35,7 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 			//check if selected package is suitable
 			if (!selectData.isPackageSuitable(recipeId, formState.packageId)) {
 				//Selected package is not suitable
-				const { packageId } = selectData.getDefaultPackage(recipeId);
+				const { packageId } = selectData.getDefaultPackage(recipeId) ? selectData.getDefaultPackage(recipeId) : {};
 				if (!isNaN(parseInt(packageId)) && parseInt(packageId) !== parseInt(formState.packageId)) {
 					setFormState((state) => ({ ...state, packageId: parseInt(packageId) }));
 				}
@@ -129,8 +130,13 @@ const getInitialState = (endProduct = null, selectData = null) => {
 		commercialName: '',
 		notes: '',
 	};
-	const { recipeId } = selectData.getDefaultRecipe();
-	const { packageId } = selectData.getDefaultPackage();
+
+	const { recipeId = null } = selectData?.getDefaultRecipe() ? selectData?.getDefaultRecipe() : {};
+	const { packageId = null } = selectData?.getDefaultPackage() ? selectData.getDefaultPackage() : {};
+	if (!recipeId || !packageId) {
+		return result;
+	}
+
 	if (endProduct && 'endId' in endProduct) {
 		//Export data from endproduct as initial state
 		Object.keys(endProduct).forEach((key) => {

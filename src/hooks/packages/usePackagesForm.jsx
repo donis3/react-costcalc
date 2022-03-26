@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppContext } from '../../context/AppContext';
-import { usePackagesContext, usePackagesDispatch } from '../../context/MainContext';
+import { useEndProductsContext, usePackagesContext, usePackagesDispatch } from '../../context/MainContext';
 import useFormHandler from '../common/useFormHandler';
 import useJoi from '../common/useJoi';
 import { defaultPackage } from './usePackages';
@@ -11,7 +11,11 @@ import { defaultPackage } from './usePackages';
 export default function usePackagesForm({ packageId = null } = {}) {
 	const navigate = useNavigate();
 	const { t } = useTranslation('translation');
+	const { t: endProductsTranslations} = useTranslation('pages/endproducts');
+	
 	const { packages } = usePackagesContext();
+	const { endProducts } = useEndProductsContext();
+
 	const pack = packageId === null ? null : packages.findById(packageId, true);
 	const originalState = pack ? { ...pack } : { ...defaultPackage };
 
@@ -42,6 +46,17 @@ export default function usePackagesForm({ packageId = null } = {}) {
 
 	const onDelete = () => {
 		if (!pack) return;
+
+		//Before deleting, find endProducts that use this packaging
+		if (endProducts && Array.isArray(endProducts.data)) {
+			const boundEndProducts = endProducts.data.filter((item) => item.packageId === pack.packageId);
+			if (boundEndProducts.length > 0) {
+				//Stop dispatch. There are related products
+				toast.error(endProductsTranslations('deleteError.package', {count: boundEndProducts.length}));
+				return;
+			}
+		}
+
 		const dispatchAction = getDeleteDispatchAction(formState);
 		dispatch(dispatchAction);
 	};

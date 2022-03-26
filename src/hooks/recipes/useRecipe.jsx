@@ -14,6 +14,9 @@ export default function useRecipe(recipeId) {
 	const { Materials: materials } = useMaterialContext();
 	const { convert, defaultCurrency } = useCurrencyConversion();
 
+	if (isNaN(parseInt(recipeId))) {
+		return { recipe: null };
+	}
 	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert, dispatch, defaultCurrency) };
 } //========================// End of hook
 
@@ -200,6 +203,7 @@ class Recipe {
 
 	//A new yield value is given. Calculate ratio
 	changeRecipeYield(newYield = 0) {
+		if (!this.recipe.yield) throw new Error('Invalid recipe data');
 		newYield = parseFloat(newYield);
 		let ratio = 1;
 		if (isNaN(newYield) === false && newYield > 0) {

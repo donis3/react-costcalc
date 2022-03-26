@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecipesDispatchContext } from '../../context/MainContext';
+import { useEndProductsContext, useRecipesDispatchContext } from '../../context/MainContext';
 
 import useStorageState from '../common/useStorageState';
 import useRecipeFormSchema from './useRecipeFormSchema';
@@ -10,7 +10,10 @@ import useRecipeFormSchema from './useRecipeFormSchema';
 export default function useRecipeForm({ recipe = undefined } = {}) {
 	const storageKey = recipe ? 'edit-recipe-form' : 'add-recipe-form';
 	const { t } = useTranslation('translation');
+	const { t: endProductsTranslations} = useTranslation('pages/endproducts');
+
 	const { dispatch } = useRecipesDispatchContext();
+	const { endProducts} = useEndProductsContext();
 
 	const navigate = useNavigate();
 
@@ -118,6 +121,18 @@ export default function useRecipeForm({ recipe = undefined } = {}) {
 	};
 
 	const onDelete = () => {
+
+		//Before deleting, find endProducts that use this recipe
+		if (endProducts && Array.isArray(endProducts.data)) {
+			const boundEndProducts = endProducts.data.filter((item) => item.recipeId === recipe.recipeId);
+			if (boundEndProducts.length > 0) {
+				//Stop dispatch. There are related products
+				toast.error(endProductsTranslations('deleteError.recipe', {count: boundEndProducts.length}));
+				return;
+			}
+		}
+		
+		//Proceed with deleting.
 		const success = (recipeId = null) => {
 			toast.success(t('success.delete', { name: formState.name }));
 			navigate('/recipes');

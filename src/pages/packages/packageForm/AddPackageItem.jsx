@@ -37,7 +37,7 @@ export default function AddPackageItem({ onAddItem = null } = {}) {
 		itemCurrency: Joi.string()
 			.valid(...currencies.allCurrencies)
 			.label(t('labels.itemCurrency')),
-		boxCapacity: Joi.number().min(1).precision(2).required().label(t('labels.boxCapacity')),
+		boxCapacity: Joi.number().min(1).precision(2).label(t('labels.boxCapacity')),
 	});
 
 	const itemTypes = [
@@ -149,7 +149,7 @@ export default function AddPackageItem({ onAddItem = null } = {}) {
 						</FormInput>
 					)}
 					<div className='col-span-full flex justify-center items-center'>
-						<Button.Add className='btn btn-block' type="button" onClick={handleAddItem}>
+						<Button.Add className='btn btn-block' type='button' onClick={handleAddItem}>
 							<Icon icon='FaArrowCircleUp' className='mr-1' /> {t('form.addItem')}
 						</Button.Add>
 					</div>
@@ -166,6 +166,10 @@ const parseRef = (formRef, schema = null) => {
 		const value = formRef.current[name].value;
 		formData[name] = value;
 	});
+	//Remove box capacity
+	if (formData?.packageType !== 'box') {
+		delete formData.boxCapacity;
+	}
 	const { error, value } = schema.validate(formData);
 	let errors = {};
 	if (error && error.details && error.details.length > 0) {

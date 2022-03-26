@@ -14,7 +14,9 @@
 	"error": {
 		"duplicate": "A product with the same recipe & package is already defined.",
 		"invalidId": "Save failed. Invalid product ID",
-		"notFound": "Product couldn't be found"
+		"notFound": "Product couldn't be found",
+		"packageError": "The packaging item bound to this product couldn't be found. Please edit the product",
+		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product"
 	},
 	"labels": {
 		"endId": "Product ID",
@@ -46,5 +48,11 @@
 		"recipeCost": "Materials",
 		"packageCost": "Packaging",
 		"showAllMaterialsCost": "Show Deep Analysis"
+	},
+	"deleteError": {
+		"package": "This package is being used by a product and can't be deleted.",
+		"package_other": "This package is being used by {{count}} products and can't be deleted.",
+		"recipe": "This recipe is being used by a product and can't be deleted.",
+		"recipe_other": "This recipe is being used by {{count}} products and can't be deleted."
 	}
 }

@@ -16,7 +16,8 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems 
 	const { costItems, costTotals } = useEndProductCostAnalysis({ recipeItems, packageItems, showTax: false });
 
 	if (!data) return <></>;
-	
+	if (!data.package) return <>{t('error.packageError')}</>;
+	if (!data.recipe) return <>{t('error.recipeError')}</>;
 
 	const linkClass = 'border-b border-dotted border-base-content font-medium';
 	return (
