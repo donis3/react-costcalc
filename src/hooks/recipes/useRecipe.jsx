@@ -7,7 +7,7 @@ import {
 import { sortArrayNumeric } from '../../lib/common';
 import useCurrencyConversion from '../app/useCurrencyConversion';
 
-export default function useRecipe(recipeId) {
+export default function useRecipe(recipeId = null) {
 	const { recipes } = useRecipesContext();
 	const { dispatch } = useRecipesDispatchContext();
 	const { products } = useProductsContext();
@@ -20,7 +20,7 @@ export default function useRecipe(recipeId) {
 	return { recipe: new Recipe(recipes.findById(recipeId), products, materials, convert, dispatch, defaultCurrency) };
 } //========================// End of hook
 
-class Recipe {
+export class Recipe {
 	productsClass = null;
 	materialsClass = null;
 	convert = null;
@@ -237,6 +237,7 @@ class Recipe {
 		if (typeof this.dispatch !== 'function') return;
 		//Get the last saved unit cost
 		const oldCost = this.getLatestUnitCost();
+		
 
 		//Generate current cost
 		const newCost = {
@@ -253,7 +254,6 @@ class Recipe {
 			Math.abs(oldCost.costWithTax - newCost.costWithTax) <= 0.01
 		) {
 			//Old and new costs are basically the same. No need to save
-			//console.log('No need for dispatch');
 			return;
 		}
 

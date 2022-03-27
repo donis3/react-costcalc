@@ -53,11 +53,14 @@ export default function Recipe() {
 		//Set yield amount for change yield input
 		newYieldRef.current.value = recipe.yield;
 
-		//save cost if needed
-		recipe.saveUnitCost();
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);
+
+	useEffect(() => {
+		//save cost if needed
+		if (recipe) recipe.saveUnitCost();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	//Show /Hide material modal
 	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
@@ -71,7 +74,6 @@ export default function Recipe() {
 	return (
 		<>
 			<BackButton />
-
 			<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
 				{/* Header */}
 				<div className='w-full flex justify-between items-center border-b'>

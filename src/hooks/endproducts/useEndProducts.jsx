@@ -73,6 +73,7 @@ export default function useEndProducts(recipes = null, packages = null) {
 	//Calculate cost data for single product
 	function calculateCost(product = null) {
 		if (isNaN(parseInt(product?.endId))) return null;
+		
 
 		let quantity = 1;
 

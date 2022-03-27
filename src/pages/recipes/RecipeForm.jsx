@@ -10,6 +10,7 @@ import { useAppContext } from '../../context/AppContext';
 import RecipeFormMaterials from './formComponents/RecipeFormMaterials';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import BackButton from '../../components/common/BackButton';
+import useRecipe from '../../hooks/recipes/useRecipe';
 
 export default function RecipeForm() {
 	const { t } = useTranslation('pages/recipes');
@@ -19,6 +20,7 @@ export default function RecipeForm() {
 
 	const { recipes } = useRecipesContext();
 	const recipe = recipes.findById(recipeId);
+	useRecipe(recipeId); //Will load recipe class for cost calculations
 
 	const { products } = useProductsContext();
 	const productList = products.getAllSorted({ field: 'name' });
@@ -50,9 +52,9 @@ export default function RecipeForm() {
 	useEffect(() => {
 		//Load active product when component initializes
 		const activeProduct = products.findById(formState.productId);
-		if (!activeProduct) {
+		if (!activeProduct && products) {
 			//Product not found! get default productId and set it to form state
-			const { productId } = products.getDefaultProduct();
+			const { productId } = products.getDefaultProduct() || {};
 			if (productId !== formState.productId) setFormState((state) => ({ ...state, productId }));
 			return;
 		}
@@ -74,7 +76,7 @@ export default function RecipeForm() {
 
 	//Unable to add recipe if no products are available
 	if (!productList || !Array.isArray(productList) || productList.length === 0) {
-		console.log(productList);
+		
 		return (
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>
