@@ -7,6 +7,7 @@ import EndProduct from './pages/endproducts/EndProduct';
 import EndProductForm from './pages/endproducts/EndProductForm';
 import EndProducts from './pages/endproducts/EndProducts';
 import HomePage from './pages/HomePage';
+import MaterialForm from './pages/materials/form/MaterialForm';
 import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
 import Package from './pages/packages/Package';
@@ -22,6 +23,7 @@ export default function Router() {
 		<Routes>
 			{/* Business Routes */}
 			<Route path='/materials' element={<Materials />} />
+
 			<Route path='/products' element={<Products />} />
 			<Route path='/currency' element={<CurrencySelectOne />} />
 			<Route path='/currency/:currency' element={<Currency />} />
@@ -29,7 +31,9 @@ export default function Router() {
 			<Route path='/recipes/:recipeId' element={<Recipe />} />
 			<Route path='/recipes/add' element={<RecipeForm />} />
 			<Route path='/recipes/edit/:recipeId' element={<RecipeForm />} />
-			
+
+			{/* Experimental */}
+			<Route path='/materials/add' element={<MaterialForm />} />
 
 			{/* Packages */}
 			<Route path='/packages' element={<Packages />} />
@@ -42,9 +46,6 @@ export default function Router() {
 			<Route path='/endproducts/add' element={<EndProductForm isEdit={false} />} />
 			<Route path='/endproducts/:endId' element={<EndProduct />} />
 			<Route path='/endproducts/edit/:endId' element={<EndProductForm isEdit={true} />} />
-
-
-			
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

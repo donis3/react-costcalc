@@ -1,4 +1,5 @@
 {
+	"name": "Material",
 	"title": "Materials",
 	"lead": "Available materials and details.",
 	"btnNew": "New",
@@ -32,10 +33,15 @@
 
 	"form": {
 		"title": "Add New Material",
+		"details": "Materials are used in manufacturing recipes.",
+		"firstSection": "Material Definitions",
+		"secondSection": "Price Details",
 		"defaultName": "New Material Name",
 		"updateTitle": "Edit Material",
 		"name": "Material Name",
 		"nameAlt": "",
+		"provider": "Provider",
+		"providerAlt": "Material provider company",
 		"unit": "Unit",
 		"unitAlt": "Select the unit type of the material",
 		"massUnits": "Weight",
@@ -43,7 +49,7 @@
 		"density": "Material Density",
 		"densityAlt": "Density of the material (g/cm<sup>3</sup>)",
 		"price": "Unit Price (Without Tax)",
-		"priceAlt": "Taxed Price: {{amount}}/{{unit}}",
+		"priceAlt": "With Tax: {{amount}}/{{unit}}",
 		"currency": "Currency",
 		"currencyAlt": "",
 		"tax": "Tax / Vat",

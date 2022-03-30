@@ -25,7 +25,14 @@ class ErrorBoundary extends React.Component {
 					</h1>
 					<p className='text-lg mb-5 max-w-xl'>{t('errorBoundary.message')}</p>
 
-					<button type='button' className='btn btn-primary btn-md' onClick={() => this.setState({ hasError: false })}>
+					<button
+						type='button'
+						className='btn btn-primary btn-md'
+						onClick={() => {
+							this.setState({ hasError: false });
+							window.location.href = window.location.origin;
+						}}
+					>
 						<FaHome className='mr-2' />
 						{t('errorBoundary.button')}
 					</button>

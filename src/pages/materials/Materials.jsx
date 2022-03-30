@@ -7,6 +7,7 @@ import MaterialForm from './MaterialForm';
 import MaterialInfo from './MaterialInfo';
 import Button from '../../components/common/Button';
 import MaterialPriceHistory from './MaterialPriceHistory';
+import { Link } from 'react-router-dom';
 
 export default function Materials() {
 	//Translation
@@ -35,7 +36,13 @@ export default function Materials() {
 				<div className='w-full flex justify-between items-center'>
 					{/* Title & Lead Text */}
 					<h3 className='text-2xl py-2 font-semibold'>{t('title')}</h3>
-					<Button.Add type='button' onClick={() => openModal('add')} />
+					<div>
+						<Link to='/materials/add' className='mr-1'>
+							<Button.New name={t('name')}/>
+						</Link>
+
+						<Button.Add type='button' onClick={() => openModal('add')} />
+					</div>
 				</div>
 				<p className='opacity-80'>{t('lead')}</p>
 
