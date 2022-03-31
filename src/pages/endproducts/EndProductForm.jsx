@@ -6,6 +6,7 @@ import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import FormInput from '../../components/form/FormInput';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 import { useAppContext } from '../../context/AppContext';
 import { useEndProductsContext } from '../../context/MainContext';
 
@@ -38,15 +39,13 @@ export default function EndProductForm({ isEdit = false } = {}) {
 	if (selectRecipe.length === 0) return <NoRecipeError />;
 	return (
 		<>
-			{/* Back Button */}
-			<BackButton />
-
 			{/* Form */}
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<h3 className='text-2xl py-2 font-semibold'>
-					{/* Form title depending on context */}
-					{isEdit ? t('form.editTitle') : t('form.addTitle')}
-				</h3>
+				<ModuleHeader
+					text={isEdit ? t('form.editTitle') : t('form.addTitle')}
+					module='endproducts'
+					role={isEdit ? 'edit' : 'add'}
+				/>
 				<p className='opacity-80'>
 					{/* Form lead depending on context */}
 					{t('form.details')}

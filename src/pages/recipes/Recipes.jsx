@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 
 import RecipesTable from './table/RecipesTable';
 
@@ -13,13 +14,14 @@ export default function Recipes() {
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				{/* Page Header */}
-				<div className='w-full flex justify-between items-center'>
-					<h3 className='text-2xl py-2 font-semibold'>{t('recipes.title')}</h3>
+				{/* Card Header */}
+				<ModuleHeader text={t('recipes.title')} module='recipes' role='main'>
+					{/* Links */}
 					<Link to='/recipes/add'>
-						<Button.New type="button" name={t('name')} />
+						<Button.New name={t('name')} />
 					</Link>
-				</div>
+				</ModuleHeader>
+				
 				{/* Lead Text */}
 				<p className='opacity-80'>{t('recipes.lead')}</p>
 

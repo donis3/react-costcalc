@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import CardWithTabs from '../../components/common/CardWithTabs';
 import DocumentDates from '../../components/common/DocumentDates';
@@ -19,7 +18,6 @@ export default function EndProduct() {
 	const navigate = useNavigate();
 	const { endProduct, recipeItems, packageItems } = useEndProduct(endId);
 	const { t } = useTranslation('pages/endproducts');
-	
 
 	//Product not found ?
 	useEffect(() => {
@@ -64,7 +62,6 @@ export default function EndProduct() {
 	];
 	return (
 		<>
-			<BackButton />
 			<CardWithTabs
 				tabs={tabs}
 				headerContent={
@@ -72,6 +69,9 @@ export default function EndProduct() {
 						<Button.Edit type='button' className='btn btn-sm' />
 					</Link>
 				}
+				module='endproducts'
+				role='view'
+				title={endProduct.name}
 			/>
 			<DocumentDates updatedAt={endProduct?.updatedAt} createdAt={endProduct?.createdAt} />
 		</>

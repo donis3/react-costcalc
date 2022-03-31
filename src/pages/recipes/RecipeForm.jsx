@@ -9,8 +9,8 @@ import useRecipeForm, { selectRecipeArrayGenerator } from '../../hooks/recipes/u
 import { useAppContext } from '../../context/AppContext';
 import RecipeFormMaterials from './formComponents/RecipeFormMaterials';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
-import BackButton from '../../components/common/BackButton';
 import useRecipe from '../../hooks/recipes/useRecipe';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 
 export default function RecipeForm() {
 	const { t } = useTranslation('pages/recipes');
@@ -76,7 +76,6 @@ export default function RecipeForm() {
 
 	//Unable to add recipe if no products are available
 	if (!productList || !Array.isArray(productList) || productList.length === 0) {
-		
 		return (
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 				<h3 className='text-2xl py-2 font-semibold'>
@@ -95,13 +94,14 @@ export default function RecipeForm() {
 
 	return (
 		<>
-			{/* Back Button */}
-			<BackButton />
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<h3 className='text-2xl py-2 font-semibold'>
-					{/* Form title depending on context */}
-					{recipe ? t('form.titleUpdate', { name: recipe.name }) : t('form.titleAdd')}
-				</h3>
+				{/* Card Header */}
+				<ModuleHeader
+					text={recipe ? t('form.titleUpdate', { name: recipe.name }) : t('form.titleAdd')}
+					module='recipes'
+					role={recipe ? 'edit' : 'add'}
+				/>
+
 				<p className='opacity-80'>
 					{/* Form lead depending on context */}
 					{recipe ? t('form.leadUpdate') : t('form.leadAdd')}

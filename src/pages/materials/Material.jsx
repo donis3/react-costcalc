@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMaterialContext } from '../../context/MainContext';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
 import Card from '../../components/common/Card';
 import ModuleHeader from '../../components/layout/ModuleHeader';
-import Button from '../../components/common/Button';
 
 export default function Material() {
 	const { t } = useTranslation('pages/materials', 'translation');

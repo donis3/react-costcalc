@@ -13,6 +13,7 @@
 	},
 	"form": {
 		"addTitle": "New Package Bundle",
+		"updateTitle": "Edit Package",
 		"details": "Please define a package bundle, which may consist of a package, label, cap, box, etc..",
 		"subtitle": "Package Definitions",
 		"packingItemsTitle": "Packaging Items",

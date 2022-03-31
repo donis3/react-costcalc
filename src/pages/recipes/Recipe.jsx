@@ -20,6 +20,7 @@ import DocumentDates from '../../components/common/DocumentDates';
 import CostTable from '../../components/CostTable/CostTable';
 import RecipeCostHistory from './details/RecipeCostHistory';
 import BackButton from '../../components/common/BackButton';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -73,22 +74,18 @@ export default function Recipe() {
 	}
 	return (
 		<>
-			<BackButton />
 			<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
-				{/* Header */}
-				<div className='w-full flex justify-between items-center border-b'>
-					{/* Card Title */}
-					<h3 className='text-4xl py-2 font-semibold'>{recipeState.recipe.name}</h3>
-					{/* Action Button */}
-					<div className='flex items-center gap-x-1'>
-						<Button.Chart forceIcon onClick={openCostHistory}>
+				{/* Card Header */}
+				<ModuleHeader text={recipeState.recipe.name} module='recipes' role='view'>
+					{/* Links */}
+					<Button.Chart forceIcon onClick={openCostHistory}>
 							{t('charts.costHistory', { ns: 'translation' })}
 						</Button.Chart>
 						<Link to={`/recipes/edit/${recipeState.recipe.recipeId}`}>
 							<Button.Edit />
 						</Link>
-					</div>
-				</div>
+				</ModuleHeader>
+
 
 				{/* Half / Half divided */}
 				<div className='w-full flex'>

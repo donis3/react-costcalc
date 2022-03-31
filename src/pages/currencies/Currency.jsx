@@ -13,6 +13,7 @@ import CurrencyError from './CurrencyError';
 
 import { useAppContext } from '../../context/AppContext';
 import CurrencyChart from './CurrencyChart';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 
 export default function Currency() {
 	const { t } = useTranslation();
@@ -60,10 +61,11 @@ export default function Currency() {
 	return (
 		<>
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<h3 className='text-2xl py-2 font-semibold'>
-					{/* Title with long currency name */}
-					{t('currency.titleCurrency', { currency: t(`currency.${currency}`) })}
-				</h3>
+				<ModuleHeader
+					text={t('currency.titleCurrency', { currency: t(`currency.${currency}`) })}
+					module='currency'
+					role='view'
+				/>
 				{/* Details text about this module */}
 				<p className='opacity-80'>{t('currency.details', { from: currency, to: currencies.defaultCurrency })}</p>
 

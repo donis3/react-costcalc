@@ -1,5 +1,6 @@
 {
 	"title": "Product Definitions",
+	"name": "Product",
 	"lead": "Define each base product and their properties.",
 	"states": {
 		"liquid": "Liquid",

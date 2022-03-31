@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import BackButton from '../../components/common/BackButton';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { FormFooterActions } from '../../components/common/FormFooterActions';
 import FormInput from '../../components/form/FormInput';
+import ModuleHeader from '../../components/layout/ModuleHeader';
 
 import usePackagesForm from '../../hooks/packages/usePackagesForm';
 import PackageFormTable from './packageForm/PackageFormTable';
@@ -38,18 +38,19 @@ export default function PackageForm({ isEdit = false } = {}) {
 	//Render
 	return (
 		<>
-			{/* Back Button */}
-			<BackButton />
 			{/* Form */}
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<h3 className='text-2xl py-2 font-semibold'>
-					{/* Form title depending on context */}
-					{t('form.addTitle')}
-				</h3>
+				{/* Card Header */}
+				<ModuleHeader
+					text={isEdit ? t('form.updateTitle') : t('form.addTitle')}
+					module='packages'
+					role={isEdit ? 'edit' : 'add'}
+				/>
 				<p className='opacity-80'>
 					{/* Form lead depending on context */}
 					{t('form.details')}
 				</p>
+
 				<form onSubmit={onSubmit} className='w-full mt-10'>
 					{/* Form Start*/}
 
