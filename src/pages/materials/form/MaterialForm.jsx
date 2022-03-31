@@ -38,7 +38,7 @@ export default function MaterialForm({ isEdit = false }) {
 	//==========================// Form States //===================================//
 	//is form submitted
 	const [isSubmitted, setSubmitted] = useState(false);
-	let initialState = { unit: 'kg', density: 1, currency: defaultCurrency };
+	let initialState = { name: '', unit: 'kg', density: 1, currency: defaultCurrency, provider: '', price: '', tax: '' };
 	if (material) {
 		initialState = { ...initialState, ...material };
 	}
@@ -214,7 +214,12 @@ export default function MaterialForm({ isEdit = false }) {
 				</p>
 
 				{/* Form BUilder */}
-				<Form onSubmit={handleSubmit} onReset={handleReset} onDelete={handleDelete} setSubmitted={setSubmitted}>
+				<Form
+					onSubmit={handleSubmit}
+					onReset={handleReset}
+					onDelete={isEdit ? handleDelete : null}
+					setSubmitted={setSubmitted}
+				>
 					{/* First Section */}
 					<Form.Section title={t('form.firstSection')}>
 						{/* Material Name */}

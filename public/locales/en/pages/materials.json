@@ -8,8 +8,9 @@
 	"table": {
 		"material": "Material",
 		"unit": "Unit",
-		"tax": "Tax",
+		"supplier": "Supplier",
 		"price": "Price"
+
 	},
 	"notFound": "Requested material couldn't be found.",
 	"info": {
@@ -41,8 +42,8 @@
 		"updateTitle": "Edit Material",
 		"name": "Material Name",
 		"nameAlt": "",
-		"provider": "Provider",
-		"providerAlt": "Material provider company",
+		"provider": "Supplier",
+		"providerAlt": "Material supplier company",
 		"unit": "Unit",
 		"unitAlt": "Select the unit type of the material",
 		"massUnits": "Weight",

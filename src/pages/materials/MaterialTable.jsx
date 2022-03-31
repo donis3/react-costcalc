@@ -29,15 +29,15 @@ export default function MaterialTable({ openModal = null } = {}) {
 							{t('table.material')}
 						</ThSortable>
 
-						<ThSortable className='w-1/12' field='tax' sortingState={sortingState} handleSort={sortBy}>
-							{t('table.tax')}
+						<ThSortable className='w-3/12' field='provider' sortingState={sortingState} handleSort={sortBy}>
+							{t('table.supplier')}
 						</ThSortable>
 
-						<ThSortable className='w-3/12' field='price' sortingState={sortingState} handleSort={sortBy}>
+						<ThSortable className='w-2/12' field='price' sortingState={sortingState} handleSort={sortBy}>
 							{t('table.price')}
 						</ThSortable>
 
-						<ThSortable className='w-3/12'></ThSortable>
+						<ThSortable className='w-2/12'></ThSortable>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,9 +52,9 @@ export default function MaterialTable({ openModal = null } = {}) {
 
 //Table Rows
 function MaterialTableRow({ data = null, index = 0, openModal = null }) {
-	const { displayMoney, displayNumber } = useIntl();
+	const { displayMoney } = useIntl();
 	if (!data) return <></>;
-	const { materialId, name, unit, tax, price, currency } = data;
+	const { materialId, name, unit, provider, price, currency } = data;
 
 	return (
 		<tr className='hover'>
@@ -65,8 +65,7 @@ function MaterialTableRow({ data = null, index = 0, openModal = null }) {
 				</Link>
 			</td>
 			<td>
-				{displayNumber(tax, 2)}
-				<span className='text-xs ml-1 opacity-70'>%</span>
+				{provider}
 			</td>
 			<td>
 				{displayMoney(price, currency)}
