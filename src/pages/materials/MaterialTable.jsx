@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle, FaPencilAlt, FaChartLine } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import ThSortable from '../../components/common/ThSortable';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
@@ -59,9 +60,9 @@ function MaterialTableRow({ data = null, index = 0, openModal = null }) {
 		<tr className='hover'>
 			<th>{index + 1}</th>
 			<td className='whitespace-normal truncate'>
-				<span className='font-medium cursor-pointer' onClick={() => openModal?.('info', materialId)}>
+				<Link to={`/materials/${materialId}`} className='link-hover'>
 					{name}
-				</span>
+				</Link>
 			</td>
 			<td>
 				{displayNumber(tax, 2)}
@@ -72,9 +73,10 @@ function MaterialTableRow({ data = null, index = 0, openModal = null }) {
 				<span className='text-xs ml-1 opacity-70'>/{unit}</span>
 			</td>
 			<td className='flex flex-wrap gap-x-1'>
-				<button className='btn btn-ghost btn-xs' onClick={() => openModal('edit', materialId)}>
+				
+				<Link to={`/materials/edit/${materialId}`} className='btn btn-ghost btn-xs'>
 					<FaPencilAlt />
-				</button>
+				</Link>
 				<button className='btn btn-ghost btn-xs' onClick={() => openModal('history', materialId)}>
 					<FaChartLine />
 				</button>

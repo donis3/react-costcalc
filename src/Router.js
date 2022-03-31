@@ -8,6 +8,7 @@ import EndProductForm from './pages/endproducts/EndProductForm';
 import EndProducts from './pages/endproducts/EndProducts';
 import HomePage from './pages/HomePage';
 import MaterialForm from './pages/materials/form/MaterialForm';
+import Material from './pages/materials/Material';
 import Materials from './pages/materials/Materials';
 import NotFound from './pages/NotFound';
 import Package from './pages/packages/Package';
@@ -33,7 +34,10 @@ export default function Router() {
 			<Route path='/recipes/edit/:recipeId' element={<RecipeForm />} />
 
 			{/* Experimental */}
+			<Route path='/materials/:materialId' element={<Material/>} />
 			<Route path='/materials/add' element={<MaterialForm />} />
+			<Route path='/materials/edit' element={<Materials/>} />
+			<Route path='/materials/edit/:materialId' element={<MaterialForm isEdit={true} />} />
 
 			{/* Packages */}
 			<Route path='/packages' element={<Packages />} />

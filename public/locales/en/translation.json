@@ -18,12 +18,14 @@
 		"error": "Error",
 		"notFound": "Not Found",
 		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
-		"savingItem": "Couldn't save {{item}}",
+		"savingItem": "Couldn't save {{item, lowercase}}",
 		"invalidItem": "Invalid item.",
 		"add": "Item couldn't be added.",
 		"update": "Item couldn't be updated.",
 		"delete": "Item couldn't be deleted.",
-		"noData": "No data"
+		"noData": "No data",
+		"itemNotFound": "Requested {{item, lowercase}} couldn't be found",
+		"duplicate": "There is already another item with the same values."
 	},
 	"success": {
 		"add": "\"{{name}}\" was successfully added.",

@@ -4,7 +4,7 @@ import { useAppContext } from '../../context/AppContext';
 import Icon from '../common/Icon';
 
 //These paths wont be shown as links
-const linkBlacklist  = ['/recipes/edit'];
+const linkBlacklist = ['/recipes/edit', '/materials/edit', '/packages/edit', '/products/edit', '/endproducts/edit'];
 
 export default function Breadcrumb() {
 	const { pathname } = useLocation();
@@ -12,7 +12,7 @@ export default function Breadcrumb() {
 	const crumbs = pathname.split('/').filter((item) => item && item.length > 0);
 
 	const { page } = useAppContext();
-	
+
 	const crumbsJsx = [];
 	crumbs.reduce((accumulator, current, index) => {
 		//Add current path to accumulated array
@@ -25,7 +25,7 @@ export default function Breadcrumb() {
 				{/* Add reference if this is the last element */}
 				{crumbs.length - 1 === index ? (
 					// This is the last breadcrumb
-					<span className='opacity-50' >
+					<span className='opacity-50'>
 						{/* Try to get breadcrumb from app context if available. Or fallback to current pathname */}
 						{t(`${current}`, { defaultValue: page.getBreadcrumb(pathname) || current })}
 					</span>

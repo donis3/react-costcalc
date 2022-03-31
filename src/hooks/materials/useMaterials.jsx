@@ -8,15 +8,17 @@ import useIntl from '../common/useIntl';
 import useCurrencyConversion from '../app/useCurrencyConversion';
 import Material from './Material';
 
+
 /**
  * Define fields and defaults for a material
  */
 export const fields = {
-	materialId: { type: 'numeric', default: 1 },
+	materialId: { type: 'numeric', default: 0 },
 	tax: { type: 'numeric', default: 0 },
 	price: { type: 'numeric', default: 0 },
 	density: { type: 'numeric', default: 1 },
 	name: { type: 'string', default: '' },
+	provider: { type: 'string', default: '' },
 	currency: { type: 'string', default: 'TRY' },
 	unit: { type: 'string', default: 'kg' },
 	priceHistory: { type: 'array', default: [] },
@@ -56,7 +58,8 @@ export default function useMaterials() {
 		},
 
 		findById: function (materialId = null, classObject = false) {
-			if (!materialId || isNaN(parseInt(materialId))) return null;
+			if (isNaN(parseInt(materialId))) return null;
+			materialId = parseInt(materialId);
 			const result = this.materials.find((item) => item.materialId === materialId);
 			if (!result) return null;
 			//Deep copy

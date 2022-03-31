@@ -6,7 +6,7 @@ export default function DocumentDates({ updatedAt = null, createdAt = null } = {
 	const { t } = useTranslation('translation');
 
 	return (
-		<div className='p-1 flex justify-between'>
+		<div className='p-1 flex justify-between mb-5'>
 			{updatedAt && (
 				<p className='text-xs italic opacity-50'>
 					<span className='text-xs mr-1'>{t('dates.lastUpdate')}:</span>

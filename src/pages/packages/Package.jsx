@@ -9,7 +9,7 @@ import { FaInfo as InfoIcon, FaChartLine as CostIcon } from 'react-icons/fa';
 import PackageInfo from './packageDetails/PackageInfo';
 import PackageCosts from './packageDetails/PackageCosts';
 import DocumentDates from '../../components/common/DocumentDates';
-import BackButton from '../../components/common/BackButton';
+
 
 export default function Package() {
 	const { packageId } = useParams();
@@ -56,7 +56,6 @@ export default function Package() {
 	//Render
 	return (
 		<>
-			<BackButton />
 			<CardWithTabs
 				tabs={tabs}
 				headerContent={
@@ -64,6 +63,9 @@ export default function Package() {
 						<Button.Edit type='button' className='btn btn-sm' />
 					</Link>
 				}
+				title={pack?.name}
+				module='packages'
+				role='view'
 			/>
 			<DocumentDates updatedAt={pack?.updatedAt} createdAt={pack?.createdAt} />
 		</>

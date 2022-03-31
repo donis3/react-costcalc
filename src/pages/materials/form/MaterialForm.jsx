@@ -1,18 +1,36 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../../components/common/BackButton';
+import { useNavigate, useParams } from 'react-router-dom';
 import Card from '../../../components/common/Card';
 import Form from '../../../components/forms/Form';
+import { useMaterialContext, useMaterialDispatchContext, useRecipesContext } from '../../../context/MainContext';
 import useConfig from '../../../hooks/app/useConfig';
 import useCurrencyConversion from '../../../hooks/app/useCurrencyConversion';
 import useIntl from '../../../hooks/common/useIntl';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
+import { toast } from 'react-toastify';
+import { useAppContext } from '../../../context/AppContext';
 
-//Experimental
+import ModuleHeader from '../../../components/layout/ModuleHeader';
 
-export default function MaterialForm({ materialId = null, isEdit = false }) {
+/**
+ * New material form and Edit material together
+ * @param {boolean} isEdit if true, will check router params for material ID
+ * @returns
+ */
+export default function MaterialForm({ isEdit = false }) {
 	//==========================// Dependencies //===================================//
 	const { t } = useTranslation('pages/materials', 'translation');
+	const { page } = useAppContext();
+	const { recipes } = useRecipesContext();
+
+	const { Materials } = useMaterialContext();
+	const { dispatch } = useMaterialDispatchContext();
+
+	const { materialId } = useParams();
+	const material = isEdit ? Materials.findById(materialId, false) : null;
+	const navigate = useNavigate();
+
 	const config = useConfig();
 	const { displayMoney } = useIntl();
 	const { convert, defaultCurrency } = useCurrencyConversion();
@@ -20,7 +38,11 @@ export default function MaterialForm({ materialId = null, isEdit = false }) {
 	//==========================// Form States //===================================//
 	//is form submitted
 	const [isSubmitted, setSubmitted] = useState(false);
-	const initialState = { unit: 'kg', density: 1, currency: defaultCurrency };
+	let initialState = { unit: 'kg', density: 1, currency: defaultCurrency };
+	if (material) {
+		initialState = { ...initialState, ...material };
+	}
+
 	//For visual UX state handling
 	const [visualState, setVisualState] = useState({
 		fullPrice: 0,
@@ -29,6 +51,27 @@ export default function MaterialForm({ materialId = null, isEdit = false }) {
 		unit: initialState.unit,
 	});
 
+	//==========================// effects //===================================//
+	useEffect(() => {
+		//If a material was requested but couldn't be found, toast warning and return to materials
+		if (isEdit === true && !material) {
+			toast.warn(t('error.itemNotFound', { ns: 'translation', item: t('name') }));
+			navigate('/materials');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [material, isEdit]);
+
+	//Calculate current try price on load
+	useEffect(() => {
+		priceChangeHandler();
+
+		//Only run on mount
+		if (isEdit && material) {
+			page.setBreadcrumb(material.name);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	//==========================// Form Handling Library //===================================//
 	const { schema, joi, register, getError, handleChange, getFormData, setValue, getValue } = useFormBuilder({
 		initialState,
@@ -36,7 +79,7 @@ export default function MaterialForm({ materialId = null, isEdit = false }) {
 	});
 
 	//==========================// Form Schema //===================================//
-	schema.materialId = joi.number().min(0).required().label(t('form.materialId'));
+	if (isEdit) schema.materialId = joi.number().min(0).required().label(t('form.materialId'));
 	schema.name = joi.string().min(3).max(100).required().label(t('form.name'));
 	schema.provider = joi.string().min(3).max(100).required().label(t('form.provider'));
 	schema.density = joi.number().positive().precision(2).required().label(t('form.density'));
@@ -87,25 +130,91 @@ export default function MaterialForm({ materialId = null, isEdit = false }) {
 		}
 	});
 
+	//==========================// Form Handlers //===================================//
+	const handleSubmit = (e) => {
+		//Define dispatches
+		const handleUpdateMaterial = (data) => {
+			dispatch({
+				type: 'update',
+				payload: data,
+				success: () => {
+					toast.success(t('form.updateSuccess', { name: data.name }));
+					navigate('/materials/' + data.materialId);
+				},
+				error: (code = 'update') => toast.error(t('error.' + code, { ns: 'translation' })),
+			});
+		};
+		const handleAddMaterial = (data) => {
+			dispatch({
+				type: 'add',
+				payload: data,
+				success: () => {
+					toast.success(t('form.addSuccess', { name: data.name }));
+					navigate('/materials/' + data.materialId);
+				},
+				error: (code = 'add') => toast.error(t('error.' + code, { ns: 'translation' })),
+			});
+		};
+
+		//Execute
+		try {
+			const data = getFormData(true);
+			if (!isEdit) {
+				handleAddMaterial(data);
+			} else {
+				handleUpdateMaterial(data);
+			}
+		} catch (err) {
+			//Form errors.
+		}
+	};
+
+	const handleReset = () => {
+		Object.keys(initialState).forEach((key) => {
+			setValue(key, initialState[key]);
+		});
+	};
+
+	const handleDelete = () => {
+		if (!material) return;
+		const boundRecipes = recipes.getByMaterial(material.materialId) || [];
+
+		//If any recipe is using this material, disallow
+		if (boundRecipes && Array.isArray(boundRecipes) && boundRecipes.length > 0) {
+			toast.error(t('form.boundRecipeError', { count: boundRecipes.length }));
+			return;
+		}
+		dispatch({
+			type: 'delete',
+			payload: material,
+			success: () => {
+				toast.success(t('form.deleteSuccess', { name: material.name }));
+				navigate('/materials/');
+			},
+			error: (code = 'delete') => toast.error(t('error.' + code, { ns: 'translation' })),
+		});
+	};
+
 	//==========================// RENDER //===================================//
 	return (
 		<>
 			{/* Back Button */}
-			<BackButton />
 
 			{/* Form */}
 			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
-				<h3 className='text-2xl py-2 font-semibold'>
-					{/* Form title depending on context */}
-					{t('form.title')}
-				</h3>
+				<ModuleHeader
+					module='materials'
+					text={isEdit ? t('form.updateTitle') : t('form.title')}
+					role={isEdit ? 'edit' : 'add'}
+				/>
+
 				<p className='opacity-80'>
 					{/* Form lead depending on context */}
 					{t('form.details')}
 				</p>
 
 				{/* Form BUilder */}
-				<Form onSubmit={(e) => console.log(getFormData())} setSubmitted={setSubmitted}>
+				<Form onSubmit={handleSubmit} onReset={handleReset} onDelete={handleDelete} setSubmitted={setSubmitted}>
 					{/* First Section */}
 					<Form.Section title={t('form.firstSection')}>
 						{/* Material Name */}
@@ -123,7 +232,7 @@ export default function MaterialForm({ materialId = null, isEdit = false }) {
 						</Form.Control>
 
 						<Form.Control error={getError('unit')} label={t('form.unit')} altLabel={t('form.unitAlt')}>
-							<Form.Select options={selectUnit} {...register({ field: 'unit', isControlled: false })} />
+							<Form.Select options={selectUnit} {...register({ field: 'unit', isControlled: true })} />
 						</Form.Control>
 					</Form.Section>
 

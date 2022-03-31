@@ -9,6 +9,7 @@ export default function useProducts() {
 	const [productsRepo, setProductsRepo] = useStorageRepo('application', 'products', []);
 	//Reducer for react state
 	const [productsState, dispatch] = useReducer(productsReducer, productsRepo);
+	
 
 	useEffect(() => {
 		setProductsRepo(productsState);

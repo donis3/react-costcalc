@@ -52,6 +52,7 @@ function InputSelect(
 	};
 
 	const validate = (e) => {
+		
 		//Validate if provided
 		if (typeof validator !== 'object' || 'validate' in validator === false) return;
 		const { error } = validator.validate(e.target.value);

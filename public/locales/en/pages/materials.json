@@ -11,6 +11,7 @@
 		"tax": "Tax",
 		"price": "Price"
 	},
+	"notFound": "Requested material couldn't be found.",
 	"info": {
 		"notFound": "Material could not be loaded for material ID: {{id}}",
 		"title": "Details for \"{{name, truncate(maxLength: 10)}}\""

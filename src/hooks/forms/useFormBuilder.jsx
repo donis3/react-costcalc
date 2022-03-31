@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
+import useConfig from '../app/useConfig';
 import useJoi from '../common/useJoi';
 
 export default function useFormBuilder({ initialState = {}, isSubmitted = false } = {}) {
 	//=========================// Dependencies //=========================//
 	const joi = useJoi({ abortEarly: false, convert: true });
+	const config = useConfig();
 	const schema = {};
 	const [formErrors, setFormErrors] = useState({});
 	const [formState, setFormState] = useState(initialState);
@@ -11,6 +13,15 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	const onChangeMiddleware = {};
 
 	//=========================// Private Methods //=========================//
+
+	//Check if a field is controlled or referenced
+	function isControlled(field = null) {
+		if (!field) return false;
+		if (field in inputRefs.current && inputRefs.current[field]) {
+			return false;
+		}
+		return true;
+	}
 
 	//Register controlled input component
 	function registerControlledInput(field) {
@@ -116,8 +127,9 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	/**
 	 * Will validate the form and return clean data using schema
 	 * Will also include initialState values and merge with formData
+	 * Will throw error if validation fails.
 	 * @param {bool} includeInitialState if false, will only return values for joi schema
-	 * @returns
+	 * @returns {obj} Validated form data
 	 */
 	const getFormData = (includeInitialState = false) => {
 		let result = { ...formState };
@@ -125,10 +137,37 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		Object.keys(inputRefs.current).forEach((key) => {
 			result[key] = key in inputRefs.current ? inputRefs.current[key].value : '';
 		});
-		//Create joi schema
-		const { value, error } = validateForm(result);
 
-		return value;
+		//Remove fields that are not in form schema
+		const formData = Object.keys(schema).reduce((accumulator, key) => {
+			if (typeof result === 'object' && key in result) {
+				return { ...accumulator, [key]: result[key] };
+			}
+			if (typeof initialState === 'object' && key in initialState) {
+				return { ...accumulator, [key]: initialState[key] };
+			}
+			return { ...accumulator, [key]: '' };
+		}, {});
+
+		//Validate form
+		const { value, error } = validateForm(formData);
+
+		//Handle errors
+		if (error && error.details && Array.isArray(error.details)) {
+			const message = error.details.reduce((acc, current) => {
+				return acc.length > 0 ? `${acc}, ${current.context.key}` : current.context.key;
+			}, '');
+			if (config.get('debug.forms')) {
+				console.warn(`Form validation errors: ${message}`);
+			}
+			throw new Error(`Form validation errors: ${message}`);
+		}
+		//Return data
+		if (!includeInitialState) {
+			return value;
+		} else {
+			return { ...initialState, ...value };
+		}
 	};
 
 	/**
@@ -177,6 +216,13 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			//Check if given field is in formState and return it
 			setFormState((state) => ({ ...state, [field]: value }));
 		}
+
+		//Call onChange middleware manually when a field is changed by setValue
+		if (isControlled(field)) {
+			onControlledInputChange(field, value);
+		} else {
+			normalInputChange(field, value);
+		}
 	};
 
 	/**
@@ -220,7 +266,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		handleChange: registerOnChangeMiddleware,
 		getFormData,
 		formErrors,
-		hasError: () => (Object.keys(formErrors).length > 0 ? true : false),
+
 		//Values (including referenced inputs)
 		setValue,
 		getValue,

@@ -8,19 +8,18 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init(i18nextOption
 
 // after i18next.init(options);
 i18n.services.formatter.add('lowercase', (value, lng, options) => {
-	console.log(options)
 	return value.toLowerCase();
 });
 i18n.services.formatter.add('underscore', (value, lng, options) => {
 	return value.replace(/\s+/g, '_');
 });
 
-i18n.services.formatter.add('truncate', (value, lng, {maxLength = 1}) => {
-	if( !maxLength || isNaN(parseInt(maxLength)) ) return value;
+i18n.services.formatter.add('truncate', (value, lng, { maxLength = 1 }) => {
+	if (!maxLength || isNaN(parseInt(maxLength))) return value;
 	maxLength = parseInt(maxLength);
-	if(value.length <= maxLength) {
+	if (value.length <= maxLength) {
 		return value;
-	}else {
+	} else {
 		const substr = value.substring(0, maxLength);
 		return substr + '...';
 	}

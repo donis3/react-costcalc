@@ -2,24 +2,49 @@ import { fields } from './useMaterials';
 import { getMaxInArray } from '../../lib/common';
 
 export default function materialsReducer(state, { type = null, payload = null, success = null, error = null }) {
+	const onError = (errorCode = null) => {
+		error?.(errorCode);
+		return state;
+	};
+
+	const onSuccess = (newState = null) => {
+		success?.();
+		return newState ? newState : state;
+	};
+	//Data corruption handling
+	if (Array.isArray(state) === false) {
+		state = [];
+	}
+
 	switch (type) {
 		/* Add new material */
 		case 'add': {
 			//Find next id
-			const nextMaterialId = getMaxInArray(state, 'materialId', false) + 1;
+			const nextMaterialId = state.length > 0 ? getMaxInArray(state, 'materialId', false) + 1 : 0;
+
 			//Add to payload
 			payload.materialId = nextMaterialId;
+
+			//merge payload with default fields
+			let mergedPayload = getMergedPayload(payload, fields);
+
 			//Validate payload
-			payload = validateMaterialData(payload);
-			if (!payload) {
-				//Invalid data
-				error?.();
-				return state;
-			}
-			//callback
-			if (typeof success === 'function') success();
-			//Set new state
-			return [...state, payload];
+			mergedPayload = validateMaterialData(mergedPayload);
+
+			//Invalid Payload
+			if (!mergedPayload) return onError('invalidItem');
+
+			//Check uniqueness
+			const duplicates = state.filter((item) => {
+				if (item.name === mergedPayload.name && item.provider === mergedPayload.provider) {
+					return true;
+				}
+				return false;
+			});
+			if (duplicates.length > 0) return onError('duplicate');
+
+			//Return success
+			return onSuccess([...state, mergedPayload]);
 		}
 
 		/* Update existing material */
@@ -30,9 +55,12 @@ export default function materialsReducer(state, { type = null, payload = null, s
 				error?.();
 				return state;
 			}
+			//merge payload with default fields
+			let mergedPayload = getMergedPayload(payload, fields);
+
 			//Validate payload
-			payload = validateMaterialData(payload);
-			if (!payload) {
+			mergedPayload = validateMaterialData(mergedPayload);
+			if (!mergedPayload) {
 				//Invalid data
 				error?.();
 				return state;
@@ -40,11 +68,11 @@ export default function materialsReducer(state, { type = null, payload = null, s
 
 			//Create new state with updated item
 			const result = state.map((item) => {
-				if (item.materialId !== payload.materialId) {
+				if (item.materialId !== mergedPayload.materialId) {
 					return item;
 				} else {
 					//The one to be updated
-					return payload;
+					return mergedPayload;
 				}
 			});
 
@@ -123,8 +151,8 @@ function validateMaterialData(data = null, materialId = null) {
 		return null;
 	}
 	//If a material id is provided, add it to object
-	if (materialId && typeof materialId === 'number') {
-		data.materialId = materialId;
+	if (isNaN(parseInt(materialId)) === false) {
+		data.materialId = parseInt(materialId);
 	}
 
 	//Generate a new object with allowed keys
@@ -142,4 +170,16 @@ function validateMaterialData(data = null, materialId = null) {
 	}
 	//Validation failed
 	return null;
+}
+
+function getMergedPayload(payload, fields) {
+	if (!fields) return payload;
+
+	return Object.keys(fields).reduce((acc, key) => {
+		if (typeof payload === 'object' && key in payload) {
+			return { ...acc, [key]: payload[key] };
+		} else {
+			return { ...acc, [key]: fields[key].default };
+		}
+	}, {});
 }

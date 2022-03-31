@@ -22,7 +22,18 @@
 		"stateChange": true,
 		"storage": true,
 		"windowType": false,
-		"exchangeRates": true
+		"exchangeRates": true,
+		"forms": true
+	},
+	"modules": {
+		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },
+		"currency": { "icon": "FaRegMoneyBillAlt", "colors": ["#495371", "#74959A"] },
+		"materials": { "icon": "FaBoxes", "colors": ["#1C0A00", "#361500"] },
+		"packages": { "icon": "FaBoxOpen", "colors": ["#789395", "#94B49F"] },
+		"products": { "icon": "FaClipboardList", "colors": ["#C36839", "#86340A"] },
+		"recipes": { "icon": "FaRegFileAlt", "colors": ["#630000", "#810000"] },
+		"endproducts": { "icon": "FaStore", "colors": ["#0C4271", "#0A81AB"] },
+		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"applicationData": {
 		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",
