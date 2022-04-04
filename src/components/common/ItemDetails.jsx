@@ -1,0 +1,147 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import useConfig from '../../hooks/app/useConfig';
+import useIntl from '../../hooks/common/useIntl';
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import OptionControl from './OptionControl';
+
+/**
+ * Main wrapper for item details page
+ * Uses grid
+ * @returns
+ */
+function Wrapper({ children, colsSmall, colsLarge }) {
+	if (isNaN(parseInt(colsSmall))) colsSmall = 2;
+	if (isNaN(parseInt(colsLarge))) colsLarge = 3;
+
+	return <div className='w-full flex md:flex-row md:gap-x-10 gap-y-10 flex-col-reverse'>{children}</div>;
+}
+Wrapper.defaultProps = {
+	colsSmall: 2,
+	colsLarge: 3,
+};
+
+/**
+ * Individual Items in the grid.
+ * @param {*} param0
+ * @returns
+ */
+function Item({ title = null, children, ...attributes } = {}) {
+	if (typeof children === 'string' && children.trim().length === 0) {
+		return <></>;
+	}
+	return (
+		<div {...attributes}>
+			{/* Details */}
+			<h4 className='text-base-content opacity-60 text-sm mb-1'>{title}</h4>
+			<p className='text-base-content text-base font-medium'>{children}</p>
+		</div>
+	);
+}
+
+/**
+ * Display a box with current price, and show price change if included
+ * Show taxed price if included
+ * @param {*} param0
+ * @returns
+ */
+function UnitCostBox({ currency, price, priceWithTax, previousPrice, title, unit, className }) {
+	//Type checks
+	price = parseFloat(price);
+	priceWithTax = parseFloat(priceWithTax);
+	previousPrice = parseFloat(previousPrice);
+	if (isNaN(price)) price = 0;
+	if (isNaN(priceWithTax)) priceWithTax = price;
+	if (isNaN(previousPrice)) previousPrice = price;
+
+	const config = useConfig();
+	const { t } = useTranslation('translation');
+	if (!currency) currency = config.getDefaultCurrency(true);
+	const { displayMoney, displayNumber } = useIntl();
+
+	//Calculate price change
+	let priceChange = 0;
+
+	if (previousPrice !== price) {
+		//There is a price change
+		const diff = Math.abs(price - previousPrice);
+		const percent = (diff / previousPrice) * 100;
+		priceChange = diff > 0 ? percent : -percent;
+	}
+
+	const priceChangeIndicator = (
+		<span className={`text-sm flex items-center ${priceChange > 0 ? 'text-green-600' : 'text-red-600'}`}>
+			{/* indicator */}
+			{displayNumber(priceChange,2)} % {priceChange > 0 ? <FaCaretUp /> : <FaCaretDown />}
+		</span>
+	);
+
+	return (
+		<div className={`w-full flex ${className ? className : null}`}>
+			<div className='stats shadow flex-1'>
+				<div className='stat'>
+					<div className='stat-title flex justify-between gap-x-10'>
+						<span>{title}</span>
+						{/* Price change indicator */}
+						{priceChange !== 0 && priceChangeIndicator}
+					</div>
+
+					<div className='stat-value text-3xl'>
+						{displayMoney(price, currency)}
+						<span className='text-base font-semibold ml-1 opacity-50'>/{unit}</span>
+					</div>
+					<div className='stat-desc'>
+						{t('labels.priceWithTax', { price: `${displayMoney(priceWithTax, currency)}/${unit}` })}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+UnitCostBox.defaultProps = {
+	currency: null,
+	price: 0,
+	priceWithTax: null,
+	previousPrice: 0,
+	title: '',
+	unit: 'kg',
+};
+
+function Toggles({ setOption, getOption, options, ...attributes }) {
+	const { t } = useTranslation('translation');
+	const config = useConfig();
+	const defaultCurrencyName = t('currency.' + config.getDefaultCurrency(true));
+
+	if (!Array.isArray(options) || options.length === 0) return <></>;
+
+	return (
+		<div {...attributes}>
+			{/* Generate toggles */}
+			{options.map((opt, i) => {
+				return (
+					<OptionControl
+						key={i}
+						state={getOption(opt)}
+						setState={() => setOption(opt)}
+						text={t(`toggles.${opt}`, { currency: defaultCurrencyName })}
+						checkboxFirst={true}
+					/>
+				);
+			})}
+		</div>
+	);
+}
+Toggles.defaultProps = {
+	setOption: () => {},
+	getOption: () => {},
+	options: [],
+};
+
+const ItemDetails = {
+	Main: Wrapper,
+	Item: Item,
+	Price: UnitCostBox,
+	Toggles: Toggles,
+};
+
+export default ItemDetails;

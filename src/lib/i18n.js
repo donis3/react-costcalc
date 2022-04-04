@@ -10,6 +10,9 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init(i18nextOption
 i18n.services.formatter.add('lowercase', (value, lng, options) => {
 	return value.toLowerCase();
 });
+i18n.services.formatter.add('capitalize', (value, lng, options) => {
+	return value.charAt(0).toUpperCase() + value.slice(1);
+});
 i18n.services.formatter.add('underscore', (value, lng, options) => {
 	return value.replace(/\s+/g, '_');
 });

@@ -10,7 +10,6 @@
 		"unit": "Unit",
 		"supplier": "Supplier",
 		"price": "Price"
-
 	},
 	"notFound": "Requested material couldn't be found.",
 	"info": {
@@ -30,7 +29,8 @@
 		"priceWithTax": "Taxed Price",
 		"currency": "Price Currency",
 		"density": "Density",
-		"densityText": "{{value}} g/cm<sup>3</sup>"
+		"densityText": "{{value}} g/cm<sup>3</sup>",
+		"provider": "Supplier"
 	},
 
 	"form": {

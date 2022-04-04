@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaInfoCircle, FaPencilAlt, FaChartLine } from 'react-icons/fa';
+import { FaPencilAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ThSortable from '../../components/common/ThSortable';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
 import useIntl from '../../hooks/common/useIntl';
 
-export default function MaterialTable({ openModal = null } = {}) {
+export default function MaterialTable() {
 	const { t } = useTranslation('pages/materials');
 	const { Materials } = useMaterialContext();
 	const [sortingState, sortBy] = useSortTableByField('materials', Materials.fields, Materials.fields[0]);
@@ -42,7 +42,7 @@ export default function MaterialTable({ openModal = null } = {}) {
 				</thead>
 				<tbody>
 					{Materials.getAll(sortingState).map((material, index) => {
-						return <MaterialTableRow key={index} index={index} data={material} openModal={openModal} />;
+						return <MaterialTableRow key={index} index={index} data={material} />;
 					})}
 				</tbody>
 			</table>
@@ -51,7 +51,7 @@ export default function MaterialTable({ openModal = null } = {}) {
 }
 
 //Table Rows
-function MaterialTableRow({ data = null, index = 0, openModal = null }) {
+function MaterialTableRow({ data = null, index = 0 }) {
 	const { displayMoney } = useIntl();
 	if (!data) return <></>;
 	const { materialId, name, unit, provider, price, currency } = data;
@@ -64,25 +64,15 @@ function MaterialTableRow({ data = null, index = 0, openModal = null }) {
 					{name}
 				</Link>
 			</td>
-			<td>
-				{provider}
-			</td>
+			<td>{provider}</td>
 			<td>
 				{displayMoney(price, currency)}
 				<span className='text-xs ml-1 opacity-70'>/{unit}</span>
 			</td>
 			<td className='flex flex-wrap gap-x-1'>
-				
 				<Link to={`/materials/edit/${materialId}`} className='btn btn-ghost btn-xs'>
 					<FaPencilAlt />
 				</Link>
-				<button className='btn btn-ghost btn-xs' onClick={() => openModal('history', materialId)}>
-					<FaChartLine />
-				</button>
-
-				<button className='btn btn-ghost btn-xs' onClick={() => openModal?.('info', materialId)}>
-					<FaInfoCircle />
-				</button>
 			</td>
 		</tr>
 	);

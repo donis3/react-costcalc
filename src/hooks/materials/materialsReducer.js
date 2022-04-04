@@ -66,6 +66,9 @@ export default function materialsReducer(state, { type = null, payload = null, s
 				return state;
 			}
 
+			//Update updateAt
+			mergedPayload.updatedAt = Date.now();
+
 			//Create new state with updated item
 			const result = state.map((item) => {
 				if (item.materialId !== mergedPayload.materialId) {
@@ -99,41 +102,75 @@ export default function materialsReducer(state, { type = null, payload = null, s
 			return result;
 		}
 
-		//Add the given local price to price history of this material if necessary
-		case 'addToPriceHistory': {
+		case 'addPriceHistory': {
 			//Check payload
 			const { materialId, priceItem } = payload;
 			if (!priceItem || isNaN(materialId) || 'date' in priceItem === false) return state;
 			priceItem.amount = parseFloat(priceItem.amount);
-			if (isNaN(priceItem.amount)) return state;
+			if (isNaN(priceItem.amount)) priceItem.amount = 0;
 
 			//Load requested material
 			const material = state.find((item) => item.materialId === materialId);
 			if (!material) return state;
-			let latestPrice = 0;
-			//Extract latest price from material if exists
-			if (material.priceHistory && Array.isArray(material.priceHistory) && material.priceHistory.length > 0) {
-				const lastPriceItem = material.priceHistory[0];
-				if (lastPriceItem && lastPriceItem.amount && isNaN(parseFloat(lastPriceItem.amount)) === false) {
-					//Found latest price
-					latestPrice = parseFloat(lastPriceItem.amount);
-				}
-			}
-			//Compare current price to last price and do nothing if they are the same
-			const diff = Math.abs(Math.round((priceItem.amount - latestPrice) * 100) / 100);
-			if (diff <= 0) return state; //No need to update.
-			//Copy price history
+
+			//Load price histories
 			let priceHistory = material.priceHistory ? [...material.priceHistory] : [];
-			if (priceHistory.length > 9) {
-				priceHistory.splice(9);
-			}
+
+			//Get latest prices
+			const { price } = getLatestPrice(material);
+
+			//Check if price has changed enough to warrant an update
+			if (!hasPriceChanged(price, priceItem.amount)) return state;
+
+			//Add new price to array
+			console.log(`Adding new price to ${material.name}. New: ${priceItem.amount} Old: ${price}`);
+			priceHistory.unshift(priceItem);
+
+			//Remove excess items
+			if (priceHistory.length > 10) priceHistory.splice(10);
 
 			//Replace this material in state
 			return state.map((item) => {
 				//Other materials
 				if (item.materialId !== materialId) return item;
 				//This material that needs updating
-				return { ...material, priceHistory: [priceItem, ...priceHistory] };
+				return { ...material, priceHistory: [...priceHistory] };
+			});
+		}
+
+		case 'addLocalPriceHistory': {
+			//Check payload
+			const { materialId, priceItem } = payload;
+			if (!priceItem || isNaN(materialId) || 'date' in priceItem === false) return state;
+			priceItem.amount = parseFloat(priceItem.amount);
+			if (isNaN(priceItem.amount)) priceItem.amount = 0;
+
+			//Load requested material
+			const material = state.find((item) => item.materialId === materialId);
+			if (!material) return state;
+
+			//Load price histories
+			let localPriceHistory = material.localPriceHistory ? [...material.localPriceHistory] : [];
+
+			//Get latest local prices
+			const { localPrice } = getLatestPrice(material);
+
+			//Check if price has changed enough to warrant an update
+			if (!hasPriceChanged(localPrice, priceItem.amount)) return state;
+
+			//Add new price to array
+			console.log(`Adding new local price to ${material.name}. New: ${priceItem.amount} Old: ${localPrice}`);
+			localPriceHistory.unshift(priceItem);
+
+			//Remove excess items
+			if (localPriceHistory.length > 10) localPriceHistory.splice(10);
+
+			//Replace this material in state
+			return state.map((item) => {
+				//Other materials
+				if (item.materialId !== materialId) return item;
+				//This material that needs updating
+				return { ...material, localPriceHistory: [...localPriceHistory] };
 			});
 		}
 
@@ -142,6 +179,36 @@ export default function materialsReducer(state, { type = null, payload = null, s
 			throw new Error(`Invalid dispatch type: ${type}`);
 		}
 	}
+}
+
+function getLatestPrice(material) {
+	const result = { localPrice: 0, price: 0 };
+	if (!material) return result;
+	if (Array.isArray(material.priceHistory) && material.priceHistory.length > 0) {
+		const lastPriceItem = material.priceHistory[0];
+		if (lastPriceItem && lastPriceItem.amount && isNaN(parseFloat(lastPriceItem.amount)) === false) {
+			//Found latest price
+			result.price = parseFloat(lastPriceItem.amount);
+		}
+	}
+	if (Array.isArray(material.localPriceHistory) && material.localPriceHistory.length > 0) {
+		const lastPriceItem = material.localPriceHistory[0];
+		if (lastPriceItem && lastPriceItem.amount && isNaN(parseFloat(lastPriceItem.amount)) === false) {
+			//Found latest price
+			result.localPrice = parseFloat(lastPriceItem.amount);
+		}
+	}
+	return result;
+}
+
+function hasPriceChanged(previous, current) {
+	previous = parseFloat(previous);
+	current = parseFloat(current);
+	if (isNaN(previous)) previous = 0;
+	if (isNaN(current)) current = 0;
+	const diff = Math.abs(Math.round((current - previous) * 100) / 100);
+
+	return diff <= 0 ? false : true;
 }
 
 //Filter given data get clean object

@@ -8,7 +8,6 @@ import useIntl from '../common/useIntl';
 import useCurrencyConversion from '../app/useCurrencyConversion';
 import Material from './Material';
 
-
 /**
  * Define fields and defaults for a material
  */
@@ -22,6 +21,9 @@ export const fields = {
 	currency: { type: 'string', default: 'TRY' },
 	unit: { type: 'string', default: 'kg' },
 	priceHistory: { type: 'array', default: [] },
+	localPriceHistory: { type: 'array', default: [] },
+	createdAt: { type: 'numeric', default: Date.now() },
+	updatedAt: { type: 'numeric', default: Date.now() },
 };
 
 /* ==================================== Note: Import Through Context	 ====================================== */
@@ -126,8 +128,20 @@ export default function useMaterials() {
 				date: Date.now(),
 				amount: material.localPrice,
 			};
+			const currentPrice = {
+				date: Date.now(),
+				amount: material.price,
+			};
 			dispatch({
-				type: 'addToPriceHistory',
+				type: 'addPriceHistory',
+				payload: {
+					materialId: material.materialId,
+					priceItem: currentPrice,
+				},
+			});
+
+			dispatch({
+				type: 'addLocalPriceHistory',
 				payload: {
 					materialId: material.materialId,
 					priceItem: currentLocalPrice,

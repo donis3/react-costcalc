@@ -92,6 +92,7 @@
 		"totalWitTax": "Taxed Total",
 		"totalWithTax": "Taxed Total",
 		"taxPercent": "Tax %{{percent}}",
+		"priceWithTax": "{{price}} including tax",
 		"taxTotal": "Total Tax",
 		"noTax": "Without Tax",
 		"withTax": "With Tax",
@@ -203,7 +204,10 @@
 		"DKK": "Danish Krone"
 	},
 	"toggles": {
-		"includeTax": "Include tax?"
+		"includeTax": "Include tax?",
+		"showTax": "Include tax?",
+		"localPrice": "Convert costs/prices to {{currency}}?",
+		"baseUnit": "Use base units?"
 	},
 	"errorBoundary": {
 		"title": "Application Crashed!",
@@ -215,5 +219,11 @@
 		"name": "Name",
 		"amount": "Amount",
 		"rate": "Rate"
+	},
+	"tabs": {
+		"details": "Details",
+		"itemDetails": "{{item, capitalize}} Details",
+		"costHistory": "Cost History",
+		"priceHistory": "Price History"
 	}
 }

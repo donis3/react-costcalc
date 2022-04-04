@@ -15,10 +15,10 @@ export default function OptionControl({ state = true, setState = null, text = nu
 		}
 	};
 	return (
-		<div className='form-control'>
+		<div className='form-control py-1'>
 			<label className={`cursor-pointer flex items-center gap-x-2 ${!checkboxFirst && ' justify-between'}`}>
 				{!checkboxFirst && <span className='label-text'>{text}</span>}
-				<input type='checkbox' checked={state} className='checkbox checkbox-primary' onChange={handleChange} />
+				<input type='checkbox' checked={state} className='checkbox checkbox-primary min-w-[25px]' onChange={handleChange} />
 				{checkboxFirst && <span className='label-text'>{text}</span>}
 			</label>
 		</div>

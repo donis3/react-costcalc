@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useMaterialContext } from '../../context/MainContext';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
-import Card from '../../components/common/Card';
-import ModuleHeader from '../../components/layout/ModuleHeader';
+import CardWithTabs from '../../components/common/CardWithTabs';
+import Button from '../../components/common/Button';
+import MaterialDetails from './details/MaterialDetails';
+import MaterialHistory from './details/MaterialHistory';
+import { FaInfo as InfoIcon, FaChartLine as CostIcon } from 'react-icons/fa';
+import DocumentDates from '../../components/common/DocumentDates';
 
 export default function Material() {
 	const { t } = useTranslation('pages/materials', 'translation');
@@ -19,6 +23,9 @@ export default function Material() {
 		if (!material) {
 			toast.warning(t('error.itemNotFound', { ns: 'translation', item: t('name') }));
 			navigate('/notfound');
+		}else {
+			//Calculate prices and save to db
+			Materials.recordPriceForMaterial(material);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [material]);
@@ -28,12 +35,41 @@ export default function Material() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	//JSX
+	//Define tabs
+	const tabs = [
+		{
+			name: (
+				<span className='flex items-center gap-x-1'>
+					<InfoIcon /> {t('tabs.itemDetails', { ns: 'translation', item: t('name') })}
+				</span>
+			),
+			body: <MaterialDetails material={material} />,
+		},
+		{
+			name: (
+				<span className='flex items-center gap-x-1'>
+					<CostIcon /> {t('tabs.priceHistory', { ns: 'translation' })}
+				</span>
+			),
+			body: <MaterialHistory materialId={material.materialId} />,
+		},
+	];
+
+	//Render
 	return (
 		<>
-			<Card className='w-full px-3 py-5' shadow='shadow-lg'>
-				<ModuleHeader text={material.name} module='materials' role='view'></ModuleHeader>
-			</Card>
+			<CardWithTabs
+				tabs={tabs}
+				headerContent={
+					<Link to={`/materials/edit/${material?.materialId}`}>
+						<Button.Edit />
+					</Link>
+				}
+				title={material?.name}
+				module='materials'
+				role='view'
+			/>
+			<DocumentDates updatedAt={material.updatedAt} createdAt={material.createdAt} />
 		</>
 	);
 }

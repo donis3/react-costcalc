@@ -15,11 +15,11 @@ import {
 	FaCaretUp,
 } from 'react-icons/fa';
 import FormInput from '../../components/form/FormInput';
-import MaterialInfo from '../materials/MaterialInfo';
+
 import DocumentDates from '../../components/common/DocumentDates';
 import CostTable from '../../components/CostTable/CostTable';
 import RecipeCostHistory from './details/RecipeCostHistory';
-import BackButton from '../../components/common/BackButton';
+
 import ModuleHeader from '../../components/layout/ModuleHeader';
 
 export default function Recipe() {
@@ -32,8 +32,6 @@ export default function Recipe() {
 	const [recipeState, setRecipeState] = useState({
 		showChangeYield: false,
 		recipe: recipe,
-		showMaterial: false,
-		materialId: null,
 		showCostHistory: false,
 	});
 	const newYieldRef = useRef();
@@ -64,8 +62,6 @@ export default function Recipe() {
 	}, []);
 
 	//Show /Hide material modal
-	const closeMaterial = () => setRecipeState((state) => ({ ...state, showMaterial: false, materialId: null }));
-	const openMaterial = (materialId) => setRecipeState((state) => ({ ...state, showMaterial: true, materialId }));
 	const openCostHistory = () => setRecipeState((state) => ({ ...state, showCostHistory: true }));
 	const closeCostHistory = () => setRecipeState((state) => ({ ...state, showCostHistory: false }));
 
@@ -79,13 +75,12 @@ export default function Recipe() {
 				<ModuleHeader text={recipeState.recipe.name} module='recipes' role='view'>
 					{/* Links */}
 					<Button.Chart forceIcon onClick={openCostHistory}>
-							{t('charts.costHistory', { ns: 'translation' })}
-						</Button.Chart>
-						<Link to={`/recipes/edit/${recipeState.recipe.recipeId}`}>
-							<Button.Edit />
-						</Link>
+						{t('charts.costHistory', { ns: 'translation' })}
+					</Button.Chart>
+					<Link to={`/recipes/edit/${recipeState.recipe.recipeId}`}>
+						<Button.Edit />
+					</Link>
 				</ModuleHeader>
-
 
 				{/* Half / Half divided */}
 				<div className='w-full flex'>
@@ -156,7 +151,6 @@ export default function Recipe() {
 						<CostTable
 							costs={recipeState.recipe.getCostDetailsForTable()}
 							items={recipeState.recipe.getMaterialsForTable()}
-							itemCallback={openMaterial}
 						/>
 					</div>
 				)}
@@ -164,7 +158,6 @@ export default function Recipe() {
 
 			<DocumentDates updatedAt={recipe?.updatedAt} createdAt={recipe?.createdAt} />
 			{recipeState.showCostHistory && <RecipeCostHistory handleClose={closeCostHistory} recipe={recipeState.recipe} />}
-			{recipeState.showMaterial && <MaterialInfo handleClose={closeMaterial} materialId={recipeState.materialId} />}
 		</>
 	);
 }

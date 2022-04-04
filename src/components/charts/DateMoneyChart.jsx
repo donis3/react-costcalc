@@ -124,5 +124,7 @@ export default function DateMoneyChart({ data = null, title = '', currency = nul
 		],
 	};
 
+	
+
 	return <Line options={options} data={chartData2} />;
 }
