@@ -7,7 +7,10 @@ import useProductsForm from '../../hooks/products/useProductsForm';
 
 export default function ProductForm({ handleClose = null, productId = null } = {}) {
 	const { t } = useTranslation('pages/products');
-	const { formState, handleSubmit, handleChange, hasError, handleDelete } = useProductsForm({ productId, handleClose });
+	const { formState, handleSubmit, handleChange, hasError, handleDelete, isEdit } = useProductsForm({
+		productId,
+		handleClose,
+	});
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -48,6 +51,7 @@ export default function ProductForm({ handleClose = null, productId = null } = {
 						<FormInput.Select
 							name='isLiquid'
 							value={formState.isLiquid}
+							disabled={isEdit ? true : false}
 							onChange={handleChange}
 							options={[
 								{ value: true, name: t('states.liquid') },
@@ -65,7 +69,7 @@ export default function ProductForm({ handleClose = null, productId = null } = {
 					>
 						<FormInput.Text
 							name='density'
-							disabled={formState.isLiquid === 'false'}
+							disabled={formState.isLiquid === 'false' || formState.isLiquid === false}
 							value={formState.density}
 							onChange={handleChange}
 							filter='number'

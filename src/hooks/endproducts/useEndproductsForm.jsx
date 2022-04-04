@@ -38,6 +38,9 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 				const { packageId } = selectData.getDefaultPackage(recipeId) ? selectData.getDefaultPackage(recipeId) : {};
 				if (!isNaN(parseInt(packageId)) && parseInt(packageId) !== parseInt(formState.packageId)) {
 					setFormState((state) => ({ ...state, packageId: parseInt(packageId) }));
+				} else {
+					//Set package to invalid id so form wont submit.
+					setFormState((state) => ({ ...state, packageId: 'notfound' }));
 				}
 			}
 		}
@@ -46,6 +49,7 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 
 	//Handle Submit
 	const onSubmit = (formData) => {
+		
 		if (!endProduct) {
 			return dispatch({
 				type: 'add',
@@ -131,9 +135,11 @@ const getInitialState = (endProduct = null, selectData = null) => {
 		notes: '',
 	};
 
+	//Find default recipe and package id's
 	const { recipeId = null } = selectData?.getDefaultRecipe() ? selectData?.getDefaultRecipe() : {};
 	const { packageId = null } = selectData?.getDefaultPackage() ? selectData.getDefaultPackage() : {};
-	if (!recipeId || !packageId) {
+
+	if (!endProduct && (!recipeId || !packageId)) {
 		return result;
 	}
 

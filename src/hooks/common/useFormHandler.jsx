@@ -20,7 +20,9 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	};
 
 	useEffect(() => {
-		validateForm(formState);
+		if (errors.length > 0) {
+			validateForm(formState);
+		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState]);
@@ -137,7 +139,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 	};
 
 	//exports
-	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError, resetForm};
+	return { onChangeHandler, setFieldState, onSubmitHandler, errors, hasError, resetForm };
 };
 
 export default useFormHandler;

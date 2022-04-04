@@ -95,5 +95,6 @@ export default function useProductsForm({ productId = null, handleClose = null }
 		handleSubmit: (e) => {
 			formHandler.onSubmitHandler(e, handleSubmit);
 		},
+		isEdit: product ? true : false,
 	};
 }
