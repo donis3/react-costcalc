@@ -64,7 +64,7 @@ export default function currenciesReducer(state, action) {
 			//add new rate as the first element
 			currentCurrencyRates = [newRate, ...currentCurrencyRates];
 			//Remove last element if max history size is exceeded
-			if (currentCurrencyRates.length > currencySettings.maxHistoricalData+1) {
+			if (currentCurrencyRates.length > currencySettings.maxHistoricalData + 1) {
 				currentCurrencyRates.pop();
 			}
 			//console.log(`[Currencies] New ${newRate.from} rate: ${newRate.rate.toFixed(2)}`);
@@ -79,6 +79,7 @@ export default function currenciesReducer(state, action) {
 			//Return empty object as state
 			return onSuccess({});
 		}
+
 
 		default: {
 			throw new Error(`[Currencies] Invalid dispatch request: ${type}`);

@@ -17,14 +17,15 @@
 .nav-item .nav-active {
 	font-weight: 900;
 }
-.nav-item .nav-active::after {
-	margin-left: 3px;
-	content: '\25CF';
-	margin-top: -2px;
+
+
+.nav-item svg {
+	@apply opacity-30;
 }
-.nav-item .nav-active::after {
-	@apply text-success-content;
+.nav-item .nav-active svg {
+	@apply opacity-100;
 }
+
 
 .nav-dropdown {
 	@apply w-full flex flex-col items-end lg:w-auto lg:list-item;

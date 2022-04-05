@@ -37,6 +37,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		if (!schema) return null;
 
 		const result = schema.validate(formData);
+		
 
 		//There are errors
 		if (result.error && result.error.details) {
@@ -70,6 +71,7 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		setIsSubmitted(true);
 
 		const data = validateForm(formState);
+		
 		if (!data) {
 			//There are errors do not submit
 			// console.log('Form has errors');

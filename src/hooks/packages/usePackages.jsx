@@ -137,6 +137,8 @@ export default function usePackages() {
 			//Other operations
 			if (item.packageType === 'box') {
 				mutatedItem.name = t('labels.boxName', { name: mutatedItem.name, capacity: item.boxCapacity });
+				mutatedItem.amount = mutatedItem.amount / item.boxCapacity
+				mutatedItem.quantity = mutatedItem.quantity / item.boxCapacity
 			}
 			return mutatedItem;
 		});

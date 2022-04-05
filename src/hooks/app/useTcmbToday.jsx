@@ -9,10 +9,10 @@ import { useCurrencyDispatch } from '../../context/MainContext';
 const axiosOptions = { timeout: 20000 };
 
 /**
- * This hook will connect to TCMB today xml and parse it, 
- * extract required exchange rates from the xml and 
+ * This hook will connect to TCMB today xml and parse it,
+ * extract required exchange rates from the xml and
  * will dispatch them to currency storage repo
- * @returns 
+ * @returns
  */
 export default function useTcmbToday() {
 	//Config vars
@@ -112,6 +112,7 @@ export default function useTcmbToday() {
 			);
 			//Dispatch using cache
 			dispatchXmlRates(xmlCache.xml);
+			refreshApplication();
 			return;
 		}
 
@@ -143,9 +144,17 @@ export default function useTcmbToday() {
 			.finally(() => {
 				//Set States
 				setLoading(false);
+				refreshApplication();
 			});
 
 		//Parse data
+	};
+
+	const refreshApplication = () => {
+		console.log(`Reloading application due to exchange rate changes...`);
+		setTimeout(() => {
+			window.location.reload();
+		}, 1000);
 	};
 
 	//Return public states and api

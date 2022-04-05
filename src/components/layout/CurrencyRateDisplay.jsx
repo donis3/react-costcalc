@@ -15,6 +15,7 @@ export default function CurrencyRateDisplay() {
 	const { loading, fetchTcmbRates } = useTcmbToday();
 	const { t } = useTranslation('translation');
 	
+	
 
 	//No currency conversion available
 	if (!currencies || currencies.enabledCurrencies === 0) {

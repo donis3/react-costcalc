@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Company from './pages/company/Company';
+import Employees from './pages/company/Employees';
+import Expenses from './pages/company/Expenses';
 
 import Currency from './pages/currencies/Currency';
 import CurrencySelectOne from './pages/currencies/CurrencySelectOne';
@@ -34,10 +37,15 @@ export default function Router() {
 			<Route path='/recipes/edit/:recipeId' element={<RecipeForm />} />
 
 			{/* Experimental */}
-			<Route path='/materials/:materialId' element={<Material/>} />
+			<Route path='/materials/:materialId' element={<Material />} />
 			<Route path='/materials/add' element={<MaterialForm />} />
-			<Route path='/materials/edit' element={<Materials/>} />
+			<Route path='/materials/edit' element={<Materials />} />
 			<Route path='/materials/edit/:materialId' element={<MaterialForm isEdit={true} />} />
+
+			{/* Company */}
+			<Route path='/company' element={<Company />}  />
+			<Route path='/company/employees' element={<Employees />} />
+			<Route path='/company/expenses' element={<Expenses />} />
 
 			{/* Packages */}
 			<Route path='/packages' element={<Packages />} />

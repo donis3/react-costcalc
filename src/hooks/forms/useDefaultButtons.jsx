@@ -75,12 +75,42 @@ export default function useDefaultButtons() {
 		);
 	}
 
+	function Edit({ children, icon = 'FaPencilAlt', text = '', ...props }) {
+		if (typeof text !== 'string') text = '';
+		if (i18n.exists(text)) text = t(text);
+		if (i18n.exists('buttons.' + text)) text = t('buttons.' + text);
+		if (!children) children = text;
+
+		return (
+			<button type='button' className='btn btn-outline btn-sm ' {...props}>
+				{icon && typeof icon === 'string' ? <FaIcon icon={icon} /> : null}
+				{children ? children : t('buttons.edit')}
+			</button>
+		);
+	}
+
+	function Cancel({ children, icon = 'FaTimes', text = '', ...props }) {
+		if (typeof text !== 'string') text = '';
+		if (i18n.exists(text)) text = t(text);
+		if (i18n.exists('buttons.' + text)) text = t('buttons.' + text);
+		if (!children) children = text;
+
+		return (
+			<button type='button' className='btn btn-sm ' {...props}>
+				{icon && typeof icon === 'string' ? <FaIcon icon={icon} /> : null}
+				{children ? children : t('buttons.cancel')}
+			</button>
+		);
+	}
+
 	return {
 		Submit,
 		Delete,
 		ConfirmYes,
 		ConfirmNo,
 		Reset,
+		Edit,
+		Cancel,
 	};
 }
 

@@ -25,7 +25,8 @@
 		"delete": "Item couldn't be deleted.",
 		"noData": "No data",
 		"itemNotFound": "Requested {{item, lowercase}} couldn't be found",
-		"duplicate": "There is already another item with the same values."
+		"duplicate": "There is already another item with the same values.",
+		"updateNotRequired": "Nothing to update"
 	},
 	"success": {
 		"add": "\"{{name}}\" was successfully added.",
@@ -40,7 +41,11 @@
 	"nav": {
 		"manufacturing": "Manufacturing",
 		"products": "Product Definitions",
-		"recipes": "Recipes"
+		"recipes": "Recipes",
+		"company": "Company",
+		"companyAlt": "Company Details",
+		"expenses": "Expenses",
+		"employees": "Employees"
 	},
 	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
 	"themes": {

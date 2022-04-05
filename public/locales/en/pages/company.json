@@ -1,0 +1,27 @@
+{
+	"name": "Company",
+	"details": {
+		"title": "Company Details",
+		"lead": "Information about the company"
+	},
+	"infoForm": {
+		"details": "Company Details",
+		"communication": "Communication Info"
+	},
+	"company": {
+		"name": "Company Name",
+		"about": "About the company",
+		"founder": "Founder",
+		"establishedOn": "Established On",
+		"address": "Company Address",
+		"city": "City",
+		"country": "Country",
+		"lat": "Latitude",
+		"long": "Longitude",
+		"phone": "Landline",
+		"mobile": "Mobile",
+		"fax": "Fax",
+		"email": "Email",
+		"taxId": "Tax No"
+	}
+}

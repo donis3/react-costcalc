@@ -50,6 +50,11 @@ export default function Currency() {
 		const error = () => toast.error(t('currency.addError'));
 
 		dispatch({ type: 'add', payload, success, error });
+
+		console.log(`Reloading application due to exchange rate changes...`);
+		setTimeout(() => {
+			window.location.reload();
+		}, 1000);
 	};
 
 	if (!currencies || 'enabledCurrencies' in currencies === false || currencies.enabledCurrencies.length === 0) {

@@ -39,9 +39,8 @@ export default function MainContext({ children }) {
 	const recipesMemoized = useMemo(() => ({ recipes }), [recipes]);
 	const packagesMemoized = useMemo(() => ({ packages }), [packages]);
 	const endProductsMemoized = useMemo(() => ({ endProducts }), [endProducts]);
-	
 
-	//All Context Providers wrapped
+	//All Context Providers wrapped 
 	return (
 		// Currency Conversion Rates
 		<CurrencyContext.Provider value={currenciesMemoized}>

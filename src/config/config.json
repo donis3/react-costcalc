@@ -33,6 +33,10 @@
 		"products": { "icon": "FaClipboardList", "colors": ["#C36839", "#86340A"] },
 		"recipes": { "icon": "FaRegFileAlt", "colors": ["#630000", "#810000"] },
 		"endproducts": { "icon": "FaStore", "colors": ["#0C4271", "#0A81AB"] },
+		"manufacturing": { "icon": "FaIndustry", "colors": ["#0C4271", "#0A81AB"], "children": ["products", "recipes"] },
+		"company": { "icon": "FaBuilding", "colors": ["#0C4271", "#0A81AB"], "children": ["employees", "expenses"] },
+		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#0C4271", "#0A81AB"] },
+		"employees": { "icon": "FaUsers", "colors": ["#0C4271", "#0A81AB"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"applicationData": {

@@ -20,6 +20,9 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 
 	//Form State
 	const [formState, setFormState] = useState(getInitialState(endProduct, selectData));
+	
+
+	
 
 	//Load form handler
 	const { hasError, onChangeHandler, onSubmitHandler } = useFormHandler({
@@ -50,6 +53,7 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 	//Handle Submit
 	const onSubmit = (formData) => {
 		
+
 		if (!endProduct) {
 			return dispatch({
 				type: 'add',
@@ -139,7 +143,8 @@ const getInitialState = (endProduct = null, selectData = null) => {
 	const { recipeId = null } = selectData?.getDefaultRecipe() ? selectData?.getDefaultRecipe() : {};
 	const { packageId = null } = selectData?.getDefaultPackage() ? selectData.getDefaultPackage() : {};
 
-	if (!endProduct && (!recipeId || !packageId)) {
+	
+	if (!endProduct && (isNaN(recipeId) || isNaN(packageId))) {
 		return result;
 	}
 

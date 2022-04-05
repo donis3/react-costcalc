@@ -10,6 +10,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import MainContext from './context/MainContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CompanyContextProvider from './context/CompanyContext';
 
 function App() {
 	loadThemeFromStorage();
@@ -27,15 +28,16 @@ function App() {
 				pauseOnFocusLoss
 				draggable={false}
 				pauseOnHover
-				
 			/>
 			<AppContextProvider>
-				{/* Main context has multiple context in it */}
-				<MainContext>
-					<MainLayout footer={<Footer />} header={<Navbar />}>
-						<Router />
-					</MainLayout>
-				</MainContext>
+				<CompanyContextProvider>
+					{/* Main context has multiple context in it */}
+					<MainContext>
+						<MainLayout footer={<Footer />} header={<Navbar />}>
+							<Router />
+						</MainLayout>
+					</MainContext>
+				</CompanyContextProvider>
 			</AppContextProvider>
 		</ErrorBoundary>
 	);

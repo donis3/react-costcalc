@@ -14,6 +14,7 @@ export default function useCurrencyConversion() {
 	 */
 	const convert = (amount = 0, from = null, to = null, round = true) => {
 		const result = { currency: from, amount: amount };
+		
 
 		if (typeof from === 'string') from = from.toUpperCase();
 		if (typeof to === 'string') to = to.toUpperCase();

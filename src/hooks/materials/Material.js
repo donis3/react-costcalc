@@ -38,6 +38,8 @@ export default class Material {
 
 		this.calculatePriceWithTax();
 		this.calculateBaseUnitPrice();
+
+		
 	}
 
 	/**

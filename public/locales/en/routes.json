@@ -8,5 +8,8 @@
 	"recipes": "Recipes",
 	"add": "Add",
 	"edit": "Edit",
-	"packages": "Packages"
+	"packages": "Packages",
+	"company": "Company",
+	"expenses": "Expenses",
+	"employees": "Employees"
 }

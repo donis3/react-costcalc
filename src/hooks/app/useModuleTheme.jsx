@@ -2,7 +2,19 @@ import useConfig from './useConfig';
 
 //Roles enum
 const roles = ['main', 'add', 'edit', 'view', 'other'];
-const modules = ['home', 'products', 'materials', 'recipes', 'packages', 'endproducts', 'currency', 'other'];
+const modules = [
+	'home',
+	'products',
+	'materials',
+	'recipes',
+	'packages',
+	'endproducts',
+	'currency',
+	'other',
+	'company',
+	'employees',
+	'expenses',
+];
 
 export default function useModuleTheme({ module = 'home', role = 'main' }) {
 	const config = useConfig();
