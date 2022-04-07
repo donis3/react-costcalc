@@ -1,26 +1,27 @@
 import config from '../../config/config.json';
+import { formatISO } from 'date-fns';
 
-const departments = ['manufacturing', 'pr', 'cr', 'marketing', 'hr', 'it', 'management', 'other'];
-const categories = ['officeSupplies', 'repairs', 'utilities', 'other'];
+const departments = config.company.departments.map((item) => item.name);
+const categories = config.company.expenseCategories;
 const defaultCurrencyObj = config.applicationData.currencies.find((item) => item.default === true);
 const defaultCurrency = defaultCurrencyObj?.code || 'TRY';
 
 const defaultCompany = {
 	info: {
 		name: 'Dream Incorporated.',
+		legalName: 'Dreams Manufacturing Dreams LLC - Cayman Islands',
 		founder: 'John Doe',
 		about: 'About the company...',
-		establishedOn: new Date('01/01/2000').getTime(),
+		establishedOn: formatISO(new Date('01/01/2000')),
 		address: 'Central Avenue No:1',
 		city: 'Istanbul',
 		country: 'Turkiye',
-		lat: 41.013043,
-		long: 28.952883,
 		phone: '2121000000',
 		mobile: '5321000000',
 		fax: '2121000000',
 		email: 'company@example.com',
 		taxId: '',
+		website: 'www.company.com',
 	},
 	overhead: [
 		{
@@ -38,10 +39,18 @@ const defaultCompany = {
 		{
 			name: 'John Doe',
 			department: departments[0],
-			salary: 50000,
+			notes: '',
+			gross: 5879 * 12,
+			net: 4250 * 12,
 			currency: defaultCurrency,
 		},
 	],
+	totals: {
+		overhead: 0,
+		overheadWithTax: 0,
+		wagesNet: 0,
+		wagesGross: 0,
+	},
 };
 
 export default defaultCompany;

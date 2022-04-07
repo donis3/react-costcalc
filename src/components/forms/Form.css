@@ -9,3 +9,7 @@
 .form-control-group .input-group :nth-child(1) {
 	@apply flex-1;
 }
+
+.form-control {
+	@apply min-w-[30px]
+}

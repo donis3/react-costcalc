@@ -21,7 +21,7 @@ export default function Company() {
 
 	//Render
 	return (
-		<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
+		<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 			{/* Card Header */}
 			<ModuleHeader text={info.name} subtext={t('details.title')} module='company' role='main'>
 				{/* Dynamic Button */}

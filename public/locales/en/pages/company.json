@@ -10,6 +10,7 @@
 	},
 	"company": {
 		"name": "Company Name",
+		"legalName": "Company Title",
 		"about": "About the company",
 		"founder": "Founder",
 		"establishedOn": "Established On",
@@ -22,6 +23,7 @@
 		"mobile": "Mobile",
 		"fax": "Fax",
 		"email": "Email",
-		"taxId": "Tax No"
+		"taxId": "Tax No",
+		"website": "Website Address"
 	}
 }

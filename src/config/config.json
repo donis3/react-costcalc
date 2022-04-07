@@ -39,6 +39,20 @@
 		"employees": { "icon": "FaUsers", "colors": ["#0C4271", "#0A81AB"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
+	"company": {
+		"departments": [
+			{ "name": "manufacturing", "isLabour": true },
+			{ "name": "marketing", "isLabour": false },
+			{ "name": "hr", "isLabour": false },
+			{ "name": "pr", "isLabour": false },
+			{ "name": "cr", "isLabour": false },
+			{ "name": "it", "isLabour": false },
+			{ "name": "management", "isLabour": false },
+			{ "name": "other", "isLabour": false }
+		],
+
+		"expenseCategories": ["officeSupplies", "repairs", "utilities", "other"]
+	},
 	"applicationData": {
 		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",
 		"currencies": [

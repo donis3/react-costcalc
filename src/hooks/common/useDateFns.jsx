@@ -39,5 +39,6 @@ export default function useDateFns() {
 		parseISO,
 		datePickerFormat,
 		datePickerJoiFormat,
+		locale: dateLocale,
 	};
 }

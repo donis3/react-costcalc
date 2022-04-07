@@ -31,10 +31,12 @@ export default function CompanyInfo() {
 			<CompanyInfoItem title={t('company.mobile')} text={info.mobile} />
 			<CompanyInfoItem title={t('company.fax')} text={info.fax} />
 			<CompanyInfoItem title={t('company.email')} text={info.email} />
+			<CompanyInfoItem title={t('company.website')} text={info.website} />
 
 			{/* row */}
 			<CompanyInfoItem title={t('company.taxId')} text={info.taxId} />
 			{/* Row */}
+			<CompanyInfoItem title={t('company.legalName')} text={info.legalName} className='col-span-full p-3' />
 			<CompanyInfoItem title={t('company.about')} text={info.about} className='col-span-full p-3' />
 		</div>
 	);

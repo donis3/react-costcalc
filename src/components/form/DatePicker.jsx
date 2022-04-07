@@ -10,20 +10,24 @@ import { useTranslation } from 'react-i18next';
 
 const DatePickerComponent = forwardRef(DatePicker);
 
-
-
 function DatePicker({ name, onChange, ...props }, ref) {
 	const { t } = useTranslation('translation');
-	const { format, isValid, parse, datePickerFormat } = useDateFns();
+	const { format, isValid, parse, datePickerFormat, locale } = useDateFns();
 	//initial Date State
 	let initialState = props?.value ? props.value : '';
+	let initialDate = new Date();
 	try {
-		const loadedDate = new Date(initialState);
-		initialState = format(loadedDate, datePickerFormat);
-	} catch (error) {}
+		const loadedDate = parse(initialState, datePickerFormat, new Date());
+		if (isValid(loadedDate)) {
+			initialState = format(loadedDate, datePickerFormat);
+			initialDate = loadedDate;
+		}
+	} catch (error) {
+		console.log(error.message);
+	}
 
 	//Date state
-	const [selected, setSelected] = useState();
+	const [selected, setSelected] = useState(initialDate);
 	const [inputValue, setInputValue] = useState(initialState);
 
 	//Popper state
@@ -122,6 +126,7 @@ function DatePicker({ name, onChange, ...props }, ref) {
 							defaultMonth={selected}
 							selected={selected}
 							onSelect={handleDaySelect}
+							locale={locale}
 						/>
 					</div>
 				</FocusTrap>

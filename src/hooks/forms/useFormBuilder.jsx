@@ -23,6 +23,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 * @returns
 	 */
 	function parseInitialData(data) {
+		
 		return Object.keys(data).reduce((accumulator, key) => {
 			//Check for iso strings
 			try {
@@ -30,14 +31,18 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 					//Parse the iso string from db as a date obj
 					let date = parseISO(data[key]);
 					if (isValid(date)) {
+						
 						//Found a date
 						return { ...accumulator, [key]: format(date, datePickerFormat) };
 					}
 				}
+				if( data[key] instanceof Date) {
+					return { ...accumulator, [key]: format(data[key], datePickerFormat) };
+				}
 			} catch (error) {
 				//console.log(error.message)
 			}
-
+			
 			//Not iso string, return original value
 			return { ...accumulator, [key]: data[key] };
 		}, {});
