@@ -1,18 +1,47 @@
 import { useRef, useState } from 'react';
 import useConfig from '../app/useConfig';
+import useDateFns from '../common/useDateFns';
+
 import useJoi from '../common/useJoi';
 
 export default function useFormBuilder({ initialState = {}, isSubmitted = false } = {}) {
 	//=========================// Dependencies //=========================//
 	const joi = useJoi({ abortEarly: false, convert: true });
+	const { format, parseISO, datePickerFormat, isValid } = useDateFns();
 	const config = useConfig();
 	const schema = {};
 	const [formErrors, setFormErrors] = useState({});
-	const [formState, setFormState] = useState(initialState);
+	const [formState, setFormState] = useState(parseInitialData(initialState));
 	const inputRefs = useRef({});
 	const onChangeMiddleware = {};
 
 	//=========================// Private Methods //=========================//
+
+	/**
+	 * Check each field if its an ISO date string and format it
+	 * @param {*} data initial form data
+	 * @returns
+	 */
+	function parseInitialData(data) {
+		return Object.keys(data).reduce((accumulator, key) => {
+			//Check for iso strings
+			try {
+				if (typeof data[key] === 'string' && data[key].length > 10) {
+					//Parse the iso string from db as a date obj
+					let date = parseISO(data[key]);
+					if (isValid(date)) {
+						//Found a date
+						return { ...accumulator, [key]: format(date, datePickerFormat) };
+					}
+				}
+			} catch (error) {
+				//console.log(error.message)
+			}
+
+			//Not iso string, return original value
+			return { ...accumulator, [key]: data[key] };
+		}, {});
+	}
 
 	//Check if a field is controlled or referenced
 	function isControlled(field = null) {
@@ -57,7 +86,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		if (field in onChangeMiddleware && typeof onChangeMiddleware[field] === 'function') {
 			onChangeMiddleware[field](value);
 		}
-		return setFormState((state) => ({ ...state, [field]: value }));
+		return setFormState({ ...formState, [field]: value });
 	}
 
 	//On change middleware for referenced inputs
@@ -111,6 +140,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 * @returns
 	 */
 	function register({ field = null, isControlled = false }) {
+		//register field
 		return isControlled ? registerControlledInput(field) : registerReferencedInput(field);
 	}
 
@@ -132,6 +162,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 * @returns {obj} Validated form data
 	 */
 	const getFormData = (includeInitialState = false) => {
+		//Get data from form state
 		let result = { ...formState };
 		//Add uncontrolled input values
 		Object.keys(inputRefs.current).forEach((key) => {
@@ -139,14 +170,14 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		});
 
 		//Remove fields that are not in form schema
-		const formData = Object.keys(schema).reduce((accumulator, key) => {
+		let formData = Object.keys(schema).reduce((accumulator, key) => {
 			if (typeof result === 'object' && key in result) {
 				return { ...accumulator, [key]: result[key] };
 			}
 			if (typeof initialState === 'object' && key in initialState) {
 				return { ...accumulator, [key]: initialState[key] };
 			}
-			return { ...accumulator, [key]: '' };
+			return accumulator;
 		}, {});
 
 		//Validate form

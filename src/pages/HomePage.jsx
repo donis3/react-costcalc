@@ -3,6 +3,10 @@ import Card from '../components/common/Card';
 import ModuleHeader from '../components/layout/ModuleHeader';
 import useCompany from '../context/company/useCompany';
 
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+
+
 export default function HomePage() {
 	let arr = [];
 	for (let i = 0; i < 10; i++) {
@@ -19,6 +23,8 @@ export default function HomePage() {
 			<p className='p-2 leading-relaxed'>
 				Welcome to cost calculator.
 			</p>
+			
+			<DayPicker />
 		</Card>
 	);
 }

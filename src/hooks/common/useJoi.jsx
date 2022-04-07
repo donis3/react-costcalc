@@ -1,5 +1,8 @@
-import Joi from 'joi';
+import baseJoi from 'joi';
+import joiDate from '@joi/date';
 import { useTranslation } from 'react-i18next';
+
+const Joi = baseJoi.extend(joiDate);
 
 const appDefaultOptions = {
 	stripUnknown: true,

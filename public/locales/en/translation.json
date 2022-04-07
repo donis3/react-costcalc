@@ -12,7 +12,8 @@
 		"month": "Month",
 		"monthShort": "M",
 		"lastUpdate": "Last Update",
-		"createdAt": "Created"
+		"createdAt": "Created",
+		"pickDate": "Pick a date"
 	},
 	"error": {
 		"error": "Error",

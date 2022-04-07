@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Form from '../../../components/forms/Form';
 import useCompany from '../../../context/company/useCompany';
+import useDateFns from '../../../hooks/common/useDateFns';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
 export default function CompanyEdit({ handleClose = null }) {
 	const { t } = useTranslation('pages/company');
 	const { company, CompanyInfoActions } = useCompany();
+	const {datePickerJoiFormat} = useDateFns();
 
 	//=============// Form State //===============//
 	const [isSubmitted, setSubmitted] = useState(false);
@@ -20,8 +22,9 @@ export default function CompanyEdit({ handleClose = null }) {
 
 	//=============// Form Schema //===============//
 	schema.name = joi.string().min(3).max(100).required().label(t('company.name'));
+	schema.about = joi.string().max(1000).required().label(t('company.about'));
 	schema.founder = joi.string().min(3).max(100).required().label(t('company.founder'));
-	schema.establishedOn = joi.number().required().label(t('company.establishedOn'));
+	schema.establishedOn = joi.date().format(datePickerJoiFormat).required().label(t('company.establishedOn'));
 
 	//=============// Form Handlers //===============//
 	const handleSubmit = (e) => {
@@ -56,11 +59,20 @@ export default function CompanyEdit({ handleClose = null }) {
 					<Form.Text {...register({ field: 'founder', isControlled: false })} />
 				</Form.Control>
 
-                {/* Established On */}
+				{/* Established On */}
 				<Form.Control label={t('company.establishedOn')} error={getError('establishedOn')}>
-					<Form.Text {...register({ field: 'establishedOn', isControlled: false })} />
+					<Form.Date {...register({ field: 'establishedOn', isControlled: true })} />
 				</Form.Control>
-                tdo: react-datepicker https://github.com/gpbl/react-day-picker
+
+				{/* About */}
+				<Form.Control label={t('company.about')} error={getError('about')}>
+					<Form.Textarea {...register({ field: 'about', isControlled: false })} />
+				</Form.Control>
+
+				{/* Tax Id */}
+				<Form.Control label={t('company.taxId')} error={getError('taxId')}>
+					<Form.Text {...register({ field: 'taxId', isControlled: false })} />
+				</Form.Control>
 			</Form.Section>
 		</Form>
 	);

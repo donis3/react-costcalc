@@ -5,6 +5,8 @@ import './Form.css';
 import InputNumber from './InputNumber';
 import InputSelect from './InputSelect';
 import InputText from './InputText';
+import InputDate from './InputDate';
+import InputTextarea from './InputTextarea';
 
 function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted }) {
 	function handleSubmit(e) {
@@ -226,4 +228,7 @@ Form.DefaultFooter = DefaultFooter;
 Form.Text = InputText;
 Form.Number = InputNumber;
 Form.Select = InputSelect;
+Form.Textarea = InputTextarea;
+Form.Date = InputDate;
+
 export default Form;
