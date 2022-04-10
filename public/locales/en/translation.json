@@ -27,9 +27,12 @@
 		"noData": "No data",
 		"itemNotFound": "Requested {{item, lowercase}} couldn't be found",
 		"duplicate": "There is already another item with the same values.",
-		"updateNotRequired": "Nothing to update"
+		"updateNotRequired": "Nothing to update",
+		"badRequest": "Bad Request",
+		"updateTargetNotFound": "Update failed, {{name}} couldn't be found"
 	},
 	"success": {
+		"reset": "\"{{name}}\" was successfully reset",
 		"add": "\"{{name}}\" was successfully added.",
 		"update": "\"{{name}}\" was successfully updated.",
 		"delete": "\"{{name}}\" was successfully deleted."

@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Form from '../../../components/forms/Form';
 import useEmployeeForm from './useEmployeeForm';
 import Card from '../../../components/common/Card';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
+import { useNavigate, useParams } from 'react-router-dom';
+import useCompanyEmployees from '../../../context/company/useCompanyEmployees';
+import { useAppContext } from '../../../context/AppContext';
+import { toast } from 'react-toastify';
 
-export default function EmployeeForm({ isEdit = false, employeeId = null }) {
-	const { t } = useTranslation('pages/company');
-	const { selectData, handlers, register, getError } = useEmployeeForm();
+export default function EmployeeForm({ isEdit = false }) {
+	const { page } = useAppContext();
+	const navigate = useNavigate();
+	const { t } = useTranslation('pages/company', 'translation');
+	const { findById } = useCompanyEmployees();
+	const { employeeId } = useParams();
+	const employee = isEdit ? findById(employeeId) : null;
+	const { selectData, handlers, register, getError } = useEmployeeForm(employee);
+
+	//Set Breadcrumb on page load
+	useEffect(() => {
+		//Employee not found
+		if (isEdit && !employee) {
+			toast.warn(t('error.itemNotFound', { ns: 'translation', item: t('employees.name') }));
+			navigate('/company/employees');
+		}
+		if (isEdit && employeeId && employee && employee?.name) {
+			page.setBreadcrumb(employee.name);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
@@ -67,13 +89,3 @@ export default function EmployeeForm({ isEdit = false, employeeId = null }) {
 EmployeeForm.defaultProps = {
 	callback: () => console.log(`Please provide callback for modal close (Employee Form)`),
 };
-
-function EmployeeFormFooter() {
-	return (
-		<Form.DefaultFooter
-			handleReset={() => console.log('Reset Form')}
-			handleDelete={() => console.log('will delete')}
-			styled={false}
-		/>
-	);
-}

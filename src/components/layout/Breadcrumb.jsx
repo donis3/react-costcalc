@@ -4,7 +4,14 @@ import { useAppContext } from '../../context/AppContext';
 import Icon from '../common/Icon';
 
 //These paths wont be shown as links
-const linkBlacklist = ['/recipes/edit', '/materials/edit', '/packages/edit', '/products/edit', '/endproducts/edit'];
+const linkBlacklist = [
+	'/recipes/edit',
+	'/materials/edit',
+	'/packages/edit',
+	'/products/edit',
+	'/endproducts/edit',
+	'/company/employees/edit',
+];
 
 export default function Breadcrumb() {
 	const { pathname } = useLocation();

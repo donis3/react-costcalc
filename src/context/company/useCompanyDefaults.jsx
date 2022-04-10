@@ -30,6 +30,7 @@ export default function useCompanyDefaults() {
 	};
 
 	const employee = {
+		employeeId: 0,
 		name: '',
 		department: departments[0].name,
 		notes: '',
@@ -42,6 +43,7 @@ export default function useCompanyDefaults() {
 	};
 
 	const expense = {
+		expenseId: 0,
 		name: '',
 		category: expenseCategories[0],
 		period: periods[0],

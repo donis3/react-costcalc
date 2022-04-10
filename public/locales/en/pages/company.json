@@ -27,10 +27,12 @@
 		"website": "Website Address"
 	},
 	"employees": {
+		"moduleName": "employees",
 		"name": "Employee",
 		"title": "Employees",
 		"lead": "Define employees and salaries for cost calculation. ",
-		"formTitleAdd": "New Employee"
+		"formTitleAdd": "New Employee",
+		"formTitleEdit": "Edit Employee"
 	},
 	"employee": {
 		"formSectionDetails": "Personal Information",

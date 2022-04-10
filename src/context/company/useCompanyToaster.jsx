@@ -9,10 +9,10 @@ import { toast } from 'react-toastify';
 export default function useCompanyToaster() {
 	const { t } = useTranslation('pages/company', 'translation');
 
-	const errorToast = (callback = null) => {
+	const errorToast = (callback = null, name = null) => {
 		//return toast function
 		return (errorCode) => {
-			toast.error(t(`error.${errorCode}`, { ns: 'translation' }), { toastId: 'company-success' });
+			toast.error(t(`error.${errorCode}`, { ns: 'translation', name }), { toastId: 'company-success' });
 			if (typeof callback === 'function') callback();
 		};
 	};

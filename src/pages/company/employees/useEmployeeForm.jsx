@@ -1,37 +1,47 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
+import useCompanyEmployees from '../../../context/company/useCompanyEmployees';
 import useConfig from '../../../hooks/app/useConfig';
 import useDateFns from '../../../hooks/common/useDateFns';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
-export default function useEmployeeForm() {
+export default function useEmployeeForm(employee = null) {
+	//Dependencies
 	const { t } = useTranslation('pages/company');
 	const config = useConfig();
 	const departments = config.get('company.departments');
 	const currencies = config.getCurrenciesArray();
-
 	const { datePickerJoiFormat } = useDateFns();
+	const navigate = useNavigate();
+
+	//Default employee data
 	const { defaultEmployee } = useCompanyDefaults();
-	
+	//Employee model
+	const { actions } = useCompanyEmployees();
 
 	//=============// Form State //===============//
 	const [isSubmitted, setSubmitted] = useState(false);
 
 	//=============// Form Builder //===============//
 	const { schema, joi, register, getError, getFormData, setValue, initialState } = useFormBuilder({
-		initialState: defaultEmployee,
+		initialState: employee ? employee : defaultEmployee,
 		isSubmitted,
 	});
 
 	//=============// Form Schema //===============//
 	addSchemaRules(schema, joi, { t, datePickerJoiFormat, currencies, departments });
 
-	//Handlers
+	//=============// Form Handlers //===============//
 	const onSubmit = (e) => {
 		try {
-			const data = getFormData(false);
-			console.log(data);
+			const data = getFormData(true);
+			if (employee) {
+				actions.update(data, () => navigate('/company/employees'));
+			} else {
+				actions.add(data, () => navigate('/company/employees'));
+			}
 		} catch (err) {
 			//Form errors.
 		}
@@ -46,6 +56,7 @@ export default function useEmployeeForm() {
 		setSubmitted(false);
 	};
 
+	//=============// Hook Exports //===============//
 	return {
 		register,
 		getError,
