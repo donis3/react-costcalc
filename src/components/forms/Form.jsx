@@ -8,7 +8,7 @@ import InputText from './InputText';
 import InputDate from './InputDate';
 import InputTextarea from './InputTextarea';
 
-function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted }) {
+function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted, footer, grid }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		setSubmitted?.((state) => true);
@@ -19,12 +19,19 @@ function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, set
 
 	return (
 		<form onSubmit={handleSubmit} className='w-full mt-10'>
-			<Grid colsSmall={colsSmall} colsLarge={colsLarge}>
-				{/* Sections */}
-				{children}
-				{/* Footer */}
-				<DefaultFooter handleReset={onReset} handleDelete={onDelete} />
-			</Grid>
+			{grid ? (
+				<Grid colsSmall={colsSmall} colsLarge={colsLarge}>
+					{/* Sections */}
+					{children}
+					{/* Footer */}
+					{footer && <DefaultFooter handleReset={onReset} handleDelete={onDelete} />}
+				</Grid>
+			) : (
+				<>
+					{children}
+					{footer && <DefaultFooter handleReset={onReset} handleDelete={onDelete} />}
+				</>
+			)}
 		</form>
 	);
 }
@@ -35,6 +42,8 @@ Form.defaultProps = {
 	onReset: null,
 	onDelete: null,
 	setSubmitted: () => {},
+	footer: true,
+	grid: true,
 };
 
 /**
@@ -59,14 +68,14 @@ function Grid({ children, colsSmall = 1, colsLarge = 2, ...props }) {
 	if (colsLarge !== colsSmall) {
 		//we need media queries
 		return (
-			<div className={`grid grid-cols-${colsSmall} lg:grid-cols-${colsLarge} gap-x-10 gap-y-14`} {...props}>
+			<div className={`grid grid-cols-${colsSmall} lg:grid-cols-${colsLarge} gap-x-10 gap-y-8`} {...props}>
 				{/* Content */}
 				{children}
 			</div>
 		);
 	} else {
 		return (
-			<div className={`grid grid-cols-1 gap-x-10 gap-y-14`} {...props}>
+			<div className={`grid grid-cols-1 gap-x-10 gap-y-8`} {...props}>
 				{/* Content */}
 				{children}
 			</div>
@@ -168,9 +177,17 @@ function GroupControl({ children, label = null, altLabel = null, error = '' }) {
  * @param {*} param0
  * @returns
  */
-function Footer({ children, ...props }) {
+function Footer({ children, styled = false, ...props }) {
+	if (!styled) {
+		return (
+			<div className='col-span-full w-full flex   gap-x-5 justify-between ' {...props}>
+				{/* Input as children */}
+				{children}
+			</div>
+		);
+	}
 	return (
-		<div className='col-span-full w-full flex py-5 px-2  gap-x-5 border-t-4 mt-5 justify-between' {...props}>
+		<div className='col-span-full w-full flex py-5 px-2  gap-x-5 justify-between border-t-4 mt-5 ' {...props}>
 			{/* Input as children */}
 			{children}
 		</div>
@@ -183,7 +200,7 @@ function Footer({ children, ...props }) {
  * @param {function} handleDelete provide delete callback if you want delete button
  * @returns
  */
-function DefaultFooter({ handleReset = null, handleDelete = null }) {
+function DefaultFooter({ handleReset = null, handleDelete = null, styled = true }) {
 	const { Submit, ConfirmYes, ConfirmNo, Delete, Reset } = useDefaultButtons();
 	const [showConfirm, setShowConfirm] = useState(false);
 	const { t } = useTranslation('translation');
@@ -200,7 +217,7 @@ function DefaultFooter({ handleReset = null, handleDelete = null }) {
 	);
 
 	return (
-		<Footer>
+		<Footer styled={styled}>
 			<div className='flex-1 flex gap-x-2'>
 				{/* Save & Reset Buttons */}
 				<Submit icon='FaSave' text='save' />
@@ -216,6 +233,13 @@ function DefaultFooter({ handleReset = null, handleDelete = null }) {
 	);
 }
 
+/**
+ * Provide a flex-row wrapper
+ */
+function FormRow({ children }) {
+	return <div className='flex flex-row  gap-x-5'>{children}</div>;
+}
+
 //Building Blocks
 Form.Grid = Grid;
 Form.Section = Section;
@@ -223,6 +247,7 @@ Form.Control = Control;
 Form.ControlGroup = GroupControl;
 Form.Footer = Footer;
 Form.DefaultFooter = DefaultFooter;
+Form.Row = FormRow;
 
 //Inputs
 Form.Text = InputText;

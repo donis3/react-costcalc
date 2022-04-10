@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 const SelectComponent = forwardRef(InputSelect);
 
 function InputSelect(
-	{ setError, getError, name, validator, isSubmitted, liveErrors, onChange, children, options, ...props },
+	{ setError, getError, name, validator, isSubmitted, liveErrors, onChange, children, options, setValue, ...props },
 	ref
 ) {
 	if (!name) throw new Error('Input Text requires a name attribute!');
@@ -36,7 +36,6 @@ function InputSelect(
 		delete selectProps.defaultValue;
 	}
 
-	
 	const hasError = () => {
 		const error = getError?.();
 		if (typeof error === 'string' && error.length > 0) return true;
@@ -52,7 +51,6 @@ function InputSelect(
 	};
 
 	const validate = (e) => {
-		
 		//Validate if provided
 		if (typeof validator !== 'object' || 'validate' in validator === false) return;
 		const { error } = validator.validate(e.target.value);
@@ -90,6 +88,7 @@ SelectComponent.defaultProps = {
 	liveErrors: false,
 	onChange: undefined,
 	options: null,
+	setValue: () => console.log('SetValue not available.'),
 };
 
 export default SelectComponent;

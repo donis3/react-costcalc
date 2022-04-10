@@ -7,11 +7,12 @@ import useJoi from '../common/useJoi';
 export default function useFormBuilder({ initialState = {}, isSubmitted = false } = {}) {
 	//=========================// Dependencies //=========================//
 	const joi = useJoi({ abortEarly: false, convert: true });
-	const { format, parseISO, datePickerFormat, isValid } = useDateFns();
+	const { formatISO } = useDateFns();
 	const config = useConfig();
 	const schema = {};
 	const [formErrors, setFormErrors] = useState({});
 	const [formState, setFormState] = useState(parseInitialData(initialState));
+
 	const inputRefs = useRef({});
 	const onChangeMiddleware = {};
 
@@ -23,27 +24,12 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 * @returns
 	 */
 	function parseInitialData(data) {
-		
 		return Object.keys(data).reduce((accumulator, key) => {
-			//Check for iso strings
-			try {
-				if (typeof data[key] === 'string' && data[key].length > 10) {
-					//Parse the iso string from db as a date obj
-					let date = parseISO(data[key]);
-					if (isValid(date)) {
-						
-						//Found a date
-						return { ...accumulator, [key]: format(date, datePickerFormat) };
-					}
-				}
-				if( data[key] instanceof Date) {
-					return { ...accumulator, [key]: format(data[key], datePickerFormat) };
-				}
-			} catch (error) {
-				//console.log(error.message)
+			//Check for date objects and parse them as iso strings
+			if (data[key] instanceof Date) {
+				return { ...accumulator, [key]: formatISO(data[key]) };
 			}
-			
-			//Not iso string, return original value
+			//Not a date, return original value
 			return { ...accumulator, [key]: data[key] };
 		}, {});
 	}
@@ -68,6 +54,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			key: field,
 			value: field in formState ? formState[field] : '',
 			onChange: (e) => onControlledInputChange(field, e.target.value),
+			setValue: (value) => setFormState((state) => ({ ...state, [field]: value })),
 		};
 	}
 
@@ -83,6 +70,11 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			defaultValue: field in initialState ? initialState[field] : '',
 			onChange: (e) => normalInputChange(field, e.target.value),
 			ref: (element) => (inputRefs.current[field] = element),
+			setValue: (value) => {
+				if (field in inputRefs.current) {
+					inputRefs.current[field].value = value;
+				}
+			},
 		};
 	}
 
@@ -240,7 +232,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	const setValue = (field = null, value = null) => {
 		if (!field) return;
 		if (typeof value !== 'string' && typeof value !== 'number') value = '';
-
+		//console.log(`${field}: ${value}`);
 		if (Object.keys(inputRefs.current).find((key) => key === field)) {
 			//Given field is available in uncontrolled units list.
 			Object.keys(inputRefs.current).forEach((key) => {
@@ -297,6 +289,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	return {
 		joi,
 		schema,
+		initialState: parseInitialData(initialState),
 		register,
 		getError: (field) => formErrors?.[field],
 		handleChange: registerOnChangeMiddleware,

@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useCompany from '../../../context/company/useCompany';
+
+import useCompanyInfo from '../../../context/company/useCompanyInfo';
 import useDateFns from '../../../hooks/common/useDateFns';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
 export default function useCompanyEdit({ formCallback = null }) {
 	const { t } = useTranslation('pages/company');
-	const { company, CompanyInfoActions } = useCompany();
+	const { info, actions } = useCompanyInfo();
 	const { datePickerJoiFormat } = useDateFns();
-	
+
 	//=============// Form State //===============//
 	const [isSubmitted, setSubmitted] = useState(false);
-	const initialState = { ...company.info };
+	const initialState = { ...info };
 
 	//=============// Form Builder //===============//
 	const { schema, joi, register, getError, getFormData, setValue } = useFormBuilder({
@@ -42,7 +43,7 @@ export default function useCompanyEdit({ formCallback = null }) {
 	const handleSubmit = (e) => {
 		try {
 			const data = getFormData(false);
-			CompanyInfoActions.updateInfo(data, formCallback);
+			actions.updateInfo(data, formCallback);
 		} catch (err) {
 			//Form errors.
 		}
@@ -55,7 +56,7 @@ export default function useCompanyEdit({ formCallback = null }) {
 		setSubmitted(false);
 	};
 
-	const handleDelete = () => CompanyInfoActions.deleteInfo(formCallback);
+	const handleDelete = () => actions.deleteInfo(formCallback);
 
 	return {
 		register,

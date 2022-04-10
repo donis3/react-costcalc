@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import useCompany from '../../../context/company/useCompany';
+import useCompanyInfo from '../../../context/company/useCompanyInfo';
 import useIntl from '../../../hooks/common/useIntl';
 
 export default function CompanyInfo() {
 	const { t } = useTranslation('pages/company', 'translation');
-	const {  info } = useCompany();
+	const { info } = useCompanyInfo();
 	const { displayDate } = useIntl();
 
 	return (

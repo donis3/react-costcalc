@@ -25,5 +25,45 @@
 		"email": "Email",
 		"taxId": "Tax No",
 		"website": "Website Address"
+	},
+	"employees": {
+		"name": "Employee",
+		"title": "Employees",
+		"lead": "Define employees and salaries for cost calculation. ",
+		"formTitleAdd": "New Employee"
+	},
+	"employee": {
+		"formSectionDetails": "Personal Information",
+		"formSectionWage": "Salary",
+		"name": "Employee Name",
+		"net": "Net annual wage",
+		"gross": "Gross annual wage",
+		"currency": "Wage Currency",
+		"department": "Department",
+		"dob": "Date of Birth",
+		"notes": "Notes",
+		"email": "Email",
+		"mobile": "Mobile Phone"
+	},
+	"departments": {
+		"manufacturing": "Manufacturing",
+		"marketing": "Marketing",
+		"hr": "Human Resources",
+		"pr": "Public Relations",
+		"cr": "Customer Relations",
+		"it": "Information Technologies",
+		"management": "Management",
+		"other": "Other"
+	},
+	"defaultCompany": {
+		"name": "Dream Incorporated.",
+		"legalName": "Dreams Manufacturing Dreams LLC - Cayman Islands",
+		"founder": "John Dreamer",
+		"about": "Dreams Inc is a tech company that brings digital joy.",
+		"address": "Dreams Building, 200 Elgin Ave",
+		"city": "George Town",
+		"country": "Cayman Islands",
+		"email": "company@example.com",
+		"website": "http://www.company.com"
 	}
 }

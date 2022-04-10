@@ -10,7 +10,7 @@ Example usage:
 
 const InputTextComponent = forwardRef(InputText);
 
-function InputText({ setError, getError, name, validator, isSubmitted, liveErrors, onChange, ...props }, ref) {
+function InputText({ setError, getError, name, validator, isSubmitted, liveErrors, onChange, setValue, ...props }, ref) {
 	if (!name) throw new Error('Input Text requires a name attribute!');
 
 	const hasError = () => {
@@ -58,6 +58,7 @@ InputTextComponent.defaultProps = {
 	isSubmitted: false,
 	liveErrors: false,
 	onChange: undefined,
+	setValue: () => {}
 };
 
 export default InputTextComponent;

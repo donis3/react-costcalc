@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '../../components/common/Card';
 import ModuleHeader from '../../components/layout/ModuleHeader';
-import useCompany from '../../context/company/useCompany';
+import useCompanyInfo from '../../context/company/useCompanyInfo';
 import useDefaultButtons from '../../hooks/forms/useDefaultButtons';
 import CompanyEdit from './details/CompanyEdit';
 import CompanyInfo from './details/CompanyInfo';
@@ -14,10 +14,10 @@ export default function Company() {
 
 	//Page State
 	const [state, setState] = useState({ companyEdit: false });
-	const toggleCompanyEdit = () => setState((state) => ({ ...state, companyEdit: !state.companyEdit }));
+	const toggleCompanyEdit = () => setState({ ...state, companyEdit: !state.companyEdit });
 
 	//Company Data
-	const { info } = useCompany();
+	const { info } = useCompanyInfo();
 
 	//Render
 	return (

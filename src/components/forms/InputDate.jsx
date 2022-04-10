@@ -10,7 +10,10 @@ Example usage:
 */
 const InputDateComponent = forwardRef(InputDate);
 
-function InputDate({ setError, getError, name, validator, isSubmitted, liveErrors, onChange, ...props }, ref) {
+function InputDate(
+	{ setError, getError, name, validator, isSubmitted, liveErrors, onChange, setValue, ...props },
+	ref
+) {
 	if (!name) throw new Error('Input Text requires a name attribute!');
 
 	const hasError = () => {
@@ -39,7 +42,7 @@ function InputDate({ setError, getError, name, validator, isSubmitted, liveError
 		}
 	};
 
-	return <DatePicker onChange={handleChange} ref={ref} {...props} />;
+	return <DatePicker onChange={handleChange} setValue={setValue} ref={ref} {...props} />;
 }
 
 InputDateComponent.defaultProps = {
@@ -50,6 +53,7 @@ InputDateComponent.defaultProps = {
 	isSubmitted: false,
 	liveErrors: false,
 	onChange: undefined,
+	setValue: () => console.log('setValue not available.'),
 };
 
 export default InputDateComponent;

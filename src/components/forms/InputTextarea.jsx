@@ -10,7 +10,7 @@ Example usage:
 
 const InputTextareaComponent = forwardRef(InputTextarea);
 
-function InputTextarea({ setError, getError, name, validator, isSubmitted, liveErrors, onChange, ...props }, ref) {
+function InputTextarea({ setError, getError, setValue, name, validator, isSubmitted, liveErrors, onChange, ...props }, ref) {
 	if (!name) throw new Error('Input Text requires a name attribute!');
 
 	const hasError = () => {
@@ -49,6 +49,7 @@ InputTextareaComponent.defaultProps = {
 	isSubmitted: false,
 	liveErrors: false,
 	onChange: undefined,
+	setValue: () => {}
 };
 
 export default InputTextareaComponent;

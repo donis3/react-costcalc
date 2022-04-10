@@ -1,4 +1,4 @@
-import { format, isValid, parse, parseISO } from 'date-fns';
+import { format, isValid, parse, parseISO, formatISO } from 'date-fns';
 import { useAppContext } from '../../context/AppContext';
 import { tr, enUS } from 'date-fns/locale';
 
@@ -37,6 +37,7 @@ export default function useDateFns() {
 			return parse(dateString, formatString, referenceDate, { ...options, ...getLocaleOptions() });
 		},
 		parseISO,
+		formatISO,
 		datePickerFormat,
 		datePickerJoiFormat,
 		locale: dateLocale,
