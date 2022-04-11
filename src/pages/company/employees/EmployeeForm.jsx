@@ -71,6 +71,10 @@ export default function EmployeeForm({ isEdit = false }) {
 
 				{/* Wage Section */}
 				<Form.Section title={t('employee.formSectionWage')}>
+					{/* Field: date of employment (doe) */}
+					<Form.Control label={t('employee.doe')} error={getError('doe')}>
+						<Form.Date {...register({ field: 'doe', isControlled: true })} />
+					</Form.Control>
 					<Form.Control label={t('employee.net')} error={getError('net')}>
 						<Form.Number {...register({ field: 'net', isControlled: false })} />
 					</Form.Control>

@@ -37,14 +37,17 @@ function DatePicker({ name, onChange, setValue, ...props }, fwRef) {
 	};
 
 	useEffect(() => {
-		//If a date iso string is passed, format it
-		const newValue = props?.value || props?.defaultValue || dateInput.current?.value;
+		//If a date iso string is passed OR a date obj, format it
+		const newValue = props.value;
 		if (newValue && isValid(parseISO(newValue))) {
 			setValue(format(parseISO(newValue), datePickerFormat));
 			setSelected(parseISO(newValue));
+		} else if (newValue && newValue instanceof Date) {
+			setValue(format(newValue, datePickerFormat));
+			setSelected(newValue);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props?.value, props?.defaultValue]);
+	}, [props.value]);
 
 	//On change middleware
 	const handleInputChange = (e) => {

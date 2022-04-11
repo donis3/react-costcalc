@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import useCompanyInfo from '../../../context/company/useCompanyInfo';
+import useDateFns from '../../../hooks/common/useDateFns';
 import useIntl from '../../../hooks/common/useIntl';
 
 export default function CompanyInfo() {
 	const { t } = useTranslation('pages/company', 'translation');
 	const { info } = useCompanyInfo();
 	const { displayDate } = useIntl();
+	const { timeSince } = useDateFns();
 
 	return (
 		// Create grid
@@ -15,6 +17,10 @@ export default function CompanyInfo() {
 			<CompanyInfoItem title={t('company.founder')} text={info.founder} />
 			{/* Row */}
 			<CompanyInfoItem title={t('company.establishedOn')} text={displayDate(info.establishedOn, { time: false })} />
+			<CompanyInfoItem
+				title={t('company.timeSince')}
+				text={timeSince(info.establishedOn, null, { addSuffix: false })}
+			/>
 			<CompanyInfoItem title={t('company.address')}>
 				<p className='mt-1'>
 					{info.address}

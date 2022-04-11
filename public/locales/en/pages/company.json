@@ -24,7 +24,8 @@
 		"fax": "Fax",
 		"email": "Email",
 		"taxId": "Tax No",
-		"website": "Website Address"
+		"website": "Website Address",
+		"timeSince": "Active Time"
 	},
 	"employees": {
 		"moduleName": "employees",
@@ -33,6 +34,12 @@
 		"lead": "Define employees and salaries for cost calculation. ",
 		"formTitleAdd": "New Employee",
 		"formTitleEdit": "Edit Employee"
+	},
+	"table": {
+		"name": "Employee",
+		"department": "Department",
+		"gross": "Gross Salary",
+		"doe": "Employment Date"
 	},
 	"employee": {
 		"formSectionDetails": "Personal Information",
@@ -43,6 +50,7 @@
 		"currency": "Wage Currency",
 		"department": "Department",
 		"dob": "Date of Birth",
+		"doe": "Date of Employment",
 		"notes": "Notes",
 		"email": "Email",
 		"mobile": "Mobile Phone"

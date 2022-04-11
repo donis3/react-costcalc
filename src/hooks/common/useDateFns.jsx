@@ -1,4 +1,4 @@
-import { format, isValid, parse, parseISO, formatISO } from 'date-fns';
+import { format, isValid, parse, parseISO, formatISO, formatDistance, differenceInYears } from 'date-fns';
 import { useAppContext } from '../../context/AppContext';
 import { tr, enUS } from 'date-fns/locale';
 
@@ -28,6 +28,41 @@ export default function useDateFns() {
 		}
 	}
 
+	function optionsWithLocale(options = null) {
+		if (options && typeof options === 'object') {
+			return { ...getLocaleOptions(), ...options };
+		} else {
+			return getLocaleOptions();
+		}
+	}
+
+	function parseDate(date = null, defaultValue = null) {
+		if (!date) return defaultValue;
+		if (date instanceof Date && isValid(date)) return date;
+		if (isValid(parse(date, datePickerFormat, new Date()))) {
+			return parse(date, datePickerFormat, new Date());
+		}
+		if (isValid(parseISO(date))) {
+			return parseISO(date);
+		}
+		return defaultValue;
+	}
+
+	function timeSince(startingDate, endDate = null, options = null) {
+		//Try to parse starting and end date
+		startingDate = parseDate(startingDate);
+		endDate = parseDate(endDate, new Date());
+
+		//Validate startingDate
+		if (!startingDate) return null;
+
+		//Generate options and locale
+		const defaultOptions = { includeSeconds: false, addSuffix: true };
+		const opts = optionsWithLocale(options || defaultOptions);
+
+		return formatDistance(startingDate, endDate, opts);
+	}
+
 	return {
 		format: (date, formatStr = 'P', options = {}) => {
 			return format(date, formatStr, { ...options, ...getLocaleOptions() });
@@ -38,8 +73,10 @@ export default function useDateFns() {
 		},
 		parseISO,
 		formatISO,
+		timeSince,
 		datePickerFormat,
 		datePickerJoiFormat,
 		locale: dateLocale,
+		getAge: differenceInYears,
 	};
 }

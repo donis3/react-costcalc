@@ -232,6 +232,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	const setValue = (field = null, value = null) => {
 		if (!field) return;
 		if (typeof value !== 'string' && typeof value !== 'number') value = '';
+
 		//console.log(`${field}: ${value}`);
 		if (Object.keys(inputRefs.current).find((key) => key === field)) {
 			//Given field is available in uncontrolled units list.
@@ -242,7 +243,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			});
 		} else {
 			//Check if given field is in formState and return it
-			setFormState((state) => ({ ...state, [field]: value }));
+			setFormState({ ...formState, [field]: value });
 		}
 
 		//Call onChange middleware manually when a field is changed by setValue
@@ -285,6 +286,22 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		});
 	};
 
+	/**
+	 * Return values to initial state
+	 * both reference and state values
+	 */
+	const resetForm = () => {
+		//Reset form state
+		const newState = parseInitialData(initialState);
+		setFormState(newState);
+		//Set referenced values
+		Object.keys(newState).forEach((key) => {
+			if (key in inputRefs.current) {
+				inputRefs.current[key].value = newState[key];
+			}
+		});
+	};
+
 	//=========================// Exports //=========================//
 	return {
 		joi,
@@ -303,5 +320,6 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		getState,
 		setState,
 		removeState,
+		resetForm,
 	};
 }

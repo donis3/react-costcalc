@@ -25,7 +25,7 @@ export default function useEmployeeForm(employee = null) {
 	const [isSubmitted, setSubmitted] = useState(false);
 
 	//=============// Form Builder //===============//
-	const { schema, joi, register, getError, getFormData, setValue, initialState } = useFormBuilder({
+	const { schema, joi, register, getError, getFormData, setValue, resetForm } = useFormBuilder({
 		initialState: employee ? employee : defaultEmployee,
 		isSubmitted,
 	});
@@ -50,9 +50,7 @@ export default function useEmployeeForm(employee = null) {
 		console.log('TODO: Delete Employee.');
 	};
 	const onReset = (e) => {
-		Object.keys(initialState).forEach((key) => {
-			setValue(key, initialState[key]);
-		});
+		resetForm();
 		setSubmitted(false);
 	};
 
@@ -100,6 +98,7 @@ function addSchemaRules(schema = null, joi = null, other = {}) {
 		.regex(/^\w+([.-]?\w+)+@\w+([.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/, { name: 'email' })
 		.label(t('employee.email'));
 	schema.dob = joi.date().format(datePickerJoiFormat).required().label(t('employee.dob'));
+	schema.doe = joi.date().format(datePickerJoiFormat).required().label(t('employee.doe'));
 	//Money
 	schema.gross = joi.number().min(0).default(0).required().label(t('employee.gross'));
 	schema.net = joi.number().min(0).default(0).required().label(t('employee.net'));

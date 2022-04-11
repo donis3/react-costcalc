@@ -40,6 +40,7 @@ export default function useCompanyDefaults() {
 		email: '',
 		mobile: '',
 		dob: formatISO(new Date('01/01/1987')),
+		doe: formatISO(new Date(new Date().getFullYear(), 1, 1)),
 	};
 
 	const expense = {

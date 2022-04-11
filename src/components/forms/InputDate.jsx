@@ -42,7 +42,7 @@ function InputDate(
 		}
 	};
 
-	return <DatePicker onChange={handleChange} setValue={setValue} ref={ref} {...props} />;
+	return <DatePicker name={name} onChange={handleChange} setValue={setValue} ref={ref} {...props} />;
 }
 
 InputDateComponent.defaultProps = {

@@ -17,7 +17,7 @@ export function getMaxInArray(subject, propertyName, getObject = false) {
 			return 0;
 		}
 	}
-	if( subject.length === 0) {
+	if (subject.length === 0) {
 		return 0;
 	}
 
@@ -38,14 +38,14 @@ export function getMaxInArray(subject, propertyName, getObject = false) {
 
 export function sortArrayNumeric(data = [], prop = null, isAsc = true) {
 	if (Array.isArray(data) === false || data.length <= 0) return [];
-	if(prop) {
-		if(typeof data[0] !== 'object' || prop in data[0] === false ) {
+	if (prop) {
+		if (typeof data[0] !== 'object' || prop in data[0] === false) {
 			//Invalid Data
 			return data;
-		}else {
+		} else {
 			return data.sort((a, b) => {
 				//Return -1 or 1 depending on asc or desc
-				return ( parseFloat(a[prop]) < parseFloat(b[prop]) ? -1 : 1) * (isAsc ? 1 : -1);
+				return (parseFloat(a[prop]) < parseFloat(b[prop]) ? -1 : 1) * (isAsc ? 1 : -1);
 			});
 		}
 	} else {
@@ -58,15 +58,14 @@ export function sortArrayNumeric(data = [], prop = null, isAsc = true) {
 
 export function sortArrayAlphabetic(data = [], prop = null, isAsc = true) {
 	if (Array.isArray(data) === false || data.length <= 0) return [];
-	if(prop) {
-		if(typeof data[0] !== 'object' || prop in data[0] === false ) {
+	if (prop) {
+		if (typeof data[0] !== 'object' || prop in data[0] === false) {
 			//Invalid Data
 			return data;
-		}else {
+		} else {
 			return data.sort((a, b) => {
 				//Return -1 or 1 depending on asc or desc
 				return isAsc ? a[prop].localeCompare(b[prop]) : b[prop].localeCompare(a[prop]);
-				
 			});
 		}
 	} else {
@@ -75,4 +74,35 @@ export function sortArrayAlphabetic(data = [], prop = null, isAsc = true) {
 			return isAsc ? a.localeCompare(b) : b.localeCompare(a);
 		});
 	}
+}
+
+export function sortArrayDate(data = [], prop = null, isAsc = true) {
+	if (Array.isArray(data) === false || data.length <= 0) return [];
+
+	//Non object date array
+	if (!prop) {
+		return data.sort((a, b) => {
+			//Return -1 or 1 depending on asc or desc
+			if (a instanceof Date && b instanceof Date) {
+				return isAsc ? a.getTime() > b.getTime() : a.getTime() < b.getTime();
+			} else {
+				return isAsc ? a.localeCompare(b) : b.localeCompare(a);
+			}
+		});
+	}
+
+	//Sort array of objects
+	if (typeof data[0] !== 'object' || prop in data[0] === false) {
+		//Invalid Data
+		return data;
+	}
+
+	return data.sort((a, b) => {
+		//Return -1 or 1 depending on asc or desc
+		if (a[prop] instanceof Date && b[prop] instanceof Date) {
+			return isAsc ? a[prop].getTime() > b[prop].getTime() : a[prop].getTime() < b[prop].getTime();
+		} else {
+			return isAsc ? a[prop].localeCompare(b[prop]) : b[prop].localeCompare(a[prop]);
+		}
+	});
 }
