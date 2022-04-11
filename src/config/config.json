@@ -49,9 +49,7 @@
 			{ "name": "it", "isLabour": false },
 			{ "name": "management", "isLabour": false },
 			{ "name": "other", "isLabour": false }
-		],
-
-		"expenseCategories": ["officeSupplies", "repairs", "utilities", "other"]
+		]
 	},
 	"applicationData": {
 		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",

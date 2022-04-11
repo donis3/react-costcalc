@@ -11,6 +11,7 @@ const linkBlacklist = [
 	'/products/edit',
 	'/endproducts/edit',
 	'/company/employees/edit',
+	'/company/expenses/edit',
 ];
 
 export default function Breadcrumb() {

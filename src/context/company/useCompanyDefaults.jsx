@@ -8,9 +8,25 @@ export default function useCompanyDefaults() {
 
 	//Definitions
 	const departments = config.get('company.departments') || [];
-	const expenseCategories = config.get('company.expenseCategories');
+
 	const defaultCurrency = config.getDefaultCurrency(true);
-	const periods = ['y', 'm', 'd', 'w'];
+	const periods = ['y', 'm', 'd', 'w', 'h'];
+	const units = ['t', 'kwh', 'kg', 'L', 'pcs', 'other'];
+	const expenseCategories = [
+		'advertisement',
+		'banking',
+		'government',
+		'legal',
+		'insurance',
+		'maintenance',
+		'office',
+		'utilities',
+		'rent',
+		'food',
+		'gas',
+		'depreciation',
+		'other',
+	];
 
 	const companyInfo = {
 		name: t('defaultCompany.name'),
@@ -73,5 +89,7 @@ export default function useCompanyDefaults() {
 		defaultEmployee: employee,
 		defaultInfo: companyInfo,
 		periods,
+		units,
+		expenseCategories,
 	};
 }

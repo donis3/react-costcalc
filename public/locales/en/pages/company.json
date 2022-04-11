@@ -68,6 +68,41 @@
 		"management": "Management",
 		"other": "Other"
 	},
+	"expenses": {
+		"name": "Expense",
+		"title": "Expenses",
+		"lead": "Company overhead expenses",
+		"formTitleAdd": "New Expense",
+		"formTitleUpdate": "Edit Expense",
+		"formSectionDetails": "Expense Details",
+		"formSectionCost": "Cost Details"
+	},
+	"expense": {
+		"name": "Expense",
+		"category": "Category",
+		"period": "Period",
+		"periodAlt": "At which interval should this expense be added to expenses",
+		"price": "Unit Price",
+		"quantity": "Quantity",
+		"unit": "Unit",
+		"tax": "Tax Percentage"
+	},
+	"expenseCategories": {
+		"advertisement": "Advertising",
+		"banking": "Banking",
+		"government": "Government Fees",
+		"legal": "Legal Fees",
+		"insurance": "Insurances",
+		"maintenance": "Maintenance",
+		"office": "Office Supplies",
+		"utilities": "Utilities",
+		"rent": "Rent",
+		"food": "Food",
+		"gas": "Gasoline",
+		"depreciation": "Depreciations",
+		"other": "Other"
+	},
+
 	"defaultCompany": {
 		"name": "Dream Incorporated.",
 		"legalName": "Dreams Manufacturing Dreams LLC - Cayman Islands",

@@ -15,6 +15,7 @@
 		"createdAt": "Created",
 		"pickDate": "Pick a date"
 	},
+	"periods": { "h": "Hourly", "d": "Daily", "w": "Weekly", "m": "Monthly", "y": "Annually" },
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
@@ -160,7 +161,10 @@
 		"L": "Liter",
 		"L_other": "Liters",
 		"pcs": "piece",
-		"pcs_other": "pieces"
+		"pcs_other": "pieces",
+		"kwh": "kilowatt Hour",
+		"kwh_other": "kilowatt hours",
+		"other": "Other"
 	},
 	"unitsShort": {
 		"mg": "mg",
