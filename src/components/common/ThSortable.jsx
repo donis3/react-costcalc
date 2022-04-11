@@ -27,7 +27,7 @@ export default function ThSortable({ children, className, field, handleSort, sor
 		);
 	}
 
-	return <th className={className}>{centered ? <CenterTh>{buttonContent}</CenterTh> : buttonContent}</th>;
+	return <th className={`whitespace-normal  ${className}`}>{centered ? <CenterTh>{buttonContent}</CenterTh> : buttonContent}</th>;
 }
 
 

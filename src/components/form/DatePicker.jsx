@@ -7,7 +7,7 @@ import { usePopper } from 'react-popper';
 import { FaCalendarAlt as CalendarIcon } from 'react-icons/fa';
 import useDateFns from '../../hooks/common/useDateFns';
 import { useTranslation } from 'react-i18next';
-import { isEqual, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 const DatePickerComponent = forwardRef(DatePicker);
 

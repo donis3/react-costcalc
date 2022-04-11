@@ -13,8 +13,8 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 
 			<div className='flex-1 flex gap-x-2 items-center'>
 				<Icon icon={icon} style={{ color: bgColor }} className='text-2xl opacity-75' />
-				<h3 className='text-2xl py-2 font-semibold' style={{ color: color }}>
-					{text}
+				<h3 className='text-2xl py-2 font-semibold flex flex-wrap items-end' style={{ color: color }}>
+					<span>{text}</span>
 					{subtext.length > 0 && <span className='ml-1 text-base opacity-50'>{subtext}</span>}
 				</h3>
 			</div>

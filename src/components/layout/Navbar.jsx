@@ -27,18 +27,14 @@ export default function Navbar() {
 		setMenuOpen(false);
 	}, [loc.pathname]);
 
-	const reloadPage = () => {
-		setTimeout(() => {
-			document.location.reload();
-		}, 200);
-	};
+	
 
 	return (
 		<>
 			<nav ref={navbarRef} className={`relative px-3 lg:px-5 py-3 bg-neutral`}>
 				<div className='container  mx-auto flex flex-wrap items-center justify-between'>
 					<div className='w-full flex justify-between lg:w-auto'>
-						<Link to='/' className='text-neutral-content' onClick={reloadPage}>
+						<Link to='/' className='text-neutral-content'>
 							<Logo width='200' />
 						</Link>
 						<button className='navbar-collapse-btn' type='button' onClick={() => setMenuOpen(!menuOpen)}>

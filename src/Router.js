@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Company from './pages/company/Company';
 import Employees from './pages/company/Employees';
+import EmployeeDetails from './pages/company/employees/EmployeeDetails';
 import EmployeeForm from './pages/company/employees/EmployeeForm';
 import Expenses from './pages/company/Expenses';
 
@@ -45,8 +46,10 @@ export default function Router() {
 
 			{/* Company */}
 			<Route path='/company' element={<Company />} />
-			<Route path='/company/employees' element={<Employees />} />
 			<Route path='/company/expenses' element={<Expenses />} />
+			{/* Company > Employees */}
+			<Route path='/company/employees' element={<Employees />} />
+			<Route path='/company/employees/:employeeId' element={<EmployeeDetails />} />
 			<Route path='/company/employees/add' element={<EmployeeForm isEdit={false} />} />
 			<Route path='/company/employees/edit/:employeeId' element={<EmployeeForm isEdit={true} />} />
 

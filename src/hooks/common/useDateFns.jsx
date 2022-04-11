@@ -1,4 +1,13 @@
-import { format, isValid, parse, parseISO, formatISO, formatDistance, differenceInYears } from 'date-fns';
+import {
+	format,
+	isValid,
+	parse,
+	parseISO,
+	formatISO,
+	formatDistance,
+	differenceInYears,
+	formatDistanceStrict,
+} from 'date-fns';
 import { useAppContext } from '../../context/AppContext';
 import { tr, enUS } from 'date-fns/locale';
 
@@ -60,8 +69,12 @@ export default function useDateFns() {
 		const defaultOptions = { includeSeconds: false, addSuffix: true };
 		const opts = optionsWithLocale(options || defaultOptions);
 
+		if (opts?.strict === true) {
+			return formatDistanceStrict(startingDate, endDate, opts);
+		}
 		return formatDistance(startingDate, endDate, opts);
 	}
+
 
 	return {
 		format: (date, formatStr = 'P', options = {}) => {
@@ -77,6 +90,6 @@ export default function useDateFns() {
 		datePickerFormat,
 		datePickerJoiFormat,
 		locale: dateLocale,
-		getAge: differenceInYears,
+		getAge: (birthday) => differenceInYears(Date.now(), parseDate(birthday)),
 	};
 }

@@ -25,7 +25,7 @@ export default function useEmployeeForm(employee = null) {
 	const [isSubmitted, setSubmitted] = useState(false);
 
 	//=============// Form Builder //===============//
-	const { schema, joi, register, getError, getFormData, setValue, resetForm } = useFormBuilder({
+	const { schema, joi, register, getError, getFormData, resetForm } = useFormBuilder({
 		initialState: employee ? employee : defaultEmployee,
 		isSubmitted,
 	});
@@ -46,8 +46,10 @@ export default function useEmployeeForm(employee = null) {
 			//Form errors.
 		}
 	};
-	const onDelete = (e) => {
-		console.log('TODO: Delete Employee.');
+	const onDelete = () => {
+		if (employee) {
+			actions.delete(employee, () => navigate('/company/employees'));
+		}
 	};
 	const onReset = (e) => {
 		resetForm();

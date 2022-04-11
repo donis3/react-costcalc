@@ -53,6 +53,22 @@ export default function useCompanyEmployees() {
 		callback?.();
 	}
 
+	function deleteEmployee(data, callback) {
+		const action = {
+			type: 'DeleteEmployee',
+			payload: data,
+			success: successToast('delete', data?.name),
+			error: errorToast(null, t('employees.name')),
+		};
+		dispatch(action);
+		//Run callback after dispatch complete regardless of result
+		callback?.();
+	}
+
+	/**
+	 * For debug
+	 * Removes all employees
+	 */
 	function resetEmployees() {
 		const action = {
 			type: 'ResetEmployees',
@@ -118,6 +134,7 @@ export default function useCompanyEmployees() {
 			removeAll: resetEmployees,
 			add: addEmployee,
 			update: updateEmployee,
+			delete: deleteEmployee,
 		},
 		sorting: {
 			fields: Object.keys(sortingSchema),

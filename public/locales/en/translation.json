@@ -26,6 +26,7 @@
 		"delete": "Item couldn't be deleted.",
 		"noData": "No data",
 		"itemNotFound": "Requested {{item, lowercase}} couldn't be found",
+		"nameNotFound": "Requested {{name, lowercase}} couldn't be found",
 		"duplicate": "There is already another item with the same values.",
 		"updateNotRequired": "Nothing to update",
 		"badRequest": "Bad Request",

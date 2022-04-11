@@ -132,6 +132,26 @@ export default function useCompanyReducer() {
 				});
 			}
 
+			/**
+			 * Add new employee to company.employees
+			 */
+			case 'DeleteEmployee': {
+				//Verify
+				if (!payload || typeof payload !== 'object' || !validateId(payload?.employeeId)) {
+					return onError('invalidData');
+				}
+				//Find requested employee
+				if (!Array.isArray(state.employees)) return onError('badRequest');
+				const employee = state.employees.find((item) => item.employeeId === payload.employeeId);
+				if (!employee) return onError('nameNotFound');
+
+				//Remove employee and return
+				return onSuccess({
+					...state,
+					employees: state.employees.filter((item) => item.employeeId !== employee.employeeId),
+				});
+			}
+
 			// Unsupported Dispatch Type
 			default: {
 				throw new Error('Invalid action type received: ' + type);

@@ -6,7 +6,7 @@ import ThSortable from '../../../components/common/ThSortable';
 import useCompanyEmployees from '../../../context/company/useCompanyEmployees';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useIntl from '../../../hooks/common/useIntl';
-import { FaPencilAlt } from 'react-icons/fa';
+import Button from '../../../components/common/Button';
 
 export default function EmployeeTable() {
 	const { t } = useTranslation('pages/company');
@@ -16,7 +16,7 @@ export default function EmployeeTable() {
 
 	return (
 		<div className='overflow-x-auto my-10'>
-			<table className='table table-zebra w-full md:table-normal table-fixed table-compact'>
+			<table className='table table-zebra w-full md:table-normal  table-compact'>
 				<thead>
 					<tr>
 						<ThSortable className='w-4/12' field='name' sortingState={sortingState} handleSort={sortBy}>
@@ -50,7 +50,7 @@ export default function EmployeeTable() {
 
 function EmployeeTableRow({ employee } = {}) {
 	const { displayDate, displayMoney } = useIntl();
-	const { employeeId = null, name = '', department = '', doe = '', grossLocal = 0 } = employee;
+	const { employeeId = null, name = '', department = '', doe = '', gross = 0, currency } = employee;
 
 	if (!employeeId) return <></>;
 	return (
@@ -62,10 +62,10 @@ function EmployeeTableRow({ employee } = {}) {
 			</td>
 			<td>{department}</td>
 			<td>{displayDate(doe, { time: false })}</td>
-			<td>{displayMoney(grossLocal)}</td>
+			<td>{displayMoney(gross, currency)}</td>
 			<td className='flex flex-wrap gap-x-1'>
-				<Link to={`/company/employees/edit/${employeeId}`} className='btn btn-ghost btn-xs'>
-					<FaPencilAlt />
+				<Link to={`/company/employees/edit/${employeeId}`}>
+					<Button.EditSmall />
 				</Link>
 			</td>
 		</tr>

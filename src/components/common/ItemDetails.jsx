@@ -10,15 +10,19 @@ import OptionControl from './OptionControl';
  * Uses grid
  * @returns
  */
-function Wrapper({ children, colsSmall, colsLarge }) {
-	if (isNaN(parseInt(colsSmall))) colsSmall = 2;
-	if (isNaN(parseInt(colsLarge))) colsLarge = 3;
-
+function Wrapper({ children }) {
 	return <div className='w-full flex md:flex-row md:gap-x-10 gap-y-10 flex-col-reverse'>{children}</div>;
 }
-Wrapper.defaultProps = {
-	colsSmall: 2,
-	colsLarge: 3,
+
+function GridWrapper({ children, colsSmall, colsLarge }) {
+	if (isNaN(parseInt(colsSmall))) colsSmall = 1;
+	if (isNaN(parseInt(colsLarge))) colsLarge = 2;
+
+	return <div className={`p-3 grid grid-cols-${colsSmall} gap-x-10 gap-y-5 md:grid-cols-${colsLarge}`}>{children}</div>;
+}
+GridWrapper.defaultProps = {
+	colsSmall: 1,
+	colsLarge: 2,
 };
 
 /**
@@ -35,6 +39,44 @@ function Item({ title = null, children, ...attributes } = {}) {
 			{/* Details */}
 			<h4 className='text-base-content opacity-60 text-sm mb-1'>{title}</h4>
 			<p className='text-base-content text-base font-medium'>{children}</p>
+		</div>
+	);
+}
+
+/**
+ * whitespace pre text item
+ * @param {*} param0
+ * @returns
+ */
+function ItemTextPre({ title = null, children, ...attributes } = {}) {
+	if (typeof children === 'string' && children.trim().length === 0) {
+		return <></>;
+	}
+	return (
+		<div {...attributes}>
+			{/* Details */}
+			<h4 className='text-base-content opacity-60 text-sm mb-1'>{title}</h4>
+			<p className='text-base-content text-base font-normal leading-tight whitespace-pre-wrap'>{children}</p>
+		</div>
+	);
+}
+
+/**
+ * whitespace pre text item
+ * @param {*} param0
+ * @returns
+ */
+function RowItem({ title = null, pre = false, children, ...attributes } = {}) {
+	if (typeof children === 'string' && children.trim().length === 0) {
+		return <></>;
+	}
+	return (
+		<div className='col-span-full' {...attributes}>
+			{/* Details */}
+			{title && <h4 className='text-base-content opacity-60 text-sm mb-1'>{title}</h4>}
+			{pre && <p className='text-base-content text-base font-normal leading-tight whitespace-pre-wrap'>{children}</p>}
+			{!pre && typeof children === 'string' && <p className='text-base-content text-base font-medium'>{children}</p>}
+			{!pre && typeof children !== 'string' && <div>{children}</div>}
 		</div>
 	);
 }
@@ -72,7 +114,7 @@ function UnitCostBox({ currency, price, priceWithTax, previousPrice, title, unit
 	const priceChangeIndicator = (
 		<span className={`text-sm flex items-center ${priceChange > 0 ? 'text-green-600' : 'text-red-600'}`}>
 			{/* indicator */}
-			{displayNumber(priceChange,2)} % {priceChange > 0 ? <FaCaretUp /> : <FaCaretDown />}
+			{displayNumber(priceChange, 2)} % {priceChange > 0 ? <FaCaretUp /> : <FaCaretDown />}
 		</span>
 	);
 
@@ -139,7 +181,10 @@ Toggles.defaultProps = {
 
 const ItemDetails = {
 	Main: Wrapper,
+	MainGrid: GridWrapper,
 	Item: Item,
+	RowItem,
+	Pre: ItemTextPre,
 	Price: UnitCostBox,
 	Toggles: Toggles,
 };

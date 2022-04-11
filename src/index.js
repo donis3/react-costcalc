@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/layout/Loading';
+import './fonts';
 
-import './lib/i18n';//Import i18next initialization
+import './lib/i18n'; //Import i18next initialization
 
 ReactDOM.render(
 	<Suspense fallback={<Loading />}>

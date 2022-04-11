@@ -51,9 +51,12 @@
 		"department": "Department",
 		"dob": "Date of Birth",
 		"doe": "Date of Employment",
+		"employmentTime": "Employment Duration",
 		"notes": "Notes",
 		"email": "Email",
-		"mobile": "Mobile Phone"
+		"mobile": "Mobile Phone",
+		"detailsTitle": "Employee Information",
+		"age": "Age"
 	},
 	"departments": {
 		"manufacturing": "Manufacturing",
