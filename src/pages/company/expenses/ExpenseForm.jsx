@@ -5,6 +5,7 @@ import Card from '../../../components/common/Card';
 import Form from '../../../components/forms/Form';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
 import { useAppContext } from '../../../context/AppContext';
+import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
 import useIntl from '../../../hooks/common/useIntl';
 import useExpenseForm from './useExpenseForm';
 
@@ -12,13 +13,15 @@ export default function ExpenseForm({ isEdit = false }) {
 	const { t } = useTranslation('pages/company', 'translation');
 	const { page } = useAppContext();
 	const { expenseId } = useParams();
-	const { selectData, register, getError, handlers, cost } = useExpenseForm();
+	const { findById } = useCompanyExpenses();
+	const expense = isEdit ? findById(expenseId) : null;
+	const { selectData, register, getError, handlers, cost } = useExpenseForm(expense);
 	const { displayMoney } = useIntl();
 
 	//Set breadcrumb if an expense is loaded
 	useEffect(() => {
-		if (isEdit && expenseId) {
-			page.setBreadcrumb('Expense Name');
+		if (isEdit && expense) {
+			page.setBreadcrumb(expense.name);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -27,10 +30,9 @@ export default function ExpenseForm({ isEdit = false }) {
 		<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
 			<ModuleHeader
 				module='expenses'
-				text={isEdit ? t('expenses.formTitleEdit') : t('expenses.formTitleAdd')}
+				text={isEdit ? t('expenses.formTitleUpdate') : t('expenses.formTitleAdd')}
 				role={isEdit ? 'edit' : 'add'}
 			/>
-			<p>TODO: form Schema, dispatch actions</p>
 
 			{/* Body */}
 			<Form onSubmit={handlers.submit} onDelete={isEdit ? handlers.delete : null} onReset={handlers.reset}>

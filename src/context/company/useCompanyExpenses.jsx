@@ -92,9 +92,25 @@ export default function useCompanyExpenses() {
 		return convertedExpenses;
 	}
 
+	/**
+	 * Generate an array of categories with at least 1 expense item in it.
+	 * @returns array of categories
+	 */
+	const getAvailableCategories = () => {
+		return company.expenses.reduce((acc, expense) => {
+			const { category } = expense;
+			if (acc.includes(category)) {
+				return acc;
+			} else {
+				return [...acc, category];
+			}
+		}, []);
+	};
+
 	return {
 		findById,
 		getAll,
+		getAvailableCategories,
 		sorting: {
 			fields: ['expenseId', 'name', 'localCategory', 'localPeriod', 'localAnnualCost'],
 			default: 'expenseId',

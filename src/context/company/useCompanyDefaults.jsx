@@ -12,6 +12,13 @@ export default function useCompanyDefaults() {
 	const defaultCurrency = config.getDefaultCurrency(true);
 	const periods = ['y', 'm', 'w', 'd', 'h'];
 	const units = ['t', 'kwh', 'kg', 'L', 'pcs', 'other'];
+	const periodCoefficients = {
+		y: 1,
+		m: 12,
+		w: 365 / 7,
+		d: 365,
+		h: 365 * 24,
+	};
 	//Localization in pages/company
 	const expenseCategories = [
 		'advertisement',
@@ -91,6 +98,7 @@ export default function useCompanyDefaults() {
 		defaultEmployee: employee,
 		defaultInfo: companyInfo,
 		periods,
+		periodCoefficients,
 		units,
 		expenseCategories,
 	};

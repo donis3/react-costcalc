@@ -1,12 +1,17 @@
-import React from 'react';
 import useStorageState from '../common/useStorageState';
 
 const defaultOptions = {
 	localPrice: true,
 	baseUnit: false,
 	showTax: false,
+	showPeriod: 'y', //For expenses
+	showCategory: [], //For expenses
 };
 
+/**
+ *	Global ui toggles for app
+ * @returns [getOption, setOption, displayState]
+ */
 export default function useUiToggles() {
 	const [displayState, setDisplayState] = useStorageState('displaySettings', defaultOptions);
 
@@ -17,9 +22,14 @@ export default function useUiToggles() {
 	};
 
 	const setOption = (option = null, value = null) => {
-		if (!option || option in displayState === false) return;
-		if (typeof value !== 'boolean') value = null;
-		if (value === null) value = !displayState[option]; //if no value is provided, toggle the value
+		if (!option || option in defaultOptions === false) return;
+
+		//Check if option is bool and try to toggle if value is null
+		if (typeof defaultOptions[option] === 'boolean') {
+			if (typeof value !== 'boolean') value = null;
+			if (value === null) value = !displayState[option]; //if no value is provided, toggle the value
+		}
+
 		setDisplayState({ ...displayState, [option]: value });
 	};
 

@@ -90,7 +90,8 @@
 		"no": "no",
 		"new": "New",
 		"back": "Back",
-		"chart": "Chart"
+		"chart": "Chart",
+		"options": "Options"
 	},
 	"labels": {
 		"name": "Name",
@@ -115,7 +116,8 @@
 		"density": "Density",
 		"packageCapacity": "Package Capacity",
 		"physicalState": "Physical State",
-		"weight": "Weight"
+		"weight": "Weight",
+		"filtering": "Filtering ({{count}})"
 	},
 	"charts": {
 		"costHistory": "Cost History",

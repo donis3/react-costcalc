@@ -3,66 +3,91 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import ThSortable from '../../../components/common/ThSortable';
+import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
 import useConfig from '../../../hooks/app/useConfig';
+import useCurrencyConversion from '../../../hooks/app/useCurrencyConversion';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
+import useUiToggles from '../../../hooks/app/useUiToggles';
 import useIntl from '../../../hooks/common/useIntl';
+import ExpenseOptions from './ExpenseOptions';
 
-export default function ExpensesTable({ options }) {
+export default function ExpensesTable() {
+	// eslint-disable-next-line no-unused-vars
+	const [getOption, setOption, options] = useUiToggles();
 	const { getAll, sorting } = useCompanyExpenses();
 	const { t } = useTranslation('pages/company');
 	const [sortingState, sortBy] = useSortTableByField('expenses', sorting.fields, sorting.default);
+	const expenses = getAll({ ...sortingState, category: options.showCategory });
 
 	return (
-		<div className='overflow-x-auto my-10'>
-			<table className='table table-zebra w-full md:table-normal  table-compact'>
-				<thead>
-					<tr>
-						<ThSortable className='w-4/12' field={sorting.fields[1]} sortingState={sortingState} handleSort={sortBy}>
-							{t('expense.name')}
-						</ThSortable>
+		<>
+			{/* Table options and total cost */}
+			<div className='flex mt-5'>
+				<div className='w-1/2'>
+					<ExpenseTotals expenses={expenses} options={options} />
+				</div>
+				<div className='w-1/2'>
+					<ExpenseOptions options={options} setOption={setOption} />
+				</div>
+			</div>
+            {/* Table */}
+			<div className='overflow-x-auto my-10'>
+				<table className='table table-zebra w-full md:table-normal  table-compact'>
+					<thead>
+						<tr>
+							<ThSortable className='w-4/12' field={sorting.fields[1]} sortingState={sortingState} handleSort={sortBy}>
+								{t('expense.name')}
+							</ThSortable>
 
-						<ThSortable className='w-3/12' field={sorting.fields[2]} sortingState={sortingState} handleSort={sortBy}>
-							{t('expense.category')}
-						</ThSortable>
+							<ThSortable className='w-3/12' field={sorting.fields[2]} sortingState={sortingState} handleSort={sortBy}>
+								{t('expense.category')}
+							</ThSortable>
 
-						<ThSortable className='w-2/12' field={sorting.fields[3]} sortingState={sortingState} handleSort={sortBy}>
-							{t('expense.period')}
-						</ThSortable>
+							<ThSortable className='w-2/12' field={sorting.fields[3]} sortingState={sortingState} handleSort={sortBy}>
+								{t('expense.period')}
+							</ThSortable>
 
-						<ThSortable className='w-2/12' field={sorting.fields[4]} sortingState={sortingState} handleSort={sortBy}>
-							{t('expense.amount')}
-						</ThSortable>
+							<ThSortable className='w-2/12' field={sorting.fields[4]} sortingState={sortingState} handleSort={sortBy}>
+								{t('expense.amount')}
+							</ThSortable>
 
-						<ThSortable className='w-1/12'></ThSortable>
-					</tr>
-				</thead>
-				<tbody>
-					{getAll({ ...sortingState, category: options.showCategory }).map((expense, index) => (
-						<ExpenseTableRow key={index} expense={expense} options={options} />
-					))}
-				</tbody>
-			</table>
-		</div>
+							<ThSortable className='w-1/12'></ThSortable>
+						</tr>
+					</thead>
+					<tbody>
+						{expenses.map((expense, index) => (
+							<ExpenseTableRow key={index} expense={expense} options={options} />
+						))}
+					</tbody>
+				</table>
+			</div>
+		</>
 	);
 }
 
 function ExpenseTableRow({ expense, options }) {
-	const { t } = useTranslation('pages/company');
-	const config = useConfig();
 	const { displayMoney } = useIntl();
 	const { defaultCost } = useCompanyExpenseCalculator();
+	const { convert, defaultCurrency } = useCurrencyConversion();
 	if (!expense || 'expenseId' in expense === false) return <></>;
 
-	const { expenseId, name, localCategory, localPeriod, cost = defaultCost } = expense;
-	const displayCost = { currency: config.getDefaultCurrency(true), amount: 0, amountWithTax: 0 };
-	if (cost && options.showPeriod in cost) {
-		displayCost.currency = cost[options.showPeriod].currency;
-		displayCost.amount = cost[options.showPeriod].amount;
-		displayCost.amountWithTax = cost[options.showPeriod].amountWithTax;
+	const { expenseId, name, localCategory, period, localPeriod, cost = defaultCost, currency } = expense;
+	//Convert to local currency toggle
+	let local = false;
+	if (currency && currency !== defaultCurrency) {
+		if (options?.localPrice === true) local = true;
 	}
-
+	//Get cost for this period
+	let displayCost = {};
+	if (cost && period in cost) {
+		displayCost = cost[period];
+	}
+	//Convert if needed
+	const net = local ? convert(displayCost.amount, displayCost.currency).amount : displayCost.amount;
+	const taxed = local ? convert(displayCost.amountWithTax, displayCost.currency).amount : displayCost.amountWithTax;
+	const activeCurrency = local ? defaultCurrency : currency;
 	return (
 		<tr className='hover'>
 			<td className='whitespace-normal truncate'>
@@ -72,7 +97,7 @@ function ExpenseTableRow({ expense, options }) {
 			</td>
 			<td>{localCategory}</td>
 			<td>{localPeriod}</td>
-			<td>{displayMoney(displayCost.amount, displayCost.currency)}</td>
+			<td>{options?.showTax === true ? displayMoney(taxed, activeCurrency) : displayMoney(net, activeCurrency)}</td>
 			<td className='flex flex-wrap gap-x-1'>
 				<Link to={`/company/expenses/edit/${expenseId}`}>
 					<Button.EditSmall />
@@ -82,10 +107,56 @@ function ExpenseTableRow({ expense, options }) {
 	);
 }
 
+/**
+ * Takes currently shown expenses array to calculate totals
+ * @param {*} param0
+ */
+function ExpenseTotals({ expenses, options }) {
+	const { t } = useTranslation('pages/company', 'translation');
+	const { displayMoney } = useIntl();
+	const config = useConfig();
+	const defaultCurrency = config.getDefaultCurrency(true);
+	const period = options?.showPeriod ? options.showPeriod : 'y';
+	const currentPeriodText = t(`periods.${options.showPeriod}`, { ns: 'translation' });
+	const { periodCoefficients } = useCompanyDefaults();
+	const coefficient = period in periodCoefficients ? periodCoefficients[period] : 1;
+
+	const totals = expenses.reduce(
+		(acc, expense) => {
+			const { localAnnualCost, localAnnualCostWithTax } = expense;
+			acc.net += isNaN(parseFloat(localAnnualCost)) ? 0 : parseFloat(localAnnualCost);
+			acc.withTax += isNaN(parseFloat(localAnnualCostWithTax)) ? 0 : parseFloat(localAnnualCostWithTax);
+			return acc;
+		},
+		{ net: 0, withTax: 0, currency: defaultCurrency }
+	);
+
+	return (
+		<div className='w-full flex items-center justify-start mb-3'>
+			<div className='stats border'>
+				<div className='stat'>
+					<div className='stat-title'>{t('expensesTable.periodCost', { period: currentPeriodText })}</div>
+					<div className='stat-value'>{displayMoney(totals.net / coefficient, totals.currency)}</div>
+					<div className='stat-desc'>
+						{t('labels.priceWithTax', {
+							ns: 'translation',
+							price: displayMoney(totals.withTax / coefficient, totals.currency),
+						})}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
 //Defaults
 ExpensesTable.defaultProps = {
 	options: { showPeriod: 'y', showCategory: [] },
 };
 ExpenseTableRow.defaultProps = {
 	expense: null,
+};
+ExpenseTotals.defaultProps = {
+	options: { showPeriod: 'y', showCategory: [] },
+	expenses: [],
 };

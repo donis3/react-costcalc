@@ -79,6 +79,12 @@
 		"formMonthlyTitle": "Monthly Cost",
 		"formAnnualTitle": "Annual Cost"
 	},
+	"expensesTable": {
+		"categoryOptions": "Display categories",
+		"currencyOptions": "Options",
+		"periodOptions": "Total cost period",
+		"periodCost": "{{period}} cost"
+	},
 	"expense": {
 		"name": "Expense",
 		"category": "Category",

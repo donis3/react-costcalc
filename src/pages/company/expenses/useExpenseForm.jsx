@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
@@ -36,8 +36,7 @@ export default function useExpenseForm(expense = null) {
 		try {
 			const data = getFormData(true);
 			if (expense) {
-				//actions.update(data, () => navigate('/company/employees'));
-				console.log('Implement update');
+				actions.update(data, () => navigate('/company/expenses'));
 			} else {
 				//actions.add(data, () => navigate('/company/employees'));
 				actions.add(data, navigate('/company/expenses'));
@@ -48,8 +47,7 @@ export default function useExpenseForm(expense = null) {
 	};
 	const onDelete = () => {
 		if (expense) {
-			//actions.delete(employee, () => navigate('/company/employees'));
-			console.log('Implement onDelete');
+			actions.delete(expense, () => navigate('/company/expenses'));
 		}
 	};
 	const onReset = (e) => {
