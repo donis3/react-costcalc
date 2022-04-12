@@ -10,8 +10,9 @@ export default function useCompanyDefaults() {
 	const departments = config.get('company.departments') || [];
 
 	const defaultCurrency = config.getDefaultCurrency(true);
-	const periods = ['y', 'm', 'd', 'w', 'h'];
+	const periods = ['y', 'm', 'w', 'd', 'h'];
 	const units = ['t', 'kwh', 'kg', 'L', 'pcs', 'other'];
+	//Localization in pages/company
 	const expenseCategories = [
 		'advertisement',
 		'banking',
@@ -69,11 +70,12 @@ export default function useCompanyDefaults() {
 		price: 0,
 		tax: 0,
 		currency: defaultCurrency,
+		cost: null, //Will be an object with each time period
 	};
 
 	const defaultCompany = {
 		info: companyInfo,
-		overhead: [],
+		expenses: [],
 		employees: [],
 		totals: {
 			overhead: 0,

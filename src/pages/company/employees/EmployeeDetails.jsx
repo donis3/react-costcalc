@@ -89,7 +89,7 @@ export default function EmployeeDetails() {
 						</ItemDetails.RowItem>
 					)}
 					{/* Notes */}
-					<ItemDetails.RowItem title={t('employee.notes')} pre>
+					<ItemDetails.RowItem title={t('employee.notes')} pre className='col-span-full mt-10'>
 						{employee.notes}
 					</ItemDetails.RowItem>
 				</ItemDetails.MainGrid>

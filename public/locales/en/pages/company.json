@@ -75,7 +75,9 @@
 		"formTitleAdd": "New Expense",
 		"formTitleUpdate": "Edit Expense",
 		"formSectionDetails": "Expense Details",
-		"formSectionCost": "Cost Details"
+		"formSectionCost": "Cost Details",
+		"formMonthlyTitle": "Monthly Cost",
+		"formAnnualTitle": "Annual Cost"
 	},
 	"expense": {
 		"name": "Expense",
@@ -85,7 +87,9 @@
 		"price": "Unit Price",
 		"quantity": "Quantity",
 		"unit": "Unit",
-		"tax": "Tax Percentage"
+		"tax": "Tax Percentage",
+		"currency": "Currency",
+		"amount": "Amount"
 	},
 	"expenseCategories": {
 		"advertisement": "Advertising",

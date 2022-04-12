@@ -15,13 +15,14 @@
 		"createdAt": "Created",
 		"pickDate": "Pick a date"
 	},
-	"periods": { "h": "Hourly", "d": "Daily", "w": "Weekly", "m": "Monthly", "y": "Annually" },
+	"periods": { "h": "Hourly", "d": "Daily", "w": "Weekly", "m": "Monthly", "y": "Annual" },
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
 		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
 		"savingItem": "Couldn't save {{item, lowercase}}",
 		"invalidItem": "Invalid item.",
+		"invalidData": "Operation failed. Invalid data received",
 		"add": "Item couldn't be added.",
 		"update": "Item couldn't be updated.",
 		"delete": "Item couldn't be deleted.",
@@ -31,7 +32,11 @@
 		"duplicate": "There is already another item with the same values.",
 		"updateNotRequired": "Nothing to update",
 		"badRequest": "Bad Request",
-		"updateTargetNotFound": "Update failed, {{name}} couldn't be found"
+		"updateTargetNotFound": "Update failed, {{name}} couldn't be found",
+
+		"addInvalidData": "Invalid data. {{name}} couldn't be added.",
+		"updateInvalidData": "Invalid data. {{name}} couldn't be updated.",
+		"deleteInvalidData": "Invalid data. {{name}} couldn't be deleted."
 	},
 	"success": {
 		"reset": "\"{{name}}\" was successfully reset",

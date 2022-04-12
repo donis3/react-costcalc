@@ -1,9 +1,11 @@
 import useCompanyDefaults from './useCompanyDefaults';
 import { v4 as uuid4, validate as validateId } from 'uuid';
+import useCompanyExpenseCalculator from './useCompanyExpenseCalculator';
 
 export default function useCompanyReducer() {
 	//Dependencies
-	const { defaultCompany, defaultEmployee } = useCompanyDefaults();
+	const { defaultCompany, defaultEmployee, defaultExpense } = useCompanyDefaults();
+	const { calculateCost } = useCompanyExpenseCalculator();
 
 	//Start reducer
 	function companyReducer(state, action) {
@@ -23,9 +25,7 @@ export default function useCompanyReducer() {
 
 		//ACTIONS
 		switch (type) {
-			case 'add': {
-				return onError();
-			}
+			//==========================// COMPANY INFO //==========================//
 
 			/**
 			 * Requires a payload of company info object
@@ -63,6 +63,8 @@ export default function useCompanyReducer() {
 				//Update
 				return onSuccess({ ...state, info: defaultCompany.info });
 			}
+
+			//==========================// EMPLOYEES //==========================//
 
 			/**
 			 * Removes all company information and reverts to default values
@@ -102,7 +104,7 @@ export default function useCompanyReducer() {
 			}
 
 			/**
-			 * Add new employee to company.employees
+			 * Updates an employee. Expects an employee obj
 			 */
 			case 'UpdateEmployee': {
 				//Verify
@@ -133,12 +135,12 @@ export default function useCompanyReducer() {
 			}
 
 			/**
-			 * Add new employee to company.employees
+			 * Delete an employee. Expects the employee object
 			 */
 			case 'DeleteEmployee': {
 				//Verify
 				if (!payload || typeof payload !== 'object' || !validateId(payload?.employeeId)) {
-					return onError('invalidData');
+					return onError('deleteInvalidData');
 				}
 				//Find requested employee
 				if (!Array.isArray(state.employees)) return onError('badRequest');
@@ -149,6 +151,79 @@ export default function useCompanyReducer() {
 				return onSuccess({
 					...state,
 					employees: state.employees.filter((item) => item.employeeId !== employee.employeeId),
+				});
+			}
+
+			//==========================// EXPENSES //==========================//
+			/**
+			 * Adds an expense. Expects an expense obj
+			 * Will generate UUID
+			 */
+			case 'AddExpense': {
+				//Verify
+				if (!payload || typeof payload !== 'object' || 'name' in payload === false) {
+					return onError('addInvalidData');
+				}
+				//Merge & generate id
+				const newExpense = { ...defaultExpense, ...payload, expenseId: uuid4() };
+
+				//Calculate cost per period and save it to object (dont convert to local currency)
+				newExpense.cost = calculateCost(newExpense, false);
+
+				//Add to state
+				return onSuccess({ ...state, expenses: [...state?.expenses, newExpense] });
+			}
+
+			/**
+			 * Updates an expense. Expects an expense obj
+			 */
+			case 'UpdateExpense': {
+				//Verify
+				if (!payload || typeof payload !== 'object' || !validateId(payload?.expenseId)) {
+					return onError('updateInvalidData');
+				}
+				//Find requested expense
+				if (!Array.isArray(state.expenses)) return onError('badRequest');
+				const expense = state.expenses.find((item) => item.expenseId === payload.expenseId);
+				if (!expense) return onError('nameNotFound');
+
+				//Merge received expense with existing
+				const newExpense = { ...expense, ...payload };
+
+				//Calculate cost per period and save it to object (dont convert to local currency)
+				newExpense.cost = calculateCost(newExpense, false);
+
+				//Compare
+				if (JSON.stringify(newExpense) === JSON.stringify(expense)) {
+					//Nothing to update.
+					return onError('updateNotRequired');
+				}
+				//Update state
+				return onSuccess({
+					...state,
+					expenses: state.expenses.map((item) => {
+						if (item.expenseId !== newExpense.expenseId) return item;
+						return newExpense;
+					}),
+				});
+			}
+			/**
+			 * Delete an Expense. Expects an expense object
+			 */
+			case 'DeleteExpense': {
+				//Verify
+				if (!payload || typeof payload !== 'object' || !validateId(payload?.expenseId)) {
+					return onError('deleteInvalidData');
+				}
+				//Find requested expense
+				if (!Array.isArray(state.expenses)) return onError('badRequest');
+				const expense = state.expenses.find((item) => item.expenseId === payload.expenseId);
+				if (!expense) return onError('nameNotFound');
+
+				//Remove expense and return
+				return onSuccess({
+					...state,
+					expenses: state.expenses.filter((item) => item.expenseId !== expense.expenseId),
 				});
 			}
 

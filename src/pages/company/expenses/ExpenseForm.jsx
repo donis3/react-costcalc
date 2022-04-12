@@ -5,13 +5,15 @@ import Card from '../../../components/common/Card';
 import Form from '../../../components/forms/Form';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
 import { useAppContext } from '../../../context/AppContext';
+import useIntl from '../../../hooks/common/useIntl';
 import useExpenseForm from './useExpenseForm';
 
 export default function ExpenseForm({ isEdit = false }) {
 	const { t } = useTranslation('pages/company', 'translation');
 	const { page } = useAppContext();
 	const { expenseId } = useParams();
-	const { selectData, register, getError, handlers } = useExpenseForm();
+	const { selectData, register, getError, handlers, cost } = useExpenseForm();
+	const { displayMoney } = useIntl();
 
 	//Set breadcrumb if an expense is loaded
 	useEffect(() => {
@@ -28,11 +30,7 @@ export default function ExpenseForm({ isEdit = false }) {
 				text={isEdit ? t('expenses.formTitleEdit') : t('expenses.formTitleAdd')}
 				role={isEdit ? 'edit' : 'add'}
 			/>
-            <p>
-                TODO:
-                form Schema,
-                dispatch actions
-            </p>
+			<p>TODO: form Schema, dispatch actions</p>
 
 			{/* Body */}
 			<Form onSubmit={handlers.submit} onDelete={isEdit ? handlers.delete : null} onReset={handlers.reset}>
@@ -54,10 +52,10 @@ export default function ExpenseForm({ isEdit = false }) {
 
 				{/* Cost Section */}
 				<Form.Section title={t('expenses.formSectionCost')}>
-					{/* Field: unitPrice */}
+					{/* Field: price & currency */}
 					<Form.ControlGroup label={t('expense.price')} error={getError(['price', 'currency'])}>
 						<Form.Number {...register({ field: 'price', isControlled: false })} />
-						<Form.Select {...register({ field: 'period', isControlled: false })} options={selectData.currencies} />
+						<Form.Select {...register({ field: 'currency', isControlled: false })} options={selectData.currencies} />
 					</Form.ControlGroup>
 
 					<Form.Row>
@@ -76,6 +74,24 @@ export default function ExpenseForm({ isEdit = false }) {
 						<Form.Number {...register({ field: 'tax', isControlled: false })} />
 					</Form.Control>
 				</Form.Section>
+
+				{/* Calculations */}
+				<Form.Row>
+					<div className='stat flex-1 border-2 rounded-md'>
+						<div className='stat-title'>{t('expenses.formMonthlyTitle')}</div>
+						<div className='stat-value'>{displayMoney(cost?.m?.amount)}</div>
+						<div className='stat-desc'>
+							{t('labels.priceWithTax', { ns: 'translation', price: displayMoney(cost?.m?.amountWithTax) })}
+						</div>
+					</div>
+					<div className='stat flex-1 border-2 rounded-md'>
+						<div className='stat-title'>{t('expenses.formAnnualTitle')}</div>
+						<div className='stat-value'>{displayMoney(cost?.y?.amount)}</div>
+						<div className='stat-desc'>
+							{t('labels.priceWithTax', { ns: 'translation', price: displayMoney(cost?.y?.amountWithTax) })}
+						</div>
+					</div>
+				</Form.Row>
 			</Form>
 		</Card>
 	);

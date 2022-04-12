@@ -23,7 +23,8 @@
 		"storage": true,
 		"windowType": false,
 		"exchangeRates": true,
-		"forms": true
+		"forms": true,
+		"expenses": true
 	},
 	"modules": {
 		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },

@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
+import useCompanyExpenseActions from '../../../context/company/useCompanyExpenseActions';
+import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useConfig from '../../../hooks/app/useConfig';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
 export default function useExpenseForm(expense = null) {
 	const config = useConfig();
+	const navigate = useNavigate();
 	const { t } = useTranslation('pages/company', 'translation');
 	const { periods, units, defaultExpense, expenseCategories } = useCompanyDefaults();
 	const selectData = useSelectArray({ units, periods, expenseCategories });
 	const currencies = config.getCurrenciesArray();
+	const { calculateCost, defaultCost } = useCompanyExpenseCalculator();
+	const actions = useCompanyExpenseActions();
 
 	//=============// Form State //===============//
 	const [isSubmitted, setSubmitted] = useState(false);
+	//State for ux
+	const initialCostData = expense ? calculateCost(expense) : defaultCost;
+	const [cost, setCost] = useState(initialCostData);
 
 	//=============// Form Builder //===============//
-	const { schema, joi, register, getError, getFormData, resetForm } = useFormBuilder({
+	const { schema, joi, register, getError, getFormData, resetForm, getValue, handleChange } = useFormBuilder({
 		initialState: expense ? expense : defaultExpense,
 		isSubmitted,
 	});
 	//=============// Form Schema //===============//
-	addSchemaRules(schema, joi, { t, currencies, units, periods });
+	addSchemaRules(schema, joi, { t, currencies, units, periods, expenseCategories });
 
 	//=============// Form Handlers //===============//
 	const onSubmit = (e) => {
@@ -31,7 +40,7 @@ export default function useExpenseForm(expense = null) {
 				console.log('Implement update');
 			} else {
 				//actions.add(data, () => navigate('/company/employees'));
-				console.log('Implement add');
+				actions.add(data, navigate('/company/expenses'));
 			}
 		} catch (err) {
 			//Form errors.
@@ -46,8 +55,30 @@ export default function useExpenseForm(expense = null) {
 	const onReset = (e) => {
 		resetForm();
 		setSubmitted(false);
+		setCost(initialCostData);
 	};
-
+	//=========================// Cost Calculation //==========================//
+	const getCostValues = () => {
+		return {
+			period: getValue('period'),
+			price: getValue('price'),
+			quantity: getValue('quantity'),
+			tax: getValue('tax'),
+			currency: getValue('currency'),
+		};
+	};
+	const handlePriceChange = () => {
+		const expenseData = getCostValues();
+		const costData = calculateCost(expenseData);
+		setCost(costData);
+	};
+	//Event listeners
+	handleChange('period', handlePriceChange);
+	handleChange('price', handlePriceChange);
+	handleChange('currency', handlePriceChange);
+	handleChange('quantity', handlePriceChange);
+	handleChange('tax', handlePriceChange);
+	//=========================// EXPORTS //==========================//
 	return {
 		register,
 		getError,
@@ -58,6 +89,7 @@ export default function useExpenseForm(expense = null) {
 			setSubmitted: setSubmitted,
 		},
 		selectData,
+		cost,
 	};
 }
 
@@ -106,27 +138,40 @@ function addSchemaRules(schema = null, joi = null, other = {}) {
 		return schema;
 	};
 	//Extract required data
-	const { t, units, periods, currencies } = other;
+	const { t, units, periods, currencies, expenseCategories } = other;
 	if (typeof t !== 'function') return onError('translation');
 	if (!Array.isArray(currencies)) return onError('currencies');
 	if (!Array.isArray(units)) return onError('units');
 	if (!Array.isArray(periods)) return onError('periods');
+	if (!Array.isArray(expenseCategories)) return onError('expenseCategories');
 	if (!schema) return onError('schema');
 	if (!joi) return onError('joi');
 
 	//=============// Form Schema //===============//
 	//Strings
-	schema.name = joi.string().min(3).max(100).required().label(t('employee.name'));
-	schema.notes = joi.string().max(500).allow('').label(t('employee.notes'));
-	schema.mobile = joi.string().allow('').max(30).label(t('employee.mobile'));
-
-	//Money
-	schema.gross = joi.number().min(0).default(0).required().label(t('employee.gross'));
-	schema.net = joi.number().min(0).default(0).required().label(t('employee.net'));
-	//Enums
+	schema.name = joi.string().min(3).max(100).required().label(t('expense.name'));
+	//Selects
+	schema.category = joi
+		.string()
+		.allow(...expenseCategories)
+		.label(t('expense.category'));
+	schema.period = joi
+		.string()
+		.allow(...periods)
+		.label(t('expense.period'));
 	schema.currency = joi
 		.string()
 		.allow(...currencies)
-		.label(t('employee.currency'));
+		.label(t('expense.currency'));
+	schema.unit = joi
+		.string()
+		.allow(...units)
+		.label(t('expense.unit'));
+
+	//Numbers
+	schema.price = joi.number().min(0).default(0).required().label(t('expense.price'));
+	schema.quantity = joi.number().min(0).default(0).required().label(t('expense.quantity'));
+	schema.tax = joi.number().min(0).default(0).required().label(t('expense.tax'));
+
 	return schema;
 }
