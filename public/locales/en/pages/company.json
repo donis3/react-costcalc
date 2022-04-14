@@ -95,7 +95,12 @@
 		"unit": "Unit",
 		"tax": "Tax Percentage",
 		"currency": "Currency",
-		"amount": "Amount"
+		"amount": "Amount",
+		"cost": "{{period}} Cost",
+		"costWithTax": "{{period}} Cost With Tax"
+	},
+	"expenseDetails": {
+		"subtitle": "Expense Details"
 	},
 	"expenseCategories": {
 		"advertisement": "Advertising",

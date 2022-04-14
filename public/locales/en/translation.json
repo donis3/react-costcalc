@@ -16,6 +16,7 @@
 		"pickDate": "Pick a date"
 	},
 	"periods": { "h": "Hourly", "d": "Daily", "w": "Weekly", "m": "Monthly", "y": "Annual" },
+	"periodName": { "h": "hour", "d": "day", "w": "week", "m": "month", "y": "year" },
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
@@ -182,7 +183,9 @@
 		"mL": "mL",
 		"L": "L",
 		"pcs": "pc",
-		"pcs_other": "pcs"
+		"pcs_other": "pcs",
+		"kwh": "kwh",
+		"other": "other"
 	},
 	"packageTypes": {
 		"box": "Box",

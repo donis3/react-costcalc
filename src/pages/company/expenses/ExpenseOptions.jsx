@@ -6,13 +6,14 @@ import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
 import useConfig from '../../../hooks/app/useConfig';
 
-export default function ExpenseOptions({ setOption, options }) {
+export default function ExpenseOptions({ setOption, options, display }) {
 	const { t } = useTranslation('pages/company', 'translation');
 	const config = useConfig();
 	const defaultCurrency = config.getDefaultCurrency(true);
 	const [expanded, setExpanded] = useState(false);
 	const { getAvailableCategories } = useCompanyExpenses();
 	const { periods } = useCompanyDefaults();
+	if (!Array.isArray(display)) display = ['category', 'period', 'options'];
 
 	const isCategoryActive = (category) => {
 		if ('showCategory' in options === false) return true;
@@ -52,7 +53,7 @@ export default function ExpenseOptions({ setOption, options }) {
 	};
 
 	return (
-		<>
+		<div className='mb-10'>
 			{/* Options Toggle */}
 			<div className='w-full flex p-1 justify-end -mb-3'>
 				<button type='button' className='badge badge-secondary' onClick={() => setExpanded(!expanded)}>
@@ -65,62 +66,80 @@ export default function ExpenseOptions({ setOption, options }) {
 			{expanded ? (
 				<div className='w-full min-h-[50px] transition-opacity'>
 					<div className='w-full h-full p-3  border border-neutral rounded-md'>
-						{/* Category Filters */}
-						<ExpenseOptionsTitle onClick={() => toggleCategory('all')}>
-							{t('expensesTable.categoryOptions')}
-						</ExpenseOptionsTitle>
-						<div className='flex flex-wrap gap-5 mt-3 mb-5'>
-							{getAvailableCategories().map((category, index) => {
-								return (
-									<ExpenseOptionItem
-										key={index}
-										text={t(`expenseCategories.${category}`)}
-										isActive={isCategoryActive(category)}
-										onClick={() => toggleCategory(category)}
-									/>
-								);
-							})}
-						</div>
+						{display.includes('category') && (
+							<>
+								{/* Category Options */}
+								<ExpenseOptionsTitle onClick={() => toggleCategory('all')}>
+									{t('expensesTable.categoryOptions')}
+								</ExpenseOptionsTitle>
+								<div className='flex flex-wrap gap-5 mt-3 mb-5'>
+									{getAvailableCategories().map((category, index) => {
+										return (
+											<ExpenseOptionItem
+												key={index}
+												text={t(`expenseCategories.${category}`)}
+												isActive={isCategoryActive(category)}
+												onClick={() => toggleCategory(category)}
+											/>
+										);
+									})}
+								</div>
+							</>
+						)}
 
-						{/* Period Option */}
-						<ExpenseOptionsTitle>{t('expensesTable.periodOptions')}</ExpenseOptionsTitle>
-						<div className='flex flex-wrap gap-5 mt-3 mb-5'>
-							{periods.map((period, index) => {
-								return (
-									<ExpenseOptionItem
-										key={index}
-										text={t(`periods.${period}`, { ns: 'translation' })}
-										isActive={isPeriodActive(period)}
-										onClick={() => changePeriod(period)}
-									/>
-								);
-							})}
-						</div>
+						{display.includes('period') && (
+							<>
+								{/* period Options */}
+								<ExpenseOptionsTitle>{t('expensesTable.periodOptions')}</ExpenseOptionsTitle>
+								<div className='flex flex-wrap gap-5 mt-3 mb-5'>
+									{periods.map((period, index) => {
+										return (
+											<ExpenseOptionItem
+												key={index}
+												text={t(`periods.${period}`, { ns: 'translation' })}
+												isActive={isPeriodActive(period)}
+												onClick={() => changePeriod(period)}
+											/>
+										);
+									})}
+								</div>
+							</>
+						)}
 
-						{/* Other Options */}
-						<ExpenseOptionsTitle>{t('expensesTable.currencyOptions')}</ExpenseOptionsTitle>
-						<div className='flex flex-col gap-y-3 mt-3 mb-5'>
-							<OptionControl
-								checkboxFirst
-								state={options?.localPrice}
-								setState={(value) => setOption('localPrice', value)}
-								text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
-							/>
-							<OptionControl
-								state={options?.showTax}
-								setState={(value) => setOption('showTax', value)}
-								checkboxFirst
-								text={t('toggles.showTax', { ns: 'translation' })}
-							/>
-						</div>
+						{display.includes('period') && (
+							<>
+								{/* Other Options */}
+								<ExpenseOptionsTitle>{t('expensesTable.currencyOptions')}</ExpenseOptionsTitle>
+								<div className='flex flex-col gap-y-3 mt-3 mb-5'>
+									<OptionControl
+										checkboxFirst
+										state={options?.localPrice}
+										setState={(value) => setOption('localPrice', value)}
+										text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
+									/>
+									<OptionControl
+										state={options?.showTax}
+										setState={(value) => setOption('showTax', value)}
+										checkboxFirst
+										text={t('toggles.showTax', { ns: 'translation' })}
+									/>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			) : (
+				// Not expanded, display nothing
 				''
 			)}
-		</>
+		</div>
 	);
 }
+ExpenseOptions.defaultProps = {
+	setOption: () => console.log('Set Option fn missing'),
+	options: {},
+	display: ['category', 'period', 'options'],
+};
 
 function ExpenseOptionItem({ isActive = false, text = '', ...props }) {
 	if (isActive) {
