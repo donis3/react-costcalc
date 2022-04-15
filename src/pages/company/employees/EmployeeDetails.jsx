@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import Card from '../../../components/common/Card';
 import ItemDetails from '../../../components/common/ItemDetails';
-
+import { toast } from 'react-toastify';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
 import { useAppContext } from '../../../context/AppContext';
 import useCompanyEmployees from '../../../context/company/useCompanyEmployees';
@@ -26,10 +26,14 @@ export default function EmployeeDetails() {
 	const { convert, defaultCurrency } = useCurrencyConversion();
 	const { getAge, timeSince } = useDateFns();
 	const [getOption, setOption] = useUiToggles();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (employee) {
 			page.setBreadcrumb(employee.name);
+		} else {
+			toast.warning(t('error.itemNotFound', { ns: 'translation', item: t('employees.name') }));
+			navigate('/company/employees');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

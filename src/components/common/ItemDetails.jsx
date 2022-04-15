@@ -7,13 +7,24 @@ import OptionControl from './OptionControl';
 
 /**
  * Main wrapper for item details page
- * Uses grid
+ * Uses flex box
  * @returns
  */
 function Wrapper({ children }) {
-	return <div className='w-full flex md:flex-row md:gap-x-10 gap-y-10 flex-col-reverse'>{children}</div>;
+	return (
+		<div className='w-full flex md:flex-row md:gap-x-10 gap-y-10 flex-col-reverse p-3'>
+			{/* Flex Wrapper */}
+			{children}
+		</div>
+	);
 }
 
+/**
+ * Main wrapper for item details page
+ * Uses grid
+ * @param {*} param0
+ * @returns
+ */
 function GridWrapper({ children, colsSmall, colsLarge }) {
 	if (isNaN(parseInt(colsSmall))) colsSmall = 1;
 	if (isNaN(parseInt(colsLarge))) colsLarge = 2;

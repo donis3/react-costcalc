@@ -13,7 +13,7 @@ export default function ExpenseOptions({ setOption, options, display }) {
 	const [expanded, setExpanded] = useState(false);
 	const { getAvailableCategories } = useCompanyExpenses();
 	const { periods } = useCompanyDefaults();
-	if (!Array.isArray(display)) display = ['category', 'period', 'options'];
+	if (!Array.isArray(display)) display = ['category', 'period', 'localPrice', 'tax'];
 
 	const isCategoryActive = (category) => {
 		if ('showCategory' in options === false) return true;
@@ -55,7 +55,7 @@ export default function ExpenseOptions({ setOption, options, display }) {
 	return (
 		<div className='mb-10'>
 			{/* Options Toggle */}
-			<div className='w-full flex p-1 justify-end -mb-3'>
+			<div className='w-full flex p-1 justify-end'>
 				<button type='button' className='badge badge-secondary' onClick={() => setExpanded(!expanded)}>
 					{expanded ? <FaCaretDown /> : <FaCaretLeft />}
 					{Array.isArray(options?.showCategory) && options.showCategory.length > 0
@@ -64,7 +64,7 @@ export default function ExpenseOptions({ setOption, options, display }) {
 				</button>
 			</div>
 			{expanded ? (
-				<div className='w-full min-h-[50px] transition-opacity'>
+				<div className='min-h-[50px]  z-[100]  absolute right-0 w-1/2 bg-base-100 shadow-md'>
 					<div className='w-full h-full p-3  border border-neutral rounded-md'>
 						{display.includes('category') && (
 							<>
@@ -106,23 +106,27 @@ export default function ExpenseOptions({ setOption, options, display }) {
 							</>
 						)}
 
-						{display.includes('period') && (
+						{(display.includes('localPrice') || display.includes('tax')) && (
 							<>
 								{/* Other Options */}
 								<ExpenseOptionsTitle>{t('expensesTable.currencyOptions')}</ExpenseOptionsTitle>
 								<div className='flex flex-col gap-y-3 mt-3 mb-5'>
-									<OptionControl
-										checkboxFirst
-										state={options?.localPrice}
-										setState={(value) => setOption('localPrice', value)}
-										text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
-									/>
-									<OptionControl
-										state={options?.showTax}
-										setState={(value) => setOption('showTax', value)}
-										checkboxFirst
-										text={t('toggles.showTax', { ns: 'translation' })}
-									/>
+									{display.includes('localPrice') && (
+										<OptionControl
+											checkboxFirst
+											state={options?.localPrice}
+											setState={(value) => setOption('localPrice', value)}
+											text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
+										/>
+									)}
+									{display.includes('tax') && (
+										<OptionControl
+											state={options?.showTax}
+											setState={(value) => setOption('showTax', value)}
+											checkboxFirst
+											text={t('toggles.showTax', { ns: 'translation' })}
+										/>
+									)}
 								</div>
 							</>
 						)}
@@ -138,7 +142,7 @@ export default function ExpenseOptions({ setOption, options, display }) {
 ExpenseOptions.defaultProps = {
 	setOption: () => console.log('Set Option fn missing'),
 	options: {},
-	display: ['category', 'period', 'options'],
+	display: ['category', 'period', 'localPrice', 'tax'],
 };
 
 function ExpenseOptionItem({ isActive = false, text = '', ...props }) {

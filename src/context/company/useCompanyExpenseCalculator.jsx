@@ -90,7 +90,7 @@ export default function useCompanyExpenseCalculator() {
 		const annualAmountWithTax = amountWithTax * periodX;
 
 		//Calc cost for each period
-		return generateResultObject(annualAmount, annualAmountWithTax, currency);
+		return generateResultObject(annualAmount, annualAmountWithTax, convertToLocal ? defaultCurrency : currency);
 	};
 
 	//Exports
