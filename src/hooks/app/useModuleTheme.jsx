@@ -1,7 +1,7 @@
 import useConfig from './useConfig';
 
 //Roles enum
-const roles = ['main', 'add', 'edit', 'view', 'other'];
+const roles = ['main', 'add', 'edit', 'view', 'other', 'chart', 'pie'];
 const modules = [
 	'home',
 	'products',
@@ -39,25 +39,35 @@ export default function useModuleTheme({ module = 'home', role = 'main' }) {
 
 	//Role specific actions
 	switch (role) {
-		case roles[1]:
+		case 'add':
 			//Add
 			icon = 'FaPlusSquare';
 			showBackButton = true;
 			break;
-		case roles[2]:
+		case 'edit':
 			//Edit
 			icon = 'FaPencilAlt';
 			showBackButton = true;
 			break;
-		case roles[3]:
+		case 'view':
 			//view
 			showBackButton = true;
 			break;
-		case roles[4]:
+		case 'other':
 			//other
 			showBackButton = true;
 			break;
-		case roles[0]:
+		case 'chart':
+			//other
+			showBackButton = true;
+			icon = 'FaChartLine';
+			break;
+		case 'pie':
+			//other
+			showBackButton = true;
+			icon = 'FaChartPie';
+			break;
+		case 'main':
 		default:
 			//main
 			showBackButton = false;

@@ -3,7 +3,7 @@
 }
 
 .scale-out {
-	animation: scaleOut 5s;
+	animation: scaleOut .5s;
 }
 
 @keyframes scaleOut {

@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import ThSortable from '../../../components/common/ThSortable';
-import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
+
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
-import useConfig from '../../../hooks/app/useConfig';
+
 import useCurrencyConversion from '../../../hooks/app/useCurrencyConversion';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useUiToggles from '../../../hooks/app/useUiToggles';
 import useIntl from '../../../hooks/common/useIntl';
+import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseOptions from './ExpenseOptions';
 
 export default function ExpensesTable() {
@@ -26,13 +27,13 @@ export default function ExpensesTable() {
 			{/* Table options and total cost */}
 			<div className='flex mt-5 gap-x-10 relative'>
 				<div className='w-1/2'>
-					<ExpenseTotals expenses={expenses} options={options} />
+					<ExpenseTotal expenses={expenses} options={options} />
 				</div>
 				<div className='w-1/2'>
 					<ExpenseOptions options={options} setOption={setOption} />
 				</div>
 			</div>
-            {/* Table */}
+			{/* Table */}
 			<div className='overflow-x-auto my-10'>
 				<table className='table table-zebra w-full md:table-normal  table-compact'>
 					<thead>
@@ -107,56 +108,10 @@ function ExpenseTableRow({ expense, options }) {
 	);
 }
 
-/**
- * Takes currently shown expenses array to calculate totals
- * @param {*} param0
- */
-function ExpenseTotals({ expenses, options }) {
-	const { t } = useTranslation('pages/company', 'translation');
-	const { displayMoney } = useIntl();
-	const config = useConfig();
-	const defaultCurrency = config.getDefaultCurrency(true);
-	const period = options?.showPeriod ? options.showPeriod : 'y';
-	const currentPeriodText = t(`periods.${options.showPeriod}`, { ns: 'translation' });
-	const { periodCoefficients } = useCompanyDefaults();
-	const coefficient = period in periodCoefficients ? periodCoefficients[period] : 1;
-
-	const totals = expenses.reduce(
-		(acc, expense) => {
-			const { localAnnualCost, localAnnualCostWithTax } = expense;
-			acc.net += isNaN(parseFloat(localAnnualCost)) ? 0 : parseFloat(localAnnualCost);
-			acc.withTax += isNaN(parseFloat(localAnnualCostWithTax)) ? 0 : parseFloat(localAnnualCostWithTax);
-			return acc;
-		},
-		{ net: 0, withTax: 0, currency: defaultCurrency }
-	);
-
-	return (
-		<div className='w-full flex items-center justify-start mb-3'>
-			<div className='stats border'>
-				<div className='stat'>
-					<div className='stat-title'>{t('expensesTable.periodCost', { period: currentPeriodText })}</div>
-					<div className='stat-value'>{displayMoney(totals.net / coefficient, totals.currency)}</div>
-					<div className='stat-desc'>
-						{t('labels.priceWithTax', {
-							ns: 'translation',
-							price: displayMoney(totals.withTax / coefficient, totals.currency),
-						})}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
 //Defaults
 ExpensesTable.defaultProps = {
 	options: { showPeriod: 'y', showCategory: [] },
 };
 ExpenseTableRow.defaultProps = {
 	expense: null,
-};
-ExpenseTotals.defaultProps = {
-	options: { showPeriod: 'y', showCategory: [] },
-	expenses: [],
 };

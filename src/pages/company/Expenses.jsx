@@ -12,6 +12,9 @@ export default function Expenses() {
 	return (
 		<Card className='w-full px-3 py-5' shadow='shadow-lg'>
 			<ModuleHeader text={t('expenses.title')} module='expenses' role='main'>
+				<Link to='/company/expenses/chart'>
+					<Button.PieChart forceIcon>{t('expenses.chart')}</Button.PieChart>
+				</Link>
 				<Link to='/company/expenses/add'>
 					<Button.New name={t('expenses.name')} />
 				</Link>

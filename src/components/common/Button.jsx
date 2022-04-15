@@ -12,6 +12,7 @@ import {
 	FaPlus as AddIcon,
 	FaArrowLeft as BackIcon,
 	FaChartLine as ChartIcon,
+	FaChartPie as PieChartIcon,
 } from 'react-icons/fa';
 
 function Button({ children, type, ...attributes }) {
@@ -268,6 +269,28 @@ function ChartButton({ children, iconFirst = true, name = '', forceIcon = false,
 	);
 }
 
+function PieChartButton({ children, iconFirst = true, name = '', forceIcon = false, ...attributes }) {
+	const { t } = useTranslation('translation');
+	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
+	if (!children) {
+		children = (
+			<>
+				{iconFirst && <PieChartIcon className='mr-1' />}
+				{t('buttons.chart')}
+				{name && ` ${name}`}
+				{!iconFirst && <PieChartIcon className='ml-1' />}
+			</>
+		);
+	}
+	return (
+		<button className='btn btn-accent btn-sm' {...attributes}>
+			{forceIcon && iconFirst && <PieChartIcon className='mr-1' />}
+			{children}
+			{forceIcon && !iconFirst && <PieChartIcon className='ml-1' />}
+		</button>
+	);
+}
+
 //Add custom buttons
 Button.Save = SaveButton;
 Button.Submit = SubmitButton;
@@ -282,5 +305,6 @@ Button.New = NewButton;
 Button.EditSmall = EditSmall;
 Button.Back = BackButton;
 Button.Chart = ChartButton;
+Button.PieChart = PieChartButton;
 
 export default Button;

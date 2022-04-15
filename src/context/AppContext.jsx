@@ -48,11 +48,11 @@ const AppContextProvider = ({ children }) => {
 	};
 
 	//Page context for page name, title etc
-	const [lastBreadcrumb, setLastBreadcrumb] = useState({});
 	const { pathname } = useLocation();
+	const [lastBreadcrumb, setLastBreadcrumb] = useState({});
 	//Must be used in useEffect with pathname dependency or will cause too many renders
 	const setBreadcrumb = (text = '') => {
-		if(!text || typeof text !== 'string') text = '';
+		if (!text || typeof text !== 'string') text = '';
 		const newBreadcrumb = text;
 		setLastBreadcrumb({ ...lastBreadcrumb, [pathname]: newBreadcrumb });
 	};

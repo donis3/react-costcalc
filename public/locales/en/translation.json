@@ -127,7 +127,9 @@
 		"itemPriceHistory": "\"{{name}}\" Price History",
 		"price": "Prices",
 		"rateChartTitle": "{{from}}/{{to}} Rate History",
-		"rateChartLabel": "{{from}}/{{to}}"
+		"rateChartLabel": "{{from}}/{{to}}",
+		"costAnalysis": "Cost Analysis for {{item}}",
+		"other": "Other"
 	},
 	"costTable": {
 		"noContent": "There are no items to display",

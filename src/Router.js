@@ -5,6 +5,7 @@ import Employees from './pages/company/Employees';
 import EmployeeDetails from './pages/company/employees/EmployeeDetails';
 import EmployeeForm from './pages/company/employees/EmployeeForm';
 import Expenses from './pages/company/Expenses';
+import ExpenseChart from './pages/company/expenses/ExpenseChart';
 import ExpenseDetails from './pages/company/expenses/ExpenseDetails';
 import ExpenseForm from './pages/company/expenses/ExpenseForm';
 
@@ -54,6 +55,7 @@ export default function Router() {
 			<Route path='/company/expenses/add' element={<ExpenseForm />} />
 			<Route path='/company/expenses/edit/:expenseId' element={<ExpenseForm isEdit={true} />} />
 			<Route path='/company/expenses/:expenseId' element={<ExpenseDetails />} />
+			<Route path='/company/expenses/chart' element={<ExpenseChart />} />
 
 			{/* Company > Employees */}
 			<Route path='/company/employees' element={<Employees />} />

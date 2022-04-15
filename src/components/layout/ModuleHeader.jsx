@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppContext } from '../../context/AppContext';
 
 import useModuleTheme from '../../hooks/app/useModuleTheme';
 import BackButton from '../common/BackButton';
 import Icon from '../common/Icon';
 
-export default function ModuleHeader({ children, module, text, subtext, role, backBtn }) {
+export default function ModuleHeader({ children, module, text, subtext, role, backBtn, setBreadcrumb }) {
 	const { icon, color, bgColor, backBtn: showBackButton } = useModuleTheme({ module, role });
+	const { page } = useAppContext(setBreadcrumb ? { breadcrumb: text } : null);
 	if (typeof subtext !== 'string') subtext = '';
+
+	useEffect(() => {
+		if (setBreadcrumb) {
+			if (typeof setBreadcrumb === 'string') {
+				page.setBreadcrumb(setBreadcrumb);
+			} else {
+				page.setBreadcrumb(text);
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<div className='w-full flex justify-between items-center border-b-4 mb-3' style={{ borderColor: bgColor }}>
 			{/* Title & Lead Text */}
@@ -34,4 +48,5 @@ ModuleHeader.defaultProps = {
 	module: 'home',
 	role: 'main',
 	backBtn: null,
+	setBreadcrumb: false,
 };

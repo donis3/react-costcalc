@@ -72,6 +72,7 @@
 		"name": "Expense",
 		"title": "Expenses",
 		"lead": "Company overhead expenses",
+		"chart": "Expense Analysis",
 		"formTitleAdd": "New Expense",
 		"formTitleUpdate": "Edit Expense",
 		"formSectionDetails": "Expense Details",
@@ -103,6 +104,7 @@
 		"subtitle": "Expense Details"
 	},
 	"expenseCategories": {
+		"all": "All Categories",
 		"advertisement": "Advertising",
 		"banking": "Banking",
 		"government": "Government Fees",

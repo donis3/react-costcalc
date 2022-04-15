@@ -64,7 +64,7 @@ export default function ExpenseOptions({ setOption, options, display }) {
 				</button>
 			</div>
 			{expanded ? (
-				<div className='min-h-[50px]  z-[100]  absolute right-0 w-1/2 bg-base-100 shadow-md'>
+				<div className='min-h-[50px]  z-[100]  absolute right-0 w-1/2 bg-base-100 shadow-md anim-scale-down'>
 					<div className='w-full h-full p-3  border border-neutral rounded-md'>
 						{display.includes('category') && (
 							<>

@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+.anim-fade-in {
+    animation: fadeIn 1s;
+}
+
+.anim-scale-center {
+    animation: scaleX .5s;
+}
+
+.anim-scale-down {
+    transform-origin: top;
+    animation: scaleY .5s;
+}
+
+@keyframes scaleY {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.table-zebra thead tr th {
+    @apply bg-neutral text-neutral-content
+}
+
+
+
 /* poppins-200 - latin-ext_latin */
 @font-face {
     font-family: 'Poppins';
