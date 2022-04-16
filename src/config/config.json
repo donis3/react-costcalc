@@ -16,6 +16,9 @@
 	},
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
+	"tables": {
+		"itemsPerPage": 3
+	},
 	"debug": {
 		"themeHelper": false,
 		"i18next": false,

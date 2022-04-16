@@ -95,6 +95,9 @@
 		"options": "Options",
 		"link": "Go"
 	},
+	"pagination": {
+		"info": "Displaying {{start}}-{{end}} of {{total}}"
+	},
 	"labels": {
 		"name": "Name",
 		"item": "Item",

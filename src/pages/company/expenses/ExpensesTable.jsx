@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import ThSortable from '../../../components/common/ThSortable';
+import TablePagination from '../../../components/tables/TablePagination';
 
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
@@ -11,6 +12,7 @@ import useCurrencyConversion from '../../../hooks/app/useCurrencyConversion';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useUiToggles from '../../../hooks/app/useUiToggles';
 import useIntl from '../../../hooks/common/useIntl';
+import usePagination from '../../../hooks/common/usePagination';
 import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseOptions from './ExpenseOptions';
 
@@ -21,6 +23,11 @@ export default function ExpensesTable() {
 	const { t } = useTranslation('pages/company');
 	const [sortingState, sortBy] = useSortTableByField('expenses', sorting.fields, sorting.default);
 	const expenses = getAll({ ...sortingState, category: options.showCategory });
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: expenses,
+		name: 'ExpensesTable',
+	});
 
 	return (
 		<>
@@ -58,11 +65,12 @@ export default function ExpensesTable() {
 						</tr>
 					</thead>
 					<tbody>
-						{expenses.map((expense, index) => (
+						{rows.map((expense, index) => (
 							<ExpenseTableRow key={index} expense={expense} options={options} />
 						))}
 					</tbody>
 				</table>
+				<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 			</div>
 		</>
 	);
