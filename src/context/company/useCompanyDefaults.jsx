@@ -85,10 +85,20 @@ export default function useCompanyDefaults() {
 		expenses: [],
 		employees: [],
 		totals: {
-			overhead: 0,
-			overheadWithTax: 0,
-			wagesNet: 0,
-			wagesGross: 0,
+			currency: defaultCurrency,
+			updatedAt: Date.now(),
+			expenses: 0,
+			expensesWithTax: 0,
+			labourNet: 0,
+			labourGross: 0,
+			//Excluding labour wages
+			salariesNet: 0,
+			salariesGross: 0,
+		},
+		production: {
+			updatedAt: Date.now(),
+			unit: config.get('company.defaultProductionUnit'),
+			totalProduction: 0,
 		},
 	};
 
@@ -101,5 +111,7 @@ export default function useCompanyDefaults() {
 		periodCoefficients,
 		units,
 		expenseCategories,
+		production: defaultCompany.production,
+		totals: defaultCompany.totals,
 	};
 }

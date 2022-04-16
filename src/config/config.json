@@ -24,7 +24,9 @@
 		"windowType": false,
 		"exchangeRates": true,
 		"forms": true,
-		"expenses": true
+		"expenses": true,
+		"companyProduction": true,
+		"companyTotals": true
 	},
 	"modules": {
 		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },
@@ -41,6 +43,7 @@
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"company": {
+		"defaultProductionUnit": "kg",
 		"departments": [
 			{ "name": "manufacturing", "isLabour": true },
 			{ "name": "marketing", "isLabour": false },

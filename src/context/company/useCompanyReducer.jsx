@@ -227,6 +227,38 @@ export default function useCompanyReducer() {
 				});
 			}
 
+			//==========================// COMPANY TOTALS //==========================//
+			/**
+			 * Update company production data
+			 */
+			case 'UpdateCompanyProduction': {
+				if (!payload || 'totalProduction' in payload === false) return onError('invalidData');
+				if (JSON.stringify(state?.production) === JSON.stringify(payload)) {
+					//Both data are the same, no need to update
+					return state;
+				}
+				//Update update time
+				payload.updatedAt = Date.now();
+
+				return onSuccess({ ...state, production: payload });
+			}
+			/**
+			 * Update company totals data (total costs)
+			 */
+			case 'UpdateCompanyTotals': {
+				if (!payload || 'expenses' in payload === false) return onError('invalidData');
+				//Merge and check if anything changed
+				if (state?.totals && 'salariesNet' in state.totals) {
+					let mergedPayload = { ...state.totals, ...payload, updatedAt: state.totals?.updatedAt };
+					if (JSON.stringify(state.totals) === JSON.stringify(mergedPayload)) {
+						//Both data are the same, no need to update
+						return state;
+					}
+				}
+				//Update update time and return
+				payload.updatedAt = Date.now();
+				return onSuccess({ ...state, totals: payload });
+			}
 			// Unsupported Dispatch Type
 			default: {
 				throw new Error('Invalid action type received: ' + type);

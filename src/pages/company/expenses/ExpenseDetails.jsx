@@ -38,8 +38,11 @@ export default function ExpenseDetails() {
 	}, []);
 
 	if (!expense) return <></>;
+
+	//Options for expense options popup
 	const isForeignCurrency = expense.currency !== config.getDefaultCurrency(true);
 	const expenseOptionsDisplay = isForeignCurrency ? ['period', 'localPrice'] : ['period'];
+	//Render
 	return (
 		<Card className='w-full px-3 py-5' shadow='shadow-lg'>
 			<ModuleHeader text={expense.name} subtext={t('expenseDetails.subtitle')} module='expenses' role='view'>
@@ -49,11 +52,11 @@ export default function ExpenseDetails() {
 			</ModuleHeader>
 
 			{/* Table options and total cost */}
-			<div className='flex mt-5 gap-x-10 relative'>
-				<div className='w-1/2'>
+			<div className='flex flex-col md:flex-row mt-5 gap-x-10 gap-y-5 relative '>
+				<div className='flex-1'>
 					<ExpenseTotals expense={expense} options={options} />
 				</div>
-				<div className='w-1/2'>
+				<div className='flex-1'>
 					<ExpenseOptions options={options} setOption={setOption} display={expenseOptionsDisplay} />
 				</div>
 			</div>

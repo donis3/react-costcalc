@@ -22,7 +22,10 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 	}, []);
 
 	return (
-		<div className='w-full flex justify-between items-center border-b-4 mb-3' style={{ borderColor: bgColor }}>
+		<div
+			className='w-full flex flex-col-reverse md:flex-row justify-between items-left md:items-center border-b-4 mb-3'
+			style={{ borderColor: bgColor }}
+		>
 			{/* Title & Lead Text */}
 
 			<div className='flex-1 flex gap-x-2 items-center'>
@@ -33,7 +36,7 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 				</h3>
 			</div>
 			{/* Right side of the header*/}
-			<div className='flex items-center gap-x-1'>
+			<div className='flex items-center md:justify-end gap-x-1 flex-1'>
 				{(showBackButton || backBtn) && <BackButton />}
 				{children}
 			</div>

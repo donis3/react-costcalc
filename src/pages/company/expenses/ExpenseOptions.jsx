@@ -1,3 +1,4 @@
+import FocusTrap from 'focus-trap-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCaretDown, FaCaretLeft, FaUndoAlt } from 'react-icons/fa';
@@ -64,74 +65,84 @@ export default function ExpenseOptions({ setOption, options, display }) {
 				</button>
 			</div>
 			{expanded ? (
-				<div className='min-h-[50px]  z-[100]  absolute right-0 w-1/2 bg-base-100 shadow-md anim-scale-down'>
-					<div className='w-full h-full p-3  border border-neutral rounded-md'>
-						{display.includes('category') && (
-							<>
-								{/* Category Options */}
-								<ExpenseOptionsTitle onClick={() => toggleCategory('all')}>
-									{t('expensesTable.categoryOptions')}
-								</ExpenseOptionsTitle>
-								<div className='flex flex-wrap gap-5 mt-3 mb-5'>
-									{getAvailableCategories().map((category, index) => {
-										return (
-											<ExpenseOptionItem
-												key={index}
-												text={t(`expenseCategories.${category}`)}
-												isActive={isCategoryActive(category)}
-												onClick={() => toggleCategory(category)}
-											/>
-										);
-									})}
-								</div>
-							</>
-						)}
+				<FocusTrap
+					active
+					focusTrapOptions={{
+						initialFocus: false,
+						allowOutsideClick: true,
+						clickOutsideDeactivates: true,
+						onDeactivate: () => setExpanded(false),
+					}}
+				>
+					<div className='min-h-[50px]  z-[100]  absolute right-0 w-1/2 bg-base-100 shadow-md anim-scale-down'>
+						<div className='w-full h-full p-3  border border-neutral rounded-md'>
+							{display.includes('category') && (
+								<>
+									{/* Category Options */}
+									<ExpenseOptionsTitle onClick={() => toggleCategory('all')}>
+										{t('expensesTable.categoryOptions')}
+									</ExpenseOptionsTitle>
+									<div className='flex flex-wrap gap-5 mt-3 mb-5'>
+										{getAvailableCategories().map((category, index) => {
+											return (
+												<ExpenseOptionItem
+													key={index}
+													text={t(`expenseCategories.${category}`)}
+													isActive={isCategoryActive(category)}
+													onClick={() => toggleCategory(category)}
+												/>
+											);
+										})}
+									</div>
+								</>
+							)}
 
-						{display.includes('period') && (
-							<>
-								{/* period Options */}
-								<ExpenseOptionsTitle>{t('expensesTable.periodOptions')}</ExpenseOptionsTitle>
-								<div className='flex flex-wrap gap-5 mt-3 mb-5'>
-									{periods.map((period, index) => {
-										return (
-											<ExpenseOptionItem
-												key={index}
-												text={t(`periods.${period}`, { ns: 'translation' })}
-												isActive={isPeriodActive(period)}
-												onClick={() => changePeriod(period)}
-											/>
-										);
-									})}
-								</div>
-							</>
-						)}
+							{display.includes('period') && (
+								<>
+									{/* period Options */}
+									<ExpenseOptionsTitle>{t('expensesTable.periodOptions')}</ExpenseOptionsTitle>
+									<div className='flex flex-wrap gap-5 mt-3 mb-5'>
+										{periods.map((period, index) => {
+											return (
+												<ExpenseOptionItem
+													key={index}
+													text={t(`periods.${period}`, { ns: 'translation' })}
+													isActive={isPeriodActive(period)}
+													onClick={() => changePeriod(period)}
+												/>
+											);
+										})}
+									</div>
+								</>
+							)}
 
-						{(display.includes('localPrice') || display.includes('tax')) && (
-							<>
-								{/* Other Options */}
-								<ExpenseOptionsTitle>{t('expensesTable.currencyOptions')}</ExpenseOptionsTitle>
-								<div className='flex flex-col gap-y-3 mt-3 mb-5'>
-									{display.includes('localPrice') && (
-										<OptionControl
-											checkboxFirst
-											state={options?.localPrice}
-											setState={(value) => setOption('localPrice', value)}
-											text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
-										/>
-									)}
-									{display.includes('tax') && (
-										<OptionControl
-											state={options?.showTax}
-											setState={(value) => setOption('showTax', value)}
-											checkboxFirst
-											text={t('toggles.showTax', { ns: 'translation' })}
-										/>
-									)}
-								</div>
-							</>
-						)}
+							{(display.includes('localPrice') || display.includes('tax')) && (
+								<>
+									{/* Other Options */}
+									<ExpenseOptionsTitle>{t('expensesTable.currencyOptions')}</ExpenseOptionsTitle>
+									<div className='flex flex-col gap-y-3 mt-3 mb-5'>
+										{display.includes('localPrice') && (
+											<OptionControl
+												checkboxFirst
+												state={options?.localPrice}
+												setState={(value) => setOption('localPrice', value)}
+												text={t('toggles.localPrice', { currency: defaultCurrency, ns: 'translation' })}
+											/>
+										)}
+										{display.includes('tax') && (
+											<OptionControl
+												state={options?.showTax}
+												setState={(value) => setOption('showTax', value)}
+												checkboxFirst
+												text={t('toggles.showTax', { ns: 'translation' })}
+											/>
+										)}
+									</div>
+								</>
+							)}
+						</div>
 					</div>
-				</div>
+				</FocusTrap>
 			) : (
 				// Not expanded, display nothing
 				''

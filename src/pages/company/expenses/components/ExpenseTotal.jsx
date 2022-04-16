@@ -29,8 +29,8 @@ export default function ExpenseTotal({ expenses, options }) {
 	);
 
 	return (
-		<div className='w-full flex items-center justify-start mb-3'>
-			<div className='stats border'>
+		<div className='w-full flex items-center justify-start mb-3 '>
+			<div className='stats border flex-1'>
 				<div className='stat'>
 					<div className='stat-title'>{t('expensesTable.periodCost', { period: currentPeriodText })}</div>
 					<div className='stat-value'>{displayMoney(totals.net / coefficient, totals.currency)}</div>

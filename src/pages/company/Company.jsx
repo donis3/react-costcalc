@@ -3,11 +3,17 @@ import { useTranslation } from 'react-i18next';
 import Card from '../../components/common/Card';
 import ModuleHeader from '../../components/layout/ModuleHeader';
 import useCompanyInfo from '../../context/company/useCompanyInfo';
+import useCompanyProduction from '../../context/company/useCompanyProduction';
+import useCompanyTotals from '../../context/company/useCompanyTotals';
 import useDefaultButtons from '../../hooks/forms/useDefaultButtons';
 import CompanyEdit from './details/CompanyEdit';
 import CompanyInfo from './details/CompanyInfo';
 
 export default function Company() {
+	//Calculate totals
+	useCompanyProduction();
+	useCompanyTotals();
+
 	//Dependencies
 	const { t } = useTranslation('pages/company');
 	const { Edit, Cancel } = useDefaultButtons();
