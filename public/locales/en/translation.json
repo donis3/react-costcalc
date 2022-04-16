@@ -92,7 +92,8 @@
 		"new": "New",
 		"back": "Back",
 		"chart": "Chart",
-		"options": "Options"
+		"options": "Options",
+		"link": "Go"
 	},
 	"labels": {
 		"name": "Name",

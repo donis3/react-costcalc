@@ -18,7 +18,7 @@ import {
 function Button({ children, type, ...attributes }) {
 	if ('type' in attributes === false) attributes.type = 'button'; //To avoid submit button creation by default
 	return (
-		<button type={type} className='btn btn-primary' {...attributes}>
+		<button type={type} className='btn btn-primary btn-sm' {...attributes}>
 			{children}
 		</button>
 	);
