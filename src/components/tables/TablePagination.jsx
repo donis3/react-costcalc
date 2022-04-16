@@ -67,7 +67,7 @@ export default function TablePagination({ current, total, handler, arrows, doubl
 	};
 
 	//Calculate start and end counts
-	const startCount = (current - 1) * perPage;
+	const startCount = ((current - 1) * perPage)+1;
 	const endCount = current * perPage > itemCount ? itemCount : current * perPage;
 
 	return (

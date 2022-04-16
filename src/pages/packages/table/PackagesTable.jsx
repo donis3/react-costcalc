@@ -3,15 +3,22 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import ThSortable from '../../../components/common/ThSortable';
+import TablePagination from '../../../components/tables/TablePagination';
 import { usePackagesContext } from '../../../context/MainContext';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useIntl from '../../../hooks/common/useIntl';
+import usePagination from '../../../hooks/common/usePagination';
 
 export default function PackagesTable() {
 	const { packages } = usePackagesContext();
 	const { t } = useTranslation('pages/packages', 'translation');
 	const [sortingState, sortBy] = useSortTableByField('packages', ['name', 'packageCapacity', 'cost'], 'name');
 	const { displayNumber, displayMoney } = useIntl();
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: packages.getAllSorted(sortingState),
+		name: 'Packages',
+	});
 
 	//No package
 	if (packages.count() === 0) {
@@ -42,7 +49,7 @@ export default function PackagesTable() {
 					</tr>
 				</thead>
 				<tbody>
-					{packages.getAllSorted(sortingState).map((item, index) => {
+					{rows.map((item, index) => {
 						return (
 							<tr className='hover' key={index}>
 								<td>{index + 1}</td>
@@ -72,6 +79,7 @@ export default function PackagesTable() {
 					})}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }

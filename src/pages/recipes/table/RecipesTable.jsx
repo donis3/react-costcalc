@@ -2,15 +2,22 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import ThSortable from '../../../components/common/ThSortable';
+import TablePagination from '../../../components/tables/TablePagination';
 import { useRecipesContext } from '../../../context/MainContext';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useIntl from '../../../hooks/common/useIntl';
+import usePagination from '../../../hooks/common/usePagination';
 
 export default function RecipesTable({ handleOpen = null } = {}) {
 	const { t } = useTranslation('pages/recipes');
 	const [sortingState, sortBy] = useSortTableByField('recipes', ['name', 'yield', 'product'], 'name');
 	const { recipes } = useRecipesContext();
 	const { displayNumber } = useIntl();
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: recipes.getAllSorted(sortingState),
+		name: 'Recipes',
+	});
 
 	//Products table is empty
 	if (recipes.count() === 0) {
@@ -42,7 +49,7 @@ export default function RecipesTable({ handleOpen = null } = {}) {
 					</tr>
 				</thead>
 				<tbody>
-					{recipes.getAllSorted(sortingState).map((item, index) => {
+					{rows.map((item, index) => {
 						return (
 							<tr className='hover' key={index}>
 								<td>{index + 1}</td>
@@ -66,6 +73,7 @@ export default function RecipesTable({ handleOpen = null } = {}) {
 					})}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }

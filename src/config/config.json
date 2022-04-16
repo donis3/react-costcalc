@@ -17,7 +17,7 @@
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
 	"tables": {
-		"itemsPerPage": 3
+		"itemsPerPage": 10
 	},
 	"debug": {
 		"themeHelper": false,

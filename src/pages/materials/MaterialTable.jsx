@@ -3,14 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { FaPencilAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ThSortable from '../../components/common/ThSortable';
+import TablePagination from '../../components/tables/TablePagination';
 import { useMaterialContext } from '../../context/MainContext';
 import useSortTableByField from '../../hooks/app/useSortTableByField';
 import useIntl from '../../hooks/common/useIntl';
+import usePagination from '../../hooks/common/usePagination';
 
 export default function MaterialTable() {
 	const { t } = useTranslation('pages/materials');
 	const { Materials } = useMaterialContext();
 	const [sortingState, sortBy] = useSortTableByField('materials', Materials.fields, Materials.fields[0]);
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: Materials.getAll(sortingState),
+		name: 'Materials',
+	});
 
 	if (Materials.count() <= 0) {
 		//No data
@@ -41,11 +48,12 @@ export default function MaterialTable() {
 					</tr>
 				</thead>
 				<tbody>
-					{Materials.getAll(sortingState).map((material, index) => {
+					{rows.map((material, index) => {
 						return <MaterialTableRow key={index} index={index} data={material} />;
 					})}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }

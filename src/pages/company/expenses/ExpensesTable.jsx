@@ -26,7 +26,7 @@ export default function ExpensesTable() {
 
 	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
 		table: expenses,
-		name: 'ExpensesTable',
+		name: 'Expenses',
 	});
 
 	return (

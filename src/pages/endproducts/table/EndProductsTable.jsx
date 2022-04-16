@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ThSortable from '../../../components/common/ThSortable';
+import TablePagination from '../../../components/tables/TablePagination';
 import { useEndProductsContext } from '../../../context/MainContext';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
+import usePagination from '../../../hooks/common/usePagination';
 
 import EndProductsTableRow from './EndProductsTableRow';
 
@@ -16,6 +18,11 @@ export default function EndProductsTable() {
 
 	const { endProducts } = useEndProductsContext();
 	const sortedProducts = endProducts?.getAllSorted?.(sortingState) || [];
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: sortedProducts,
+		name: 'Endproducts',
+	});
 
 	//No Product
 	if (sortedProducts.length === 0) {
@@ -49,11 +56,12 @@ export default function EndProductsTable() {
 					</tr>
 				</thead>
 				<tbody>
-					{sortedProducts.map((item, i) => (
+					{rows.map((item, i) => (
 						<EndProductsTableRow key={i} data={item} />
 					))}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }

@@ -7,12 +7,20 @@ import useCompanyEmployees from '../../../context/company/useCompanyEmployees';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useIntl from '../../../hooks/common/useIntl';
 import Button from '../../../components/common/Button';
+import usePagination from '../../../hooks/common/usePagination';
+import TablePagination from '../../../components/tables/TablePagination';
 
 export default function EmployeeTable() {
 	const { t } = useTranslation('pages/company');
 
 	const { getAll, sorting } = useCompanyEmployees();
 	const [sortingState, sortBy] = useSortTableByField('employees', sorting.fields, sorting.default);
+
+	//Pagination hook
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: getAll(sortingState),
+		name: 'Employees',
+	});
 
 	return (
 		<div className='overflow-x-auto my-10'>
@@ -39,11 +47,12 @@ export default function EmployeeTable() {
 					</tr>
 				</thead>
 				<tbody>
-					{getAll(sortingState).map((employee, index) => (
+					{rows.map((employee, index) => (
 						<EmployeeTableRow key={index} employee={employee} />
 					))}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }

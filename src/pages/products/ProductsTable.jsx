@@ -7,11 +7,18 @@ import ReactTooltip from 'react-tooltip';
 
 import useSortTableByField from '../../hooks/app/useSortTableByField';
 import useIntl from '../../hooks/common/useIntl';
+import usePagination from '../../hooks/common/usePagination';
+import TablePagination from '../../components/tables/TablePagination';
 
 export default function ProductsTable({ handleOpen = null } = {}) {
 	const { t } = useTranslation('pages/products');
 	const [sortingState, sortBy] = useSortTableByField('products', ['name', 'code', 'production'], 'productId');
 	const { products } = useProductsContext();
+
+	const { rows, currentPage, onPageChange, totalPages, count } = usePagination({
+		table: products.getAllSorted({ field: sortingState.field, asc: sortingState.asc }),
+		name: 'Products',
+	});
 
 	//Products table is empty
 	if (products.count() === 0) {
@@ -44,11 +51,12 @@ export default function ProductsTable({ handleOpen = null } = {}) {
 				</thead>
 				<tbody>
 					{products &&
-						products.getAllSorted({ field: sortingState.field, asc: sortingState.asc }).map((item, i) => {
+						rows.map((item, i) => {
 							return <ProductTableRow index={i} key={i} data={item} action={handleOpen} />;
 						})}
 				</tbody>
 			</table>
+			<TablePagination current={currentPage} total={totalPages} handler={onPageChange} itemCount={count} />
 		</div>
 	);
 }
@@ -58,7 +66,7 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 	const { displayNumber } = useIntl();
 	//Data Check
 	if (!data || typeof data !== 'object' || Object.keys(data).includes('productId') === false) return <></>;
-	
+
 	//Tooltips
 	const tooltipId = `Products-${index}`;
 
@@ -84,7 +92,7 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 				<th>
 					{index + 1}
 					{/* Tooltip Component for products page */}
-					<ReactTooltip id={tooltipId} type='light'  />
+					<ReactTooltip id={tooltipId} type='light' />
 				</th>
 				{/* Column 2 */}
 				<td className='whitespace-normal cursor-pointer font-medium' onClick={() => action('info', data.productId)}>
@@ -94,7 +102,7 @@ function ProductTableRow({ data = null, index = 0, action = null }) {
 				<td className='truncate' title={data?.code}>
 					{data?.code}
 				</td>
-				
+
 				{/* Column 5 */}
 				<td data-tip={productionTitle} data-for={tooltipId}>
 					{productionText}
