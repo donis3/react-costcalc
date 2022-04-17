@@ -49,11 +49,13 @@
 		"defaultProductionUnit": "kg",
 		"departments": [
 			{ "name": "manufacturing", "isLabour": true },
+			{ "name": "administration", "isLabour": false },
 			{ "name": "marketing", "isLabour": false },
 			{ "name": "hr", "isLabour": false },
 			{ "name": "pr", "isLabour": false },
 			{ "name": "cr", "isLabour": false },
 			{ "name": "it", "isLabour": false },
+			{ "name": "finance", "isLabour": false },
 			{ "name": "management", "isLabour": false },
 			{ "name": "other", "isLabour": false }
 		]

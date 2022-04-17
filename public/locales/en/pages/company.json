@@ -60,12 +60,14 @@
 	},
 	"departments": {
 		"manufacturing": "Manufacturing",
+		"management": "Management",
 		"marketing": "Marketing",
 		"hr": "Human Resources",
 		"pr": "Public Relations",
 		"cr": "Customer Relations",
 		"it": "Information Technologies",
-		"management": "Management",
+		"administration": "Administration",
+		"finance": "Accounting & Finance",
 		"other": "Other"
 	},
 	"expenses": {
