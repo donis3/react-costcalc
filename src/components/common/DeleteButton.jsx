@@ -1,0 +1,70 @@
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FaCheck, FaTimes, FaTrash } from 'react-icons/fa';
+
+export default function DeleteButton({ small, onClick }) {
+	const { t } = useTranslation('translation');
+	const [state, setState] = useState(false);
+
+	//If no callback function provided, don't render button
+	if (!onClick || typeof onClick !== 'function') return <></>;
+
+	const changeState = (val = null) => {
+		if (typeof val === 'boolean' && val !== state) {
+			setState(val);
+			//Revert state back to false after 5 sec
+			if (val === true) {
+				setTimeout(() => {
+					setState(false);
+				}, 5000);
+			}
+		}
+	};
+
+	if (state === false) {
+		return <BtnDelete small={small} onClick={() => changeState(true)} />;
+	} else {
+		return (
+			<div className='flex gap-x-1 fade-in items-center px-1'>
+				<span>{t('buttons.deleteConfirm')}</span>
+				<BtnNo small={small} onClick={() => changeState(false)} />
+				<BtnYes small={small} onClick={onClick} />
+			</div>
+		);
+	}
+}
+
+function BtnNo({ small, ...props }) {
+	const { t } = useTranslation('translation');
+	return (
+		<button type='button' className={`btn btn-outline ${small && 'btn-sm'}`} {...props}>
+			<FaTimes className='mr-1' />
+			{t('buttons.no')}
+		</button>
+	);
+}
+
+function BtnYes({ small, ...props }) {
+	const { t } = useTranslation('translation');
+	return (
+		<button type='button' className={`btn btn-outline text-red-600 hover:bg-red-700 ${small && 'btn-sm'}`} {...props}>
+			<FaCheck className='mr-1' />
+			{t('buttons.yes')}
+		</button>
+	);
+}
+
+function BtnDelete({ small, ...props }) {
+	const { t } = useTranslation('translation');
+	return (
+		<button type='button' className={`fade-in btn btn-error ${small && 'btn-sm'}`} {...props}>
+			<FaTrash className='mr-1' />
+			{t('buttons.delete')}
+		</button>
+	);
+}
+
+DeleteButton.defaultProps = {
+	onClick: null,
+	small: false,
+};

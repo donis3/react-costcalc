@@ -13,6 +13,9 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	const [formErrors, setFormErrors] = useState({});
 	const [formState, setFormState] = useState(parseInitialData(initialState));
 
+	//Save multi part forms if provided. {stepNo : [field, field,...]}
+	const formParts = {};
+
 	const inputRefs = useRef({});
 	const onChangeMiddleware = {};
 
@@ -124,6 +127,17 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		return { value, error };
 	}
 
+	function registerFieldStep(field = null, part = null) {
+		if (!field || typeof field !== 'string') return;
+		if (!part || typeof part !== 'string') return;
+
+		if (part in formParts) {
+			formParts[part].push(field);
+		} else {
+			formParts[part] = [field];
+		}
+	}
+
 	//=========================// Public Methods //=========================//
 
 	/**
@@ -136,9 +150,70 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 * @param {bool} isControlled controlled or not. Will use react state for controlled ones
 	 * @returns
 	 */
-	function register({ field = null, isControlled = false }) {
+	function register({ field = null, isControlled = false, part = null } = {}) {
+		//Save field's step number if provided. (for multi part forms)
+		registerFieldStep(field, part);
 		//register field
 		return isControlled ? registerControlledInput(field) : registerReferencedInput(field);
+	}
+
+	/**
+	 * Generate a joi validator for a part of form (multipart forms)
+	 * @param {*} step
+	 * @returns
+	 */
+	function getPartialValidator(part = null) {
+		if (part in formParts === false) {
+			return;
+		}
+		const fields = formParts[part];
+		if (!Array.isArray(fields) || fields.length === 0) return;
+
+		//create partial schema for this form part
+		const partialSchema = Object.keys(schema).reduce((acc, key) => {
+			if (fields.includes(key)) {
+				return { ...acc, [key]: schema[key] };
+			} else {
+				return acc;
+			}
+		}, {});
+		if (Object.keys(partialSchema).length === 0) return;
+		//Create joi schema
+		const joiSchema = joi.object(partialSchema);
+
+		const validatePart = () => {
+			//Get form data
+			const formData = fields.reduce((acc, key) => {
+				return { ...acc, [key]: getValue(key) };
+			}, {});
+			const { value, error } = joiSchema.validate(formData);
+
+			//We have errors, set them
+			if (error && Array.isArray(error.details) && error.details.length > 0) {
+				setFormErrors((state) => {
+					return error.details.reduce((accumulator, current) => {
+						let msg = current.message;
+						let field = current.context.key;
+						return { ...accumulator, [field]: msg };
+					}, {});
+				});
+			} else {
+				//This part has no errors, remove them
+				setFormErrors((state) => {
+					return Object.keys(state).reduce((acc, key) => {
+						if (fields.includes(key) === false) {
+							return { ...acc, [key]: state[key] };
+						} else {
+							return acc;
+						}
+					}, {});
+				});
+			}
+
+			return { value, error };
+		};
+
+		return validatePart;
 	}
 
 	/**
@@ -299,6 +374,13 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			if (key in inputRefs.current) {
 				inputRefs.current[key].value = newState[key];
 			}
+			//Call onChange middleware manually for each field
+
+			if (isControlled(key)) {
+				onControlledInputChange(key, newState[key]);
+			} else {
+				normalInputChange(key, newState[key]);
+			}
 		});
 	};
 
@@ -312,7 +394,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		handleChange: registerOnChangeMiddleware,
 		getFormData,
 		formErrors,
-
+		getPartialValidator,
 		//Values (including referenced inputs)
 		setValue,
 		getValue,
@@ -321,5 +403,6 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 		setState,
 		removeState,
 		resetForm,
+		formState,
 	};
 }

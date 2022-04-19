@@ -10,7 +10,7 @@
 		"titleOther": "Other Information",
 		"noContent": "Please add materials to recipe.",
 		"contentStats": "Total {{amount}} kg / {{max}} kg",
-		"noProducts": "Please add at least 1 product to the database first to be able to create a recipe.",
+		"noProducts": "Please create a product first to be able to create recipes.",
 		"goToProducts": "Go to products",
 		"noMaterials": "Please add materials to database to use them in recipes."
 	},

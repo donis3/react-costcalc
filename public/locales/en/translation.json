@@ -152,7 +152,11 @@
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
 		"minLength_other": "Must be at least {{count}} characters long",
-		"checkboxLabel": "Enabled?"
+		"checkboxLabel": "Enabled?",
+		"partInfo": "Part {{current}} of {{total}}",
+		"btnPrevious": "Previous",
+		"btnNext": "Next",
+		"btnSubmit": "Save"
 	},
 	"panel": {
 		"title": "Panel Title"
