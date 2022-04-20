@@ -14,6 +14,11 @@
 		"goToProducts": "Go to products",
 		"noMaterials": "Please add materials to database to use them in recipes."
 	},
+	"contentForm": {
+		"invalidAmount": "Invalid amount",
+		"invalidMaterial": "Invalid material",
+		"addMaterial": "Add Material"
+	},
 	"labels": {
 		"name": "Recipe Name",
 		"notes": "Notes",

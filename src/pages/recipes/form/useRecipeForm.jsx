@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useEndProductsContext, useRecipesDispatchContext } from '../../../context/MainContext';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 import { defaultRecipeSchema } from '../../../hooks/recipes/useRecipeFormSchema';
+import { toast } from 'react-toastify';
 
 export default function useRecipeForm({ recipe, products } = {}) {
 	//=============// Form State //===============//
@@ -10,10 +12,53 @@ export default function useRecipeForm({ recipe, products } = {}) {
 
 	const initialState = recipe ? { ...recipe } : { ...defaultRecipeSchema };
 	//=============// External Dependencies //===============//
+	const { dispatch } = useRecipesDispatchContext();
+	const navigate = useNavigate();
+	const { t } = useTranslation('pages/recipes', 'translation');
+	const moduleName = t('name');
+
+	const { t: tEndProducts } = useTranslation('pages/endproducts');
+	const { endProducts } = useEndProductsContext();
 	const productList = products.getAllSorted({ field: 'name' });
 	//Select first product by default
 	if (!recipe) {
 		initialState.productId = productList[0].productId;
+	}
+
+	//=============// Form Actions & Helpers //===============//
+	/**
+	 * Is deleting this recipe allowed
+	 * Checks if any endproducts are still using the recipe.
+	 * @returns {boolean} true if deletable
+	 */
+	function isDeleteAllowed() {
+		if (!recipe) return false;
+		if (endProducts && Array.isArray(endProducts.data)) {
+			const boundEndProducts = endProducts.data.filter((item) => item.recipeId === recipe.recipeId);
+			if (boundEndProducts.length > 0) {
+				//Stop dispatch. There are related products
+				toast.error(tEndProducts('deleteError.recipe', { count: boundEndProducts.length }));
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function addRecipe(data) {
+		const success = () => {
+			toast.success(t('success.add', { name: formState.name, ns: 'translation' }));
+			navigate('/recipes');
+		};
+		const error = () => toast.error(t('error.addName', { name: moduleName, ns: 'translation' }));
+		dispatch({ type: 'add', payload: data, success, error });
+	}
+	function updateRecipe(data) {
+		const success = () => {
+			toast.success(t('success.update', { name: formState.name, ns: 'translation' }));
+			navigate('/recipes');
+		};
+		const error = () => toast.error(t('error.updateName', { name: moduleName, ns: 'translation' }));
+		dispatch({ type: 'update', payload: data, success, error });
 	}
 
 	//=============// Form Builder //===============//
@@ -26,6 +71,7 @@ export default function useRecipeForm({ recipe, products } = {}) {
 		resetForm,
 		getPartialValidator,
 		formState,
+		setState,
 		getValue,
 		handleChange,
 	} = useFormBuilder({
@@ -37,10 +83,15 @@ export default function useRecipeForm({ recipe, products } = {}) {
 
 	//=============// Handlers //===============//
 	const handleSubmit = (e) => {
-		console.log('Will submit');
 		try {
-			const data = getFormData(false);
-			console.log(data);
+			//Get form data merged with initial data
+			const data = getFormData(true);
+			if (data && !recipe) {
+				addRecipe(data);
+			} else if (data && recipe) {
+				updateRecipe(data);
+			}
+			//Dispatch
 		} catch (err) {
 			//Form errors.
 		}
@@ -53,11 +104,52 @@ export default function useRecipeForm({ recipe, products } = {}) {
 
 	const handleDelete = () => {
 		if (!recipe) return;
-		console.log(`Delete Recipe`);
+		if (!isDeleteAllowed()) return;
+		//Proceed with deleting.
+		const success = (recipeId = null) => {
+			toast.success(t('success.delete', { name: formState.name }));
+		};
+		const error = () => toast.error(t('error.delete'));
+		dispatch({ type: 'delete', payload: recipe.recipeId, success, error });
+		navigate('/recipes');
 	};
 
 	//=============// Select Arrays //===============//
 	const selectProduct = productList.map((item) => ({ name: item.name, value: item.productId }));
+
+	//=============// Recipe Material Handlers //===============//
+	function addMaterial(data) {
+		if (!data) return;
+		//Load current materials
+		const mats = Array.isArray(formState.materials) ? formState.materials : [];
+		let newMatsState = [];
+		//Check if this material already in state
+		if (mats.find((item) => item.materialId === data.materialId)) {
+			//Add the new value to it
+			newMatsState = mats.map((item) => {
+				if (item.materialId === data.materialId) {
+					return { ...data, amount: data.amount + item.amount };
+				} else {
+					return item;
+				}
+			});
+		} else {
+			//This material is new to the state
+			newMatsState = [...mats, data];
+		}
+		setState('materials', newMatsState);
+	}
+	function removeMaterial(materialId) {
+		materialId = parseInt(materialId);
+		if (isNaN(materialId)) return;
+		//Load current materials
+		const mats = Array.isArray(formState.materials) ? formState.materials : [];
+		//remove this material
+		setState(
+			'materials',
+			mats.filter((item) => item.materialId !== materialId)
+		);
+	}
 
 	//=============// Export //===============//
 	return {
@@ -69,6 +161,10 @@ export default function useRecipeForm({ recipe, products } = {}) {
 		},
 		select: {
 			product: selectProduct,
+		},
+		materialControl: {
+			add: addMaterial,
+			remove: removeMaterial,
 		},
 		getPartialValidator,
 		register,

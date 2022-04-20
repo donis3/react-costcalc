@@ -368,17 +368,15 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	const resetForm = () => {
 		//Reset form state
 		const newState = parseInitialData(initialState);
-		setFormState(newState);
+		setFormState(() => newState);
 		//Set referenced values
 		Object.keys(newState).forEach((key) => {
 			if (key in inputRefs.current) {
 				inputRefs.current[key].value = newState[key];
 			}
-			//Call onChange middleware manually for each field
+			//Call onChange middleware manually for referenced fields
 
-			if (isControlled(key)) {
-				onControlledInputChange(key, newState[key]);
-			} else {
+			if (!isControlled(key)) {
 				normalInputChange(key, newState[key]);
 			}
 		});

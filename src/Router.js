@@ -23,9 +23,8 @@ import Package from './pages/packages/Package';
 import PackageForm from './pages/packages/PackageForm';
 import Packages from './pages/packages/Packages';
 import Products from './pages/products/Products';
-import RecipeForm2 from './pages/recipes/form/RecipeForm2';
+import RecipeForm from './pages/recipes/form/RecipeForm';
 import Recipe from './pages/recipes/Recipe';
-import RecipeForm from './pages/recipes/RecipeForm';
 import Recipes from './pages/recipes/Recipes';
 
 export default function Router() {
@@ -39,11 +38,9 @@ export default function Router() {
 			<Route path='/currency/:currency' element={<Currency />} />
 			<Route path='/recipes' element={<Recipes />} />
 			<Route path='/recipes/:recipeId' element={<Recipe />} />
-			<Route path='/recipes/add' element={<RecipeForm />} />
-			{/* <Route path='/recipes/edit/:recipeId' element={<RecipeForm />} /> */}
-			{/* Experimental */}
-			<Route path='/recipes/add2/' element={<RecipeForm2 />} />
-			<Route path='/recipes/edit/:recipeId' element={<RecipeForm2 isEdit={true} />} />
+
+			<Route path='/recipes/add/' element={<RecipeForm />} />
+			<Route path='/recipes/edit/:recipeId' element={<RecipeForm isEdit={true} />} />
 
 			{/* Experimental */}
 			<Route path='/materials/:materialId' element={<Material />} />

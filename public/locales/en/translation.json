@@ -35,6 +35,8 @@
 		"badRequest": "Bad Request",
 		"updateTargetNotFound": "Update failed, {{name}} couldn't be found",
 
+		"addName": "{{name}} couldn't be added",
+		"updateName": "{{name}} couldn't be updated",
 		"addInvalidData": "Invalid data. {{name}} couldn't be added.",
 		"updateInvalidData": "Invalid data. {{name}} couldn't be updated.",
 		"deleteInvalidData": "Invalid data. {{name}} couldn't be deleted."

@@ -17,15 +17,11 @@ export default function Recipes() {
 				{/* Card Header */}
 				<ModuleHeader text={t('recipes.title')} module='recipes' role='main'>
 					{/* Links */}
-					{/* Links */}
-					<Link to='/recipes/add2'>
-						<Button.New name={'add demo'} />
-					</Link>
 					<Link to='/recipes/add'>
 						<Button.New name={t('name')} />
 					</Link>
 				</ModuleHeader>
-				
+
 				{/* Lead Text */}
 				<p className='opacity-80'>{t('recipes.lead')}</p>
 

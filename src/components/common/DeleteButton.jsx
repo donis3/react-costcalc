@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCheck, FaTimes, FaTrash } from 'react-icons/fa';
 
+//Number of seconds to display delete button
+const delay = 5;
+
+/**
+ * A delete button with confirmation before executing callback
+ * @param {*} param0
+ * @returns
+ */
 export default function DeleteButton({ small, onClick }) {
 	const { t } = useTranslation('translation');
 	const [state, setState] = useState(false);
+
+	useEffect(() => {
+		if (state === true) {
+			let showDeleteConfirmTimer = setTimeout(() => setState(false), delay * 1000);
+			return () => {
+				clearTimeout(showDeleteConfirmTimer);
+			};
+		}
+	}, [state]);
 
 	//If no callback function provided, don't render button
 	if (!onClick || typeof onClick !== 'function') return <></>;
@@ -12,12 +29,6 @@ export default function DeleteButton({ small, onClick }) {
 	const changeState = (val = null) => {
 		if (typeof val === 'boolean' && val !== state) {
 			setState(val);
-			//Revert state back to false after 5 sec
-			if (val === true) {
-				setTimeout(() => {
-					setState(false);
-				}, 5000);
-			}
 		}
 	};
 

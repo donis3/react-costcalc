@@ -50,7 +50,9 @@ export default function Recipe() {
 		page.setBreadcrumb(recipe?.name);
 
 		//Set yield amount for change yield input
-		newYieldRef.current.value = recipe.yield;
+		if (recipe && newYieldRef.current) {
+			newYieldRef.current.value = recipe.yield;
+		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recipeId]);

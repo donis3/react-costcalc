@@ -95,20 +95,22 @@ function FormPartWrapper({ children, parts, controls, onReset }) {
 
 	if (parts)
 		return (
-			<div className='w-full p-3'>
-				<div className='flex justify-between gap-x-10 items-center'>
-					<ul className='steps'>
-						{parts.map((part, i) => {
-							return (
-								<Step key={i} isFilled={part.step <= activeStep} hasError={part.hasError}>
-									{part.text}
-								</Step>
-							);
-						})}
-					</ul>
-					{typeof onReset === 'function' && <Reset onClick={handleReset} />}
+			<div className='w-full p-3 flex justify-center'>
+				<div className='w-full max-w-4xl'>
+					<div className='flex justify-between gap-x-10 items-center'>
+						<ul className='steps'>
+							{parts.map((part, i) => {
+								return (
+									<Step key={i} isFilled={part.step <= activeStep} hasError={part.hasError}>
+										{part.text}
+									</Step>
+								);
+							})}
+						</ul>
+						{typeof onReset === 'function' && <Reset onClick={handleReset} />}
+					</div>
+					{children}
 				</div>
-				{children}
 			</div>
 		);
 }

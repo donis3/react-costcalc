@@ -123,6 +123,22 @@ export default function useDefaultButtons() {
 		);
 	}
 
+	function RemoveItem({ icon = 'FaTimes', ...props }) {
+		return (
+			<button type='button' className='btn btn-outline  btn-xs py-0 px-1 text-red-500 hover:bg-red-500' {...props}>
+				<FaIcon icon={icon} className='' />
+			</button>
+		);
+	}
+
+	function AddItem({ icon = 'FaPlus', ...props }) {
+		return (
+			<button type='button' className='btn btn-secondary w-auto' {...props}>
+				<FaIcon icon={icon} className='' />
+			</button>
+		);
+	}
+
 	return {
 		Submit,
 		Delete,
@@ -132,6 +148,8 @@ export default function useDefaultButtons() {
 		Edit,
 		Cancel,
 		LinkBtn,
+		RemoveItem,
+		AddItem
 	};
 }
 

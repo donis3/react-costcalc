@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import Button from '../../../components/common/Button';
 import Card from '../../../components/common/Card';
 import DeleteButton from '../../../components/common/DeleteButton';
 import FormPart from '../../../components/form/FormPart';
@@ -13,9 +12,14 @@ import useFormParts from '../../../hooks/forms/useFormParts';
 import useRecipeForm from './useRecipeForm';
 import { toast } from 'react-toastify';
 import useIntl from '../../../hooks/common/useIntl';
+import ContentTable from './ContentTable';
 
 export default function RecipeForm2({ isEdit = false }) {
-	//Dependencies
+	/**
+	 * Load recipes and products repo
+	 * check if form is in edit mode and try to find a recipe if so
+	 * if recipe is not found, navigate to recipes
+	 */
 	const { recipeId } = useParams();
 	const navigate = useNavigate();
 	const { page } = useAppContext();
@@ -44,15 +48,33 @@ export default function RecipeForm2({ isEdit = false }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	//Form Handlers
+	//=====================// FORM HANDLER //=======================//
+	/**
+	 * Using multipart forms, define the parts (part names corresponds to formparts.json localization file)
+	 *
+	 */
 	const { controls, getPart, parts } = useFormParts('recipe.details', 'recipe.content', 'recipe.notes');
-	const { getPartialValidator, getError, register, handlers, select, formState, handleChange, getValue } =
-		useRecipeForm({
-			recipe,
-			products,
-		});
+	const {
+		getPartialValidator,
+		getError,
+		register,
+		handlers,
+		select,
+		handleChange,
+		getValue,
+		materialControl,
+		formState,
+	} = useRecipeForm({
+		recipe,
+		products,
+	});
 
 	//=====================// UI STATE HANDLING //=======================//
+	/**
+	 * Generate a ui state using current form state.
+	 * To display correct yield unit & weight
+	 * @returns
+	 */
 	function generateUiState() {
 		//Default state
 		const result = { isLiquid: false, unit: 'kg', yieldWeight: 0, yield: 0 };
@@ -83,33 +105,39 @@ export default function RecipeForm2({ isEdit = false }) {
 	}
 	const [uiState, setUiState] = useState(generateUiState());
 
+	//Form change listener
 	handleChange('productId', () => {
 		setUiState(generateUiState());
 	});
+	//Form change listener
 	handleChange('yield', () => {
 		setUiState(generateUiState());
 	});
-
+	//Display yield weight formatted
 	const showYieldWeight = () => {
 		if (!uiState.isLiquid || uiState.yieldWeight === 0) return;
-		return `${displayNumber(uiState.yieldWeight, 2)} ${uiState.unit}`;
+		return `${displayNumber(uiState.yieldWeight, 2)} kg`;
 	};
 
-	//Render
+	//Module title & role
+	const module = {
+		title: isEdit ? t('form.titleUpdate', { name: recipe.name }) : t('form.titleAdd'),
+		role: isEdit ? 'edit' : 'add',
+	};
+
+	//=====================// FORM RENDER //=======================//
 	return (
 		<Card className='w-full px-3 py-5 mb-5' shadow='shadow-lg'>
 			{/* Card Header */}
-			<ModuleHeader
-				text={isEdit ? t('form.titleUpdate', { name: recipe.name }) : t('form.titleAdd')}
-				module='recipes'
-				role={isEdit ? 'edit' : 'add'}
-			>
+			<ModuleHeader text={module.title} module='recipes' role={module.role}>
 				<DeleteButton small onClick={recipe ? handlers.delete : null} />
 			</ModuleHeader>
-			{/* Body */}
+
+			{/* Form Start */}
 			<Form footer={false} grid={false} onSubmit={handlers.submit} setSubmitted={handlers.setSubmitted}>
+				{/* Form Parts Start */}
 				<FormPart.Wrapper parts={parts} controls={controls} onReset={handlers.reset}>
-					{/* FormPart: recipe.details */}
+					{/* ========================== FormPart: recipe.details ============================ */}
 					<FormPart part={getPart(0)} controls={controls} getValidator={() => getPartialValidator('details')}>
 						{/* Field: name */}
 						<Form.Control error={getError('name')} label={t('labels.name')}>
@@ -121,6 +149,7 @@ export default function RecipeForm2({ isEdit = false }) {
 							<Form.Select
 								{...register({ field: 'productId', isControlled: false, part: 'details' })}
 								options={select.product}
+								disabled={isEdit ? true : false}
 							/>
 						</Form.Control>
 
@@ -131,9 +160,21 @@ export default function RecipeForm2({ isEdit = false }) {
 						</Form.ControlGroup>
 					</FormPart>
 
-					<FormPart part={getPart(1)} controls={controls}></FormPart>
+					{/* ========================== FormPart: recipe.content ============================ */}
+					<FormPart part={getPart(1)} controls={controls}>
+						<ContentTable
+							controls={materialControl}
+							recipeMaterials={formState.materials}
+							recipeYield={uiState.yieldWeight}
+						/>
+					</FormPart>
+
+					{/* ========================== FormPart: recipe.notes ============================ */}
 					<FormPart part={getPart(2)} controls={controls}>
-						Part 3
+						{/* Field: notes */}
+						<Form.Control error={getError('notes')} label={t('labels.notes')}>
+							<Form.Textarea {...register({ field: 'notes', isControlled: false, part: 'notes' })} />
+						</Form.Control>
 					</FormPart>
 				</FormPart.Wrapper>
 			</Form>

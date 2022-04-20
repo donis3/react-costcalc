@@ -106,15 +106,17 @@ function Section({ children, title = null, ...props }) {
  * A form input wrapper with label and alt label. Will also show errors if needed
  * Wrap each input with this inside FormBlock.Grid
  */
-function Control({ children, label = null, altLabel = null, error = '' }) {
+function Control({ children, label = null, altLabel = null, error = '', noLabel = false, className = '' }) {
 	if (typeof error !== 'string') error = '';
 
 	return (
-		<div className={`form-control w-full ${error.length > 0 ? 'form-error' : ''}`}>
-			<label className='label'>
-				{/* Main Label */}
-				{label && <span className='label-text'>{label}</span>}
-			</label>
+		<div className={`form-control w-full ${error.length > 0 ? 'form-error' : ''}  ${className}`}>
+			{noLabel === false && (
+				<label className='label'>
+					{/* Main Label */}
+					<span className='label-text'>{label}</span>
+				</label>
+			)}
 			{/* Input as children */}
 			{children}
 			<label className='label label-bottom'>
@@ -135,7 +137,7 @@ function Control({ children, label = null, altLabel = null, error = '' }) {
  * error can be an array to display multiple errors
  *
  */
-function GroupControl({ children, label = null, altLabel = null, error = '' }) {
+function GroupControl({ children, label = null, altLabel = null, error = '', noLabel = false, className = '' }) {
 	let errorText = '';
 	if (Array.isArray(error) && error.length > 0) {
 		errorText = error.reduce((acc, current) => {
@@ -151,12 +153,14 @@ function GroupControl({ children, label = null, altLabel = null, error = '' }) {
 	}
 
 	return (
-		<div className={`form-control form-control-group w-full ${errorText.length > 0 ? 'form-error' : ''}`}>
-			<label className='label'>
-				{/* Main Label */}
-				{label && <span className='label-text'>{label}</span>}
-			</label>
-			<div className='input-group'>
+		<div className={`form-control form-control-group w-full ${errorText.length > 0 ? 'form-error' : ''} ${className}`}>
+			{noLabel === false && (
+				<label className='label'>
+					{/* Main Label */}
+					{label && <span className='label-text'>{label}</span>}
+				</label>
+			)}
+			<div className='input-group max-w-fit'>
 				{/* Input as children */}
 				{children}
 			</div>
@@ -167,6 +171,7 @@ function GroupControl({ children, label = null, altLabel = null, error = '' }) {
 				{errorText.length === 0 && altLabel && (
 					<span className='label-text-alt' dangerouslySetInnerHTML={{ __html: altLabel }} />
 				)}
+				
 			</label>
 		</div>
 	);

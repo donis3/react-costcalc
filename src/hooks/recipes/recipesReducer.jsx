@@ -20,6 +20,7 @@ export default function recipesReducer(state, action) {
 
 			//Add creation time
 			result.createdAt = Date.now();
+			result.updatedAt = Date.now();
 
 			//callback
 			if (typeof success === 'function') success(nextRecipeId);
