@@ -32,9 +32,9 @@ export default function ExpenseTotal({ expenses, options }) {
 		<div className='w-full flex items-center justify-start mb-3 '>
 			<div className='stats border flex-1'>
 				<div className='stat'>
-					<div className='stat-title'>{t('expensesTable.periodCost', { period: currentPeriodText })}</div>
-					<div className='stat-value'>{displayMoney(totals.net / coefficient, totals.currency)}</div>
-					<div className='stat-desc'>
+					<div className='stat-title text-base'>{t('expensesTable.periodCost', { period: currentPeriodText })}</div>
+					<div className='stat-value text-xl'>{displayMoney(totals.net / coefficient, totals.currency)}</div>
+					<div className='stat-desc text-xs'>
 						{t('labels.priceWithTax', {
 							ns: 'translation',
 							price: displayMoney(totals.withTax / coefficient, totals.currency),

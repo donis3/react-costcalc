@@ -85,8 +85,8 @@ export default function Recipe() {
 				</ModuleHeader>
 
 				{/* Half / Half divided */}
-				<div className='w-full flex'>
-					<div className='py-3 px-3 w-1/2 '>
+				<div className='w-full flex flex-col-reverse md:flex-row'>
+					<div className='py-3 px-3  flex-1'>
 						<div>
 							{/* Product Name */}
 							<h4 className='text-base-content opacity-50 text-sm'>{t('labels.product')}</h4>
@@ -131,7 +131,7 @@ export default function Recipe() {
 							{/* Editable Yield Section END */}
 						</div>
 					</div>
-					<div className='p-3 w-1/2 flex justify-end '>
+					<div className='p-3  flex justify-end '>
 						{/* Recipe Unit Cost Stat Component */}
 						<RecipeUnitCost recipe={recipeState.recipe} />
 					</div>
@@ -179,7 +179,7 @@ function RecipeUnitCost({ recipe = null }) {
 
 	if (!recipe) return <></>;
 	return (
-		<div className='stats shadow'>
+		<div className='stats shadow w-full'>
 			<div className='stat'>
 				<div className='stat-title flex justify-between gap-x-10'>
 					<span>{t('recipe.unitCost')}</span>

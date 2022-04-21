@@ -74,12 +74,12 @@ function CostStat() {
 		<div className='flex gap-x-10'>
 			<div className='stats shadow flex-1'>
 				<div className='stat'>
-					<div className='stat-figure text-secondary text-4xl flex'>
+					<div className='stat-figure text-secondary text-2xl flex'>
 						<EmployeeIcon />
 						<LabourIcon />
 					</div>
-					<div className='stat-title'>{t('employees.statTotal')}</div>
-					<div className='stat-value'>{displayMoney(total.gross, total.currency)}</div>
+					<div className='stat-title text-base'>{t('employees.statTotal')}</div>
+					<div className='stat-value text-xl'>{displayMoney(total.gross, total.currency)}</div>
 					<div className='stat-desc'>{t('employees.statPeriod', { period: periodName })}</div>
 				</div>
 			</div>

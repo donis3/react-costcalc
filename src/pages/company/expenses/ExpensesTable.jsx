@@ -32,11 +32,11 @@ export default function ExpensesTable() {
 	return (
 		<>
 			{/* Table options and total cost */}
-			<div className='flex flex-col md:flex-row mt-5 gap-x-10 relative '>
+			<div className='flex flex-col-reverse md:flex-row mt-5 gap-x-10 relative '>
 				<div className='flex-1'>
 					<ExpenseTotal expenses={expenses} options={options} />
 				</div>
-				<div className='flex-1'>
+				<div className=''>
 					<ExpenseOptions options={options} setOption={setOption} />
 				</div>
 			</div>

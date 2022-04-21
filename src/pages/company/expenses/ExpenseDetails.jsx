@@ -56,7 +56,7 @@ export default function ExpenseDetails() {
 				<div className='flex-1'>
 					<ExpenseTotals expense={expense} options={options} />
 				</div>
-				<div className='flex-1'>
+				<div className=''>
 					<ExpenseOptions options={options} setOption={setOption} display={expenseOptionsDisplay} />
 				</div>
 			</div>
