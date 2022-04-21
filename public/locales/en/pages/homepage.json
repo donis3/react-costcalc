@@ -4,7 +4,7 @@
 		"labour": "Labour",
 		"periodText": "Per {{period}}",
 		"production": "Production",
-		"productionUnitCost": "Production Cost",
+		"productionUnitCost": "Labour Cost",
 		"productionUnitCostDesc": "Labour cost per {{unit}}"
 	},
 	"help": {

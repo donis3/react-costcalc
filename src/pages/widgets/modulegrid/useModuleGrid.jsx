@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCompany from '../../../context/company/useCompany';
 import {
+	useEndProductsContext,
 	useMaterialContext,
 	usePackagesContext,
 	useProductsContext,
@@ -15,6 +16,7 @@ export default function useModuleGrid() {
 	const { Materials } = useMaterialContext();
 	const { recipes } = useRecipesContext();
 	const { packages } = usePackagesContext();
+	const { endProducts } = useEndProductsContext();
 
 	//================// Helper Methods //==================//
 	function getCount(data) {
@@ -27,6 +29,7 @@ export default function useModuleGrid() {
 		employees: 0,
 		expenses: 0,
 		products: 0,
+		endproducts: 0,
 		materials: 0,
 		recipes: 0,
 		packages: 0,
@@ -35,6 +38,7 @@ export default function useModuleGrid() {
 	//================// Get Data from Repos//==================//
 	result.employees = useMemo(() => getCount(company?.employees), [company]);
 	result.expenses = useMemo(() => getCount(company?.expenses), [company]);
+	result.endproducts = useMemo(() => getCount(endProducts?.data), [endProducts]);
 	result.products = useMemo(() => getCount(products?.data), [products]);
 	result.materials = useMemo(() => getCount(Materials?.materials), [Materials]);
 	result.recipes = useMemo(() => getCount(recipes?.recipesState), [recipes]);
@@ -56,10 +60,10 @@ export default function useModuleGrid() {
 			link: '/company/expenses',
 		},
 		{
-			module: 'products',
+			module: 'endproducts',
 			label: t('miniStats.products'),
-			text: result.products,
-			link: '/products',
+			text: result.endproducts,
+			link: '/endproducts',
 		},
 		{
 			module: 'recipes',

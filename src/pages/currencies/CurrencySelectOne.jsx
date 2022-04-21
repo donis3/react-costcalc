@@ -15,7 +15,7 @@ export default function CurrencySelectOne() {
 
 	return (
 		<>
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				<ModuleHeader text={t('currency.title')} module='currency' role='view' />
 				
 				<p className='opacity-80'>{t('currency.selectCurrency')}</p>

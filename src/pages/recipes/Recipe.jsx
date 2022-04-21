@@ -72,7 +72,7 @@ export default function Recipe() {
 	}
 	return (
 		<>
-			<Card className='w-full px-3 py-5 ' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				{/* Card Header */}
 				<ModuleHeader text={recipeState.recipe.name} module='recipes' role='view'>
 					{/* Links */}

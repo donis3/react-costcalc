@@ -25,7 +25,7 @@ export default function Products() {
 
 	return (
 		<>
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				{/* Card Header */}
 				<ModuleHeader text={t('title')} module='products' role='main'>
 					{/* Links */}

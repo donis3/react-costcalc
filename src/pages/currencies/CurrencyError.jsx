@@ -9,7 +9,7 @@ export default function CurrencyError() {
 
 	return (
 		<>
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				<ModuleHeader text={t('currency.title')} module='currency' role='view' />
 				
 				<div className='flex justify-between gap-x-10 items-end'>

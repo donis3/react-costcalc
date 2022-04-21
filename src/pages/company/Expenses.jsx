@@ -15,7 +15,7 @@ export default function Expenses() {
 	useCompanyTotals();
 
 	return (
-		<Card className='w-full px-3 py-5' shadow='shadow-lg'>
+		<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 			<ModuleHeader text={t('expenses.title')} module='expenses' role='main'>
 				<Link to='/company/expenses/chart'>
 					<Button.PieChart forceIcon>{t('expenses.chart')}</Button.PieChart>

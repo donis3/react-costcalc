@@ -41,7 +41,7 @@ export default function EndProductForm({ isEdit = false } = {}) {
 	return (
 		<>
 			{/* Form */}
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				<ModuleHeader
 					text={isEdit ? t('form.editTitle') : t('form.addTitle')}
 					module='endproducts'

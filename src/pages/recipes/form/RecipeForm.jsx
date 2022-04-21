@@ -127,7 +127,7 @@ export default function RecipeForm2({ isEdit = false }) {
 
 	//=====================// FORM RENDER //=======================//
 	return (
-		<Card className='w-full px-3 py-5 mb-5' shadow='shadow-lg'>
+		<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 			{/* Card Header */}
 			<ModuleHeader text={module.title} module='recipes' role={module.role}>
 				<DeleteButton small onClick={recipe ? handlers.delete : null} />
