@@ -1,0 +1,24 @@
+{
+	"totals": {
+		"overhead": "Overhead",
+		"labour": "Labour",
+		"periodText": "Per {{period}}",
+		"production": "Production",
+		"productionUnitCost": "Production Cost",
+		"productionUnitCostDesc": "Labour cost per {{unit}}"
+	},
+	"help": {
+		"overhead": "expenses + employee salaries<br />(manufacturing dept. excluded)",
+		"labour": "manufacturing department salary",
+		"production": "Average production amount for given period",
+		"productionUnitCost": "Labour cost per unit of production <br />Total labour cost / total production"
+	},
+	"miniStats": {
+		"employees": "Employees",
+		"products": "Products",
+		"materials": "Materials",
+		"expenses": "Expenses",
+		"recipes": "Recipes",
+		"packages": "Packages"
+	}
+}

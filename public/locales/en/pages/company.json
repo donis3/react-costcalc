@@ -31,9 +31,11 @@
 		"moduleName": "employees",
 		"name": "Employee",
 		"title": "Employees",
-		"lead": "Define employees and salaries for cost calculation. ",
 		"formTitleAdd": "New Employee",
-		"formTitleEdit": "Edit Employee"
+		"formTitleEdit": "Edit Employee",
+		"statTotal": "Gross Total",
+		"statLabour": "Labour",
+		"statPeriod": "per {{period}}"
 	},
 	"table": {
 		"name": "Employee",
