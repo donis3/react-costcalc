@@ -1,9 +1,13 @@
+import { useTranslation } from 'react-i18next';
+import useCompanyLabourCost from '../../context/company/useCompanyLabourCost';
 import { useEndProductsContext } from '../../context/MainContext';
 import useRecipe from '../recipes/useRecipe';
 
 export default function useEndProduct(endId = null) {
-	const {endProducts} = useEndProductsContext();
-	
+	const labourCost = useCompanyLabourCost();
+	const { t } = useTranslation('translation');
+	const { endProducts } = useEndProductsContext();
+
 	const endProduct = endProducts ? endProducts.findById(endId, true) : null;
 	const { recipe } = useRecipe(endProduct?.recipeId);
 
@@ -15,17 +19,17 @@ export default function useEndProduct(endId = null) {
 			try {
 				const yieldChangedRecipe = recipe.changeRecipeYield(endProduct.package.packageCapacity);
 				materials = yieldChangedRecipe.materials;
-			} catch(e) {
-				console.log('Recipe load error: ', e.message)
+			} catch (e) {
+				console.log('Recipe load error: ', e.message);
 			}
-			
+
 			//Deep copy materials as recipeItems
 			if (Array.isArray(materials)) {
 				recipeItems = materials.map((mat) => ({ ...mat }));
 			}
 		}
 	}
-	
+
 	let packageItems = [];
 	if (endProduct && endProduct.package && endProduct.package.items) {
 		if (Array.isArray(endProduct.package.items)) {
@@ -33,5 +37,21 @@ export default function useEndProduct(endId = null) {
 		}
 	}
 
-	return { endProduct, recipeItems, packageItems };
+	let labourItems = [];
+	if (labourCost && endProduct && endProduct.cost && endProduct.cost.labourCost) {
+		let weight = parseFloat(endProduct?.getWeight());
+		if (isNaN(weight)) weight = 0;
+		//Add it as a cost item as well
+		const costItem = {
+			name: t('labels.labourCost'),
+			price: labourCost.net,
+			tax: labourCost.tax,
+			quantity: weight,
+			unit: null,
+			amount: labourCost.net * weight, //must be cost without tax
+			currency: labourCost.currency,
+		};
+		labourItems.push(costItem);
+	}
+	return { endProduct, recipeItems, packageItems, labourItems };
 }

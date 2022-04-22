@@ -4,16 +4,25 @@ import { Link } from 'react-router-dom';
 import NumericUnit from '../../../components/common/NumericUnit';
 import PricePerUnit from '../../../components/common/PricePerUnit';
 import CostTable from '../../../components/CostTable/CostTable';
+import useConfig from '../../../hooks/app/useConfig';
 import useEndProductCostAnalysis from '../../../hooks/endproducts/useEndProductCostAnalysis';
 import ProductInfo from '../../products/ProductInfo';
+import ProductPriceWidget from './ProductPriceWidget';
 
-export default function EndProductInfo({ data = null, recipeItems, packageItems } = {}) {
+export default function EndProductInfo({ data = null, recipeItems, packageItems, labourItems } = {}) {
+	const config = useConfig();
+	const defaultCurrency = config.getDefaultCurrency(true);
 	const { t } = useTranslation('pages/endproducts');
 	const [modalState, setModalState] = useState({ modal: 'product', isOpen: false });
 	const openModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: true }));
 	const closeModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: false }));
 
-	const { costItems, costTotals } = useEndProductCostAnalysis({ recipeItems, packageItems, showTax: false });
+	const { costItems, costTotals } = useEndProductCostAnalysis({
+		recipeItems,
+		packageItems,
+		showTax: false,
+		labourItems,
+	});
 
 	if (!data) return <></>;
 	if (!data.package) return <>{t('error.packageError')}</>;
@@ -23,9 +32,17 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems 
 	return (
 		<>
 			{/* Product Details Section */}
-			<div className='grid grid-cols-2 gap-x-2 gap-y-5'>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-5 p-3 md:p-1'>
 				{/* Grid Start */}
-				{/* ... */}
+				{/* Price Row */}
+				<div className='w-full col-span-full flex'>
+					<ProductPriceWidget
+						cost={data.totalCost}
+						costWithTax={data.totalCostWithTax}
+						currency={defaultCurrency}
+						unit='pcs'
+					/>
+				</div>
 
 				{/* Item */}
 				<InfoItem title={t('labels.name', { ns: 'translation' })}>

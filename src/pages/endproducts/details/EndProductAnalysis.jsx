@@ -5,7 +5,7 @@ import OptionControl from '../../../components/common/OptionControl';
 import useStorageState from '../../../hooks/common/useStorageState';
 import useEndProductCostAnalysis from '../../../hooks/endproducts/useEndProductCostAnalysis';
 
-export default function EndProductAnalysis({ data = null, recipeItems, packageItems } = {}) {
+export default function EndProductAnalysis({ data = null, recipeItems, packageItems, labourItems } = {}) {
 	const { t } = useTranslation('pages/endproducts', 'translation');
 	const [displayState, setDisplayState] = useStorageState('displaySettings', {
 		localPrice: true,
@@ -16,10 +16,9 @@ export default function EndProductAnalysis({ data = null, recipeItems, packageIt
 	const { chartData: deepChartData } = useEndProductCostAnalysis({
 		recipeItems,
 		packageItems,
+		labourItems,
 		showTax: displayState.showTax,
 	});
-
-    
 
 	return (
 		<>
@@ -78,6 +77,13 @@ function CostAnalysisShallow({ data = null, displayState = null } = {}) {
 				chartData.labels.push(t('costAnalysis.recipeCost'));
 				let cost = data.cost.recipeCost;
 				if (displayState.showTax) cost += data.cost.recipeTax;
+				chartData.data.push(cost);
+				break;
+			}
+			case 'labourCost': {
+				chartData.labels.push(t('costAnalysis.labourCost'));
+				let cost = data.cost.labourCost;
+				if (displayState.showTax) cost += data.cost.labourCostTax;
 				chartData.data.push(cost);
 				break;
 			}

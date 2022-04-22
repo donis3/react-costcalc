@@ -7,9 +7,7 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 	const { displayNumber, displayMoney } = useIntl();
 	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
 	const additionalClass = ' p-3 ';
-    const {t} = useTranslation('translation');
-
-	
+	const { t } = useTranslation('translation');
 
 	//Clickable button if callback provided
 	const itemName =
@@ -20,14 +18,15 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 		) : (
 			<>{name}</>
 		);
-    const quantityDecimalPlaces = unit === 'pcs' ? 0 : 2;
+	const quantityDecimalPlaces = unit === 'pcs' ? 0 : 2;
 	return (
 		<>
 			<div className={'col-span-4 ' + stripeClass + additionalClass}>{itemName}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price, currency)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>% {displayNumber(tax, 1)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>
-				{displayNumber(quantity, quantityDecimalPlaces)} {t(`unitsShort.${unit}`, {count: Math.round(quantity)})}
+				{displayNumber(quantity, quantityDecimalPlaces)}{' '}
+				{unit && t(`unitsShort.${unit}`, { count: Math.round(quantity) })}
 			</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(amount)}</div>
 		</>

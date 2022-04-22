@@ -42,7 +42,7 @@ export default function NumericUnit({ type = null, children, isPer = false, shor
 	return (
 		<>
 			{isNaN(parseFloat(children)) === false ? displayNumber(children, 2) : children}
-			<span className='ml-1 text-sm opacity-75'>
+			<span className='ml-1 text-[70%] opacity-75'>
 				{unit && isPer && '/'}
 				{unit}
 			</span>

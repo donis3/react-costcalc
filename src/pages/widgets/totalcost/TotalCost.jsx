@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import useCompany from '../../../context/company/useCompany';
-import useConfig from '../../../hooks/app/useConfig';
 import {
 	GrUserManager as EmployeeIcon,
 	GrUserWorker as LabourIcon,
@@ -17,6 +15,7 @@ import useUiToggles from '../../../hooks/app/useUiToggles';
 import useTotalCost from './useTotalCost';
 import ReactTooltip from 'react-tooltip';
 import NumericUnit from '../../../components/common/NumericUnit';
+import { Link } from 'react-router-dom';
 
 export default function TotalCost() {
 	const { t } = useTranslation('pages/homepage', 'translation');
@@ -59,9 +58,11 @@ export default function TotalCost() {
 					helpText={t('help.production')}
 					desc={t('totals.periodText', { period: periodName })}
 				>
-					<NumericUnit type={production.unit} short>
-						{production.production}
-					</NumericUnit>
+					<Link to='/products'>
+						<NumericUnit type={production.unit} short>
+							{production.production}
+						</NumericUnit>
+					</Link>
 				</Stat>
 
 				<Stat

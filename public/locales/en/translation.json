@@ -124,7 +124,8 @@
 		"packageCapacity": "Package Capacity",
 		"physicalState": "Physical State",
 		"weight": "Weight",
-		"filtering": "Filtering ({{count}})"
+		"filtering": "Filtering ({{count}})",
+		"labourCost": "Labour Cost"
 	},
 	"charts": {
 		"costHistory": "Cost History",

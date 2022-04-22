@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import useCompanyLabourCost from '../../context/company/useCompanyLabourCost';
 
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 import useStorageRepo from '../common/useStorageRepo';
@@ -6,19 +7,20 @@ import useStorageRepo from '../common/useStorageRepo';
 import endProductsReducer from './endProductsReducer';
 
 export default function useEndProducts(recipes = null, packages = null) {
+	//Load company labour cost per unit
+	const labourCost = useCompanyLabourCost();
+
 	//Load local storage for this repo
 	const [endProductsRepo, setEndProductsRepo] = useStorageRepo('application', 'endproducts', []);
 	//Initialize state using local storage data
 	const [endProductsState, dispatch] = useReducer(endProductsReducer, endProductsRepo);
 	//Whenever state changes, save it to local storage repo
 	useEffect(() => {
-		calculateProductCosts(endProducts.getAllSorted(), dispatch);
+		calculateProductCosts(endProducts.getAllSorted(), dispatch, labourCost);
 		setEndProductsRepo(endProductsState);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [endProductsState]);
 
-	
-	
 	EndProduct.loadDependencies({
 		recipes: recipes.getAllSorted(),
 		packages: packages.getAllSorted(),
@@ -55,12 +57,12 @@ export default function useEndProducts(recipes = null, packages = null) {
 	}; //EOC
 
 	//Calculate each products cost and save if needed
-	function calculateProductCosts(products = null, dispatch = null) {
+	function calculateProductCosts(products = null, dispatch = null, labourCost = null) {
 		if (!Array.isArray(products) || products.length === 0) return;
 		if (!dispatch || typeof dispatch !== 'function') return;
 		//Reduce products array and create an array with endId and costs
 		const productCostsArray = products.reduce((accumulator, current) => {
-			const costOfProduct = calculateCost(current);
+			const costOfProduct = calculateCost(current, labourCost);
 			// console.log(current.name, costOfProduct);
 			const productData = { endId: current.endId, ...costOfProduct };
 			//Return product id and cost information for dispatch
@@ -71,13 +73,13 @@ export default function useEndProducts(recipes = null, packages = null) {
 	}
 
 	//Calculate cost data for single product
-	function calculateCost(product = null) {
+	function calculateCost(product = null, labourCost = null) {
 		if (isNaN(parseInt(product?.endId))) return null;
-		
-
 		let quantity = 1;
 
 		const costData = {
+			labourCost: 0,
+			labourCostTax: 0,
 			recipeCost: 0,
 			recipeTax: 0,
 			packageCost: 0,
@@ -91,7 +93,7 @@ export default function useEndProducts(recipes = null, packages = null) {
 			packageCapacity = parseFloat(packageCapacity);
 			cost = parseFloat(cost);
 			tax = parseFloat(tax);
-			
+
 			if (isNaN(packageCapacity) === false) quantity = packageCapacity;
 			if (isNaN(cost) === false) costData.packageCost = cost;
 			if (isNaN(tax) === false) costData.packageTax = tax;
@@ -101,15 +103,26 @@ export default function useEndProducts(recipes = null, packages = null) {
 		if (product.recipe && Array.isArray(product.recipe.unitCosts) && product.recipe.unitCosts.length > 0) {
 			let recipeUnitCost = { ...product.recipe.unitCosts[0] };
 			let { cost, costWithTax } = recipeUnitCost;
-			
+
 			cost = parseFloat(cost);
 			costWithTax = parseFloat(costWithTax);
 			if (isNaN(cost) === false) costData.recipeCost = quantity * cost;
 			if (isNaN(costWithTax) === false) costData.recipeTax = quantity * (costWithTax - cost);
 		}
 
-		costData.total = costData.recipeCost + costData.packageCost;
-		costData.totalWithTax = costData.total + costData.recipeTax + costData.packageTax;
+		//Find labour cost for this recipe
+		if (labourCost && 'gross' in labourCost) {
+			const weight = parseFloat(product.getWeight());
+			if (isNaN(weight) === false) {
+				const labourNet = labourCost.net * weight;
+				const labourGross = labourCost.gross * weight;
+				costData.labourCost = labourNet;
+				costData.labourCostTax = labourGross - labourNet;
+			}
+		}
+
+		costData.total = costData.recipeCost + costData.packageCost + costData.labourCost;
+		costData.totalWithTax = costData.total + costData.recipeTax + costData.packageTax + costData.labourCostTax;
 		return costData;
 	}
 

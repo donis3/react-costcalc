@@ -16,7 +16,7 @@ export default function EndProduct() {
 	const { endId } = useParams();
 	const { page } = useAppContext();
 	const navigate = useNavigate();
-	const { endProduct, recipeItems, packageItems } = useEndProduct(endId);
+	const { endProduct, recipeItems, packageItems, labourItems } = useEndProduct(endId);
 	const { t } = useTranslation('pages/endproducts');
 
 	//Product not found ?
@@ -41,7 +41,14 @@ export default function EndProduct() {
 					<InfoIcon /> {t('endProduct.tabDetails')}
 				</span>
 			),
-			body: <EndProductInfo data={endProduct} recipeItems={recipeItems} packageItems={packageItems} />,
+			body: (
+				<EndProductInfo
+					data={endProduct}
+					labourItems={labourItems}
+					recipeItems={recipeItems}
+					packageItems={packageItems}
+				/>
+			),
 		},
 		{
 			name: (
@@ -49,7 +56,14 @@ export default function EndProduct() {
 					<AnalysisIcon /> {t('endProduct.tabCostAnalysis')}
 				</span>
 			),
-			body: <EndProductAnalysis data={endProduct} recipeItems={recipeItems} packageItems={packageItems} />,
+			body: (
+				<EndProductAnalysis
+					data={endProduct}
+					labourItems={labourItems}
+					recipeItems={recipeItems}
+					packageItems={packageItems}
+				/>
+			),
 		},
 		{
 			name: (
