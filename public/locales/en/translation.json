@@ -59,7 +59,8 @@
 		"company": "Company",
 		"companyAlt": "Company Details",
 		"expenses": "Expenses",
-		"employees": "Employees"
+		"employees": "Employees",
+		"morders": "Manufacturing Orders"
 	},
 	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
 	"themes": {

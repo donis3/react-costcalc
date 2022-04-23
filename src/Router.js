@@ -18,6 +18,8 @@ import HomePage from './pages/HomePage';
 import MaterialForm from './pages/materials/form/MaterialForm';
 import Material from './pages/materials/Material';
 import Materials from './pages/materials/Materials';
+import Morders from './pages/morders/Morders';
+import MordersForm from './pages/morders/MordersForm';
 import NotFound from './pages/NotFound';
 import Package from './pages/packages/Package';
 import PackageForm from './pages/packages/PackageForm';
@@ -75,6 +77,10 @@ export default function Router() {
 			<Route path='/endproducts/add' element={<EndProductForm isEdit={false} />} />
 			<Route path='/endproducts/:endId' element={<EndProduct />} />
 			<Route path='/endproducts/edit/:endId' element={<EndProductForm isEdit={true} />} />
+
+			{/* Manufacturing Orders */}
+			<Route path='/morders' element={<Morders />} />
+			<Route path='/morders/add' element={<MordersForm />} />
 
 			{/* Homepage */}
 			<Route path='/' element={<HomePage />} />

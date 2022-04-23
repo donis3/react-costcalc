@@ -1,0 +1,10 @@
+{
+	"name": "Manufacturing Order",
+	"title": "Manufacturing Orders",
+	"lead": "A list of previous manufacturing orders",
+
+	"form": {
+		"addTitle": "New Order",
+		"endId": "Product"
+	}
+}

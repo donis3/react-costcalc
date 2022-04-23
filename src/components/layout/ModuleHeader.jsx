@@ -21,6 +21,8 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	
+
 	return (
 		<div
 			className='w-full flex flex-col-reverse md:flex-row justify-between items-left md:items-center border-b-4 mb-3'

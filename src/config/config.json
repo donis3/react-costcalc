@@ -43,6 +43,7 @@
 		"company": { "icon": "FaBuilding", "colors": ["#0C4271", "#0A81AB"], "children": ["employees", "expenses"] },
 		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#0C4271", "#0A81AB"] },
 		"employees": { "icon": "FaUsers", "colors": ["#0C4271", "#0A81AB"] },
+		"morders": { "icon": "FaListOl", "colors": ["#0C4271", "#0A81AB"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"company": {

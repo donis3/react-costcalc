@@ -27,8 +27,6 @@ export default function Navbar() {
 		setMenuOpen(false);
 	}, [loc.pathname]);
 
-	
-
 	return (
 		<>
 			<nav ref={navbarRef} className={`relative px-3 lg:px-5 py-3 bg-neutral`}>
@@ -59,6 +57,9 @@ export default function Navbar() {
 								</NavbarItem>
 								<NavbarItem to='/recipes' module='recipes'>
 									{t('nav.recipes', { ns: 'translation' })}
+								</NavbarItem>
+								<NavbarItem to='/morders' module='morders'>
+									{t('nav.morders', { ns: 'translation' })}
 								</NavbarItem>
 							</NavbarDropdown>
 
@@ -152,8 +153,8 @@ function NavbarDropdown({ text = 'dropdown', children, module = null }) {
 
 	//Determine if this module or one of the sub-modules is active.
 	//If so, display nav-active class for this dropdown toggle btn
-	const paths = loc.pathname.split('/').filter(item => item.length > 0 ); //Get each path item
-	
+	const paths = loc.pathname.split('/').filter((item) => item.length > 0); //Get each path item
+
 	if (paths.includes(module)) {
 		buttonClass = 'nav-active';
 	} else if (Array.isArray(moduleChildren)) {
@@ -165,14 +166,13 @@ function NavbarDropdown({ text = 'dropdown', children, module = null }) {
 			}
 		});
 	}
-	
 
 	if (!children) {
 		return <></>;
 	}
 	return (
 		<li className='nav-dropdown nav-item' ref={dropdownElement}>
-			<button onClick={handleClick} className={'flex items-center justify-center gap-x-1 '  + buttonClass}>
+			<button onClick={handleClick} className={'flex items-center justify-center gap-x-1 ' + buttonClass}>
 				{text}
 				{icon && <Icon icon={icon} className='opacity-50' />}
 			</button>

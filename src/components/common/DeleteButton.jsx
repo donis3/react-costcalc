@@ -10,7 +10,7 @@ const delay = 5;
  * @param {*} param0
  * @returns
  */
-export default function DeleteButton({ small, onClick }) {
+export default function DeleteButton({ small, onClick, children, ...props }) {
 	const { t } = useTranslation('translation');
 	const [state, setState] = useState(false);
 
@@ -33,7 +33,13 @@ export default function DeleteButton({ small, onClick }) {
 	};
 
 	if (state === false) {
-		return <BtnDelete small={small} onClick={() => changeState(true)} />;
+		return children ? (
+			<button type='button' {...props} onClick={() => changeState(true)}>
+				{children}
+			</button>
+		) : (
+			<BtnDelete small={small} onClick={() => changeState(true)} />
+		);
 	} else {
 		return (
 			<div className='flex gap-x-1 fade-in items-center px-1'>
@@ -65,12 +71,19 @@ function BtnYes({ small, ...props }) {
 	);
 }
 
-function BtnDelete({ small, ...props }) {
+function BtnDelete({ small, text, ...props } = {}) {
 	const { t } = useTranslation('translation');
+
 	return (
 		<button type='button' className={`fade-in btn btn-error ${small && 'btn-sm'}`} {...props}>
-			<FaTrash className='mr-1' />
-			{t('buttons.delete')}
+			{text ? (
+				text
+			) : (
+				<>
+					<FaTrash className='mr-1' />
+					{t('buttons.delete')}
+				</>
+			)}
 		</button>
 	);
 }
@@ -78,4 +91,5 @@ function BtnDelete({ small, ...props }) {
 DeleteButton.defaultProps = {
 	onClick: null,
 	small: false,
+	children: '',
 };

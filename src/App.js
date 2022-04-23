@@ -1,44 +1,30 @@
 import MainLayout from './components/layout/MainLayout';
 import Footer from './components/layout/Footer';
-
 import Router from './Router';
 import { loadThemeFromStorage } from './helpers/themeHelper';
 import Navbar from './components/layout/Navbar';
-import { AppContextProvider } from './context/AppContext';
-
 import ErrorBoundary from './components/common/ErrorBoundary';
-import MainContext from './context/MainContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CompanyContextProvider from './context/CompanyContext';
+import ContextWrapper from './ContextWrapper';
+import toastConfig from './config/toasterConfig';
 
 function App() {
 	loadThemeFromStorage();
 
 	return (
+		// Error boundary will catch thrown errors and display a route
 		<ErrorBoundary>
-			{/* React-Toastify configured here. */}
-			<ToastContainer
-				position='top-center'
-				autoClose={3000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable={false}
-				pauseOnHover
-			/>
-			<AppContextProvider>
-				<CompanyContextProvider>
-					{/* Main context has multiple context in it */}
-					<MainContext>
-						<MainLayout footer={<Footer />} header={<Navbar />}>
-							<Router />
-						</MainLayout>
-					</MainContext>
-				</CompanyContextProvider>
-			</AppContextProvider>
+			{/*Global React-Toastify*/}
+			<ToastContainer {...toastConfig} />
+			{/* All contexts in this wrapper */}
+			<ContextWrapper>
+				{/* Main layout object */}
+				<MainLayout footer={<Footer />} header={<Navbar />}>
+					{/* Routes */}
+					<Router />
+				</MainLayout>
+			</ContextWrapper>
 		</ErrorBoundary>
 	);
 }

@@ -20,5 +20,11 @@
 		"expenses": "Expenses",
 		"recipes": "Recipes",
 		"packages": "Packages"
+	},
+	"widgets": {
+		"todosTitle": "Tasks",
+		"todosName": "Task",
+		"todosNoItems": "There are currently no tasks.",
+		"todosReset": "Remove all tasks?"
 	}
 }
