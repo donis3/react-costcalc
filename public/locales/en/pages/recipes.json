@@ -41,5 +41,15 @@
 		"title": "All Recipes",
 		"lead": "Listing all recipes",
 		"noRecipes": "There are no recipes yet. Click new recipe button to start."
+	},
+	"order": {
+		"order": "New Order",
+		"date": "Date",
+		"recipe": "Recipe",
+		"product": "Product",
+		"output": "Output",
+		"materials": "Materials",
+		"notes": "Notes",
+		"result": "Report and Signature"
 	}
 }

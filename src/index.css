@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .anim-fade-in {
     animation: fadeIn 1s;
 }

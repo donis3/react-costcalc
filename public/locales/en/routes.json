@@ -6,12 +6,12 @@
 	"endproducts": "Products",
 	"currency": "Conversion Rates",
 	"recipes": "Recipes",
-	"morders": "Manufacturing Orders",
 
 	"add": "Add",
 	"edit": "Edit",
 	"packages": "Packages",
 	"company": "Company",
 	"expenses": "Expenses",
-	"employees": "Employees"
+	"employees": "Employees",
+	"view": "View"
 }

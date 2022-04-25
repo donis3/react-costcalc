@@ -58,9 +58,6 @@ export default function Navbar() {
 								<NavbarItem to='/recipes' module='recipes'>
 									{t('nav.recipes', { ns: 'translation' })}
 								</NavbarItem>
-								<NavbarItem to='/morders' module='morders'>
-									{t('nav.morders', { ns: 'translation' })}
-								</NavbarItem>
 							</NavbarDropdown>
 
 							{/* Company Nested */}

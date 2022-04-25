@@ -1,3 +1,4 @@
+import './Recipe.css';
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +22,7 @@ import CostTable from '../../components/CostTable/CostTable';
 import RecipeCostHistory from './details/RecipeCostHistory';
 
 import ModuleHeader from '../../components/layout/ModuleHeader';
+import RecipeOrder from './details/RecipeOrder';
 
 export default function Recipe() {
 	const { page } = useAppContext();
@@ -34,6 +36,7 @@ export default function Recipe() {
 		recipe: recipe,
 		showCostHistory: false,
 	});
+	const [showOrder, setShowOrder] = useState(false);
 	const newYieldRef = useRef();
 
 	//Handle recipeId change
@@ -70,9 +73,12 @@ export default function Recipe() {
 	if (!recipeState.recipe) {
 		return <></>;
 	}
+	if (showOrder) {
+		return <RecipeOrder recipe={recipeState.recipe} close={() => setShowOrder(false)} />;
+	}
 	return (
 		<>
-			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5' shadow='shadow-lg'>
 				{/* Card Header */}
 				<ModuleHeader text={recipeState.recipe.name} module='recipes' role='view'>
 					{/* Links */}
@@ -83,6 +89,11 @@ export default function Recipe() {
 						<Button.Edit />
 					</Link>
 				</ModuleHeader>
+				<div className='flex justify-end px-3'>
+					<button type='button' className='btn btn-xs btn-outline btn-primary' onClick={() => setShowOrder(true)}>
+						{t('order.order')}
+					</button>
+				</div>
 
 				{/* Half / Half divided */}
 				<div className='w-full flex flex-col-reverse md:flex-row'>
@@ -131,7 +142,7 @@ export default function Recipe() {
 							{/* Editable Yield Section END */}
 						</div>
 					</div>
-					<div className='p-3  flex justify-end '>
+					<div className='p-3'>
 						{/* Recipe Unit Cost Stat Component */}
 						<RecipeUnitCost recipe={recipeState.recipe} />
 					</div>

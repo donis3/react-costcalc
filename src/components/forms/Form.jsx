@@ -8,7 +8,7 @@ import InputText from './InputText';
 import InputDate from './InputDate';
 import InputTextarea from './InputTextarea';
 
-function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted, footer, grid }) {
+function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted, footer, grid, ...props }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		setSubmitted?.((state) => true);
@@ -18,7 +18,7 @@ function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, set
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className='w-full mt-10'>
+		<form onSubmit={handleSubmit} className='w-full mt-10' {...props}>
 			{grid ? (
 				<Grid colsSmall={colsSmall} colsLarge={colsLarge}>
 					{/* Sections */}
@@ -137,7 +137,7 @@ function Control({ children, label = null, altLabel = null, error = '', noLabel 
  * error can be an array to display multiple errors
  *
  */
-function GroupControl({ children, label = null, altLabel = null, error = '', noLabel = false, className = '' }) {
+function GroupControl({ children, label, altLabel, error, noLabel, className, large }) {
 	let errorText = '';
 	if (Array.isArray(error) && error.length > 0) {
 		errorText = error.reduce((acc, current) => {
@@ -160,7 +160,7 @@ function GroupControl({ children, label = null, altLabel = null, error = '', noL
 					{label && <span className='label-text'>{label}</span>}
 				</label>
 			)}
-			<div className='input-group max-w-fit'>
+			<div className={`input-group ${large ? 'w-full' : 'max-w-fit'} `}>
 				{/* Input as children */}
 				{children}
 			</div>
@@ -171,11 +171,18 @@ function GroupControl({ children, label = null, altLabel = null, error = '', noL
 				{errorText.length === 0 && altLabel && (
 					<span className='label-text-alt' dangerouslySetInnerHTML={{ __html: altLabel }} />
 				)}
-				
 			</label>
 		</div>
 	);
 }
+GroupControl.defaultProps = {
+	label: null,
+	altLabel: null,
+	error: '',
+	noLabel: false,
+	className: '',
+	large: false,
+};
 
 /**
  * A form footer wrapper

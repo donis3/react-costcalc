@@ -96,7 +96,8 @@
 		"back": "Back",
 		"chart": "Chart",
 		"options": "Options",
-		"link": "Go"
+		"link": "Go",
+		"print": "Print"
 	},
 	"pagination": {
 		"info": "Displaying {{start}}-{{end}} of {{total}}"

@@ -38,7 +38,7 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 				</h3>
 			</div>
 			{/* Right side of the header*/}
-			<div className='flex items-center md:justify-end gap-x-1 flex-1'>
+			<div className='flex items-center md:justify-end gap-x-1 flex-1 print:hidden'>
 				{(showBackButton || backBtn) && <BackButton />}
 				{children}
 			</div>
