@@ -134,7 +134,7 @@ export default function useCurrency() {
  * @param {[string]} availableCurrencies array of currency codes
  * @returns object with currency codes as keys
  */
-const generateInitialData = (defaultCurrency = 'TRY', availableCurrencies = []) => {
+export const generateInitialData = (defaultCurrency = 'TRY', availableCurrencies = []) => {
 	if (!defaultCurrency || !availableCurrencies || availableCurrencies.length === 0) return {};
 
 	//Iterate all available currencies and create initial data for each. Store it in result

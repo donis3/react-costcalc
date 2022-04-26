@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaTrashAlt } from 'react-icons/fa';
 import Card from '../../components/common/Card';
+import DeleteButton from '../../components/common/DeleteButton';
 import NumericUnit from '../../components/common/NumericUnit';
 import ModuleHeader from '../../components/layout/ModuleHeader';
 import useSettings from '../../hooks/app/useSettings';
@@ -10,10 +12,53 @@ import useDefaultButtons from '../../hooks/forms/useDefaultButtons';
 export default function Settings() {
 	const { t } = useTranslation('pages/settings');
 	const { displayDate } = useIntl();
-	const { Download, Upload } = useDefaultButtons();
+	const { Download, Upload, Reset } = useDefaultButtons();
 	const { settings, size, timeSinceBackup, actions } = useSettings();
-	const fileRef = useRef();
 
+	//===============// Reset Data Form //===============//
+	const initialResetState = {
+		packages: false,
+		products: false,
+		materials: false,
+		currencies: false,
+		others: false,
+		employees: false,
+		expenses: false,
+		companydetails: false,
+	};
+	const [resetState, setResetState] = useState(initialResetState);
+	const linkedModules = ['packages', 'materials', 'products'];
+	//Reset Form Handling
+	function onResetCheckboxChange(e) {
+		const field = e.target?.name;
+		const val = e.target.checked;
+		if (!field) return;
+		if (field in resetState === false) return;
+
+		//Others & linkedModules will have the same value
+		if (field === 'others') {
+			const othersState = linkedModules.reduce((acc, key) => ({ ...acc, [key]: val }), {});
+			return setResetState((state) => ({ ...state, [field]: val, ...othersState }));
+		} else {
+			return setResetState((state) => ({ ...state, [field]: val }));
+		}
+	}
+
+	function isModuleDisabled(name) {
+		if (!name) return;
+		if (linkedModules.includes(name) === false) return;
+		if (resetState.others === true) {
+			return true;
+		}
+		return false;
+	}
+
+	function resetForm() {
+		return setResetState(initialResetState);
+	}
+
+	//===============// File Upload Handler //===============//
+	const fileRef = useRef();
 	const handleFile = (e) => {
 		e.stopPropagation();
 		e.preventDefault();
@@ -22,7 +67,7 @@ export default function Settings() {
 		actions.upload(file);
 	};
 
-	//JSX
+	//===============// Render//===============//
 	return (
 		<>
 			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
@@ -85,6 +130,83 @@ export default function Settings() {
 					</div>
 				</div>
 			</Card>
+
+			{/* Reset Card */}
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
+				<ModuleHeader text={t('reset.title')} module='settings' role='main' customIcon='FaExclamation' />
+				<p className='opacity-80 text-sm'>{t('reset.lead')}</p>
+
+				<div className='grid grid-cols-2 mt-5 gap-5'>
+					<ResetCheckboxItem
+						disabled={isModuleDisabled('packages')}
+						name='packages'
+						checked={resetState.packages}
+						onChange={onResetCheckboxChange}
+					>
+						{t('reset.packages')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem
+						disabled={isModuleDisabled('materials')}
+						name='materials'
+						checked={resetState.materials}
+						onChange={onResetCheckboxChange}
+					>
+						{t('reset.materials')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem
+						disabled={isModuleDisabled('products')}
+						name='products'
+						checked={resetState.products}
+						onChange={onResetCheckboxChange}
+					>
+						{t('reset.products')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem name='currencies' checked={resetState.currencies} onChange={onResetCheckboxChange}>
+						{t('reset.currencies')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem name='companydetails' checked={resetState.companydetails} onChange={onResetCheckboxChange}>
+						{t('reset.companydetails')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem name='expenses' checked={resetState.expenses} onChange={onResetCheckboxChange}>
+						{t('reset.expenses')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem name='employees' checked={resetState.employees} onChange={onResetCheckboxChange}>
+						{t('reset.employees')}
+					</ResetCheckboxItem>
+
+					<ResetCheckboxItem name='others' checked={resetState.others} onChange={onResetCheckboxChange}>
+						{t('reset.others')}
+					</ResetCheckboxItem>
+
+					<div className='col-span-full border-t pt-3 flex flex-col md:flex-row justify-between gap-5'>
+						<DeleteButton
+							onClick={() => actions.reset(resetState)}
+							className='btn bg-red-500 hover:bg-red-900 flex gap-x-1'
+						>
+							<FaTrashAlt /> {t('reset.deleteAll')}
+						</DeleteButton>
+
+						<Reset onClick={resetForm} />
+					</div>
+				</div>
+			</Card>
 		</>
+	);
+}
+
+function ResetCheckboxItem({ children, ...props }) {
+	return (
+		<div className=''>
+			<label className='select-none flex items-center gap-x-5 py-2'>
+				<input type='checkbox' className='checkbox' {...props} />
+				<span className='label-text'>{children}</span>
+			</label>
+		</div>
 	);
 }

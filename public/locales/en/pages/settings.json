@@ -19,5 +19,24 @@
 		"notFound": "Not found",
 		"uploadError": "Couldn't load backup file. Please verify file integrity.",
 		"restoreSuccess": "Application data restored."
+	},
+	"reset": {
+		"title": "Delete Application Data",
+		"deleteAll": "Delete Selected Data",
+		"lead": "Select some or all the data you want to delete. Please backup your data before doing this incase you need to get your data back.",
+		"packages": "Packages",
+		"materials": "Materials",
+		"products": "Product Definitions",
+		"currencies": "Currency exchange rates",
+		"others": "Recipes, Products, ...others",
+		"companydetails": "Company Details",
+		"employees": "Employees",
+		"expenses": "Expenses",
+		"recipes": "Recipes",
+		"endproducts": "Products",
+		"widgets": "Widgets",
+
+		"resetSuccess": "Application data for {{modules}} is successfully deleted. Please wait for reload",
+		"resetError": "An error occurred while deleting requested data"
 	}
 }

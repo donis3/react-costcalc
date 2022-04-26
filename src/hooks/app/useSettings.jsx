@@ -9,6 +9,7 @@ import useDownload from '../common/useDownload';
 import useCompanyInfo from '../../context/company/useCompanyInfo';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import useDeleteData from './useDeleteData';
 const repoName = getRepoStorageKey('application', config);
 
 const defaultSettings = {
@@ -28,6 +29,7 @@ export default function useSettings() {
 	const { timeSince, isValid, format } = useDateFns();
 	const downloadFile = useDownload();
 	const { info } = useCompanyInfo();
+	const { deleteData } = useDeleteData();
 
 	//Save changes to repo
 	useEffect(() => {
@@ -166,10 +168,17 @@ export default function useSettings() {
 		return result;
 	}
 
+	//========================// Delete Application Data //=======================//
+	function onDeleteRequest(deleteFormState) {
+		if (!deleteFormState) return;
+		const result = Object.keys(deleteFormState).filter((key) => deleteFormState[key] === true);
+		if (result && result.length > 0) deleteData(result);
+	}
+
 	//========================// EXPORTS //=======================//
 	return {
 		settings,
-		actions: { backup: handleDownload, upload: uploadFile },
+		actions: { backup: handleDownload, upload: uploadFile, reset: onDeleteRequest },
 		size: getStorageSize(repoName),
 		timeSinceBackup: timeSinceLastBackup(settings.backup),
 	};
