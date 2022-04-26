@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import config from '../../config/config.json';
@@ -9,7 +8,7 @@ const repoName = getRepoStorageKey('application', config);
 
 const otherModules = ['recipes', 'endproducts', 'widgets'];
 export default function useDeleteData() {
-	const { t } = useTranslation('pages/settings');
+	const { t } = useTranslation('pages/system');
 	const config = useConfig();
 	const defaultData = useApplicationDefaults();
 	const data = getCurrentData(repoName);

@@ -27,13 +27,13 @@ import Products from './pages/products/Products';
 import RecipeForm from './pages/recipes/form/RecipeForm';
 import Recipe from './pages/recipes/Recipe';
 import Recipes from './pages/recipes/Recipes';
-import Settings from './pages/settings/Settings';
+import System from './pages/system/System';
 
 export default function Router() {
 	return (
 		<Routes>
 			{/* Settings */}
-			<Route path='/settings' element={<Settings />} />
+			<Route path='/system' element={<System />} />
 			{/* Business Routes */}
 			<Route path='/materials' element={<Materials />} />
 

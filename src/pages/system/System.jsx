@@ -5,15 +5,15 @@ import Card from '../../components/common/Card';
 import DeleteButton from '../../components/common/DeleteButton';
 import NumericUnit from '../../components/common/NumericUnit';
 import ModuleHeader from '../../components/layout/ModuleHeader';
-import useSettings from '../../hooks/app/useSettings';
+import useSystem from '../../hooks/app/useSystem';
 import useIntl from '../../hooks/common/useIntl';
 import useDefaultButtons from '../../hooks/forms/useDefaultButtons';
 
-export default function Settings() {
-	const { t } = useTranslation('pages/settings');
+export default function System() {
+	const { t } = useTranslation('pages/system');
 	const { displayDate } = useIntl();
 	const { Download, Upload, Reset } = useDefaultButtons();
-	const { settings, size, timeSinceBackup, actions } = useSettings();
+	const { system, size, timeSinceBackup, actions } = useSystem();
 
 	//===============// Reset Data Form //===============//
 	const initialResetState = {
@@ -57,6 +57,13 @@ export default function Settings() {
 		return setResetState(initialResetState);
 	}
 
+	function checkedCount() {
+		return Object.keys(resetState).reduce((acc, key) => {
+			if (resetState[key] === true) return acc + 1;
+			return acc;
+		}, 0);
+	}
+
 	//===============// File Upload Handler //===============//
 	const fileRef = useRef();
 	const handleFile = (e) => {
@@ -70,14 +77,9 @@ export default function Settings() {
 	//===============// Render//===============//
 	return (
 		<>
-			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-				<ModuleHeader text={t('title')} module='settings' role='other' />
-				<p className='opacity-80'>{t('lead')}</p>
-			</Card>
-
 			{/* Backup Card */}
 			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-				<ModuleHeader text={t('backup.title')} module='settings' role='main' customIcon='FaCloudDownloadAlt' />
+				<ModuleHeader text={t('backup.title')} module='system' role='main' customIcon='FaCloudDownloadAlt' />
 				<p className='opacity-80 text-sm'>{t('backup.lead')}</p>
 
 				<div className='grid grid-cols-2 mt-5 gap-5'>
@@ -102,7 +104,7 @@ export default function Settings() {
 
 			{/* Restore Card */}
 			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-				<ModuleHeader text={t('restore.title')} module='settings' role='main' customIcon='FaCloudUploadAlt' />
+				<ModuleHeader text={t('restore.title')} module='system' role='main' customIcon='FaCloudUploadAlt' />
 				<p className='opacity-80 text-sm'>{t('restore.lead')}</p>
 
 				<div className='grid grid-cols-2 mt-5 gap-5'>
@@ -110,17 +112,15 @@ export default function Settings() {
 						<h5 className='text-sm font-semibold'>{t('restore.loadedFile')}</h5>
 						<p className='leading-relaxed text-base'>
 							{/* Show filename of last restore */}
-							{settings.backup.lastRestorationFilename
-								? settings.backup.lastRestorationFilename
-								: t('restore.notFound')}
+							{system.backup.lastRestorationFilename ? system.backup.lastRestorationFilename : t('restore.notFound')}
 						</p>
 					</div>
 
 					<div className=''>
 						<h5 className='text-sm font-semibold'>{t('restore.loadedDate')}</h5>
 						<p className='leading-relaxed text-base'>
-							{settings.backup.lastRestorationDate
-								? displayDate(settings.backup.lastRestorationDate)
+							{system.backup.lastRestorationDate
+								? displayDate(system.backup.lastRestorationDate)
 								: t('restore.notFound')}
 						</p>
 					</div>
@@ -133,7 +133,7 @@ export default function Settings() {
 
 			{/* Reset Card */}
 			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-				<ModuleHeader text={t('reset.title')} module='settings' role='main' customIcon='FaExclamation' />
+				<ModuleHeader text={t('reset.title')} module='system' role='main' customIcon='FaExclamation' />
 				<p className='opacity-80 text-sm'>{t('reset.lead')}</p>
 
 				<div className='grid grid-cols-2 mt-5 gap-5'>
@@ -184,16 +184,18 @@ export default function Settings() {
 						{t('reset.others')}
 					</ResetCheckboxItem>
 
-					<div className='col-span-full border-t pt-3 flex flex-col md:flex-row justify-between gap-5'>
-						<DeleteButton
-							onClick={() => actions.reset(resetState)}
-							className='btn bg-red-500 hover:bg-red-900 flex gap-x-1'
-						>
-							<FaTrashAlt /> {t('reset.deleteAll')}
-						</DeleteButton>
+					{checkedCount() > 0 && (
+						<div className='col-span-full border-t pt-3 flex flex-col md:flex-row justify-between gap-5'>
+							<DeleteButton
+								onClick={() => actions.reset(resetState)}
+								className='btn bg-red-500 hover:bg-red-900 flex gap-x-1'
+							>
+								<FaTrashAlt /> {t('reset.deleteAll')}
+							</DeleteButton>
 
-						<Reset onClick={resetForm} />
-					</div>
+							<Reset onClick={resetForm} />
+						</div>
+					)}
 				</div>
 			</Card>
 		</>

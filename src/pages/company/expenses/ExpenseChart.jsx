@@ -19,7 +19,7 @@ export default function ExpenseChart() {
 	const handlePeriodChange = (e) => setChartOptions({ ...chartOptions, period: e.target.value });
 
 	return (
-		<Card className='w-full px-3 py-5' shadow='shadow-lg'>
+		<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 			<ModuleHeader text={t('expenses.chart')} module='expenses' role='pie' setBreadcrumb />
 
 			<div className='flex flex-col gap-y-10 p-3 items-center'>

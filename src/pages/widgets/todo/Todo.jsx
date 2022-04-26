@@ -44,7 +44,7 @@ export default function Todo() {
 	return (
 		<div>
 			<ReactTooltip effect='solid' multiline id='tasks' />
-			<div className='border-b p-2 flex flex-wrap items-center justify-between bg-base-300'>
+			<div className='border-b p-2 flex flex-wrap items-center justify-between bg-slate-500 rounded-t-md text-white'>
 				<div className='flex items-center gap-x-2'>
 					<FaTasks className='text-xl' />
 					<h3 className='font-semibold text-xl'>{t('widgets.todosTitle')}</h3>

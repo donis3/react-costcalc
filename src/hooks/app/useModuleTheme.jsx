@@ -14,7 +14,7 @@ const modules = [
 	'company',
 	'employees',
 	'expenses',
-	'settings',
+	'system',
 ];
 
 export default function useModuleTheme({ module = 'home', role = 'main' }) {

@@ -4,7 +4,7 @@ import config from '../../config/config.json';
 import { getRepoStorageKey } from '../common/useStorageRepo';
 import { getStorageSize } from '../../lib/common';
 import useDateFns from '../common/useDateFns';
-import useSettingsReducer from './useSettingsReducer';
+import useSystemReducer from './useSystemReducer';
 import useDownload from '../common/useDownload';
 import useCompanyInfo from '../../context/company/useCompanyInfo';
 import { toast } from 'react-toastify';
@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import useDeleteData from './useDeleteData';
 const repoName = getRepoStorageKey('application', config);
 
-const defaultSettings = {
+const defaultSystemData = {
 	backup: {
 		lastBackupDate: null,
 		lastRestorationDate: null,
@@ -20,11 +20,11 @@ const defaultSettings = {
 	},
 };
 
-export default function useSettings() {
-	const { t } = useTranslation('pages/settings');
-	const settingsReducer = useSettingsReducer(defaultSettings);
-	const [settingsRepo, setSettingsRepo] = useStorageState('settings', defaultSettings);
-	const [settings, dispatch] = useReducer(settingsReducer, settingsRepo);
+export default function useSystem() {
+	const { t } = useTranslation('pages/system');
+	const systemReducer = useSystemReducer(defaultSystemData);
+	const [systemRepo, setSystemRepo] = useStorageState('system', defaultSystemData);
+	const [system, dispatch] = useReducer(systemReducer, systemRepo);
 	const [selectedFile, setSelectedFile] = useState(null);
 	const { timeSince, isValid, format } = useDateFns();
 	const downloadFile = useDownload();
@@ -33,11 +33,11 @@ export default function useSettings() {
 
 	//Save changes to repo
 	useEffect(() => {
-		if (settings && JSON.stringify(settings) !== JSON.stringify(setSettingsRepo)) {
-			setSettingsRepo(settings);
+		if (system && JSON.stringify(system) !== JSON.stringify(setSystemRepo)) {
+			setSystemRepo(system);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [settings]);
+	}, [system]);
 
 	//========================// FILE UPLOAD OPERATIONS //=======================//
 	const reader = new FileReader();
@@ -90,7 +90,7 @@ export default function useSettings() {
 			//!!! REPLACE LOCAL STORAGE HERE
 			const storageString = JSON.stringify(parsedData);
 			localStorage.setItem(repoName, storageString);
-			//Get filename and save this operations details in settings storage
+			//Get filename and save this operations details in system storage
 			const payload = {
 				lastRestorationDate: Date.now(),
 				lastRestorationFilename: selectedFile.name,
@@ -117,13 +117,13 @@ export default function useSettings() {
 	//========================// FILE DOWNLOAD OPERATIONS //=======================//
 	/**
 	 * Get time past since last backup date OR return undefined.
-	 * @param {*} backupSettings
+	 * @param {*} backupState
 	 * @returns
 	 */
-	function timeSinceLastBackup(backupSettings) {
-		if (!backupSettings || 'lastBackupDate' in backupSettings === false) return;
-		if (!backupSettings.lastBackupDate) return;
-		const backupDate = new Date(backupSettings.lastBackupDate);
+	function timeSinceLastBackup(backupState) {
+		if (!backupState || 'lastBackupDate' in backupState === false) return;
+		if (!backupState.lastBackupDate) return;
+		const backupDate = new Date(backupState.lastBackupDate);
 		if (isValid(backupDate)) {
 			return timeSince(backupDate, new Date());
 		}
@@ -177,9 +177,9 @@ export default function useSettings() {
 
 	//========================// EXPORTS //=======================//
 	return {
-		settings,
+		system: system,
 		actions: { backup: handleDownload, upload: uploadFile, reset: onDeleteRequest },
 		size: getStorageSize(repoName),
-		timeSinceBackup: timeSinceLastBackup(settings.backup),
+		timeSinceBackup: timeSinceLastBackup(system.backup),
 	};
 }

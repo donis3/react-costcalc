@@ -1,7 +1,5 @@
-
-
-export default function useSettingsReducer(defaultSettings = {}) {
-	function settingsReducer(state, action) {
+export default function useSystemReducer() {
+	function systemReducer(state, action) {
 		const { type, payload, success, error } = action || {};
 
 		const onError = (msg = '') => {
@@ -30,10 +28,9 @@ export default function useSettingsReducer(defaultSettings = {}) {
 				return onSuccess({ ...state, backup: { ...state.backup, ...payload } });
 			}
 			default:
-				throw new Error('Invalid dispatch type for settings Reducer');
-				break;
+				throw new Error('Invalid dispatch type for system Reducer');
 		}
 	}
 
-	return settingsReducer;
+	return systemReducer;
 }

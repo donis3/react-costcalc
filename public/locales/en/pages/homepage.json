@@ -1,7 +1,7 @@
 {
 	"buttons": {
-		"settings": "Settings",
-		"settingsTip": "Settings and Data Backup"
+		"system": "System & Data",
+		"systemTip": "Application data management"
 	},
 	"totals": {
 		"overhead": "Overhead",

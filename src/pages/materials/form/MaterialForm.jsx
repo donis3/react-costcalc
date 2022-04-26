@@ -201,7 +201,7 @@ export default function MaterialForm({ isEdit = false }) {
 			{/* Back Button */}
 
 			{/* Form */}
-			<Card className='w-100 px-3 py-5' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
 				<ModuleHeader
 					module='materials'
 					text={isEdit ? t('form.updateTitle') : t('form.title')}

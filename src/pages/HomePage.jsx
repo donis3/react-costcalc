@@ -14,20 +14,15 @@ import { Link } from 'react-router-dom';
 export default function HomePage() {
 	const { t } = useTranslation('pages/homepage');
 	const { info } = useCompanyInfo();
-	
+
 	return (
 		<>
 			<ReactTooltip effect='solid' multiline id='homepage' />
-			<div className='flex flex-wrap justify-between items-center'>
+			<div className='flex flex-wrap justify-between items-end border-b-4 border-neutral mb-10 p-3'>
 				<h1 className='text-3xl lg:text-4xl font-semibold'>{info.name}</h1>
-				<Link to='/settings'>
-					<button
-						type='button'
-						className='btn btn-sm btn-ghost'
-						data-tip={t('buttons.settingsTip')}
-						data-for='homepage'
-					>
-						{t('buttons.settings')}
+				<Link to='/system'>
+					<button type='button' className='btn btn-sm btn-ghost' data-tip={t('buttons.systemTip')} data-for='homepage'>
+						{t('buttons.system')}
 						<GoSettings className='ml-1' />
 					</button>
 				</Link>
