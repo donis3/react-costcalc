@@ -97,7 +97,9 @@
 		"chart": "Chart",
 		"options": "Options",
 		"link": "Go",
-		"print": "Print"
+		"print": "Print",
+		"download": "Download",
+		"upload": "Upload"
 	},
 	"pagination": {
 		"info": "Displaying {{start}}-{{end}} of {{total}}"
@@ -187,6 +189,14 @@
 		"pcs_other": "pieces",
 		"kwh": "kilowatt Hour",
 		"kwh_other": "kilowatt hours",
+		"byte": "Byte",
+		"byte_other": "Bytes",
+		"kb": "Kilobyte",
+		"kb_other": "Kilobytes",
+		"mb": "Megabyte",
+		"mb_other": "Megabytes",
+		"gb": "Gigabyte",
+		"gb_other": "Gigabytes",
 		"other": "Other"
 	},
 	"unitsShort": {
@@ -200,6 +210,10 @@
 		"pcs": "pc",
 		"pcs_other": "pcs",
 		"kwh": "kwh",
+		"byte": "B",
+		"kb": "KiB",
+		"mb": "MiB",
+		"gb": "GiB",
 		"other": "other"
 	},
 	"packageTypes": {

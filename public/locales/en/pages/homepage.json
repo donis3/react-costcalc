@@ -1,4 +1,8 @@
 {
+	"buttons": {
+		"settings": "Settings",
+		"settingsTip": "Settings and Data Backup"
+	},
 	"totals": {
 		"overhead": "Overhead",
 		"labour": "Labour",

@@ -68,16 +68,20 @@ export default function RecipeOrder({ recipe, close } = {}) {
 							);
 						})}
 
-						<tr>
-							<td colSpan={2} className='order-subtitle'>
-								{t('order.notes')}
-							</td>
-						</tr>
-						<tr>
-							<td colSpan={2} className='whitespace-pre-wrap'>
-								{recipe.notes}
-							</td>
-						</tr>
+						{recipe.notes && recipe.notes.length > 0 && (
+							<>
+								<tr>
+									<td colSpan={2} className='order-subtitle'>
+										{t('order.notes')}
+									</td>
+								</tr>
+								<tr>
+									<td colSpan={2} className='whitespace-pre-wrap'>
+										{recipe.notes}
+									</td>
+								</tr>
+							</>
+						)}
 						{/* Footer */}
 						<tr>
 							<td colSpan={2} className='order-subtitle'>

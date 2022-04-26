@@ -19,7 +19,6 @@ import MaterialForm from './pages/materials/form/MaterialForm';
 import Material from './pages/materials/Material';
 import Materials from './pages/materials/Materials';
 
-
 import NotFound from './pages/NotFound';
 import Package from './pages/packages/Package';
 import PackageForm from './pages/packages/PackageForm';
@@ -28,10 +27,13 @@ import Products from './pages/products/Products';
 import RecipeForm from './pages/recipes/form/RecipeForm';
 import Recipe from './pages/recipes/Recipe';
 import Recipes from './pages/recipes/Recipes';
+import Settings from './pages/settings/Settings';
 
 export default function Router() {
 	return (
 		<Routes>
+			{/* Settings */}
+			<Route path='/settings' element={<Settings />} />
 			{/* Business Routes */}
 			<Route path='/materials' element={<Materials />} />
 

@@ -153,6 +153,35 @@ export default function useDefaultButtons() {
 		);
 	}
 
+	function Download({ children, icon = 'FaDownload', text = '', size = null, ...props }) {
+		if (typeof text !== 'string') text = '';
+		if (i18n.exists(text)) text = t(text);
+		if (i18n.exists('buttons.' + text)) text = t('buttons.' + text);
+		if (!children) children = text;
+
+		return (
+			<button type='button' className='btn btn-primary ' {...props}>
+				{icon && typeof icon === 'string' ? <FaIcon icon={icon} /> : null}
+				{children ? children : t('buttons.download')}
+				{size && <span className='ml-1 text-xs opacity-80'>({size})</span>}
+			</button>
+		);
+	}
+
+	function Upload({ children, icon = 'FaUpload', text = '', ...props }) {
+		if (typeof text !== 'string') text = '';
+		if (i18n.exists(text)) text = t(text);
+		if (i18n.exists('buttons.' + text)) text = t('buttons.' + text);
+		if (!children) children = text;
+
+		return (
+			<button type='button' className='btn btn-primary ' {...props}>
+				{icon && typeof icon === 'string' ? <FaIcon icon={icon} /> : null}
+				{children ? children : t('buttons.upload')}
+			</button>
+		);
+	}
+
 	return {
 		Submit,
 		Delete,
@@ -165,6 +194,8 @@ export default function useDefaultButtons() {
 		RemoveItem,
 		AddItem,
 		Print,
+		Download,
+		Upload,
 	};
 }
 

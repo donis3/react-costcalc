@@ -61,7 +61,7 @@ const doesStorageKeyExist = (key = null) => {
 const getStorageRepoItem = (repoName = null, itemName = null) => {
 	try {
 		//Validate Repo & table name
-		const repoKey = getRepoStorageKey(repoName);
+		const repoKey = getRepoStorageKey(repoName, config);
 		if (!doesStorageKeyExist(repoKey)) return null;
 		if (!itemName || typeof itemName !== 'string') return null;
 
@@ -83,7 +83,7 @@ const getStorageRepoItem = (repoName = null, itemName = null) => {
 const removeStorageRepoItem = (repoName = null, itemName = null) => {
 	try {
 		//Validate Repo & table name
-		const repoKey = getRepoStorageKey(repoName);
+		const repoKey = getRepoStorageKey(repoName, config);
 		if (!doesStorageKeyExist(repoKey)) return null;
 		if (!itemName || typeof itemName !== 'string') return null;
 
@@ -110,7 +110,7 @@ const removeStorageRepoItem = (repoName = null, itemName = null) => {
 const getStorageRepo = (repoName = null) => {
 	try {
 		//Validate Repo & table name
-		const repoKey = getRepoStorageKey(repoName);
+		const repoKey = getRepoStorageKey(repoName, config);
 		if (!doesStorageKeyExist(repoKey)) return {};
 
 		//Get repo and parse
@@ -130,7 +130,7 @@ const getStorageRepo = (repoName = null) => {
 //Save data to repo/item and return saved data back
 const saveStorageItem = (repoName = null, itemName = null, data = null) => {
 	//Get repo key
-	const repoKey = getRepoStorageKey(repoName);
+	const repoKey = getRepoStorageKey(repoName, config);
 
 	//Try to get old data
 	let currentRepoString = '';
@@ -168,7 +168,10 @@ const saveStorageItem = (repoName = null, itemName = null, data = null) => {
 };
 
 //Generate storage key for this repo. appname.reponame
-const getRepoStorageKey = (repoName = null) => {
+export const getRepoStorageKey = (repoName = null, config = null) => {
+	if (!config) {
+		throw new Error('storage repo requires config object');
+	}
 	if (!repoName) return null;
 	//Clean the identifier
 	repoName = repoName.replace(/\s/g, '_');

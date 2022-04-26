@@ -5,7 +5,7 @@ import useModuleTheme from '../../hooks/app/useModuleTheme';
 import BackButton from '../common/BackButton';
 import Icon from '../common/Icon';
 
-export default function ModuleHeader({ children, module, text, subtext, role, backBtn, setBreadcrumb }) {
+export default function ModuleHeader({ children, module, text, subtext, role, backBtn, setBreadcrumb, customIcon }) {
 	const { icon, color, bgColor, backBtn: showBackButton } = useModuleTheme({ module, role });
 	const { page } = useAppContext(setBreadcrumb ? { breadcrumb: text } : null);
 	if (typeof subtext !== 'string') subtext = '';
@@ -21,8 +21,6 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	
-
 	return (
 		<div
 			className='w-full flex flex-col-reverse md:flex-row justify-between items-left md:items-center border-b-4 mb-3'
@@ -31,7 +29,7 @@ export default function ModuleHeader({ children, module, text, subtext, role, ba
 			{/* Title & Lead Text */}
 
 			<div className='flex-1 flex gap-x-2 items-center'>
-				<Icon icon={icon} style={{ color: bgColor }} className='text-2xl opacity-75' />
+				<Icon icon={customIcon ? customIcon : icon} style={{ color: bgColor }} className='text-2xl opacity-75' />
 				<h3 className='text-2xl py-2 font-semibold flex flex-wrap items-end' style={{ color: color }}>
 					<span>{text}</span>
 					{subtext.length > 0 && <span className='ml-1 text-base opacity-50'>{subtext}</span>}
@@ -54,4 +52,5 @@ ModuleHeader.defaultProps = {
 	role: 'main',
 	backBtn: null,
 	setBreadcrumb: false,
+	customIcon: '',
 };

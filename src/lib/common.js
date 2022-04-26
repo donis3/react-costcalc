@@ -106,3 +106,47 @@ export function sortArrayDate(data = [], prop = null, isAsc = true) {
 		}
 	});
 }
+
+export function getStorageSize(key = null, unit = 'auto') {
+	if (typeof unit === 'string') unit = unit.toLowerCase();
+	//Get storage size in bytes
+	let result = 0;
+	if (!key) {
+		result = new Blob(Object.values(localStorage)).size;
+	} else {
+		if (key in localStorage) {
+			result = new Blob(Object.values(localStorage[key])).size;
+		}
+	}
+	
+
+	//Find the multiplier to get requested unit
+	let divider = 1;
+	//Auto unit assignment
+	if (unit === 'auto') {
+		if (result < 1024) {
+			unit = 'byte';
+		} else if (result > 1024 && result < 1024 * 1024) {
+			unit = 'kb';
+		} else if (result >= 1024 * 1024 && result < 1024 * 1024 * 1024) {
+			unit = 'mb';
+		} else {
+			unit = 'gb';
+		}
+	}
+	switch (unit) {
+		case 'kb':
+			divider = 1024;
+			break;
+		case 'mb':
+			divider = 1024 * 1024;
+			break;
+		case 'gb':
+			divider = 1024 * 1024 * 1024;
+			break;
+		default:
+			divider = 1;
+			break;
+	}
+	return { size: result / divider, unit };
+}

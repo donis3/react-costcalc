@@ -17,14 +17,14 @@ i18n.services.formatter.add('underscore', (value, lng, options) => {
 	return value.replace(/\s+/g, '_');
 });
 
-i18n.services.formatter.add('truncate', (value, lng, { maxLength = 1 }) => {
+i18n.services.formatter.add('truncate', (value, lng, { maxLength = 1, dots = true }) => {
 	if (!maxLength || isNaN(parseInt(maxLength))) return value;
 	maxLength = parseInt(maxLength);
 	if (value.length <= maxLength) {
 		return value;
 	} else {
 		const substr = value.substring(0, maxLength);
-		return substr + '...';
+		return dots === true ? substr + '...' : substr;
 	}
 });
 export default i18n;
