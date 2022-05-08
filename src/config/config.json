@@ -43,6 +43,8 @@
 		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#2b9348", "#55a630"] },
 		"employees": { "icon": "FaUsers", "colors": ["#982183", "#CB2DAE"] },
 		"system": { "icon": "FaCogs", "colors": ["#480CA8", "#560BAD"] },
+		"about": { "icon": "FaScroll", "colors": ["#7209b7", "#3a0ca3"] },
+		"help": { "icon": "FaQuestionCircle", "colors": ["#03045e", "#023e8a"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"company": {
