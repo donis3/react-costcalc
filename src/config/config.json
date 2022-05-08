@@ -4,7 +4,8 @@
 		"icon": "FaCalculator",
 		"owner": "Deniz Özkan",
 		"releaseDate": "2022-02-09",
-		"localStorageKey": "costotus"
+		"localStorageKey": "costotus",
+		"git": "https://github.com/donis3"
 	},
 	"exchangeRates": {
 		"proxy": "https://doncors.herokuapp.com/",

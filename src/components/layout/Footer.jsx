@@ -16,14 +16,14 @@ export default function Footer() {
 			<footer className='items-center p-4 footer bg-neutral text-neutral-content'>
 				<div className='items-center grid-flow-col'>
 					<Icon icon={config.app.icon} className='w-6 h-6 fill-current' />
-					<p>
+					<a href={config.app.git}>
 						{t('footer.copyright', {
 							appName: config.app.name,
 							version: process.env.REACT_APP_VERSION,
 							year: new Date().getFullYear(),
 							owner: config.app.owner,
 						})}
-					</p>
+					</a>
 					<button className='btn btn-primary btn-outline btn-xs ml-3' onClick={() => setThemeSelectOpen(true)}>
 						{t(`themes.${theme.active}`, { defaultValue: theme.active })}
 					</button>
