@@ -5,8 +5,8 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/layout/Loading';
 import './fonts';
-
-import './lib/i18n'; //Import i18next initialization
+// eslint-disable-next-line no-unused-vars
+import i18n from './lib/i18n'; //Import i18next initialization
 
 ReactDOM.render(
 	<Suspense fallback={<Loading />}>
