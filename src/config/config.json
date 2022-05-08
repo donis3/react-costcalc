@@ -1,12 +1,10 @@
 {
 	"app": {
-		"name": "Cost Calculator",
-		"icon": "FaCoins",
-		"owner": "Rhinotap",
+		"name": "Costotus",
+		"icon": "FaCalculator",
+		"owner": "Deniz Özkan",
 		"releaseDate": "2022-02-09",
-		"localStorageKey": "rhinotap.costcalc",
-		"title": "Cost Calculator",
-		"extendedTitle": "%PAGE% - Cost Calculator"
+		"localStorageKey": "costotus"
 	},
 	"exchangeRates": {
 		"proxy": "https://doncors.herokuapp.com/",
@@ -35,14 +33,14 @@
 	"modules": {
 		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },
 		"currency": { "icon": "FaRegMoneyBillAlt", "colors": ["#495371", "#74959A"] },
-		"materials": { "icon": "FaBoxes", "colors": ["#2b9348", "#55a630"] },
+		"materials": { "icon": "FaBoxes", "colors": ["#dc2f02", "#e85d04"] },
 		"packages": { "icon": "FaBoxOpen", "colors": ["#081c15", "#1b4332"] },
 		"products": { "icon": "FaClipboardList", "colors": ["#C36839", "#86340A"] },
 		"recipes": { "icon": "FaRegFileAlt", "colors": ["#630000", "#810000"] },
 		"endproducts": { "icon": "FaStore", "colors": ["#0C4271", "#0A81AB"] },
 		"manufacturing": { "icon": "FaIndustry", "colors": ["#0C4271", "#0A81AB"], "children": ["products", "recipes"] },
 		"company": { "icon": "FaBuilding", "colors": ["#001845", "#002855"], "children": ["employees", "expenses"] },
-		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#dc2f02", "#e85d04"] },
+		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#2b9348", "#55a630"] },
 		"employees": { "icon": "FaUsers", "colors": ["#982183", "#CB2DAE"] },
 		"system": { "icon": "FaCogs", "colors": ["#480CA8", "#560BAD"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }

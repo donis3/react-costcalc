@@ -2,9 +2,8 @@ import config from './config.json';
 
 
 const backendOptions = {
-	loadPath: '/locales/{{lng}}/{{ns}}.json',
-	addPath: '/locales/{{lng}}/pages/{{ns}}',
-	
+	loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
+	addPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/pages/{{ns}}.json`,
 };
 
 const detectionOptions = {

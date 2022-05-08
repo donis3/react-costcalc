@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import About from './pages/About';
 import Company from './pages/company/Company';
 import Employees from './pages/company/Employees';
 import EmployeeDetails from './pages/company/employees/EmployeeDetails';
@@ -14,6 +15,7 @@ import CurrencySelectOne from './pages/currencies/CurrencySelectOne';
 import EndProduct from './pages/endproducts/EndProduct';
 import EndProductForm from './pages/endproducts/EndProductForm';
 import EndProducts from './pages/endproducts/EndProducts';
+import Help from './pages/help/Help';
 import HomePage from './pages/HomePage';
 import MaterialForm from './pages/materials/form/MaterialForm';
 import Material from './pages/materials/Material';
@@ -32,6 +34,11 @@ import System from './pages/system/System';
 export default function Router() {
 	return (
 		<Routes>
+			{/* About  Page */}
+			<Route path='/about' element={<About />} />
+			{/* Help Page */}
+			<Route path='/help' element={<Help />} />
+
 			{/* Settings */}
 			<Route path='/system' element={<System />} />
 			{/* Business Routes */}

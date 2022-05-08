@@ -3,9 +3,9 @@ import {
 	GrUserManager as EmployeeIcon,
 	GrUserWorker as LabourIcon,
 	GrOrganization as CompanyIcon,
-	GrServices as ProductionIcon,
 	GrMoney as LabourCostIcon,
 } from 'react-icons/gr';
+import { GiStack as ProductionIcon } from 'react-icons/gi';
 import { useTranslation } from 'react-i18next';
 import useIntl from '../../../hooks/common/useIntl';
 import { FaCog, FaHome, FaQuestionCircle } from 'react-icons/fa';
@@ -33,7 +33,7 @@ export default function TotalCost() {
 			{/* Updated Text */}
 			<UpdatedAtText updatedAt={updatedAt} />
 			{/* Stat Grid */}
-			<div className='w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-20'>
+			<div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-20'>
 				<Stat
 					desc={t('totals.periodText', { period: periodName })}
 					icon={[<EmployeeIcon />, <CompanyIcon />]}
@@ -59,7 +59,7 @@ export default function TotalCost() {
 					desc={t('totals.periodText', { period: periodName })}
 				>
 					<Link to='/products'>
-						<NumericUnit type={production.unit} short>
+						<NumericUnit type={production.unit} short autoTonne autoTonneAfter={10000}>
 							{production.production}
 						</NumericUnit>
 					</Link>
@@ -85,7 +85,7 @@ function Stat({ children, label, desc, helpText, icon }) {
 		<div className='stat'>
 			{/* Stat Icon or Array of Icons */}
 			{icon && (
-				<div className='stat-figure text-secondary text-2xl flex'>
+				<div className='stat-figure  text-2xl flex'>
 					{Array.isArray(icon) ? icon.map((item, i) => React.cloneElement(item, { key: i })) : icon}
 				</div>
 			)}
@@ -150,7 +150,7 @@ function PeriodSelect({ setOption, getOption }) {
 
 	return (
 		<>
-			<button type='button' className='absolute right-2 top-2 z-50' onClick={handleOpen}>
+			<button type='button' className='absolute right-2 top-2 z-10' onClick={handleOpen}>
 				<FaCog />
 			</button>
 			{isActive && (

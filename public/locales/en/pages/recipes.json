@@ -50,6 +50,7 @@
 		"output": "Output",
 		"materials": "Materials",
 		"notes": "Notes",
-		"result": "Report and Signature"
+		"result": "Report and Signature",
+		"title": "Manufacturing Order"
 	}
 }

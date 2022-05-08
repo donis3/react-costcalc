@@ -41,7 +41,7 @@
 }
 
 .nav-dropdown ul {
-	@apply scale-out z-[55] lg:mt-1 lg:-ml-3 m-0 flex flex-col items-end p-2 bg-base-100 opacity-75 lg:opacity-100 lg:shadow-lg lg:absolute border lg:w-auto w-full  rounded-md text-base-content gap-y-1;
+	@apply scale-out z-[55] lg:mt-1 lg:-ml-3 m-0 flex flex-col items-end p-2 bg-base-100 opacity-75 lg:opacity-100 lg:shadow-lg lg:absolute border lg:w-auto w-full  rounded-md text-base-content gap-y-1 origin-top;
 }
 
 .nav-dropdown .nav-item .nav-active {

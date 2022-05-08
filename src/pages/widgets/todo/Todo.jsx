@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useRef } from 'react';
 import useTodos from '../../../context/widgets/useTodos';
 import { FaTasks, FaTimes, FaTrashAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +44,7 @@ export default function Todo() {
 	return (
 		<div>
 			<ReactTooltip effect='solid' multiline id='tasks' />
-			<div className='border-b p-2 flex flex-wrap items-center justify-between bg-slate-500 rounded-t-md text-white'>
+			<div className='border-b p-2 flex flex-wrap items-center justify-between rounded-t-md bg-neutral bg-opacity-80 text-neutral-content'>
 				<div className='flex items-center gap-x-2'>
 					<FaTasks className='text-xl' />
 					<h3 className='font-semibold text-xl'>{t('widgets.todosTitle')}</h3>

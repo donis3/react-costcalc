@@ -27,7 +27,7 @@ export default function CostTable({ items = null, costs = null, itemCallback = n
 				<div className='col-span-2 p-3'>{t('costTable.quantity')}</div>
 				<div className='col-span-2 p-3'>{t('costTable.amount')}</div>
 			</div>
-			<div className='grid grid-cols-12  leading-snug'>
+			<div className='grid grid-cols-12  leading-snug w-full'>
 				{items.map((data, i) => (
 					<CostTableRow index={i} data={data} key={i} itemCallback={getCallback(data?.id)} />
 				))}

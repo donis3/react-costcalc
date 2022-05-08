@@ -2,10 +2,18 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useIntl from '../../hooks/common/useIntl';
 
-export default function NumericUnit({ type = null, children, isPer = false, short = false } = {}) {
+export default function NumericUnit({
+	type = null,
+	children,
+	isPer = false,
+	short = false,
+	autoTonne = false,
+	autoTonneAfter = 10000,
+} = {}) {
 	const { displayNumber } = useIntl();
 	const { t, i18n } = useTranslation('translation');
 	let unit = <></>;
+	let isWeight = false;
 	const translationKey = short ? 'unitsShort' : 'units';
 	const count = isNaN(parseInt(children)) === false ? Math.round(children) : 1;
 
@@ -29,6 +37,7 @@ export default function NumericUnit({ type = null, children, isPer = false, shor
 		case 'weight':
 		case 'mass':
 			unit = t(`${translationKey}.kg`, { count: count });
+			isWeight = true;
 			break;
 		default:
 			if (i18n.exists(`${translationKey}.${type}`, { ns: 'translation' })) {
@@ -37,6 +46,13 @@ export default function NumericUnit({ type = null, children, isPer = false, shor
 				unit = type;
 			}
 			break;
+	}
+
+	//Convert to tonne if specified
+	if (isWeight && autoTonne && isNaN(parseFloat(children)) === false && parseFloat(children) > autoTonneAfter) {
+		children = children / 1000;
+		let tonRounded = Math.round(children);
+		unit = t(`${translationKey}.t`, { count: tonRounded });
 	}
 
 	return (

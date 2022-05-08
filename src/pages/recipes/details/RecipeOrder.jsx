@@ -21,7 +21,7 @@ export default function RecipeOrder({ recipe, close } = {}) {
 				{/* Title */}
 				<div className='flex flex-col gap-y-0 items-center'>
 					<h3 className='font-medium text-base leading-none'>{info.name}</h3>
-					<h1 className='font-bold text-2xl leading-none'>Manufacturing Order</h1>
+					<h1 className='font-bold text-2xl leading-none'>{t('order.title')}</h1>
 				</div>
 
 				<table className='recipe-order mt-3'>

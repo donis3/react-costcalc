@@ -6,7 +6,7 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 	const { name = '', price = 0, tax = 0, quantity = 0, unit = 'kg', amount = 0, currency = '' } = data;
 	const { displayNumber, displayMoney } = useIntl();
 	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
-	const additionalClass = ' p-3 ';
+	const additionalClass = ' p-3';
 	const { t } = useTranslation('translation');
 
 	//Clickable button if callback provided

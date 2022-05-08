@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Breadcrumb from './Breadcrumb';
 import CurrencyRateDisplay from './CurrencyRateDisplay';
 
 export default function MainLayout({ children, header, footer }) {
+	const { t } = useTranslation('translation');
+	useEffect(() => {
+		window.document.title = t('appname');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<>
 			<div className='flex flex-col w-full h-screen justify-between'>

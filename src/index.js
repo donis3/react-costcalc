@@ -11,7 +11,7 @@ import './lib/i18n'; //Import i18next initialization
 ReactDOM.render(
 	<Suspense fallback={<Loading />}>
 		<React.StrictMode>
-			<BrowserRouter>
+			<BrowserRouter basename={process.env.PUBLIC_URL}>
 				<App />
 			</BrowserRouter>
 		</React.StrictMode>

@@ -4,10 +4,10 @@ import config from '../../config/config.json';
 import { useTranslation } from 'react-i18next';
 import ThemeSelect from './ThemeSelect';
 import AppContext from '../../context/AppContext';
-
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
-	const { t } = useTranslation();
+	const { t } = useTranslation('translation');
 	const { theme } = useContext(AppContext);
 	const [isThemeSelectOpen, setThemeSelectOpen] = useState(false);
 
@@ -17,7 +17,7 @@ export default function Footer() {
 				<div className='items-center grid-flow-col'>
 					<Icon icon={config.app.icon} className='w-6 h-6 fill-current' />
 					<p>
-						{t('footer', {
+						{t('footer.copyright', {
 							appName: config.app.name,
 							version: process.env.REACT_APP_VERSION,
 							year: new Date().getFullYear(),
@@ -30,9 +30,18 @@ export default function Footer() {
 				</div>
 
 				<div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end'>
-					<Icon icon='FaInstagram' className='w-6 h-6 fill-current' />
-					<Icon icon='FaFacebook' className='w-6 h-6 fill-current' />
-					<Icon icon='FaYoutube' className='w-6 h-6 fill-current' />
+					<ul className='flex gap-2'>
+						<li>
+							<Link to='/about' className='link'>
+								{t('footer.about')}
+							</Link>
+						</li>
+						<li>
+							<Link to='/help' className='link'>
+								{t('footer.help')}
+							</Link>
+						</li>
+					</ul>
 				</div>
 			</footer>
 			<ThemeSelect isOpen={isThemeSelectOpen} setIsOpen={setThemeSelectOpen} />

@@ -19,7 +19,9 @@ export default function HomePage() {
 		<>
 			<ReactTooltip effect='solid' multiline id='homepage' />
 			<div className='flex flex-wrap justify-between items-end border-b-4 border-neutral mb-10 p-3'>
-				<h1 className='text-3xl lg:text-4xl font-semibold'>{info.name}</h1>
+				<Link to='/company'>
+					<h1 className='text-3xl lg:text-4xl font-semibold'>{info.name}</h1>
+				</Link>
 				<Link to='/system'>
 					<button type='button' className='btn btn-sm btn-ghost' data-tip={t('buttons.systemTip')} data-for='homepage'>
 						{t('buttons.system')}

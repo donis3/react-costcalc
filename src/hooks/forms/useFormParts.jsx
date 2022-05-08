@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function useFormParts(...partNames) {
@@ -83,17 +83,17 @@ export default function useFormParts(...partNames) {
 		return part ? part.isActive : false;
 	};
 
-	const nextPart = () => {
-		const { index, isLast } = getActive();
-		if (isLast === true) return;
-		setActive(index + 1);
-	};
+	// const nextPart = () => {
+	// 	const { index, isLast } = getActive();
+	// 	if (isLast === true) return;
+	// 	setActive(index + 1);
+	// };
 
-	const previousPart = () => {
-		const { index, isFirst } = getActive();
-		if (isFirst === true) return;
-		setActive(index - 1);
-	};
+	// const previousPart = () => {
+	// 	const { index, isFirst } = getActive();
+	// 	if (isFirst === true) return;
+	// 	setActive(index - 1);
+	// };
 
 	const getActive = () => {
 		const result = parts.find((item) => item.isActive === true);

@@ -1,4 +1,5 @@
 {
+	"appname": "Costotus",
 	"general": {
 		"loading": "Loading",
 		"waiting": "Waiting",
@@ -62,7 +63,11 @@
 		"employees": "Employees",
 		"morders": "Manufacturing Orders"
 	},
-	"footer": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
+	"footer": {
+		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
+		"about": "About",
+		"help": "Help"
+	},
 	"themes": {
 		"emerald": "Emerald Theme",
 		"light": "Light Theme",

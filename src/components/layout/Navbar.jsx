@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { ReactComponent as Logo } from '../../img/cost-logo.svg';
+import { ReactComponent as Logo } from '../../img/costotus-v2.svg';
 import './Navbar.css';
 
 import LangSelect from './LangSelect';
