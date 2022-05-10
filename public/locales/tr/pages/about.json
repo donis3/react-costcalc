@@ -1,0 +1,15 @@
+{
+	"title": "About {{appname}}",
+	"title1": "What is {{appname}}",
+	"title1Text": "This application is for small manufacturing businesses to keep track of their expenses and calculate their costs. ",
+	"title2": "Where do you keep our data?",
+	"title2Text": "Everything is saved in your own device (Browser storage). We do not collect any data. You should download your costotus data regularly for backup. ",
+	"title3": "Is my data safe?",
+	"title3Text": "It is up to you to keep your data safe. Do not use the app in a shared computer. Keep your backup files safe. We suggest keeping them in your cloud drive (iCloud, google drive, one drive etc). If you download a backup, make sure it is secure. All your data is saved in the backup file. If you have sensitive information, trade secrets etc, please take the necessary precautions to keep your data safe. ",
+	"title4": "What kind of businesses is this app aimed for?",
+	"title4Text": "The app is mainly for manufacturing businesses. The business I modeled this is our family business. We manufacture chemical goods, and each product has a variety of different packaging etc. Any small business could potentially use this app for cost tracking.",
+	"title5": "Why was this application developed?",
+	"title5Text": "This is a project I started while learning ReactJs (A frontend javascript library) and wanted to make something useful. ",
+	"title6": "Disclaimer",
+	"title6Text": "This is an experimental free software. Please check the calculations yourself and don’t only depend on this app for your cost calculation. We do not offer any guarantees regarding the accuracy of the application."
+}

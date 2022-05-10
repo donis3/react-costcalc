@@ -1,0 +1,26 @@
+{
+	"title": "Help",
+	"title1": "First Steps",
+	"text1": "Welcome to costotus, a free small business cost calculator and expense tracker. Before starting, make sure you read the about section.  ",
+	"title2": "Reminder",
+	"text2": "None of the information you enter leave your computer. All data is saved in your own device and you need to go to “System & Data” page and download a backup of your data. Make sure you keep your backup files safe and secure.  We are not liable for your data security.",
+	"title3": "Company",
+	"text3": "Company module is where you define the details of your company, track company expenses and employees. Company information like the name or address etc. is for your own convenience and not required by any means. ",
+	"title4": "Company > Employees",
+	"text4": "This section is where you define employees and their annual salaries and their department. Employee department is important. If you choose manufacturing as the employee dept., that employee’s salary will be counted towards labor costs, other department employees will be calculated as overhead cost.",
+	"title5": "Company > Expenses",
+	"text5": "This section is where you define periodic expenses of the company. For example, your business pays 1000$ monthly rent, you can define it as a monthly expense of 1000$ and all necessary calculations will be made to calculate your overhead. To review your company expenses, you can refine your view by selecting categories and period. You may also go to the expense analysis page to view a pie chart of your expenses to get a better picture.",
+	"title6": "Manufacturing > Product Definitions",
+	"text6": "<0>This is where each product is defined. These represent the unpacked products. For example, you manufacture 3 types of drinks, let’s say lemonade, root beer and soda. You can define these 3 products in this section without their packaging details. These are not end-products for consumers. They need packaging first and may have many different package variations and consumer names like lemonade .33L, lemonade 1L, lemonade 2,5L etc. </0> <1>Important</1><2>Every product has a production field and that field represents the total amount your company manufactures the product in question each year. This value needs to be as accurate as possible to determine your companies total annual production, which is then used to determine labor cost per unit of production.</2>",
+	"title7": "Manufacturing > Recipes",
+	"text7": "This section is for manufacturing recipes. These recipes are the backbone of product cost calculation.  ",
+	"title8": "Creating a new recipe:",
+	"recipeSteps": {
+		"step1": "Define a recipe name, because products can have different recipes.",
+		"step2": "Choose the product that the recipe will produce",
+		"step3": "Define the yield. This will determine the amount of product this recipe will produce. ",
+		"step4": "Add the contents that the recipe will consume. Make sure the amounts are calculated for the recipe yield you've defined",
+		"step5": "Write any additional information in the notes section."
+	},
+	"text8": "After a recipe is created, we can change the yield for our desired amount and it’ll automatically scale the required materials. We can now generate a manufacturing order form for printing. "
+}

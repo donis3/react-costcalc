@@ -5,5 +5,15 @@
 	"products": "Products",
 	"currency": "Conversion Rates",
 	"recipes": "Recipes",
-	"expenses": "Giderler"
+	"expenses": "Giderler",
+	"endproducts": "Products",
+	"add": "Add",
+	"edit": "Edit",
+	"packages": "Packages",
+	"company": "Company",
+	"employees": "Employees",
+	"view": "View",
+	"system": "System",
+	"about": "About",
+	"help": "Help"
 }

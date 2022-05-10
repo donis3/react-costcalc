@@ -1,0 +1,49 @@
+{
+	"name": "Package",
+	"packages": {
+		"title": "Product Packages",
+		"lead": "Listing all packaging options",
+		"noPackage": "There are currently no packages. Please start by clicking the \"New\" button"
+	},
+	"package": {
+		"tabDetails": "Details",
+		"tabCosts": "Cost History",
+		"costHistoryTitle": "\"{{item}}\" cost history",
+		"noItems": "No items available in package."
+	},
+	"form": {
+		"addTitle": "New Package Bundle",
+		"updateTitle": "Edit Package",
+		"details": "Please define a package bundle, which may consist of a package, label, cap, box, etc..",
+		"subtitle": "Package Definitions",
+		"packingItemsTitle": "Packaging Items",
+		"itemTableNoContent": "Please add packing items using the add button.",
+		"addItemTitle": "Add Packing Item",
+		"addItem": "Add Item"
+	},
+	"labels": {
+		"packageId": "Package ID",
+		"name": "Package Name",
+		"boxName": "{{name}} [For {{capacity}} pcs]",
+		"productType": "Product Type",
+		"productTypeAlt": "Physical state of the product that this package will contain",
+		"packageCapacity": "Package Capacity",
+		"packageCapacityAlt": "How much product will this package contain?",
+		"notes": "Notes",
+		"type": "Type",
+		"boxCapacity": "Box Capacity",
+		"boxCapacityAlt": "How many containers does the box hold?",
+		"capacity": "Capacity",
+		"unit": "Unit",
+		"volume": "Volume",
+		"weight": "Weight",
+		"item": "Item",
+		"itemName": "Item Name",
+		"itemType": "Type",
+		"itemPrice": "Price",
+		"itemTax": "Tax",
+		"itemCurrency": "Currency",
+		"cost": "Cost",
+		"costUnit": "/item"
+	}
+}

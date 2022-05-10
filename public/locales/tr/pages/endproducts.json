@@ -1,0 +1,60 @@
+{
+	"name": "Product",
+	"title": "Products",
+	"lead": "Define all the product variants using recipes and package bundles.",
+	"form": {
+		"noRecipeError": "Please add at least 1 recipe before creating a product.",
+		"noPackageError": "There are no package bundles suitable for this product type ({{productType}})",
+		"addTitle": "New Product",
+		"editTitle": "Edit Product",
+		"details": "Define a product by selecting the package and manufacturing recipe.",
+		"subtitle": "Product Details",
+		"subtitle2": "Other"
+	},
+	"error": {
+		"duplicate": "A product with the same recipe & package is already defined.",
+		"invalidId": "Save failed. Invalid product ID",
+		"notFound": "Product couldn't be found",
+		"packageError": "The packaging item bound to this product couldn't be found. Please edit the product",
+		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product"
+	},
+	"labels": {
+		"endId": "Product ID",
+		"commercialName": "Commercial Name",
+		"commercialNameAlt": "Product Commercial Name for customers",
+		"name": "Name",
+		"recipe": "Recipe",
+		"notes": "Notes",
+		"recipeAlt": "Will be used for physical properties and cost analysis",
+		"package": "Package",
+		"packageAlt": "Will be used to determine weight/volume and cost analysis"
+	},
+	"endProducts": {
+		"noData": "There are no products to display"
+	},
+	"endProduct": {
+		"tabDetails": "Details",
+		"tabCost": "Cost Analysis",
+		"tabCostHistory": "Cost History",
+		"tabCostAnalysis": "Cost Analysis",
+		"costHistoryTitle": "Product Cost History",
+		"costWithTax": "Cost - Tax Included",
+		"cost": "Cost",
+		"costTableTitle": "Cost Breakdown",
+		"currentCost": "Current Cost"
+	},
+	"costAnalysis": {
+		"title": "Product Cost Analysis",
+		"subtitle": "Cost Details Chart",
+		"recipeCost": "Materials",
+		"packageCost": "Packaging",
+		"labourCost": "Labour",
+		"showAllMaterialsCost": "Show Deep Analysis"
+	},
+	"deleteError": {
+		"package": "This package is being used by a product and can't be deleted.",
+		"package_other": "This package is being used by {{count}} products and can't be deleted.",
+		"recipe": "This recipe is being used by a product and can't be deleted.",
+		"recipe_other": "This recipe is being used by {{count}} products and can't be deleted."
+	}
+}

@@ -6,7 +6,8 @@
 		"material": "Material",
 		"unit": "Unit",
 		"tax": "Tax",
-		"price": "Price"
+		"price": "Price",
+		"supplier": "Supplier"
 	},
 	"form": {
 		"title": "Add New Material",
@@ -32,7 +33,13 @@
 		"updateSuccess": "Updated {{name}}",
 		"updateFail": "Couldn't update material.",
 		"deleteSuccess": "Deleted {{name}} from materials",
-		"deleteFail": "Unable to delete material."
+		"deleteFail": "Unable to delete material.",
+		"details": "Materials are used in manufacturing recipes.",
+		"firstSection": "Material Definitions",
+		"secondSection": "Price Details",
+		"provider": "Supplier",
+		"providerAlt": "Material supplier company",
+		"boundRecipeError": "There are {{count}} recipes using this material. You can't delete a material that is bound to a recipe."
 	},
 	"info": {
 		"notFound": "Material could not be loaded for material ID: {{id}}",
@@ -48,7 +55,15 @@
 		"currency": "Price Currency",
 		"density": "Density",
 		"densityText": "{{value}} g/cm<sup>3</sup>",
-		"localPrice": "Price ({{currency}})"
+		"localPrice": "Price ({{currency}})",
+		"provider": "Supplier"
 	},
-	"showLocalPrice": "Show price in local currency?"
+	"showLocalPrice": "Show price in local currency?",
+	"name": "Material",
+	"showBaseUnit": "Convert to base unit?",
+	"notFound": "Requested material couldn't be found.",
+	"priceHistory": {
+		"chartTitle": "Price Chart",
+		"title": "Price history for \"{{name, truncate(maxLength: 10)}}\""
+	}
 }

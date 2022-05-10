@@ -1,0 +1,137 @@
+{
+	"name": "Company",
+	"details": {
+		"title": "Company Details",
+		"lead": "Information about the company"
+	},
+	"infoForm": {
+		"details": "Company Details",
+		"communication": "Communication Info"
+	},
+	"company": {
+		"name": "Company Name",
+		"legalName": "Company Title",
+		"about": "About the company",
+		"founder": "Founder",
+		"establishedOn": "Established On",
+		"address": "Company Address",
+		"city": "City",
+		"country": "Country",
+		"lat": "Latitude",
+		"long": "Longitude",
+		"phone": "Landline",
+		"mobile": "Mobile",
+		"fax": "Fax",
+		"email": "Email",
+		"taxId": "Tax No",
+		"website": "Website Address",
+		"timeSince": "Active Time"
+	},
+	"employees": {
+		"moduleName": "employees",
+		"name": "Employee",
+		"title": "Employees",
+		"formTitleAdd": "New Employee",
+		"formTitleEdit": "Edit Employee",
+		"statTotal": "Gross Total",
+		"statLabour": "Labour",
+		"statPeriod": "per {{period}}"
+	},
+	"table": {
+		"name": "Employee",
+		"department": "Department",
+		"gross": "Gross Salary",
+		"doe": "Employment Date"
+	},
+	"employee": {
+		"formSectionDetails": "Personal Information",
+		"formSectionWage": "Salary",
+		"name": "Employee Name",
+		"net": "Net annual wage",
+		"gross": "Gross annual wage",
+		"currency": "Wage Currency",
+		"department": "Department",
+		"dob": "Date of Birth",
+		"doe": "Date of Employment",
+		"employmentTime": "Employment Duration",
+		"notes": "Notes",
+		"email": "Email",
+		"mobile": "Mobile Phone",
+		"detailsTitle": "Employee Information",
+		"age": "Age"
+	},
+	"departments": {
+		"manufacturing": "Manufacturing",
+		"management": "Management",
+		"marketing": "Marketing",
+		"hr": "Human Resources",
+		"pr": "Public Relations",
+		"cr": "Customer Relations",
+		"it": "Information Technologies",
+		"administration": "Administration",
+		"finance": "Accounting & Finance",
+		"other": "Other"
+	},
+	"expenses": {
+		"name": "Expense",
+		"title": "Expenses",
+		"lead": "Company overhead expenses",
+		"chart": "Expense Analysis",
+		"formTitleAdd": "New Expense",
+		"formTitleUpdate": "Edit Expense",
+		"formSectionDetails": "Expense Details",
+		"formSectionCost": "Cost Details",
+		"formMonthlyTitle": "Monthly Cost",
+		"formAnnualTitle": "Annual Cost"
+	},
+	"expensesTable": {
+		"categoryOptions": "Display categories",
+		"currencyOptions": "Options",
+		"periodOptions": "Total cost period",
+		"periodCost": "{{period}} cost"
+	},
+	"expense": {
+		"name": "Expense",
+		"category": "Category",
+		"period": "Period",
+		"periodAlt": "At which interval should this expense be added to expenses",
+		"price": "Unit Price",
+		"quantity": "Quantity",
+		"unit": "Unit",
+		"tax": "Tax Percentage",
+		"currency": "Currency",
+		"amount": "Amount",
+		"cost": "{{period}} Cost",
+		"costWithTax": "{{period}} Cost With Tax"
+	},
+	"expenseDetails": {
+		"subtitle": "Expense Details"
+	},
+	"expenseCategories": {
+		"all": "All Categories",
+		"advertisement": "Advertising",
+		"banking": "Banking",
+		"government": "Government Fees",
+		"legal": "Legal Fees",
+		"insurance": "Insurances",
+		"maintenance": "Maintenance",
+		"office": "Office Supplies",
+		"utilities": "Utilities",
+		"rent": "Rent",
+		"food": "Food",
+		"gas": "Gasoline",
+		"depreciation": "Depreciations",
+		"other": "Other"
+	},
+	"defaultCompany": {
+		"name": "Dream Incorporated.",
+		"legalName": "Dreams Manufacturing Dreams LLC - Cayman Islands",
+		"founder": "John Dreamer",
+		"about": "Dreams Inc is a tech company that brings digital joy.",
+		"address": "Dreams Building, 200 Elgin Ave",
+		"city": "George Town",
+		"country": "Cayman Islands",
+		"email": "company@example.com",
+		"website": "http://www.company.com"
+	}
+}

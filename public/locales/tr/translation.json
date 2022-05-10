@@ -4,7 +4,11 @@
 		"notfound": "Sayfa-Bulunamadı",
 		"theme": "Tema"
 	},
-	"footer": "{{appName}} - Sürüm: {{version}} - © {{year}} {{owner}}",
+	"footer": {
+		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
+		"about": "About",
+		"help": "Help"
+	},
 	"themes": {
 		"dark": "Koyu Tema",
 		"cupcake": "Tatlı Tema!",
@@ -29,13 +33,28 @@
 		"deleteX": "Delete {{name}}",
 		"deleteConfirm": "Are you sure?",
 		"yes": "yes",
-		"no": "no"
+		"no": "no",
+		"reset": "Reset",
+		"edit": "Edit",
+		"update": "Update",
+		"remove": "Remove",
+		"new": "New",
+		"back": "Back",
+		"chart": "Chart",
+		"options": "Options",
+		"link": "Go",
+		"print": "Print",
+		"download": "Download",
+		"upload": "Upload"
 	},
 	"form": {
 		"minLength_one": "Must be at least {{count}} character long",
 		"minLength_other": "Must be at least {{count}} characters long",
 		"checkboxLabel": "Enabled?",
-		"partInfo": "Part {{current}} of {{total}}"
+		"partInfo": "Part {{current}} of {{total}}",
+		"btnPrevious": "Previous",
+		"btnNext": "Next",
+		"btnSubmit": "Save"
 	},
 	"panel": {
 		"title": "Panel Title"
@@ -63,7 +82,20 @@
 		"t": "Tonne",
 		"cc": "Cubic Centimeter",
 		"mL": "Milliliter",
-		"L": "Liter"
+		"L": "Liter",
+		"pcs": "piece",
+		"pcs_other": "pieces",
+		"kwh": "kilowatt Hour",
+		"kwh_other": "kilowatt hours",
+		"byte": "Byte",
+		"byte_other": "Bytes",
+		"kb": "Kilobyte",
+		"kb_other": "Kilobytes",
+		"mb": "Megabyte",
+		"mb_other": "Megabytes",
+		"gb": "Gigabyte",
+		"gb_other": "Gigabytes",
+		"other": "Other"
 	},
 	"currency": {
 		"USD": "U.S. Dollar",
@@ -90,13 +122,33 @@
 		"fetchNotExpired": "Using latest request results. {{timeLeft}} minutes left before a new request can be made to TCMB",
 		"fetchWaiting": "Awaiting TCMB",
 		"DKK": "Danish Krone",
-		"convertPrice": "Show prices in local currency?"
+		"convertPrice": "Show prices in local currency?",
+		"changeDefault": "Change Default Currency?",
+		"changeDefaultWarning": "This action will remove saved conversion rates",
+		"chartTitle": "{{name}} rate history"
 	},
 	"error": {
 		"error": "Error",
 		"notFound": "Not Found",
 		"notFoundLong": "Requested item couldn't be found. If you think this to be a mistake, please contact system administrator.",
-		"savingItem": "Couldn't save {{item}}"
+		"savingItem": "Couldn't save {{item}}",
+		"invalidItem": "Invalid item.",
+		"invalidData": "Operation failed. Invalid data received",
+		"add": "Item couldn't be added.",
+		"update": "Item couldn't be updated.",
+		"delete": "Item couldn't be deleted.",
+		"noData": "No data",
+		"itemNotFound": "Requested {{item, lowercase}} couldn't be found",
+		"nameNotFound": "Requested {{name, lowercase}} couldn't be found",
+		"duplicate": "There is already another item with the same values.",
+		"updateNotRequired": "Nothing to update",
+		"badRequest": "Bad Request",
+		"updateTargetNotFound": "Update failed, {{name}} couldn't be found",
+		"addName": "{{name}} couldn't be added",
+		"updateName": "{{name}} couldn't be updated",
+		"addInvalidData": "Invalid data. {{name}} couldn't be added.",
+		"updateInvalidData": "Invalid data. {{name}} couldn't be updated.",
+		"deleteInvalidData": "Invalid data. {{name}} couldn't be deleted."
 	},
 	"errorBoundary": {
 		"title": "Application Crashed!",
@@ -106,7 +158,9 @@
 	"general": {
 		"loading": "Loading",
 		"waiting": "Waiting",
-		"fetching": "Fetching"
+		"fetching": "Fetching",
+		"show": "Show",
+		"hide": "Hide"
 	},
 	"fields": {
 		"date": "Date",
@@ -118,6 +172,134 @@
 		"year": "Year",
 		"yearShort": "Y",
 		"month": "Month",
-		"monthShort": "M"
+		"monthShort": "M",
+		"lastUpdate": "Last Update",
+		"createdAt": "Created",
+		"pickDate": "Pick a date"
+	},
+	"appname": "Costotus",
+	"periods": {
+		"h": "Hourly",
+		"d": "Daily",
+		"w": "Weekly",
+		"m": "Monthly",
+		"y": "Annual"
+	},
+	"periodName": {
+		"h": "hour",
+		"d": "day",
+		"w": "week",
+		"m": "month",
+		"y": "year"
+	},
+	"success": {
+		"reset": "\"{{name}}\" was successfully reset",
+		"add": "\"{{name}}\" was successfully added.",
+		"update": "\"{{name}}\" was successfully updated.",
+		"delete": "\"{{name}}\" was successfully deleted."
+	},
+	"nav": {
+		"manufacturing": "Manufacturing",
+		"products": "Product Definitions",
+		"recipes": "Recipes",
+		"company": "Company",
+		"companyAlt": "Company Details",
+		"expenses": "Expenses",
+		"employees": "Employees",
+		"morders": "Manufacturing Orders"
+	},
+	"pagination": {
+		"info": "Displaying {{start}}-{{end}} of {{total}}"
+	},
+	"labels": {
+		"name": "Name",
+		"item": "Item",
+		"package": "Package",
+		"recipe": "Recipe",
+		"product": "Product",
+		"price": "Price",
+		"unitPrice": "Unit Price",
+		"unit": "Unit",
+		"tax": "Tax",
+		"cost": "Cost",
+		"total": "Total",
+		"subTotal": "Sub Total",
+		"totalWitTax": "Taxed Total",
+		"totalWithTax": "Taxed Total",
+		"taxPercent": "Tax %{{percent}}",
+		"priceWithTax": "{{price}} including tax",
+		"taxTotal": "Total Tax",
+		"noTax": "Without Tax",
+		"withTax": "With Tax",
+		"density": "Density",
+		"packageCapacity": "Package Capacity",
+		"physicalState": "Physical State",
+		"weight": "Weight",
+		"filtering": "Filtering ({{count}})",
+		"labourCost": "Labour Cost"
+	},
+	"charts": {
+		"costHistory": "Cost History",
+		"priceHistory": "Price History",
+		"itemCostHistory": "\"{{name}}\" Cost History",
+		"itemPriceHistory": "\"{{name}}\" Price History",
+		"price": "Prices",
+		"rateChartTitle": "{{from}}/{{to}} Rate History",
+		"rateChartLabel": "{{from}}/{{to}}",
+		"costAnalysis": "Cost Analysis for {{item}}",
+		"other": "Other"
+	},
+	"costTable": {
+		"noContent": "There are no items to display",
+		"item": "Item",
+		"unitPrice": "Unit Price",
+		"tax": "Tax",
+		"quantity": "Quantity",
+		"amount": "Amount",
+		"total": "Total",
+		"subTotal": "Sub Total",
+		"totalWitTax": "Taxed Total",
+		"totalWithTax": "Taxed Total",
+		"taxPercent": "Tax %{{percent}}",
+		"taxTotal": "Total Tax"
+	},
+	"unitsShort": {
+		"mg": "mg",
+		"g": "g",
+		"kg": "kg",
+		"t": "t",
+		"cc": "cc",
+		"mL": "mL",
+		"L": "L",
+		"pcs": "pc",
+		"pcs_other": "pcs",
+		"kwh": "kwh",
+		"byte": "B",
+		"kb": "KiB",
+		"mb": "MiB",
+		"gb": "GiB",
+		"other": "other"
+	},
+	"packageTypes": {
+		"box": "Box",
+		"boxWithCapacity": "[box/{{capacity}} pcs]",
+		"container": "Container",
+		"other": "Other"
+	},
+	"physicalStates": {
+		"liquid": "Liquid",
+		"solid": "Solid"
+	},
+	"toggles": {
+		"includeTax": "Include tax?",
+		"showTax": "Include tax?",
+		"localPrice": "Convert costs/prices to {{currency}}?",
+		"baseUnit": "Use base units?"
+	},
+	"tabs": {
+		"details": "Details",
+		"itemDetails": "{{item, capitalize}} Details",
+		"costHistory": "Cost History",
+		"priceHistory": "Price History"
 	}
 }

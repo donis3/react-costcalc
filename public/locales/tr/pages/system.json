@@ -1,0 +1,40 @@
+{
+	"title": "Application Settings",
+	"lead": "Change application settings",
+	"backup": {
+		"title": "Backup",
+		"lead": "Download application data. You can load any backup file at anytime and restore your application on any computer.",
+		"lastBackup": "Last Backup",
+		"dbSize": "Database Size",
+		"never": "Never",
+		"filename": "{{app}} - {{company, truncate(maxLength: 10; dots: false)}} - {{date}}.json"
+	},
+	"restore": {
+		"title": "Restore",
+		"lead": "Restore application data using a backup file.",
+		"warning": "Warning! All current data will be lost and uploaded data will be loaded instead.",
+		"loadedFile": "Restored File",
+		"loadedDate": "Retored Date",
+		"notFound": "Not found",
+		"uploadError": "Couldn't load backup file. Please verify file integrity.",
+		"restoreSuccess": "Application data restored."
+	},
+	"reset": {
+		"title": "Delete Application Data",
+		"deleteAll": "Delete Selected Data",
+		"lead": "Select some or all the data you want to delete. Please backup your data before doing this incase you need to get your data back.",
+		"packages": "Packages",
+		"materials": "Materials",
+		"products": "Product Definitions",
+		"currencies": "Currency exchange rates",
+		"others": "Recipes, Products, ...others",
+		"companydetails": "Company Details",
+		"employees": "Employees",
+		"expenses": "Expenses",
+		"recipes": "Recipes",
+		"endproducts": "Products",
+		"widgets": "Widgets",
+		"resetSuccess": "Application data for {{modules}} is successfully deleted. Please wait for reload",
+		"resetError": "An error occurred while deleting requested data"
+	}
+}
