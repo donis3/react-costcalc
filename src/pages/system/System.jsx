@@ -27,7 +27,7 @@ export default function System() {
 		companydetails: false,
 	};
 	const [resetState, setResetState] = useState(initialResetState);
-	const linkedModules = ['packages', 'materials', 'products'];
+	const linkedModules = ['packages', 'materials', 'products', 'others'];
 	//Reset Form Handling
 	function onResetCheckboxChange(e) {
 		const field = e.target?.name;
@@ -36,9 +36,9 @@ export default function System() {
 		if (field in resetState === false) return;
 
 		//Others & linkedModules will have the same value
-		if (field === 'others') {
+		if (linkedModules.includes(field)) {
 			const othersState = linkedModules.reduce((acc, key) => ({ ...acc, [key]: val }), {});
-			return setResetState((state) => ({ ...state, [field]: val, ...othersState }));
+			return setResetState((state) => ({ ...state, ...othersState }));
 		} else {
 			return setResetState((state) => ({ ...state, [field]: val }));
 		}
