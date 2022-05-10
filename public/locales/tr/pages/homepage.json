@@ -1,40 +1,40 @@
 {
 	"buttons": {
-		"system": "System & Data",
-		"systemTip": "Application data management"
+		"system": "Sistem & Veri",
+		"systemTip": "Uygulama veri yönetimi"
 	},
 	"totals": {
-		"overhead": "Overhead",
-		"labour": "Labour",
-		"periodText": "Per {{period}}",
-		"production": "Production",
-		"productionUnitCost": "Labour Cost",
-		"productionUnitCostDesc": "Labour cost per {{unit}}"
+		"overhead": "Sabit Giderler",
+		"labour": "İşçilik",
+		"periodText": "Her {{period}}",
+		"production": "Üretim Miktarı",
+		"productionUnitCost": "İşçilik Maliyeti",
+		"productionUnitCostDesc": "Üretilen {{unit, lowercase}} başına işçilik"
 	},
 	"help": {
-		"overhead": "expenses + employee salaries<br />(manufacturing dept. excluded)",
-		"labour": "manufacturing department salary",
-		"production": "Average production amount for given period",
-		"productionUnitCost": "Labour cost per unit of production <br />Total labour cost / total production"
+		"overhead": "Giderler + Çalışan Ücretleri<br />(İmalat departmanı hariç)",
+		"labour": "İmalat departmanında çalışanların ücretleri",
+		"production": "Seçili zaman periyodunda üretilen ortalama ürün miktarı",
+		"productionUnitCost": "Üretilen birim başına işçilik maliyeti <br />Toplam işçilik / Toplam üretim miktarı"
 	},
 	"miniStats": {
-		"employees": "Employees",
-		"products": "Products",
-		"materials": "Materials",
-		"expenses": "Expenses",
-		"recipes": "Recipes",
-		"packages": "Packages"
+		"employees": "Çalışan",
+		"products": "Ürün",
+		"materials": "Hammadde",
+		"expenses": "Gider",
+		"recipes": "Reçete",
+		"packages": "Ambalaj"
 	},
 	"widgets": {
-		"todosTitle": "Tasks",
-		"todosName": "Task",
-		"todosNoItems": "There are currently no tasks.",
-		"todosReset": "Remove all tasks?",
-		"historyTitle": "Company History",
-		"historyChartTitle": "Overhead & Labour Cost Over Time",
-		"productionHistoryChartTitle": "Annual Production",
-		"historyCostBtn": "Costs",
-		"historyProductionBtn": "Production",
-		"noHistoryData": "No historical data to display."
+		"todosTitle": "Görevler",
+		"todosName": "Görev",
+		"todosNoItems": "Yapılacak görev bulunmamakta.",
+		"todosReset": "Tüm görevleri sil?",
+		"historyTitle": "Firma Geçmişi",
+		"historyChartTitle": "Zamana Karşı Sabit Gider & İşçilik Maliyeti",
+		"productionHistoryChartTitle": "Yıllık Üretim",
+		"historyCostBtn": "Giderler",
+		"historyProductionBtn": "Üretim",
+		"noHistoryData": "Gösterilecek tarih verisi bulunmuyor."
 	}
 }

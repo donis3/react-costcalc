@@ -1,60 +1,60 @@
 {
-	"name": "Product",
-	"title": "Products",
-	"lead": "Define all the product variants using recipes and package bundles.",
+	"name": "Ürün",
+	"title": "Ürünler",
+	"lead": "Son kullanıcı için ürün tanımları, reçete ve ambalaj kombinasyonları ile oluşturulur.",
 	"form": {
-		"noRecipeError": "Please add at least 1 recipe before creating a product.",
-		"noPackageError": "There are no package bundles suitable for this product type ({{productType}})",
-		"addTitle": "New Product",
-		"editTitle": "Edit Product",
-		"details": "Define a product by selecting the package and manufacturing recipe.",
-		"subtitle": "Product Details",
-		"subtitle2": "Other"
+		"noRecipeError": "Bir ürün oluşturabilmek için, lütfen en az 1 reçete oluşturun.",
+		"noPackageError": "Bu ürün tipi ({{productType}}) için uygun bir ambalaj bulunamadı.",
+		"addTitle": "Yeni Ürün",
+		"editTitle": "Ürün Düzenle",
+		"details": "Bir ambalaj çeşidi ile bir ürün reçetesi kombine ederek, son kullanıcı ürünü oluşturun.",
+		"subtitle": "Ürün Detayları",
+		"subtitle2": "Diğer Bilgiler"
 	},
 	"error": {
-		"duplicate": "A product with the same recipe & package is already defined.",
-		"invalidId": "Save failed. Invalid product ID",
-		"notFound": "Product couldn't be found",
-		"packageError": "The packaging item bound to this product couldn't be found. Please edit the product",
-		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product"
+		"duplicate": "Bu reçete ve ambalaj kombinasyonu ile oluşturulmuş bir ürün zaten mevcut.",
+		"invalidId": "Kaydetme başarısız. Geçersiz ürün no",
+		"notFound": "Ürün bulunamadı",
+		"packageError": "Bu ürünle ilişkilendirilmiş ambalaj bulunamıyor. Lütfen ürünü düzenleyin",
+		"recipeError": "Bu ürünle ilişkilendirilmiş reçete bulunamıyor. Lütfen ürünü düzenleyin"
 	},
 	"labels": {
-		"endId": "Product ID",
-		"commercialName": "Commercial Name",
-		"commercialNameAlt": "Product Commercial Name for customers",
-		"name": "Name",
-		"recipe": "Recipe",
-		"notes": "Notes",
-		"recipeAlt": "Will be used for physical properties and cost analysis",
-		"package": "Package",
-		"packageAlt": "Will be used to determine weight/volume and cost analysis"
+		"endId": "Ürün Numarası",
+		"commercialName": "Ticari Ad",
+		"commercialNameAlt": "Müşterilere sunulan ürün adı",
+		"name": "Ürün Adı",
+		"recipe": "Reçete",
+		"notes": "Notlar",
+		"recipeAlt": "Ürünün fiziksel özelliklerini ve hammadde maliyetini belirler",
+		"package": "Ambalaj",
+		"packageAlt": "Ürünün hacmini, ağırlığını ve ambalaj maliyetini belirler"
 	},
 	"endProducts": {
-		"noData": "There are no products to display"
+		"noData": "Gösterilecek ürün bulunmuyor"
 	},
 	"endProduct": {
-		"tabDetails": "Details",
-		"tabCost": "Cost Analysis",
-		"tabCostHistory": "Cost History",
-		"tabCostAnalysis": "Cost Analysis",
-		"costHistoryTitle": "Product Cost History",
-		"costWithTax": "Cost - Tax Included",
-		"cost": "Cost",
-		"costTableTitle": "Cost Breakdown",
-		"currentCost": "Current Cost"
+		"tabDetails": "Detaylar",
+		"tabCost": "Maliyet Analizi",
+		"tabCostHistory": "Maliyet Geçmişi",
+		"tabCostAnalysis": "Maliyet Analizi",
+		"costHistoryTitle": "Ürün Maliyet Geçmişi",
+		"costWithTax": "Maliyet - Vergi Dahil",
+		"cost": "Maliyet",
+		"costTableTitle": "Maliyet Dökümü",
+		"currentCost": "Güncel Maliyet"
 	},
 	"costAnalysis": {
-		"title": "Product Cost Analysis",
-		"subtitle": "Cost Details Chart",
-		"recipeCost": "Materials",
-		"packageCost": "Packaging",
-		"labourCost": "Labour",
-		"showAllMaterialsCost": "Show Deep Analysis"
+		"title": "Ürün Maliyet Analizi",
+		"subtitle": "Maliyet Detayları Grafiği",
+		"recipeCost": "Hammadde",
+		"packageCost": "Ambalaj",
+		"labourCost": "İşçilik",
+		"showAllMaterialsCost": "Detaylı Analiz Göster"
 	},
 	"deleteError": {
-		"package": "This package is being used by a product and can't be deleted.",
-		"package_other": "This package is being used by {{count}} products and can't be deleted.",
-		"recipe": "This recipe is being used by a product and can't be deleted.",
-		"recipe_other": "This recipe is being used by {{count}} products and can't be deleted."
+		"package": "Bu ambalajı kullanmakta olan bir ürün olduğu için silinemiyor.",
+		"package_other": "Bu ambalajı kullanmakta olan {{count}} ürün olduğu için silinemiyor.",
+		"recipe": "Bu reçeteyi kullanmakta olan bir ürün olduğu için silinemiyor.",
+		"recipe_other": "Bu reçeteyi kullanmakta olan {{count}} ürün olduğu için silinemiyor."
 	}
 }

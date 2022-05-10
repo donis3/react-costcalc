@@ -15,7 +15,7 @@ export default function RecipeOrder({ recipe, close } = {}) {
 		<>
 			<div className='flex justify-between mt-8 p-3 print:hidden'>
 				<Print onClick={() => window.print()} />
-				<Cancel onClick={() => close?.()} />
+				<Cancel text='close' onClick={() => close?.()} />
 			</div>
 			<div className='w-full p-3 mt-3 mb-10'>
 				{/* Title */}
@@ -30,17 +30,14 @@ export default function RecipeOrder({ recipe, close } = {}) {
 							<td className='font-semibold'>{t('order.date')}</td>
 							<td>{displayDate(Date.now(), { time: false })}</td>
 						</tr>
-
 						<tr>
 							<td className='font-semibold'>{t('order.product')}</td>
 							<td>{recipe.product.name}</td>
 						</tr>
-
 						<tr>
 							<td className='font-semibold'>{t('order.recipe')}</td>
 							<td>{recipe.name}</td>
 						</tr>
-
 						<tr>
 							<td className='font-semibold'>{t('order.output')}</td>
 							<td>
@@ -53,7 +50,6 @@ export default function RecipeOrder({ recipe, close } = {}) {
 								{t('order.materials')}
 							</td>
 						</tr>
-
 						{recipe.materials.map((material, i) => {
 							return (
 								<tr key={i} className='order-material'>
@@ -68,20 +64,24 @@ export default function RecipeOrder({ recipe, close } = {}) {
 							);
 						})}
 
-						{recipe.notes && recipe.notes.length > 0 && (
+						{recipe.notes && recipe.notes.length > 0 ? (
 							<>
 								<tr>
 									<td colSpan={2} className='order-subtitle'>
 										{t('order.notes')}
 									</td>
 								</tr>
+
 								<tr>
 									<td colSpan={2} className='whitespace-pre-wrap'>
 										{recipe.notes}
 									</td>
 								</tr>
 							</>
+						) : (
+							<></>
 						)}
+
 						{/* Footer */}
 						<tr>
 							<td colSpan={2} className='order-subtitle'>

@@ -1,56 +1,56 @@
 {
-	"name": "Recipe",
+	"name": "Reçete",
 	"form": {
-		"titleAdd": "New Recipe",
-		"leadAdd": "Add a new recipe by giving it a name and selecting the product this recipe is for. ",
-		"titleUpdate": "Edit: {{name}}",
-		"leadUpdate": "Update the recipe details and materials.",
-		"titleMeta": "Recipe Details",
-		"titleMaterials": "Recipe Content",
-		"titleOther": "Other Information",
-		"noContent": "Please add materials to recipe.",
-		"contentStats": "Total {{amount}} kg / {{max}} kg",
-		"noProducts": "Please create a product first to be able to create recipes.",
-		"goToProducts": "Go to products",
-		"noMaterials": "Please add materials to database to use them in recipes."
+		"titleAdd": "Yeni Reçete",
+		"leadAdd": "Bir reçete oluşturmak için bir isim tanımlayın ve üretilecek ürünü seçin.",
+		"titleUpdate": "{{name, capitalize}} Reçetesi Düzenle",
+		"leadUpdate": "Reçete detaylarını ve hammaddelerini güncelle",
+		"titleMeta": "Reçete Detayları",
+		"titleMaterials": "Reçete İçeriği",
+		"titleOther": "Diğer Bilgiler",
+		"noContent": "Lütfen reçeteye içerik ekleyin.",
+		"contentStats": "Toplam {{amount}} kg / {{max}} kg",
+		"noProducts": "Reçete oluşturabilmek için, lütfen önce ürün tanımları ekleyin.",
+		"goToProducts": "Ürünlere Git",
+		"noMaterials": "Reçete içeriği oluşturabilmek için lütfen önce hammadde tanımlayın."
 	},
 	"contentForm": {
-		"invalidAmount": "Invalid amount",
-		"invalidMaterial": "Invalid material",
-		"addMaterial": "Add Material"
+		"invalidAmount": "Hatalı Miktar",
+		"invalidMaterial": "Hatalı Hammadde",
+		"addMaterial": "Hammadde Ekle"
 	},
 	"labels": {
-		"name": "Recipe Name",
-		"notes": "Notes",
-		"product": "Product",
-		"productAlt": "Which product is this recipe for?",
-		"yield": "Yield",
-		"yieldAlt": "The amount of product that this recipe will yield",
-		"contents": "Recipe Contents",
-		"material": "Material",
-		"amount": "Amount"
+		"name": "Reçete Adı",
+		"notes": "Notlar",
+		"product": "Ürün",
+		"productAlt": "Bu reçete, hangi ürün için?",
+		"yield": "Üretim Miktarı",
+		"yieldAlt": "Bu reçete sonucunda üretilen ürün miktarı",
+		"contents": "Reçete İçeriği",
+		"material": "Hammadde",
+		"amount": "Miktar"
 	},
 	"recipe": {
-		"changeYield": "Change yield",
-		"newYield": "New yield amount ({{unit}})",
-		"noContent": "Recipe has no content.",
-		"unitCost": "Unit Cost",
-		"unitCostTax": "{{taxedCost}}/{{unit}} with tax"
+		"changeYield": "Üretim Miktarı Değiştir",
+		"newYield": "Üretilecek Miktar ({{unit}})",
+		"noContent": "Reçete içeriği bulunamadı.",
+		"unitCost": "Birim Maliyet",
+		"unitCostTax": "{{taxedCost}}/{{unit}} vergi dahil"
 	},
 	"recipes": {
-		"title": "All Recipes",
-		"lead": "Listing all recipes",
-		"noRecipes": "There are no recipes yet. Click new recipe button to start."
+		"title": "Tüm Reçeteler",
+		"lead": "Tüm reçeteleri görüntüle.",
+		"noRecipes": "Henüz reçete oluşturulmadı. Yeni reçete butonuna basarak başlayın!"
 	},
 	"order": {
-		"order": "New Order",
-		"date": "Date",
-		"recipe": "Recipe",
-		"product": "Product",
-		"output": "Output",
-		"materials": "Materials",
-		"notes": "Notes",
-		"result": "Report and Signature",
-		"title": "Manufacturing Order"
+		"order": "Yeni Talimat",
+		"date": "Tarih",
+		"recipe": "Reçete",
+		"product": "Ürün",
+		"output": "Üretim Miktarı",
+		"materials": "Hammaddeler",
+		"notes": "Notlar",
+		"result": "Rapor ve İmza",
+		"title": "İmalat Talimatı"
 	}
 }
