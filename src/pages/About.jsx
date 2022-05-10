@@ -16,10 +16,10 @@ export default function About() {
 
 				{/* About Items */}
 				<AboutItem title={t('title1', { appname })}>{t('title1Text')}</AboutItem>
-				<AboutItem title={t('title2')}>{t('title2Text')}</AboutItem>
-				<AboutItem title={t('title3')}>{t('title3Text')}</AboutItem>
+				<AboutItem title={t('title2')}>{t('title2Text', { appname })}</AboutItem>
+				<AboutItem title={t('title3')}>{t('title3Text', { appname })}</AboutItem>
 				<AboutItem title={t('title4')}>{t('title4Text')}</AboutItem>
-				<AboutItem title={t('title5')}>{t('title5Text')}</AboutItem>
+				<AboutItem title={t('title5')}>{t('title5Text', { appname })}</AboutItem>
 				<AboutItem title={t('title6')}>{t('title6Text')}</AboutItem>
 			</Card>
 		</>

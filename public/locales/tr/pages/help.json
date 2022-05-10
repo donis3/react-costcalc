@@ -1,26 +1,34 @@
 {
-	"title": "Help",
-	"title1": "First Steps",
-	"text1": "Welcome to costotus, a free small business cost calculator and expense tracker. Before starting, make sure you read the about section.  ",
-	"title2": "Reminder",
-	"text2": "None of the information you enter leave your computer. All data is saved in your own device and you need to go to “System & Data” page and download a backup of your data. Make sure you keep your backup files safe and secure.  We are not liable for your data security.",
-	"title3": "Company",
-	"text3": "Company module is where you define the details of your company, track company expenses and employees. Company information like the name or address etc. is for your own convenience and not required by any means. ",
-	"title4": "Company > Employees",
-	"text4": "This section is where you define employees and their annual salaries and their department. Employee department is important. If you choose manufacturing as the employee dept., that employee’s salary will be counted towards labor costs, other department employees will be calculated as overhead cost.",
-	"title5": "Company > Expenses",
-	"text5": "This section is where you define periodic expenses of the company. For example, your business pays 1000$ monthly rent, you can define it as a monthly expense of 1000$ and all necessary calculations will be made to calculate your overhead. To review your company expenses, you can refine your view by selecting categories and period. You may also go to the expense analysis page to view a pie chart of your expenses to get a better picture.",
-	"title6": "Manufacturing > Product Definitions",
-	"text6": "<0>This is where each product is defined. These represent the unpacked products. For example, you manufacture 3 types of drinks, let’s say lemonade, root beer and soda. You can define these 3 products in this section without their packaging details. These are not end-products for consumers. They need packaging first and may have many different package variations and consumer names like lemonade .33L, lemonade 1L, lemonade 2,5L etc. </0> <1>Important</1><2>Every product has a production field and that field represents the total amount your company manufactures the product in question each year. This value needs to be as accurate as possible to determine your companies total annual production, which is then used to determine labor cost per unit of production.</2>",
-	"title7": "Manufacturing > Recipes",
-	"text7": "This section is for manufacturing recipes. These recipes are the backbone of product cost calculation.  ",
-	"title8": "Creating a new recipe:",
+	"title": "Yardım",
+
+	"title1": "İlk Adım",
+	"text1": "Kobiler için maliyet programı Costotus’a hoş geldiniz. Başlamadan önce lütfen hakkında sayfasını okuyun.",
+
+	"title2": "Hatırlatma",
+	"text2": "{{appname}}, verilerinizi sunucuda saklamaz. Tüm verileriniz kendi cihazınızdadır. Farklı cihazlardan aynı verilere ulaşabilmeniz için, sistem sayfasından verilerinizi yedekleyerek diğer cihaza aktarmanız ve tekrar sistem sayfasından geri yükleme yapmalısınız. Yedeklerinizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın. Ticari sırlarınızı koruyun.",
+
+	"title3": "Firma",
+	"text3": "Firma modülüne isteğe bağlı olarak firma detaylarınızı girebilirsiniz. Bu bilgiler program akışında etkin bir rol oynamaz, yalnızca hatırlatıcı niteliktedir. ",
+
+	"title4": "Firma > Çalışanlar",
+	"text4": "Bu modül, firma çalışanlarına ödenen ücretlerin tanımlandığı alandır. Çalışan eklerken dikkat edilmesi gereken en önemli kısım, departmandır. İmalat departmanı seçilerek tanımlanan çalışanların giderleri, işçilik gideri olarak hesaplanacaktır. Diğer departmanlar, genel sabit masraf olarak görülür.",
+
+	"title5": "Firma > Giderler",
+	"text5": "Bu modül, firmanızın genel giderlerinin tanımlandığı bölümdür. İmalattan bağımsız giderler burada belirlenir. Kiralar, faturalar, finansman giderleri vb. kategorileri ve hangi sıklıkla oluştukları seçilerek tanımlanır. Bu bilgiler, firma giderlerini detaylı analiz etmenizi sağlar. Giderler tablosunda filtreleme yaparak hangi kategoride ne sıklıkla nelere ödeme yaptığınızı görebilir, analiz kısmında ise bir grafikle görsel olarak inceleyebilirsiniz.",
+
+	"title6": "İmalat > Ürün Tanımları",
+	"text6": "<0>Ürün tanımları burada yapılır. Ambalajlanmamış haliyle temel ürünleri temsil eder. Ürünün genel özellikleri ve yıllık üretim kapasitesi belirlenir. Bu ürünler son kullanıcıya satılacak ürünler değil, ambalajsız hallerini temsil eder. Aynı ürün, farklı ambalajlarla (örneğin 1 Litre ve 5 Litre) birleştirilerek 2 farklı son kullanıcı ürünü olarak üretilebilir. </0><1>Dikkat!</1><2>Ürün tanımında, yıllık üretim miktarı alanı önemlidir. Bu alan, firmanızın yıllık toplam üretim kapasitesini hesaplamada kullanılır. Dolayısıyla birim üretim işçilik maliyetinin hesaplanabilmesi, ürün tanımlarının doğruluğuna bağlıdır.</2>",
+
+	"title7": "İmalat > Reçeteler",
+	"text7": "İmalat reçeteleri burada tanımlanır. Ürün maliyetlerinin hesaplanması için en önemli tanımlar bunlardır.",
+
+	"title8": "Yeni bir reçete oluştururken",
 	"recipeSteps": {
-		"step1": "Define a recipe name, because products can have different recipes.",
-		"step2": "Choose the product that the recipe will produce",
-		"step3": "Define the yield. This will determine the amount of product this recipe will produce. ",
-		"step4": "Add the contents that the recipe will consume. Make sure the amounts are calculated for the recipe yield you've defined",
-		"step5": "Write any additional information in the notes section."
+		"step1": "Reçeteyi tanımlayan bir isim verin. Aynı ürün, farklı reçetelerle üretilebileceği için bu gereklidir.",
+		"step2": "Reçetenin kullanımıyla üretilen ürünü seçin",
+		"step3": "Reçete sonucunda çıkan ürün miktarını tanımlayın. ",
+		"step4": "Reçetede kullanılan hammaddeleri ve miktarlarını tanımlayın. Bu reçeteden çıkan ürün miktarıyla örtüşen girdi miktarları kullanmaya dikkat edin.",
+		"step5": "Eğer reçeteyle ilgili ekstra notlarınız varsa, notlar kısmında belirtin"
 	},
-	"text8": "After a recipe is created, we can change the yield for our desired amount and it’ll automatically scale the required materials. We can now generate a manufacturing order form for printing. "
+	"text8": "Reçete oluşturulduktan sonra, reçete görüntüleme sayfasında, ürün miktarını değiştirebiliriz. Ürün miktarına orantılı olarak hammadde girdileri de yeniden hesaplanır. Ardından bir üretim formu oluştur butonuna basarak talimat baskısı alabiliriz. "
 }

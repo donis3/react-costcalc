@@ -17,7 +17,7 @@ export default function Help() {
 
 				{/* About Items */}
 				<HelpItem title={t('title1')}>{t('text1')}</HelpItem>
-				<HelpItem title={t('title2')}>{t('text2')}</HelpItem>
+				<HelpItem title={t('title2')}>{t('text2', { appname })}</HelpItem>
 				<HelpItem title={t('title3')}>{t('text3')}</HelpItem>
 				<HelpItem title={t('title4')}>{t('text4')}</HelpItem>
 				<HelpItem title={t('title5')}>{t('text5')}</HelpItem>
