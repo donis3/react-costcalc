@@ -3,11 +3,14 @@ import { useTranslation } from 'react-i18next';
 import useIntl from '../../hooks/common/useIntl';
 
 export default function CostTableRow({ index, data, itemCallback = null } = {}) {
-	const { name = '', price = 0, tax = 0, quantity = 0, unit = 'kg', amount = 0, currency = '' } = data;
 	const { displayNumber, displayMoney } = useIntl();
 	const stripeClass = index % 2 === 0 ? '  ' : ' bg-base-200 ';
 	const additionalClass = ' p-3';
 	const { t } = useTranslation('translation');
+
+	//Extract row data
+	if (!data) return <></>;
+	const { name = '', price = 0, tax = 0, quantity = 0, unit = 'kg', amount = 0, currency = '' } = data;
 
 	//Clickable button if callback provided
 	const itemName =

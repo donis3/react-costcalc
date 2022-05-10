@@ -113,7 +113,7 @@ export class Recipe {
 		const newMaterials = this.materials.map((item) => {
 			//Load corresponding material as a class instance
 			const mat = this.materialsClass.findById(item.materialId, true);
-
+			if (!mat) return null;
 			const result = {
 				...item,
 				name: mat.name,
@@ -237,7 +237,6 @@ export class Recipe {
 		if (typeof this.dispatch !== 'function') return;
 		//Get the last saved unit cost
 		const oldCost = this.getLatestUnitCost();
-		
 
 		//Generate current cost
 		const newCost = {
@@ -298,7 +297,9 @@ export class Recipe {
 	*/
 	getMaterialsForTable() {
 		//Mutate materials for costTable requirements
+		
 		return this.materials.map((item) => {
+			if(!item) return null;
 			const newItem = {
 				id: item.materialId,
 				unit: item.unit,

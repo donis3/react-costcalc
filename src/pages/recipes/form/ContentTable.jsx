@@ -15,7 +15,7 @@ export default function ContentTable({ controls, recipeMaterials, recipeYield })
 	const { Materials } = useMaterialContext();
 	const materials = Materials?.getAll();
 	const selectedMaterial = materials ? materials[0] : null;
-	const unit = config.getUnitType(selectedMaterial.unit) === 'volume' ? 'L' : 'kg';
+	const unit = config.getUnitType(selectedMaterial?.unit) === 'volume' ? 'L' : 'kg';
 
 	const recipeWeight = totalWeight(recipeMaterials);
 	const initialUiState = {
