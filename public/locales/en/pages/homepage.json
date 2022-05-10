@@ -29,6 +29,12 @@
 		"todosTitle": "Tasks",
 		"todosName": "Task",
 		"todosNoItems": "There are currently no tasks.",
-		"todosReset": "Remove all tasks?"
+		"todosReset": "Remove all tasks?",
+		"historyTitle": "Company History",
+		"historyChartTitle": "Overhead & Labour Cost Over Time",
+		"productionHistoryChartTitle": "Annual Production",
+		"historyCostBtn": "Costs",
+		"historyProductionBtn": "Production",
+		"noHistoryData": "No historical data to display."
 	}
 }

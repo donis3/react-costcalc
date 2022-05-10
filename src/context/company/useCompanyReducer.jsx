@@ -248,7 +248,10 @@ export default function useCompanyReducer() {
 					return state;
 				}
 				//Something changed, add to history
-				let newProductionHistory = [{ ...payload, date: Date.now() }, ...state.history.production];
+				let newProductionHistory = [
+					{ unit: payload.unit, totalProduction: payload.totalProduction, date: Date.now() },
+					...state.history.production,
+				];
 				if (newProductionHistory.length > historyMax) {
 					newProductionHistory = newProductionHistory.slice(0, historyMax);
 				}

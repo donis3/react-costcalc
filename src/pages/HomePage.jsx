@@ -10,6 +10,7 @@ import Todo from './widgets/todo/Todo';
 import { useTranslation } from 'react-i18next';
 import { GoSettings } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import CompanyHistory from './widgets/companyhistory/CompanyHistory';
 
 export default function HomePage() {
 	const { t } = useTranslation('pages/homepage');
@@ -36,6 +37,10 @@ export default function HomePage() {
 
 			<Card className='w-full p-0 mb-10' shadow='shadow-md'>
 				<Todo />
+			</Card>
+
+			<Card className='w-full p-0 mb-10' shadow='shadow-md'>
+				<CompanyHistory />
 			</Card>
 		</>
 	);
