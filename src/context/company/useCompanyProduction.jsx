@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import useConfig from '../../hooks/app/useConfig';
-import useProducts from '../../hooks/products/useProducts';
 import { CompanyContext } from '../CompanyContext';
+import { useProductsContext } from '../MainContext';
 import useCompanyDefaults from './useCompanyDefaults';
 
 /**
@@ -10,7 +10,7 @@ import useCompanyDefaults from './useCompanyDefaults';
  */
 export default function useCompanyProduction() {
 	const [company, dispatch] = useContext(CompanyContext);
-	const { products = {} } = useProducts();
+	const { products = {} } = useProductsContext();
 	const { production: defaultProduction } = useCompanyDefaults();
 	const config = useConfig();
 
@@ -29,7 +29,7 @@ export default function useCompanyProduction() {
 	 * Generate a total production object using product data
 	 * @returns {object}
 	 */
-	function calculateTotalProduction() {
+	function calculateTotalProduction(products) {
 		//Default result object with current production value
 		const result = getCurrentProduction();
 		const unit = config.getUnitType(result.unit) === 'weight' ? 'kg' : result.unit;
@@ -56,7 +56,7 @@ export default function useCompanyProduction() {
 	useEffect(() => {
 		dispatch({
 			type: 'UpdateCompanyProduction',
-			payload: calculateTotalProduction(),
+			payload: calculateTotalProduction(products),
 			success: function () {
 				if (!config.get('debug.companyProduction')) return;
 				console.log(`Updated company production totals`);
@@ -67,7 +67,7 @@ export default function useCompanyProduction() {
 			},
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [products]);
 
 	return {};
 }

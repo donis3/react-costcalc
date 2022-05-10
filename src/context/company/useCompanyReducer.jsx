@@ -2,6 +2,9 @@ import useCompanyDefaults from './useCompanyDefaults';
 import { v4 as uuid4, validate as validateId } from 'uuid';
 import useCompanyExpenseCalculator from './useCompanyExpenseCalculator';
 
+//Number of history items allowed
+const historyMax = 20;
+
 export default function useCompanyReducer() {
 	//Dependencies
 	const { defaultCompany, defaultEmployee, defaultExpense } = useCompanyDefaults();
@@ -22,6 +25,13 @@ export default function useCompanyReducer() {
 			if (typeof error === 'function') error(errCode);
 			return state;
 		}
+
+		//Check state keys and add missing defaults
+		Object.keys(defaultCompany).forEach((key) => {
+			if (key in state === false) {
+				state[key] = defaultCompany[key];
+			}
+		});
 
 		//ACTIONS
 		switch (type) {
@@ -237,10 +247,19 @@ export default function useCompanyReducer() {
 					//Both data are the same, no need to update
 					return state;
 				}
+				//Something changed, add to history
+				let newProductionHistory = [{ ...payload, date: Date.now() }, ...state.history.production];
+				if (newProductionHistory.length > historyMax) {
+					newProductionHistory = newProductionHistory.slice(0, historyMax);
+				}
 				//Update update time
 				payload.updatedAt = Date.now();
 
-				return onSuccess({ ...state, production: payload });
+				return onSuccess({
+					...state,
+					production: payload,
+					history: { ...state.history, production: newProductionHistory },
+				});
 			}
 			/**
 			 * Update company totals data (total costs)
@@ -252,12 +271,57 @@ export default function useCompanyReducer() {
 					let mergedPayload = { ...state.totals, ...payload, updatedAt: state.totals?.updatedAt };
 					if (JSON.stringify(state.totals) === JSON.stringify(mergedPayload)) {
 						//Both data are the same, no need to update
-						return state;
+						//return state;
 					}
 				}
+				//Calculate current overhead and labor
+				const newOverheadHistoryItem = { currency: payload.currency, amount: 0, date: Date.now() };
+				const newLaborHistoryItem = { currency: payload.currency, amount: 0, date: Date.now() };
+				if (payload?.expensesWithTax > 0) newOverheadHistoryItem.amount += payload?.expensesWithTax;
+				if (payload?.salariesGross > 0) newOverheadHistoryItem.amount += payload?.salariesGross;
+				if (payload?.labourGross > 0) newLaborHistoryItem.amount += payload?.labourGross;
+
+				let newOverheadHistory = [...state.history?.overhead];
+				let newLaborHistory = [...state.history?.labor];
+				//Compare last overhead value and add to state if eligible
+				if (state.history?.overhead?.length > 0) {
+					if (isNaN(parseFloat(state?.history?.overhead?.[0]?.amount)) === false) {
+						const lastAmount = parseFloat(state.history.overhead[0].amount);
+						const diff = Math.abs(lastAmount - newOverheadHistoryItem.amount);
+						if (diff > 0.1) {
+							newOverheadHistory.unshift(newOverheadHistoryItem);
+						}
+					}
+				} else {
+					//Brand new history array
+					newOverheadHistory.unshift(newOverheadHistoryItem);
+				}
+
+				//Compare last labor value and add to state if eligible
+				if (state.history?.labor?.length > 0) {
+					if (isNaN(parseFloat(state?.history?.labor?.[0]?.amount)) === false) {
+						const lastAmount = parseFloat(state.history.labor[0].amount);
+						const diff = Math.abs(lastAmount - newLaborHistoryItem.amount);
+						if (diff > 0.1) {
+							newLaborHistory.unshift(newLaborHistoryItem);
+						}
+					}
+				} else {
+					//Brand new history array
+					newLaborHistory.unshift(newLaborHistoryItem);
+				}
+
+				//Enforce Max history size
+				if (newLaborHistory.length > historyMax) newLaborHistory = newLaborHistory.slice(0, historyMax);
+				if (newOverheadHistory.length > historyMax) newOverheadHistory = newOverheadHistory.slice(0, historyMax);
+
 				//Update update time and return
 				payload.updatedAt = Date.now();
-				return onSuccess({ ...state, totals: payload });
+				return onSuccess({
+					...state,
+					totals: payload,
+					history: { ...state.history, overhead: newOverheadHistory, labor: newLaborHistory },
+				});
 			}
 			// Unsupported Dispatch Type
 			default: {

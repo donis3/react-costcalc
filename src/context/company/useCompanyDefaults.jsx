@@ -100,6 +100,11 @@ export default function useCompanyDefaults() {
 			unit: config.get('company.defaultProductionUnit'),
 			totalProduction: 0,
 		},
+		history: {
+			overhead: [],
+			labor: [],
+			production: [],
+		},
 	};
 
 	return {
@@ -113,5 +118,6 @@ export default function useCompanyDefaults() {
 		expenseCategories,
 		production: defaultCompany.production,
 		totals: defaultCompany.totals,
+		history: defaultCompany.history,
 	};
 }

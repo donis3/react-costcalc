@@ -6,9 +6,11 @@ import ProductForm from './ProductForm';
 import ProductInfo from './ProductInfo';
 import Button from '../../components/common/Button';
 import ModuleHeader from '../../components/layout/ModuleHeader';
+import useCompanyProduction from '../../context/company/useCompanyProduction';
 
 export default function Products() {
 	const { t } = useTranslation('pages/products', 'translation');
+	useCompanyProduction();
 	const [modalState, setModalState] = useState({ isOpen: false, type: 'info', productId: 0 });
 
 	//Modal Handler
