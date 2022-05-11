@@ -7,13 +7,32 @@ import useConfig from '../hooks/app/useConfig';
 import { toast } from 'react-toastify';
 import { getRepoStorageKey } from '../hooks/common/useStorageRepo';
 
+/**
+ * HOW TO ADD MORE DEMOS:
+ * After you've decided on your demo name for example: lemonade,
+ * go to public/img and create a lemonade.jpg
+ * go to public/locales/demo.json and create a lemonade key with title, scenario texts
+ * go to src/data and create a lemonade.json with a backup data for the given demo
+ * and lastly, just add the demo name to demos array below
+ * ['lemonade']
+ *
+ */
+const demos = ['lemonade', 'supplement'];
+
 export default function Demo() {
 	const { t } = useTranslation('pages/demo');
 	const config = useConfig();
 	const appname = config.get('app.name');
-	const demos = ['lemonade', 'supplement'];
-	let loadTimer = null;
+	let loadTimer = null; //Timeout reference to clear on dismount
 
+	/**
+	 * Asynchronously attempts to load the data/demoname.json
+	 * If the file exists and is an object with keys,
+	 * converts it to a json string and saves it to local storage appName.application
+	 * then creates a timeout of 2 seconds before reloading the app
+	 * @param {string} demoName Name of the demo file
+	 * @returns {void}
+	 */
 	const loadDemo = async (demoName = null) => {
 		if (!demoName) return;
 		let demoData = '';
@@ -47,6 +66,9 @@ export default function Demo() {
 		}
 	};
 
+	/**
+	 * If there is an active timeout, clear it on dismount
+	 */
 	useEffect(() => {
 		return () => {
 			if (loadTimer) {
@@ -97,7 +119,7 @@ function DemoCard({ demoName = 'demo', callback = null } = {}) {
 					alt={demoName}
 				/>
 			</figure>
-			<div className='card-body w-3/4 h-[500px]'>
+			<div className='card-body w-full lg:w-3/4 h-[500px] '>
 				<h2 className='card-title'>{warn ? t('warningTitle') : t(`${demoName}.title`)}</h2>
 				<p className='whitespace-pre-wrap'>{warn ? t('warningText') : t(`${demoName}.scenario`)}</p>
 
