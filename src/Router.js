@@ -9,9 +9,11 @@ import Expenses from './pages/company/Expenses';
 import ExpenseChart from './pages/company/expenses/ExpenseChart';
 import ExpenseDetails from './pages/company/expenses/ExpenseDetails';
 import ExpenseForm from './pages/company/expenses/ExpenseForm';
+import Contact from './pages/Contact';
 
 import Currency from './pages/currencies/Currency';
 import CurrencySelectOne from './pages/currencies/CurrencySelectOne';
+import Demo from './pages/Demo';
 import EndProduct from './pages/endproducts/EndProduct';
 import EndProductForm from './pages/endproducts/EndProductForm';
 import EndProducts from './pages/endproducts/EndProducts';
@@ -38,6 +40,10 @@ export default function Router() {
 			<Route path='/about' element={<About />} />
 			{/* Help Page */}
 			<Route path='/help' element={<Help />} />
+			{/* Demo Page */}
+			<Route path='/demo' element={<Demo />} />
+			{/* Contact Page */}
+			<Route path='/contact' element={<Contact />} />
 
 			{/* Settings */}
 			<Route path='/system' element={<System />} />

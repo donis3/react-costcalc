@@ -1,0 +1,623 @@
+{
+	"materials": [
+		{
+			"materialId": 0,
+			"tax": 18,
+			"price": 110,
+			"density": 1,
+			"name": "Potas Kostik",
+			"provider": "potaçı",
+			"currency": "USD",
+			"unit": "t",
+			"priceHistory": [{ "date": 1649081045040, "amount": 110 }],
+			"localPriceHistory": [
+				{ "date": 1650016026883, "amount": 1608.2 },
+				{ "date": 1649665459770, "amount": 1619.2 },
+				{ "date": 1649081045040, "amount": 1618.1 }
+			],
+			"createdAt": 1649081000799,
+			"updatedAt": 1649081000799
+		},
+		{
+			"materialId": 1,
+			"tax": 8,
+			"price": 400,
+			"density": 1,
+			"name": "Koko beyaz",
+			"provider": "afgan",
+			"currency": "TRY",
+			"unit": "kg",
+			"priceHistory": [{ "date": 1650124961061, "amount": 400 }],
+			"localPriceHistory": [{ "date": 1650124961061, "amount": 400 }],
+			"createdAt": 1650124839697,
+			"updatedAt": 1650124839697
+		},
+		{
+			"materialId": 2,
+			"tax": 0,
+			"price": 200,
+			"density": 1,
+			"name": "Koko siyah",
+			"provider": "suri",
+			"currency": "TRY",
+			"unit": "kg",
+			"priceHistory": [{ "date": 1650124982208, "amount": 200 }],
+			"localPriceHistory": [{ "date": 1650124982208, "amount": 200 }],
+			"createdAt": 1650124839697,
+			"updatedAt": 1650124839697
+		},
+		{
+			"materialId": 3,
+			"tax": 8,
+			"price": 18,
+			"density": 1.4,
+			"name": "kaka esansı",
+			"provider": "götal kimya",
+			"currency": "EUR",
+			"unit": "mL",
+			"priceHistory": [{ "date": 1650125009164, "amount": 18 }],
+			"localPriceHistory": [
+				{ "date": 1650725695429, "amount": 286.74 },
+				{ "date": 1650556722008, "amount": 288.36 },
+				{ "date": 1650125009164, "amount": 284.94 }
+			],
+			"createdAt": 1650124839697,
+			"updatedAt": 1650124839697
+		}
+	],
+	"currencies": {
+		"USD": [
+			{ "date": 1650650214243, "from": "USD", "to": "TRY", "rate": 14.73 },
+			{ "date": 1650556014539, "from": "USD", "to": "TRY", "rate": 14.69 },
+			{ "date": 1650453724265, "from": "USD", "to": "TRY", "rate": 14.66 },
+			{ "date": 1650111217269, "from": "USD", "to": "TRY", "rate": 14.64 },
+			{ "date": 1649951690217, "from": "USD", "to": "TRY", "rate": 14.62 },
+			{ "date": 1649172337115, "from": "USD", "to": "TRY", "rate": 14.72 },
+			{ "date": 1649080999600, "from": "USD", "to": "TRY", "rate": 14.71 },
+			{ "date": 1649080990654, "from": "USD", "to": "TRY", "rate": 1 }
+		],
+		"EUR": [
+			{ "date": 1650650214282, "from": "EUR", "to": "TRY", "rate": 15.93 },
+			{ "date": 1650556014620, "from": "EUR", "to": "TRY", "rate": 16.02 },
+			{ "date": 1650111217319, "from": "EUR", "to": "TRY", "rate": 15.83 },
+			{ "date": 1649951690224, "from": "EUR", "to": "TRY", "rate": 15.94 },
+			{ "date": 1649172337173, "from": "EUR", "to": "TRY", "rate": 16.16 },
+			{ "date": 1649080999622, "from": "EUR", "to": "TRY", "rate": 16.21 },
+			{ "date": 1649080990654, "from": "EUR", "to": "TRY", "rate": 1 }
+		]
+	},
+	"products": [
+		{ "productId": 0, "code": "UPX", "name": "Unipot", "isLiquid": false, "density": 1, "production": 500 },
+		{ "productId": 1, "code": "551", "name": "Mokapot", "isLiquid": true, "density": 1.2, "production": 100 },
+		{ "productId": 2, "code": "12", "name": "Kakapot", "isLiquid": false, "density": 1, "production": 350 },
+		{ "productId": 3, "code": "1", "name": "Mokapot", "isLiquid": false, "density": 1, "production": 33 }
+	],
+	"recipes": [
+		{
+			"name": "Unipot Klasik 2",
+			"recipeId": 1,
+			"productId": 0,
+			"yield": 250,
+			"notes": "Değirmene attık mıydı \nbekliyoruz biraz\nsonra tamam :))",
+			"materials": [{ "materialId": 0, "amount": 170, "unit": "kg" }],
+			"createdAt": 1649081138407,
+			"updatedAt": 1650453154846,
+			"unitCosts": [
+				{ "recipeId": 1, "date": 1650365563216, "cost": 1.0948, "costWithTax": 1.292 },
+				{ "recipeId": 1, "date": 1650024495504, "cost": 0.7728, "costWithTax": 0.912 }
+			]
+		},
+		{
+			"name": "Sıvı Mokoko",
+			"recipeId": 2,
+			"productId": 1,
+			"yield": 500,
+			"notes": "esansı az ko",
+			"materials": [
+				{ "materialId": 3, "amount": 1, "unit": "L" },
+				{ "materialId": 1, "amount": 2, "unit": "kg" },
+				{ "materialId": 2, "amount": 200, "unit": "kg" }
+			],
+			"createdAt": 1650628036701,
+			"updatedAt": 1650628036701,
+			"unitCosts": [
+				{ "recipeId": 2, "date": 1650650220546, "cost": 655.08, "costWithTax": 701.0864 },
+				{ "recipeId": 2, "date": 1650628118732, "cost": 658.32, "costWithTax": 704.5856 }
+			],
+			"date": 1650650220546,
+			"cost": 655.08,
+			"costWithTax": 701.0864
+		},
+		{
+			"name": "çüko",
+			"recipeId": 3,
+			"productId": 1,
+			"yield": 500,
+			"notes": "",
+			"materials": [
+				{ "materialId": 1, "amount": 50, "unit": "kg" },
+				{ "materialId": 0, "amount": 80, "unit": "kg" },
+				{ "materialId": 3, "amount": 0.01, "unit": "L" }
+			],
+			"createdAt": 1650650748237,
+			"updatedAt": 1650650748237,
+			"unitCosts": []
+		}
+	],
+	"packages": [
+		{
+			"name": "Dumbo",
+			"productType": "liquid",
+			"packageCapacity": 50,
+			"notes": ":D",
+			"items": [
+				{ "name": "borumbombo", "packageType": "container", "itemPrice": 0, "itemTax": 0, "itemCurrency": "TRY" },
+				{
+					"name": "binini",
+					"packageType": "box",
+					"itemPrice": 0,
+					"itemTax": 0,
+					"itemCurrency": "TRY",
+					"boxCapacity": 20
+				},
+				{ "name": "zumbo", "packageType": "other", "itemPrice": 0, "itemTax": 0, "itemCurrency": "TRY" }
+			],
+			"packageId": 2,
+			"updatedAt": 1650453649179,
+			"cost": 0,
+			"currency": "TRY",
+			"tax": 0,
+			"costWithTax": 0,
+			"costHistory": [{ "cost": 0, "currency": "TRY", "date": 1650453649232, "change": 0 }],
+			"unit": "L",
+			"createdAt": 1650453649179
+		},
+		{
+			"name": "Folyo 3Kg",
+			"productType": "solid",
+			"packageCapacity": 3,
+			"notes": "Unipot için düşük kalite kendinden etiketli",
+			"items": [
+				{ "name": "Baskılı folyo", "packageType": "container", "itemPrice": 1.1, "itemTax": 8, "itemCurrency": "EUR" },
+				{
+					"name": "koli ",
+					"packageType": "box",
+					"itemPrice": 15,
+					"itemTax": 18,
+					"itemCurrency": "TRY",
+					"boxCapacity": 8
+				}
+			],
+			"packageId": 0,
+			"updatedAt": 1649081303353,
+			"cost": 19.395,
+			"currency": "TRY",
+			"tax": 1.7390999999999999,
+			"costWithTax": 21.134099999999997,
+			"costHistory": [
+				{ "cost": 19.395, "currency": "TRY", "date": 1650650216036, "change": -0.51 },
+				{ "cost": 19.495, "currency": "TRY", "date": 1650556016419, "change": 1.09 },
+				{ "cost": 19.285, "currency": "TRY", "date": 1650111219472, "change": -0.62 },
+				{ "cost": 19.405, "currency": "TRY", "date": 1649951691802, "change": -1.27 },
+				{ "cost": 19.655, "currency": "TRY", "date": 1649172338726, "change": -0.25 },
+				{ "cost": 19.705, "currency": "TRY", "date": 1649081303387, "change": 0 }
+			],
+			"unit": "kg",
+			"createdAt": 1649081303353
+		},
+		{
+			"name": "Shit und scheize",
+			"productType": "liquid",
+			"packageCapacity": 34,
+			"notes": "asffa",
+			"items": [],
+			"packageId": 1,
+			"updatedAt": 1650453556216,
+			"cost": 0,
+			"currency": "TRY",
+			"tax": 0,
+			"costWithTax": 0,
+			"costHistory": [],
+			"unit": "L",
+			"createdAt": 1650453556217
+		}
+	],
+	"endproducts": [
+		{
+			"recipeId": 1,
+			"packageId": 0,
+			"name": "Unipot yerli",
+			"commercialName": "Unipot Ultra 3",
+			"notes": "very yerili\n",
+			"endId": 0,
+			"updatedAt": 1649081945593,
+			"cost": {
+				"labourCost": 400.8424725822532,
+				"labourCostTax": 121.61515453639083,
+				"recipeCost": 3.2843999999999998,
+				"recipeTax": 0.5916000000000001,
+				"packageCost": 19.395,
+				"packageTax": 1.7390999999999999,
+				"total": 423.5218725822532,
+				"totalWithTax": 547.467727118644
+			},
+			"costHistory": [
+				{ "date": 1652185518094, "amount": 547.467727118644 },
+				{ "date": 1650714016997, "amount": 605.3257146179403 },
+				{ "date": 1650650222307, "amount": 605.8406647840532 },
+				{ "date": 1650628388029, "amount": 605.9486647840532 },
+				{ "date": 1650628328013, "amount": 25.118100000000002 },
+				{ "date": 1650628280744, "amount": 25.118100000000002 },
+				{ "date": 1650556396304, "amount": 25.118100000000002 },
+				{ "date": 1650365731670, "amount": 24.8913 },
+				{ "date": 1650111224773, "amount": 23.7513 }
+			],
+			"createdAt": 1649081945593
+		},
+		{
+			"recipeId": 2,
+			"packageId": 2,
+			"name": "Mokoko 50x",
+			"commercialName": "Unicit Mokok",
+			"notes": "güzel",
+			"endId": 1,
+			"updatedAt": 1650896866899,
+			"cost": {
+				"labourCost": 8016.849451645065,
+				"labourCostTax": 2432.303090727817,
+				"recipeCost": 32754.000000000004,
+				"recipeTax": 2300.3199999999993,
+				"packageCost": 0,
+				"packageTax": 0,
+				"total": 40770.84945164507,
+				"totalWithTax": 45503.47254237288
+			},
+			"costHistory": [
+				{ "date": 1652185518094, "amount": 45503.47254237288 },
+				{ "date": 1650714016997, "amount": 46660.63229235881 },
+				{ "date": 1650650222307, "amount": 46670.93129568107 },
+				{ "date": 1650628388029, "amount": 46845.89129568107 },
+				{ "date": 1650628328013, "amount": 35229.28 },
+				{ "date": 1650628280744, "amount": 35229.28 },
+				{ "date": 1650628134127, "amount": 35229.28 },
+				{ "date": 1650628088666, "amount": 0 },
+				{ "date": 1650628080896, "amount": 35229.28 }
+			],
+			"createdAt": 1650628080842
+		}
+	],
+	"company": {
+		"info": {
+			"name": "Unikim Co.",
+			"legalName": "Unikim Kimya Ltd Şti",
+			"founder": "Volky",
+			"about": "Dreams Inc is a tech company that brings digital joy.",
+			"establishedOn": "1999-12-31T22:00:00.000Z",
+			"address": "Dreams Building, 200 Elgin Ave",
+			"city": "George Town",
+			"country": "Cayman Islands",
+			"phone": "2121000000",
+			"mobile": "5321000000",
+			"fax": "2121000000",
+			"email": "company@example.com",
+			"taxId": "",
+			"website": "http://www.company.com"
+		},
+		"expenses": [
+			{
+				"expenseId": "7d82569a-fe90-477c-83e3-dd1c763e8cd5",
+				"name": "Elektrikx",
+				"category": "utilities",
+				"period": "m",
+				"unit": "kwh",
+				"quantity": 950,
+				"price": 1.99,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 22686, "amountWithTax": 26769.48 },
+					"m": { "currency": "TRY", "amount": 1890.5, "amountWithTax": 2230.79 },
+					"w": { "currency": "TRY", "amount": 435.0739726027397, "amountWithTax": 513.3872876712328 },
+					"d": { "currency": "TRY", "amount": 62.153424657534245, "amountWithTax": 73.3410410958904 },
+					"h": { "currency": "TRY", "amount": 2.58972602739726, "amountWithTax": 3.055876712328767 }
+				}
+			},
+			{
+				"expenseId": "a32121ef-879f-4c63-987c-c0d39ee3fabf",
+				"name": "Kira",
+				"category": "rent",
+				"period": "m",
+				"unit": "other",
+				"quantity": 1,
+				"price": 1000,
+				"tax": 18,
+				"currency": "USD",
+				"cost": {
+					"y": { "currency": "USD", "amount": 12000, "amountWithTax": 14160 },
+					"m": { "currency": "USD", "amount": 1000, "amountWithTax": 1180 },
+					"w": { "currency": "USD", "amount": 230.13698630136986, "amountWithTax": 271.56164383561645 },
+					"d": { "currency": "USD", "amount": 32.87671232876713, "amountWithTax": 38.794520547945204 },
+					"h": { "currency": "USD", "amount": 1.36986301369863, "amountWithTax": 1.6164383561643836 }
+				}
+			},
+			{
+				"expenseId": "b5e6d2a2-9519-4e16-a9c6-07487cd2c8f1",
+				"name": "Emlak Vergisi",
+				"category": "government",
+				"period": "y",
+				"unit": "other",
+				"quantity": 1,
+				"price": 2500,
+				"tax": 0,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 2500, "amountWithTax": 2500 },
+					"m": { "currency": "TRY", "amount": 208.33333333333334, "amountWithTax": 208.33333333333334 },
+					"w": { "currency": "TRY", "amount": 47.94520547945205, "amountWithTax": 47.94520547945205 },
+					"d": { "currency": "TRY", "amount": 6.8493150684931505, "amountWithTax": 6.8493150684931505 },
+					"h": { "currency": "TRY", "amount": 0.2853881278538813, "amountWithTax": 0.2853881278538813 }
+				}
+			},
+			{
+				"expenseId": "45ca9bfb-97f2-4e5b-a1ad-b9dd35ef28c8",
+				"name": "Silgi",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 4,
+				"price": 50,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 200, "amountWithTax": 236 },
+					"m": { "currency": "TRY", "amount": 16.666666666666668, "amountWithTax": 19.666666666666668 },
+					"w": { "currency": "TRY", "amount": 3.835616438356164, "amountWithTax": 4.526027397260274 },
+					"d": { "currency": "TRY", "amount": 0.547945205479452, "amountWithTax": 0.6465753424657534 },
+					"h": { "currency": "TRY", "amount": 0.0228310502283105, "amountWithTax": 0.026940639269406392 }
+				}
+			},
+			{
+				"expenseId": "96ef6347-d635-4e35-a4d3-0a5e0825ae5a",
+				"name": "Kağıt",
+				"category": "office",
+				"period": "m",
+				"unit": "pcs",
+				"quantity": 2,
+				"price": 75,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 1800, "amountWithTax": 2124 },
+					"m": { "currency": "TRY", "amount": 150, "amountWithTax": 177 },
+					"w": { "currency": "TRY", "amount": 34.52054794520548, "amountWithTax": 40.73424657534246 },
+					"d": { "currency": "TRY", "amount": 4.931506849315069, "amountWithTax": 5.8191780821917805 },
+					"h": { "currency": "TRY", "amount": 0.2054794520547945, "amountWithTax": 0.24246575342465754 }
+				}
+			},
+			{
+				"expenseId": "517e1c6c-e658-49da-99f2-a6bb174ab638",
+				"name": "Kalem",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 50,
+				"price": 12,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 600, "amountWithTax": 708 },
+					"m": { "currency": "TRY", "amount": 50, "amountWithTax": 59 },
+					"w": { "currency": "TRY", "amount": 11.506849315068493, "amountWithTax": 13.57808219178082 },
+					"d": { "currency": "TRY", "amount": 1.643835616438356, "amountWithTax": 1.9397260273972603 },
+					"h": { "currency": "TRY", "amount": 0.0684931506849315, "amountWithTax": 0.08082191780821918 }
+				}
+			},
+			{
+				"expenseId": "0927b8de-d20d-4338-8ed0-49dfc6ee1093",
+				"name": "şeffaf dosya",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 3,
+				"price": 30,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 90, "amountWithTax": 106.19999999999999 },
+					"m": { "currency": "TRY", "amount": 7.5, "amountWithTax": 8.85 },
+					"w": { "currency": "TRY", "amount": 1.7260273972602738, "amountWithTax": 2.036712328767123 },
+					"d": { "currency": "TRY", "amount": 0.2465753424657534, "amountWithTax": 0.290958904109589 },
+					"h": { "currency": "TRY", "amount": 0.010273972602739725, "amountWithTax": 0.012123287671232875 }
+				}
+			},
+			{
+				"expenseId": "87c16895-aa40-4d31-8484-4ee05f790a75",
+				"name": "yazıcı toner",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 2,
+				"price": 500,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 1000, "amountWithTax": 1180 },
+					"m": { "currency": "TRY", "amount": 83.33333333333333, "amountWithTax": 98.33333333333333 },
+					"w": { "currency": "TRY", "amount": 19.17808219178082, "amountWithTax": 22.63013698630137 },
+					"d": { "currency": "TRY", "amount": 2.73972602739726, "amountWithTax": 3.232876712328767 },
+					"h": { "currency": "TRY", "amount": 0.1141552511415525, "amountWithTax": 0.13470319634703196 }
+				}
+			},
+			{
+				"expenseId": "e19ffdb4-c939-430d-bd12-f034c2646662",
+				"name": "Fax kağıdı",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 1,
+				"price": 50,
+				"tax": 8,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 50, "amountWithTax": 54 },
+					"m": { "currency": "TRY", "amount": 4.166666666666667, "amountWithTax": 4.5 },
+					"w": { "currency": "TRY", "amount": 0.958904109589041, "amountWithTax": 1.0356164383561643 },
+					"d": { "currency": "TRY", "amount": 0.136986301369863, "amountWithTax": 0.14794520547945206 },
+					"h": { "currency": "TRY", "amount": 0.005707762557077625, "amountWithTax": 0.0061643835616438354 }
+				}
+			},
+			{
+				"expenseId": "df91327a-6209-4738-ba25-ba7ea0199071",
+				"name": "Ataç",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 10,
+				"price": 5,
+				"tax": 8,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 50, "amountWithTax": 54 },
+					"m": { "currency": "TRY", "amount": 4.166666666666667, "amountWithTax": 4.5 },
+					"w": { "currency": "TRY", "amount": 0.958904109589041, "amountWithTax": 1.0356164383561643 },
+					"d": { "currency": "TRY", "amount": 0.136986301369863, "amountWithTax": 0.14794520547945206 },
+					"h": { "currency": "TRY", "amount": 0.005707762557077625, "amountWithTax": 0.0061643835616438354 }
+				}
+			},
+			{
+				"expenseId": "75a3ceb6-9116-49bf-a42b-07864912345b",
+				"name": "zımba teli",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 5,
+				"price": 25,
+				"tax": 8,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 125, "amountWithTax": 135 },
+					"m": { "currency": "TRY", "amount": 10.416666666666666, "amountWithTax": 11.25 },
+					"w": { "currency": "TRY", "amount": 2.3972602739726026, "amountWithTax": 2.5890410958904106 },
+					"d": { "currency": "TRY", "amount": 0.3424657534246575, "amountWithTax": 0.3698630136986301 },
+					"h": { "currency": "TRY", "amount": 0.014269406392694063, "amountWithTax": 0.015410958904109588 }
+				}
+			},
+			{
+				"expenseId": "369c2048-519a-4753-8e74-326b5b2e4803",
+				"name": "Labeling Machine Repairs",
+				"category": "maintenance",
+				"period": "y",
+				"unit": "other",
+				"quantity": 1,
+				"price": 1000,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 1000, "amountWithTax": 1180 },
+					"m": { "currency": "TRY", "amount": 83.33333333333333, "amountWithTax": 98.33333333333333 },
+					"w": { "currency": "TRY", "amount": 19.17808219178082, "amountWithTax": 22.63013698630137 },
+					"d": { "currency": "TRY", "amount": 2.73972602739726, "amountWithTax": 3.232876712328767 },
+					"h": { "currency": "TRY", "amount": 0.1141552511415525, "amountWithTax": 0.13470319634703196 }
+				}
+			}
+		],
+		"employees": [
+			{
+				"employeeId": "25279f50-bbc6-4e96-bcfb-0e44cec930b5",
+				"name": "işçi 1",
+				"department": "manufacturing",
+				"notes": "",
+				"gross": 60000,
+				"net": 50000,
+				"currency": "TRY",
+				"email": "donis@aga.com",
+				"mobile": "",
+				"dob": "1986-12-31T22:00:00.000Z",
+				"doe": "2022-01-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "e0f00afe-bcfa-40d3-823e-a32e39698c01",
+				"name": "işçi suri",
+				"department": "manufacturing",
+				"notes": "",
+				"gross": 4000,
+				"net": 3000,
+				"currency": "USD",
+				"email": "suri@ye.com",
+				"mobile": "",
+				"dob": "1986-12-31T22:00:00.000Z",
+				"doe": "2022-01-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "0f3743d9-c70c-40d0-b104-f6976d38d59f",
+				"name": "ofisboy",
+				"department": "other",
+				"notes": "",
+				"gross": 35000,
+				"net": 25000,
+				"currency": "TRY",
+				"email": "ofis@bo.com",
+				"mobile": "",
+				"dob": "1986-12-31T22:00:00.000Z",
+				"doe": "2022-01-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "3d3cbe7d-9b0d-4891-9b3f-4f7d1f1deeb4",
+				"name": "Yepyeni employi",
+				"department": "manufacturing",
+				"notes": "",
+				"gross": 3500,
+				"net": 2500,
+				"currency": "EUR",
+				"email": "asfaf@agag.co",
+				"mobile": "",
+				"dob": "1986-12-31T22:00:00.000Z",
+				"doe": "2022-01-31T21:00:00.000Z"
+			}
+		],
+		"totals": {
+			"currency": "TRY",
+			"updatedAt": 1652204417662,
+			"expenses": 206861,
+			"expensesWithTax": 243623.48,
+			"labourNet": 134015,
+			"labourGross": 174675,
+			"salariesNet": 25000,
+			"salariesGross": 35000
+		},
+		"production": { "updatedAt": 1652185093384, "unit": "kg", "totalProduction": 1003 },
+		"history": {
+			"overhead": [
+				{ "currency": "TRY", "amount": 278623.48, "date": 1652185132780 },
+				{ "currency": "TRY", "amount": 276874.72, "date": 1652185119835 }
+			],
+			"labor": [{ "currency": "TRY", "amount": 174675, "date": 1652185119835 }],
+			"production": [{ "unit": "kg", "totalProduction": 1003, "date": 1652185093384 }]
+		}
+	},
+	"widgets": {
+		"todos": [
+			{
+				"todoId": "87bc472e-4051-4891-b16e-902563aa04a9",
+				"text": "add other currency fetch opts",
+				"isComplete": false,
+				"createdAt": 1650980021821,
+				"updatedAt": 1650980021821
+			},
+			{
+				"todoId": "985f00da-c3dc-4648-ad2e-3a0a0d785c30",
+				"text": "translate",
+				"isComplete": true,
+				"createdAt": 1650980525590,
+				"updatedAt": 1652206905023
+			},
+			{
+				"todoId": "e010ec26-52a1-427f-87e8-d7538fb01843",
+				"text": "Add demo mode",
+				"isComplete": false,
+				"createdAt": 1652206903579,
+				"updatedAt": 1652206903579
+			}
+		]
+	}
+}

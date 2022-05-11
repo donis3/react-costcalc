@@ -1,0 +1,10 @@
+{
+	"title": "Contact Us",
+	"copyBtn": "Copy to clipboard",
+	"copyFeedback": "Copied!",
+	"lead": "Please contact us and say hi. We'd love to hear from you.",
+	"titleBug": "Bugs & Unexpected Behavior",
+	"textBug": "This is an experimental software and you may encounter bugs or unexpected behavior. Please send us an email describing the problem and we'll look into that asap!",
+	"titleRequest": "Feature Requests",
+	"textRequest": "If you have an idea on how we could improve {{appname}}, feel free to write us about it!"
+}

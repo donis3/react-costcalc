@@ -64,9 +64,7 @@
 		"morders": "Manufacturing Orders"
 	},
 	"footer": {
-		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
-		"about": "About",
-		"help": "Help"
+		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}"
 	},
 	"themes": {
 		"emerald": "Emerald Theme",
