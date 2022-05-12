@@ -35,7 +35,7 @@
 		"recipes": "Recipes",
 		"endproducts": "Products",
 		"widgets": "Widgets",
-
+		"selectAll": "Select All",
 		"resetSuccess": "Application data for {{modules}} is successfully deleted. Please wait for reload",
 		"resetError": "An error occurred while deleting requested data"
 	}

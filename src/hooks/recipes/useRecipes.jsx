@@ -1,7 +1,6 @@
 import { useReducer, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 
 import useStorageRepo from '../common/useStorageRepo';
@@ -22,8 +21,6 @@ export default function useRecipes() {
 
 	//Products repo
 	const { products } = useProducts();
-	
-	
 
 	//Recipes API
 	const findById = (recipeId = null) => {
@@ -63,8 +60,6 @@ export default function useRecipes() {
 			};
 		});
 
-		
-
 		return result;
 	};
 
@@ -95,7 +90,7 @@ export default function useRecipes() {
 		const result = recipesState.filter((item) => {
 			return item.materials.find((mat) => mat.materialId === materialId);
 		});
-		
+
 		return result ? result : [];
 	};
 

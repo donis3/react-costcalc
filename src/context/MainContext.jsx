@@ -7,21 +7,21 @@ import useProducts from '../hooks/products/useProducts';
 import useRecipes from '../hooks/recipes/useRecipes';
 
 /* Create Contexts Here Separately */
-const MaterialContext = createContext();
-const MaterialDispatch = createContext();
-const ProductsContext = createContext();
-const ProductsDispatch = createContext();
-const CurrencyContext = createContext();
-const CurrencyDispatch = createContext();
+export const MaterialContext = createContext();
+export const MaterialDispatch = createContext();
+export const ProductsContext = createContext();
+export const ProductsDispatch = createContext();
+export const CurrencyContext = createContext();
+export const CurrencyDispatch = createContext();
 
 export const RecipesContext = createContext();
-const RecipesDispatch = createContext();
+export const RecipesDispatch = createContext();
 
-const PackagesContext = createContext();
-const PackagesDispatch = createContext();
+export const PackagesContext = createContext();
+export const PackagesDispatch = createContext();
 
-const EndProductsContext = createContext();
-const EndProductsDispatch = createContext();
+export const EndProductsContext = createContext();
+export const EndProductsDispatch = createContext();
 
 /* Providers */
 export default function MainContext({ children }) {

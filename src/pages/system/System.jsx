@@ -64,6 +64,27 @@ export default function System() {
 		}, 0);
 	}
 
+	function toggleAllReset() {
+		const keyCount = Object.keys(resetState).length;
+		const selected = Object.keys(resetState).filter((key) => {
+			return resetState[key] === true;
+		});
+		//There is at least 1 selected: toggle all to true
+		if (selected.length !== keyCount) {
+			setResetState((state) => {
+				return Object.keys(state).reduce((acc, key) => {
+					return { ...acc, [key]: true };
+				}, {});
+			});
+		} else {
+			setResetState((state) => {
+				return Object.keys(state).reduce((acc, key) => {
+					return { ...acc, [key]: false };
+				}, {});
+			});
+		}
+	}
+
 	//===============// File Upload Handler //===============//
 	const fileRef = useRef();
 	const handleFile = (e) => {
@@ -133,7 +154,11 @@ export default function System() {
 
 			{/* Reset Card */}
 			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-				<ModuleHeader text={t('reset.title')} module='system' role='main' customIcon='FaExclamation' />
+				<ModuleHeader text={t('reset.title')} module='system' role='main' customIcon='FaExclamation'>
+					<button type='button' className='btn btn-sm btn-ghost' onClick={toggleAllReset}>
+						{t('reset.selectAll')}
+					</button>
+				</ModuleHeader>
 				<p className='opacity-80 text-sm'>{t('reset.lead')}</p>
 
 				<div className='grid grid-cols-2 mt-5 gap-5'>
