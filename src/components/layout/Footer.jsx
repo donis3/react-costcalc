@@ -7,7 +7,7 @@ import AppContext from '../../context/AppContext';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
-	const { t } = useTranslation('translation');
+	const { t } = useTranslation('translation', 'routes');
 	const { theme } = useContext(AppContext);
 	const [isThemeSelectOpen, setThemeSelectOpen] = useState(false);
 
@@ -32,13 +32,23 @@ export default function Footer() {
 				<div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end'>
 					<ul className='flex gap-2'>
 						<li>
+							<Link to='/demo' className='link'>
+								{t('demo', { ns: 'routes' })}
+							</Link>
+						</li>
+						<li>
+							<Link to='/contact' className='link'>
+								{t('contact', { ns: 'routes' })}
+							</Link>
+						</li>
+						<li>
 							<Link to='/about' className='link'>
-								{t('footer.about')}
+								{t('about', { ns: 'routes' })}
 							</Link>
 						</li>
 						<li>
 							<Link to='/help' className='link'>
-								{t('footer.help')}
+								{t('help', { ns: 'routes' })}
 							</Link>
 						</li>
 					</ul>

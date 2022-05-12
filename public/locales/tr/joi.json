@@ -5,7 +5,6 @@
 		"alternatives.match": "{{#label}}, zorunlu olan hiçbir tipe uymuyor",
 		"alternatives.one": "{{#label}}, izin verilen tiplerin birden fazlasıyla örtüşüyor",
 		"alternatives.types": "{{#label}} yalnızca {{#types}} tiplerinden biri olabilir",
-
 		"any.custom": "{{#label}} özel doğrulamada başarısız oldu. {{#error.message}}",
 		"any.default": "{{#label}} doğrulaması, varsayılan yöntemde bir hataya sebep oldu",
 		"any.failover": "{{#label}} doğrulaması, hata-aşımı yönteminde bir hataya sebep oldu",
@@ -14,7 +13,6 @@
 		"any.ref": "{{#label}} {{#arg}} referansları {{:#ref}} hangi {{#reason}}",
 		"any.required": "{{#label}} zorunludur",
 		"any.unknown": "{{#label}} kullanılamaz",
-
 		"array.base": "{{#label}} bir dizi olmalı",
 		"array.excludes": "{{#label}} izin verilmeyen bir değer içeriyor",
 		"array.hasKnown": "{{#label}},  {:#patternLabel} tipinde en az bir değer içermeli",
@@ -32,13 +30,11 @@
 		"array.sort.unsupported": "{{#label}} {#type} tipi geçersiz olduğu için sıralanamıyor",
 		"array.sparse": "{{#label}} dizisindeki elemanlardan biri boşluk olamaz",
 		"array.unique": "{{#label}} dizisinde aynı elemandan birden fazla olamaz",
-
 		"binary.base": "{{#label}} buffer veya string olmalı",
 		"binary.length": "{{#label}} tam olarak {{#limit}} byte olmalı",
 		"binary.max": "{{#label}} en fazla {{#limit}} byte olmalı",
 		"binary.min": "{{#label}} en az {{#limit}} byte olmalı",
 		"boolean.base": "{{#label}} bir boolean değeri olmalı",
-
 		"date.base": "{{#label}} geçerli bir tarih olmalı",
 		"date.format": "{{#label}} tarih formatı {msg(\"date.format.\" + #format) || #format} olmalı",
 		"date.greater": "{{#label}}, {{:#limit}} tarihinde veya sonra olmalı",
@@ -48,12 +44,10 @@
 		"date.format.iso": "ISO 8601 tarihi",
 		"date.format.javascript": "tarih damgası veya milisaniye",
 		"date.format.unix": "tarih damgası veya saniye",
-
 		"function.arity": "{{#label}} parametre sayısı {{#n}} olmalı",
 		"function.class": "{{#label}} bir class olmalı",
 		"function.maxArity": "{{#label}} en fazla {{#n}} parametre almalı",
 		"function.minArity": "{{#label}} en az {{#n}} parametre almalı",
-
 		"object.and": "{{#label}}, gereken anahtarlar {{#missingWithLabels}} olmadan {{#presentWithLabels}} içeriyor",
 		"object.assert": "{{#label}} hatalı çünkü: {if(#subject.key, `\"` + #subject.key + `\" başarısız ` + (#message || \"teyit testi geçme\"), #message || \"teyit başarısız\")}",
 		"object.base": "{{#label}} türü {{#type}} olmalı",
@@ -74,7 +68,6 @@
 		"object.with": "{{:#mainWithLabel}} için {{:#peerWithLabel}} anahtarı da olmalı",
 		"object.without": "{{:#mainWithLabel}}, {{:#peerWithLabel}} anahtarı ile çakışıyor",
 		"object.xor": "{{#label}} için {{#peersWithLabels}} yalnızca bir anahtar seçilebilecek çakışma mevcut",
-
 		"number.base": "{{#label}} bir sayı olmalı",
 		"number.greater": "{{#label}}, {{#limit}} değerinden yüksek olmalı",
 		"number.infinity": "{{#label}} sonsuzluk olamaz",
@@ -88,7 +81,6 @@
 		"number.positive": "{{#label}} pozitif bir sayı olmalı",
 		"number.precision": "{{#label}} en fazla {{#limit}} ondalık basamak içerebilir",
 		"number.unsafe": "{{#label}} güvenli bir sayı olmalı",
-
 		"string.alphanum": "{{#label}} sadece harf ve rakam içerebilir",
 		"string.base": "{{#label}} bir karakter dizisi olmalı",
 		"string.base64": "{{#label}} geçerli bir base64 yazı dizisi olmalı",
@@ -120,7 +112,6 @@
 		"string.uriCustomScheme": "{{#label}}, geçerli ve  {{#scheme}} kalıbına uyumlu bir uri olmalı",
 		"string.uriRelativeOnly": "{{#label}}, göreceli bir uri olmalı",
 		"string.uppercase": "{{#label}} sadece büyük harf içermeli",
-
 		"symbol.base": "{{#label}} bir sembol olmalı",
 		"symbol.map": "{{#label}}, {{#map}} değerlerinden biri olmalı"
 	}

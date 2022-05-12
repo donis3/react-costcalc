@@ -17,6 +17,8 @@ const modules = [
 	'system',
 	'about',
 	'help',
+	'demo',
+	'contact',
 ];
 
 export default function useModuleTheme({ module = 'home', role = 'main' }) {

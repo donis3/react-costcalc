@@ -34,6 +34,7 @@
 		"recipes": "Reçeteler",
 		"endproducts": "Ürünler",
 		"widgets": "Anasayfa Widget'leri",
+		"selectAll": "Tümünü Seç",
 		"resetSuccess": "{{modules}} modül verileri silindi. Uygulama yeniden yüklenecektir.",
 		"resetError": "İstenilen veriler silinirken bir hata oluştu"
 	}

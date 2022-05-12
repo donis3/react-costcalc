@@ -12,6 +12,7 @@ export default function useDeleteData() {
 	const config = useConfig();
 	const defaultData = useApplicationDefaults();
 	const data = getCurrentData(repoName);
+	
 	//Remove data that is not present in default data
 	const cleanData = Object.keys(data).reduce((acc, key) => {
 		if (key in defaultData) {

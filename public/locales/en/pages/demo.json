@@ -1,0 +1,23 @@
+{
+	"title": "{{appname}} Demo",
+	"lead": "You want to see the app in action but don't have time to add your product definitions, materials etc.. just to see what it can do? You can use our demo database and see for yourself.",
+	"warningTitle": "Warning!",
+	"warningText": "This action will delete all your existing data. Please make sure you have downloaded your backup file if you dont want to lose any data.",
+	"loadBtn": "Load Scenario",
+	"agree": "Okay, load it!",
+	"cancel": "Cancel",
+	"unavailable": "Demo data is currently unavailable. Please try again later",
+	"error": "Unable to load demo data. Please contact us if the problem persists",
+	"fileError": "Unable to load {{name}}. File doesn't exist",
+	"success": "Please wait while application reloads",
+
+	"lemonade": {
+		"title": "The Lemonade Company",
+		"scenario": "In this scenario, you are the director of a successful lemonade stand. You have 3 product definitions and multiple recipes for each product. \n\nAfter producing your lemonades, you have 3 kinds of packaging available to create end-user products. You have .33L can, 1L bottle and 20L barrel options. You of course employ a labor force (probably mom) for manufacturing. \n\nLoad this scenario to check your expenses and product costs! "
+	},
+
+	"supplement": {
+		"title": "Mega Nutrition!",
+		"scenario": "In this scenario, you run a supplement manufacturer! You'll have a variety of product definitions, ranging from protein powders to vitamin pills. Load this scenario now to see how that would work!"
+	}
+}

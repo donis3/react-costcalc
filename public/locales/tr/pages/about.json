@@ -1,21 +1,15 @@
 {
 	"title": "{{appname}} Hakkında",
-
 	"title1": "Nedir bu {{appname}}?",
 	"title1Text": "İmalat yapan kobiler başta olmak üzere, pek çok alanda kullanılabilecek bir maliyet hesaplama uygulamasıdır.",
-
 	"title2": "Verilerim nerede saklanıyor?",
 	"title2Text": "Verileriniz kendi cihazınızda, tarayıcınızın yerel saklama alanında saklanmaktadır. {{appname}} tamamen sizin cihazınızda çalışır ve herhangi bir veriyi tarafımıza göndermez. Verilerinizin güvenliği sizin sorumluluğunuzdadır.",
-
 	"title3": "Verilerim güvende mi?",
 	"title3Text": "{{appname}} uygulaması, herhangi bir sunucuya veri göndermez. Tüm verileriniz kendi cihazınızdadır. Paylaşılan cihazlarla bu uygulamayı kullanmamanızı ve verilerinizi sık sık yedeklemenizi tavsiye ediyoruz. Sistem sayfasından tüm verilerinizi kaydedebilir ve geri yükleyebilirsiniz. Kaydettiğiniz dosyayı bir bulut sağlayıcıda (Google Drive, oneDrive, iCloud gibi) saklamanızı öneririz. Böylece başka bir cihazda {{appname}} uygulamasına girip, bulutta tuttuğunuz yedek dosyasını yükleyebilirsiniz.",
-
 	"title4": "Bu uygulama hangi firmalar için uygun?",
 	"title4Text": "Bu uygulamanın asıl hedef kitlesi, imalat yapan ve ürettiği ürünleri ambalajlayan firmalardır. Aynı reçeteyle üretilen bir ürün farklı ambalajlara konularak satılabilecek şekilde modellenmiştir. Üretim yapmayan işletmeler veya ev giderlerini merak eden kullanıcılar da faydalanabilir.",
-
 	"title5": "Bu uygulama neden geliştirildi?",
 	"title5Text": "React.js kütüphanesini bir proje geliştirerek öğrenmek istedim ve kendi aile firmamızda işimize yarayacak bir uygulama yapmaya karar verdim ve birkaç ay sonra {{appname}} ilk versiyonuyla yayına girdi.",
-
 	"title6": "Sorumluluk Reddi",
 	"title6Text": "Bu deneysel bir uygulamadır. Lütfen uygulamanın hesaplarını kontrol edin ve doğruluğunu teyit etmeden finansal kararlar almayın. Burada verilen bilgiler yaklaşık değerlerdir. Herhangi bir garanti verilmemektedir. "
 }

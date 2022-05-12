@@ -5,7 +5,8 @@
 		"owner": "Deniz Özkan",
 		"releaseDate": "2022-02-09",
 		"localStorageKey": "costotus",
-		"git": "https://github.com/donis3"
+		"git": "https://github.com/donis3",
+		"contact": "info@costotus.com"
 	},
 	"exchangeRates": {
 		"proxy": "https://doncors.herokuapp.com/",
@@ -46,6 +47,8 @@
 		"system": { "icon": "FaCogs", "colors": ["#480CA8", "#560BAD"] },
 		"about": { "icon": "FaScroll", "colors": ["#7209b7", "#3a0ca3"] },
 		"help": { "icon": "FaQuestionCircle", "colors": ["#03045e", "#023e8a"] },
+		"demo": { "icon": "FaLemon", "colors": ["#9D5C0D", "#E5890A"] },
+		"contact": { "icon": "FaRegEnvelope", "colors": ["#56776C", "#5B8A72"] },
 		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
 	},
 	"company": {
