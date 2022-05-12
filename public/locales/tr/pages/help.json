@@ -1,27 +1,19 @@
 {
 	"title": "Yardım",
-
 	"title1": "İlk Adım",
 	"text1": "Kobiler için maliyet programı Costotus’a hoş geldiniz. Başlamadan önce lütfen hakkında sayfasını okuyun.",
-
 	"title2": "Hatırlatma",
 	"text2": "{{appname}}, verilerinizi sunucuda saklamaz. Tüm verileriniz kendi cihazınızdadır. Farklı cihazlardan aynı verilere ulaşabilmeniz için, sistem sayfasından verilerinizi yedekleyerek diğer cihaza aktarmanız ve tekrar sistem sayfasından geri yükleme yapmalısınız. Yedeklerinizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın. Ticari sırlarınızı koruyun.",
-
 	"title3": "Firma",
 	"text3": "Firma modülüne isteğe bağlı olarak firma detaylarınızı girebilirsiniz. Bu bilgiler program akışında etkin bir rol oynamaz, yalnızca hatırlatıcı niteliktedir. ",
-
 	"title4": "Firma > Çalışanlar",
 	"text4": "Bu modül, firma çalışanlarına ödenen ücretlerin tanımlandığı alandır. Çalışan eklerken dikkat edilmesi gereken en önemli kısım, departmandır. İmalat departmanı seçilerek tanımlanan çalışanların giderleri, işçilik gideri olarak hesaplanacaktır. Diğer departmanlar, genel sabit masraf olarak görülür.",
-
 	"title5": "Firma > Giderler",
 	"text5": "Bu modül, firmanızın genel giderlerinin tanımlandığı bölümdür. İmalattan bağımsız giderler burada belirlenir. Kiralar, faturalar, finansman giderleri vb. kategorileri ve hangi sıklıkla oluştukları seçilerek tanımlanır. Bu bilgiler, firma giderlerini detaylı analiz etmenizi sağlar. Giderler tablosunda filtreleme yaparak hangi kategoride ne sıklıkla nelere ödeme yaptığınızı görebilir, analiz kısmında ise bir grafikle görsel olarak inceleyebilirsiniz.",
-
 	"title6": "İmalat > Ürün Tanımları",
 	"text6": "<0>Ürün tanımları burada yapılır. Ambalajlanmamış haliyle temel ürünleri temsil eder. Ürünün genel özellikleri ve yıllık üretim kapasitesi belirlenir. Bu ürünler son kullanıcıya satılacak ürünler değil, ambalajsız hallerini temsil eder. Aynı ürün, farklı ambalajlarla (örneğin 1 Litre ve 5 Litre) birleştirilerek 2 farklı son kullanıcı ürünü olarak üretilebilir. </0><1>Dikkat!</1><2>Ürün tanımında, yıllık üretim miktarı alanı önemlidir. Bu alan, firmanızın yıllık toplam üretim kapasitesini hesaplamada kullanılır. Dolayısıyla birim üretim işçilik maliyetinin hesaplanabilmesi, ürün tanımlarının doğruluğuna bağlıdır.</2>",
-
 	"title7": "İmalat > Reçeteler",
 	"text7": "İmalat reçeteleri burada tanımlanır. Ürün maliyetlerinin hesaplanması için en önemli tanımlar bunlardır.",
-
 	"title8": "Yeni bir reçete oluştururken",
 	"recipeSteps": {
 		"step1": "Reçeteyi tanımlayan bir isim verin. Aynı ürün, farklı reçetelerle üretilebileceği için bu gereklidir.",

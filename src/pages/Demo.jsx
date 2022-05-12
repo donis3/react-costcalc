@@ -85,7 +85,7 @@ export default function Demo() {
 				<ModuleHeader text={t('title', { appname })} module='demo' role='other' />
 				<p className='p3 leading-relaxed text-lg font-light'>{t('lead')}</p>
 			</Card>
-			<div className='my-10 w-full p-5 flex flex-col gap-y-10'>
+			<div className='mb-10 w-full p-5 flex flex-col gap-y-20'>
 				{demos.map((demo, i) => (
 					<DemoCard key={i} demoName={demo} callback={() => loadDemo(demo)} />
 				))}
@@ -120,7 +120,7 @@ function DemoCard({ demoName = 'demo', callback = null } = {}) {
 				/>
 			</figure>
 			<div className='card-body w-full lg:w-3/4 h-[500px] '>
-				<h2 className='card-title'>{warn ? t('warningTitle') : t(`${demoName}.title`)}</h2>
+				<h2 className='card-title text-2xl'>{warn ? t('warningTitle') : t(`${demoName}.title`)}</h2>
 				<p className='whitespace-pre-wrap'>{warn ? t('warningText') : t(`${demoName}.scenario`)}</p>
 
 				{warn ? (

@@ -1,0 +1,10 @@
+{
+	"title": "Bize Ulaşın",
+	"copyBtn": "Kopyala",
+	"copyFeedback": "Kopyalandı!",
+	"lead": "İletişim adresimize yazarak bize merhaba diyebilirsiniz. Dört gözle bekliyoruz!",
+	"titleBug": "Buglar & Beklenmeyen Sorunlar",
+	"textBug": "Bu yazılım deneyseldir ve hatalar olabilir. Uygulamada bir takım hatalı davranışlar tespit ederseniz, bize bildirmenizi rica ediyoruz.",
+	"titleRequest": "Yeni Fikirler",
+	"textRequest": "{{appname}}'u daha iyi yapacak bir fikriniz mi var? Lütfen bize yazmaktan çekinmeyin.'"
+}

@@ -44,7 +44,7 @@ export const i18nextOptions = {
 
 	supportedLngs: ['tr', 'en'],
 	nonExplicitSupportedLngs: false,
-	ns: ['translation', 'joi'],
+	ns: ['translation', 'joi', 'routes'],
 	defaultNS: 'translation',
 	debug: config.debug?.i18next,
 	backend: backendOptions, //http backend plugin options

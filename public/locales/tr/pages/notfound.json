@@ -1,5 +1,13 @@
 {
 	"title": "Hay Aksi...",
 	"message": "Üzülerek bildiriyoruz ki, aradığınız sayfayı bulamadık.",
-	"homepage": "Anasayfa"
+	"homepage": "Anasayfa",
+	"objKey": {
+		"objParam1": "selam",
+		"objParam2": "bye"
+	},
+	"arrayKey": [
+		"am",
+		"göt"
+	]
 }
