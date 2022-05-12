@@ -3,6 +3,7 @@ import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 // import AppContext from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
+import useApp from '../../context/app/useApp';
 
 export default function ResponsiveModal({
 	children,
@@ -15,8 +16,8 @@ export default function ResponsiveModal({
 	icon = null,
 }) {
 	// const { windowType } = useContext(AppContext);
-	const windowType = 'md';
-	console.log('ResponsiveModel: missing app context');
+	const { windowType } = useApp();
+	
 
 	//Close modal when clicked outside
 	const handleOutsideClick = (e) => {

@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
+import useApp from '../../context/app/useApp';
 
 import ResponsiveModal from '../common/ResponsiveModal';
 
 export default function LangSelect({ isOpen = false, setIsOpen }) {
 	const { t } = useTranslation();
 
-	const language = 'tr';
-	console.log('langselect needs to know the language');
+	const { language } = useApp();
 
-	if (!isOpen) {
+	if (!isOpen || !language) {
 		return <></>;
 	}
 

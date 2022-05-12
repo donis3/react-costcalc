@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
+import useApp from '../../context/app/useApp';
 
 import Icon from '../common/Icon';
 
@@ -19,8 +20,8 @@ export default function Breadcrumb() {
 	const { t } = useTranslation('routes');
 	const crumbs = pathname.split('/').filter((item) => item && item.length > 0);
 
-	const page = 'home';
-	console.log('Breadcrumb needs to know current page')
+	const { page } = useApp();
+	
 
 	const crumbsJsx = [];
 	crumbs.reduce((accumulator, current, index) => {

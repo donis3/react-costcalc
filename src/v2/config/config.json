@@ -67,37 +67,6 @@
 		]
 	},
 	"applicationData": {
-		"currenciesComment": "value is default conversion rate X/DEFAULT-CURRENCY",
-		"currencies": [
-			{
-				"code": "USD",
-				"value": 14,
-				"symbol": "$",
-				"disabled": false,
-				"default": false
-			},
-			{
-				"code": "EUR",
-				"value": 18,
-				"symbol": "€",
-				"disabled": false,
-				"default": false
-			},
-			{
-				"code": "DKK",
-				"value": 18,
-				"symbol": "kr.",
-				"disabled": true,
-				"default": false
-			},
-			{
-				"code": "TRY",
-				"value": 1,
-				"symbol": "₺",
-				"disabled": false,
-				"default": true
-			}
-		],
 		"unitsComment": "Weight value represents x/kg volume value represents x/L",
 		"units": [
 			{

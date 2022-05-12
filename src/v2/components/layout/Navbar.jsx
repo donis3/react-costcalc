@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { ReactComponent as Logo } from '../../img/costotus-v2.svg';
 import './Navbar.css';
@@ -10,16 +10,16 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useClickOutside from '../../hooks/common/useClickOutside';
 import Icon from '../common/Icon';
+import useApp from '../../context/app/useApp';
+import useConfig from '../../hooks/app/useConfig';
 
 export default function Navbar() {
 	const { t } = useTranslation('routes', 'translation');
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [isLangModalOpen, setLangModalOpen] = useState(false);
+	const { language } = useApp();
 
 	const loc = useLocation();
-
-	const language = 'tr';
-	console.log('navbar needs to know the language');
 
 	const navbarRef = useRef();
 	useClickOutside(navbarRef, () => setMenuOpen(false));
@@ -93,10 +93,8 @@ export default function Navbar() {
 }
 
 function NavbarItem({ children, to = '/', module = null }) {
-	// const config = useConfig();
-	// const icon = config.get(`modules.${module}.icon`);
-	const icon = null;
-	console.log('Navbar Item needs to access module icon');
+	const config = useConfig();
+	const { icon } = config.getModule(module);
 
 	const activeLink = ({ isActive }) => {
 		if (isActive) {
@@ -116,11 +114,9 @@ function NavbarItem({ children, to = '/', module = null }) {
 }
 
 function NavbarNestedItem({ children, to = '/', module = null }) {
-	// const config = useConfig();
-	// const icon = config.get(`modules.${module}.icon`);
+	const config = useConfig();
+	const { icon } = config.getModule(module);
 	const loc = useLocation();
-	const icon = null;
-	console.log('Navbar nested Item needs to access module icon');
 
 	const activeLink = ({ isActive }) => {
 		if (isActive) {
@@ -154,9 +150,8 @@ function NavbarDropdown({ text = 'dropdown', children, module = null }) {
 	const loc = useLocation();
 	let buttonClass = '';
 
-	const icon = null;
-	const moduleChildren = null;
-	console.log('Navbar Dropdown needs module children')
+	const config = useConfig();
+	const { icon, children: moduleChildren } = config.getModule(module);
 
 	//Determine if this module or one of the sub-modules is active.
 	//If so, display nav-active class for this dropdown toggle btn

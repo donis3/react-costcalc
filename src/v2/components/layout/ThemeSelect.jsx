@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-// import AppContext from '../../context/AppContext';
+import useApp from '../../context/app/useApp';
 import ResponsiveModal from '../common/ResponsiveModal';
 
 export default function ThemeSelect({ isOpen = false, setIsOpen }) {
-	// const { theme } = useContext(AppContext);
-	const theme = null;
-	console.log('themeselect needs to know the theme');
+	const { theme } = useApp();
 	const { t } = useTranslation();
 
 	if (!isOpen || !theme) {

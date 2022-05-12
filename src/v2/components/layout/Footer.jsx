@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Icon from '../common/Icon';
 import config from '../../config/config.json';
 import { useTranslation } from 'react-i18next';
 import ThemeSelect from './ThemeSelect';
 
 import { Link } from 'react-router-dom';
+import useApp from '../../context/app/useApp';
 
 export default function Footer() {
 	const { t } = useTranslation('translation', 'routes');
-	
+
 	const [isThemeSelectOpen, setThemeSelectOpen] = useState(false);
-	const theme = 'bumblebee';
-	console.log('footer needs to access themes')
+	const { theme } = useApp();
 
 	return (
 		<>
