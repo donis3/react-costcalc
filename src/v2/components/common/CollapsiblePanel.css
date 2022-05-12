@@ -1,0 +1,11 @@
+.slidingPanel {
+	height: auto;
+	max-height: 0px;
+	transform: scaleY(0);
+	transform-origin: left top;
+	transition: all 0.5s ease-in-out;
+}
+.slidingPanel.panelOpen {
+	max-height: 1000px;
+	transform: scaleY(1);
+}

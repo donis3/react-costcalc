@@ -1,0 +1,9 @@
+/* Tab border color is calculated for each theme. */
+.tab-card {
+	@apply border-b border-x;
+	border-color: hsla(var(--b3) / var(--tw-bg-opacity,1));
+}
+.tab-empty-space  {
+	@apply border-b flex-1 flex justify-end pr-1 gap-x-2;
+	border-color: hsla(var(--b3) / var(--tw-bg-opacity,1));
+}

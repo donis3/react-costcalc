@@ -1,0 +1,92 @@
+import React, { useEffect, useState } from 'react';
+import './Modal.css';
+import { AiOutlineClose } from 'react-icons/ai';
+
+//Not used
+export default function Modal({ children, title = null, footer = null, initialState = false }) {
+	const [isOpen, setIsOpen] = useState(initialState);
+
+	//Disable body scroll bar
+	useEffect(() => {
+		if (isOpen) {
+			document.body.classList.add('overflow-y-hidden');
+		} else {
+			document.body.classList.remove('overflow-y-hidden');
+		}
+		return () => document.body.classList.remove('overflow-y-hidden');
+	}, [isOpen]);
+
+	//Modal Closed
+	if (!isOpen) {
+		return <></>;
+	}
+
+	//Modal Open
+	return (
+		<ResponsiveModal title={title} footer={footer} handleCloseBtn={setIsOpen}>
+			{children}
+		</ResponsiveModal>
+	);
+}
+
+function ResponsiveModal({ children, title = null, footer = null, handleCloseBtn = null }) {
+	//Close modal when clicked outside
+	const handleOutsideClick = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		handleCloseBtn?.(false);
+	};
+	//Close modal when clicked on btn
+	const handleButtonClick = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		handleCloseBtn?.(false);
+	};
+	//Don't close modal when clicked inside
+	const handleInsideClick = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+	};
+
+	return (
+		// Wrapper Div
+		<div
+			className='lg:bg-opacity-80 bg-opacity-100 lg:bg-base-content bg-base-100 overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full w-full'
+			onClick={handleOutsideClick}
+		>
+			<div
+				className='fade-in relative p-0   lg:h-auto lg:w-full lg:max-w-4xl h-full w-full'
+				onClick={handleInsideClick}
+			>
+				{/* Content Wrapper */}
+				<div className='relative bg-base-100 lg:rounded-lg lg:shadow h-auto lg:block flex flex-col justify-between  min-h-screen lg:min-h-full'>
+					{/* Show header if exists or show gap */}
+					{title ? (
+						<div className='flex justify-between items-center px-5 pt-5 pb-5 rounded-t border-b border-base-300'>
+							<h3 className='text-3xl font-semibold min-h-8 lg:text-2xl'>{title}</h3>
+						</div>
+					) : (
+						<div className='h-16 lg:border-b border-base-300'></div>
+					)}
+					{/* Absolute Positioned Close Button */}
+					<div className='absolute top-5 right-5  text-base-content '>
+						<button className='btn-ghost rounded-md p-1'>
+							<AiOutlineClose className='text-2xl' onClick={handleButtonClick} />
+						</button>
+					</div>
+					{/* Body */}
+					<div className='p-6 space-y-6 lg:overflow-y-auto lg:max-h-96 lg:block text-base-content flex-1'>
+						{children}
+					</div>
+					{/* Show Modal Footer if exists OR show blank gap*/}
+					{footer ? (
+						<div className='flex items-center p-6 space-x-2 rounded-b border-t border-base-300'>{footer}</div>
+					) : (
+						<div className='lg:h-10'></div>
+					)}
+				</div>
+			</div>
+		</div>
+	);
+}

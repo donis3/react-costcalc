@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const daisyConfig = `./src/v1/config/config.json`;
 
 //Will include all grid sizes and add them to safelist for dynamic class building
 function getAllCols() {
@@ -9,7 +10,7 @@ function getAllCols() {
 		//Push size independent class
 		columns.push(`grid-cols-${i}`);
 
-		//Push for each size qury
+		//Push for each size
 		sizes.forEach((size) => {
 			columns.push(`${size}:grid-cols-${i}`);
 		});
@@ -38,7 +39,7 @@ module.exports = {
 		//First theme is default
 		//Add themes to config/config.json too.
 		//themes: ['emerald', 'light', 'dark', 'cupcake', 'bumblebee'],
-		themes: require('./src/config/config.json').themes, //Import from app custom config
+		themes: require(daisyConfig).themes, //Import from app custom config
 		base: true,
 		utils: true,
 		logs: true,
