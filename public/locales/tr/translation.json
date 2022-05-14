@@ -1,5 +1,6 @@
 {
 	"appname": "Costotus",
+	"firstTimeSetup": "{{appname}}'a Hoşgeldiniz.\nLütfen ilk kurulum için ayarlarınızı girin. Bol şans!",
 	"header": {
 		"home": "Anasayfa",
 		"notfound": "Sayfa-Bulunamadı",

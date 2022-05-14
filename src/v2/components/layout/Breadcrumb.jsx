@@ -24,6 +24,7 @@ export default function Breadcrumb() {
 	
 
 	const crumbsJsx = [];
+	
 	crumbs.reduce((accumulator, current, index) => {
 		//Add current path to accumulated array
 		accumulator.push(current);

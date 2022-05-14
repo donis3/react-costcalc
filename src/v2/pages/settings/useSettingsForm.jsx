@@ -20,6 +20,7 @@ export default function useSettingsForm({ data = null }) {
 	const showApiSection = availableApis.length > 0;
 	const currencyCodes = Object.keys(currency);
 	const { t } = useTranslation('pages/settings');
+	const { t: currencyTranslator, i18n } = useTranslation('currencies');
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const dispatch = useContext(SettingsDispatchContext);
 
@@ -51,12 +52,20 @@ export default function useSettingsForm({ data = null }) {
 
 	const allCurrencies = useMemo(() => {
 		let data = Object.keys(currency).reduce((acc, key) => {
-			const { name, symbol } = currency[key];
+			let { name, symbol } = currency[key];
+
+			//Localize currency if exists
+			if (i18n.exists(key, { ns: 'currencies' })) {
+				name = currencyTranslator(key);
+			}
+
 			return [...acc, { name: `${name} (${symbol})`, value: key }];
 		}, []);
 		data = sortArrayAlphabetic(data, 'name');
 		return data;
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [i18n, currencyTranslator]);
+	const defaultCurrencyName = allCurrencies.find((cur) => cur.value === formState.defaultCurrency)?.name;
 
 	function getAvailableCurrencies(allCurrencies, selectedCurrencies = [], defaultCurrency = '') {
 		const selectDefaultCurrencyItem = { name: t('form.defaultCurrencyRequired'), value: '', disabled: true };
@@ -176,6 +185,7 @@ export default function useSettingsForm({ data = null }) {
 		select,
 		register,
 		getError,
+		defaultCurrencyName,
 		actions: {
 			onCurrencySelect,
 			setIsSubmitted,

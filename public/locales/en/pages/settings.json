@@ -2,8 +2,8 @@
 	"title": "Settings",
 	"titleInitial": "Initial Setup ",
 	"name": "Setting",
-	"warning": "Warning! Changing main currency might cause incorrect cost calculations for previously entered data. Removing active currencies that were actively being used might also cause data corruption. We don't recommend changing main currency and removing active currencies after you have entered any cost data.",
-	"warningInitialSetup": "Warning! Please choose carefully and try not to change currency settings after the initial setup. Doing so may cause incorrect calculations and data corruption.",
+	"warning": "Warning! Removing a currency from available currencies may cause all the records that's using that currency to be deleted. Please download your data backup before changing any settings to prevent data-loss.",
+	"warningInitialSetup": "Warning! Default Currency can't be changed after the initial setup. This is usually your country's local currency. Please make sure you've chosen correctly before saving.",
 	"form": {
 		"titleXrate": "Exchange Rate Provider",
 		"titleCurrency": "Currency Settings",
@@ -21,10 +21,13 @@
 		"defaultCurrencyRequired": "Select main currency first",
 		"noRemoteService": "None",
 		"success": "Settings saved successfully",
-		"error": "Failed to save settings. \n {{code}}"
+		"error": "Failed to save settings. \n {{code}}",
+		"cantChange": "This can't be changed"
 	},
 	"error": {
 		"InvalidData": "Invalid data received",
-		"UnsupportedCurrency": "An unsupported currency received"
-	}
+		"UnsupportedCurrency": "An unsupported currency received",
+		"DefaultCurrencyChange": "Default currency can't be changed"
+	},
+	"initialSetup": "Initial Setup: {{date}}"
 }

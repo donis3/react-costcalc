@@ -24,15 +24,15 @@ export default function useSettingsReducer() {
 		 */
 		const onSuccess = (newState) => {
 			success?.();
-			//Remove excess
-			const cleanNewState = Object.keys(newState).reduce((acc, key) => {
-				if (key in initialData) {
+			//Get keys from default state and dont allow any outside keys
+			const cleanNewState = Object.keys(initialData).reduce((acc, key) => {
+				if (key in newState) {
 					return { ...acc, [key]: newState[key] };
 				} else {
-					console.log(`Settings: Detected and removed invalid state key: ${key}`);
-					return acc;
+					return { ...acc, [key]: initialData[key] };
 				}
 			}, {});
+
 			return cleanNewState;
 		};
 
@@ -47,19 +47,34 @@ export default function useSettingsReducer() {
 			 * requires payload with all settings
 			 */
 			case 'SaveSettings': {
-				if (!payload || 'defaultCurrency' in payload === false || 'apiProvider' in payload === false) {
+				//Error Checking
+				if (!payload || 'currencies' in payload === false || 'apiProvider' in payload === false) {
 					return onError('error.InvalidData');
 				}
-				if (!currencyCodes.includes(payload.defaultCurrency)) {
+				if (!state.setupComplete && !currencyCodes.includes(payload?.defaultCurrency)) {
 					return onError('error.UnsupportedCurrency');
 				}
+
+				//Initial Setup
+				if (state.setupComplete > 0 && 'defaultCurrency' in payload) {
+					if (payload.defaultCurrency !== state.defaultCurrency) {
+						return onError('error.DefaultCurrencyChange');
+					}
+				}
+
 				//Get payload currencies
 				const currencies = Array.isArray(payload?.currencies) ? payload.currencies : [];
+
 				//Filter currencies and remove default currency if exists
 				const newState = { ...state, ...payload, currencies: currencies.filter((c) => c !== payload.defaultCurrency) };
-				//Set setup complete
-				newState.setupComplete = Date.now();
+
+				//Set setup complete if this is initial setup
+				if (!state.setupComplete) newState.setupComplete = Date.now();
+
+				//Sort
 				newState.currencies.sort();
+
+				console.log('TODO: If a currency is removed, go through all data and remove items using that');
 
 				return onSuccess(newState);
 			}

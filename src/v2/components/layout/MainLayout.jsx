@@ -10,6 +10,7 @@ export default function MainLayout({ children, header, footer }) {
 		window.document.title = t('appname');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
 	return (
 		<>
 			<div className='flex flex-col w-full h-screen justify-between'>

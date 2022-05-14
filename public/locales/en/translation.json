@@ -1,5 +1,6 @@
 {
 	"appname": "Costotus",
+	"firstTimeSetup": "Welcome to {{appname}}.\nPlease complete initial setup. Good luck!",
 	"general": {
 		"loading": "Loading",
 		"waiting": "Waiting",

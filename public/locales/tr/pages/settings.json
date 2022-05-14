@@ -1,0 +1,33 @@
+{
+	"title": "Ayarlar",
+	"titleInitial": "İlk Kurulum",
+	"name": "Ayar",
+	"warning": "Dikkat! Var olan para birimlerini silmeniz durumunda, o para birimini kullanan kayıtlar var ise, bu kayıtlar silinecektir. Lütfen bu işlemi yapmadan önce verilerinizi yedekleyin.",
+	"warningInitialSetup": "Dikkat! İlk kurlum esnasında seçilen esas para birimi, daha sonra değiştirilemez. Bu para birimi genellikle ülkenizin yerel para birimidir. Lütfen emin olmadan kaydetmeyiniz.",
+	"form": {
+		"titleXrate": "Döviz Kuru Sağlayıcısı",
+		"titleCurrency": "Para Birimi Ayarları",
+		"apiKey": "Erişim Anahtarı",
+		"apiKeyAlt": "Eğer seçilen servis api-anahtarı gerektiriyorsa, buraya giriniz",
+		"api": "Servis Sağlayıcı",
+		"apiAlt": "Döviz kuru bilgilerini ileten servis sağlayıcı",
+		"currency": "Para Birimleri",
+		"currencyAlt": "Kullanılabilir para birimleri",
+		"selectedCurrencies": "Aktif Para Birimleri",
+		"selectedCurrenciesAlt": "İşinizde sıklıkla kullandığınız para birimlerini ekleyebilirsiniz.",
+		"defaultCurrency": "Esas Para Birimi",
+		"defaultCurrencyAlt": "Firmanızın varsayılan para birimi. Genellikle Bulunduğunuz ülkenin para birimidir.",
+		"defaultCurrencySelect": "Yerel Para Biriminizi Seçin",
+		"defaultCurrencyRequired": "Önce esas para birimi seçilmelidir",
+		"noRemoteService": "Hiçbiri",
+		"success": "Ayarlar başarıyla kaydedildi",
+		"error": "Ayarlar kaydedilemedi. \n {{code}}",
+		"cantChange": "Bu değer değiştirilemez"
+	},
+	"error": {
+		"InvalidData": "Yollanan veriler hatalı",
+		"UnsupportedCurrency": "Desteklenmeyen bir para birimine rastlandı.",
+		"DefaultCurrencyChange": "Esas para birimi değiştirilemez"
+	},
+	"initialSetup": "İlk Kurulum: {{date}}"
+}

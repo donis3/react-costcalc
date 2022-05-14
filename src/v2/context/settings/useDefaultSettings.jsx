@@ -9,6 +9,7 @@ export default function useDefaultSettings() {
 		apiProvider: '',
 		apiKey: '',
 		setupComplete: false,
+		isDemo: false,
 	};
 
 	return { initialData: defaultSettings };

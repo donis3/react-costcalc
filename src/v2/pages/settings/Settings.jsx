@@ -8,24 +8,24 @@ import useSettings from '../../context/settings/useSettings';
 
 import useSettingsForm from './useSettingsForm';
 import { FaExclamationTriangle, FaTimes } from 'react-icons/fa';
+import useDateFns from '../../hooks/common/useDateFns';
 
 export default function Settings() {
 	const { t } = useTranslation('pages/settings');
 
-	const { settings } = useSettings();
-	const { select, register, actions, formState, showApiSection, isApiKeyDisabled, getError } = useSettingsForm({
-		data: settings,
-	});
+	const { settings, setupComplete } = useSettings();
+	const { select, register, actions, formState, showApiSection, isApiKeyDisabled, getError, defaultCurrencyName } =
+		useSettingsForm({
+			data: settings,
+		});
+
+	const { timeSince } = useDateFns();
 
 	return (
 		<>
-			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
+			<Card className='w-full px-3 py-5' shadow='shadow-lg'>
 				{/* Card Header */}
-				<ModuleHeader
-					text={settings?.setupComplete > 0 ? t('title') : t('titleInitial')}
-					module='settings'
-					role='main'
-				/>
+				<ModuleHeader text={setupComplete ? t('title') : t('titleInitial')} module='settings' role='main' />
 
 				{/* Form Start */}
 				<Form onSubmit={actions.handleSubmit} onReset={actions.handleReset} setSubmitted={actions.setIsSubmitted}>
@@ -47,21 +47,22 @@ export default function Settings() {
 					{/* Currency Options */}
 					<Form.Section title={t('form.titleCurrency')}>
 						{/* Warning Text */}
-						{settings?.setupComplete > 0 ? (
-							<Alert>{t('warning')}</Alert>
-						) : (
-							<Alert info>{t('warningInitialSetup')}</Alert>
-						)}
+						{setupComplete ? <Alert>{t('warning')}</Alert> : <Alert info>{t('warningInitialSetup')}</Alert>}
+
 						<Form.Control
 							label={t('form.defaultCurrency')}
-							altLabel={t('form.defaultCurrencyAlt')}
+							altLabel={setupComplete ? t('form.cantChange') : t('form.defaultCurrencyAlt')}
 							error={getError('defaultCurrency')}
 						>
-							<Form.Select
-								name='defaultCurrency'
-								options={select.defaultCurrency}
-								{...register({ field: 'defaultCurrency', isControlled: true })}
-							/>
+							{setupComplete ? (
+								<Form.Text disabled name='defaultCurrency' value={defaultCurrencyName} />
+							) : (
+								<Form.Select
+									name='defaultCurrency'
+									options={select.defaultCurrency}
+									{...register({ field: 'defaultCurrency', isControlled: true })}
+								/>
+							)}
 						</Form.Control>
 						<Form.Row>
 							<Form.Control label={t('form.currency')} altLabel={t('form.currencyAlt')}>
@@ -88,6 +89,11 @@ export default function Settings() {
 					</Form.Section>
 				</Form>
 			</Card>
+			<div className='mb-10'>
+				<p className='text-xs font-light italic p-1'>
+					{setupComplete && t('initialSetup', { date: timeSince(new Date(settings.setupComplete)) })}
+				</p>
+			</div>
 		</>
 	);
 }

@@ -5,12 +5,7 @@
 		"name": "United Arab Emirates Dirham",
 		"symbolNative": "د.إ.‏"
 	},
-	"AFN": {
-		"code": "AFN",
-		"symbol": "AFN",
-		"name": "Afghan Afghani",
-		"symbolNative": "؋"
-	},
+	
 	"ALL": {
 		"code": "ALL",
 		"symbol": "ALL",
@@ -125,12 +120,7 @@
 		"name": "Bahamian Dollar",
 		"symbolNative": "$"
 	},
-	"BTC": {
-		"code": "BTC",
-		"symbol": "BTC",
-		"name": "Bitcoin",
-		"symbolNative": "BTC"
-	},
+	
 	"BTN": {
 		"code": "BTN",
 		"symbol": "BTN",
