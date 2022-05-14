@@ -46,7 +46,12 @@ export default function Settings() {
 					)}
 					{/* Currency Options */}
 					<Form.Section title={t('form.titleCurrency')}>
-						{settings?.setupComplete > 0 ? <Alert>{t('warning')}</Alert> : <Alert>{t('warningInitialSetup')}</Alert>}
+						{/* Warning Text */}
+						{settings?.setupComplete > 0 ? (
+							<Alert>{t('warning')}</Alert>
+						) : (
+							<Alert info>{t('warningInitialSetup')}</Alert>
+						)}
 						<Form.Control
 							label={t('form.defaultCurrency')}
 							altLabel={t('form.defaultCurrencyAlt')}
@@ -98,9 +103,9 @@ function SelectedCurrency({ name = '', onRemove = null, isDefault = false }) {
 	);
 }
 
-function Alert({ children }) {
+function Alert({ children, info = false }) {
 	return (
-		<div className='alert alert-warning'>
+		<div className={`alert ${info ? 'alert-info' : 'alert-warning'}`}>
 			<div className='gap-5'>
 				<FaExclamationTriangle className='min-w-fit text-xl' />
 				<span>{children}</span>
