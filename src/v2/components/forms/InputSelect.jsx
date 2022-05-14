@@ -61,6 +61,12 @@ function InputSelect(
 		}
 	};
 
+	const handleClick = props?.onSelect
+		? (e) => {
+				props.onSelect(e.target.value);
+		  }
+		: null;
+
 	//Render
 	return (
 		<select className='select select-bordered' onChange={handleChange} {...selectProps} {...props} ref={ref}>
@@ -70,7 +76,7 @@ function InputSelect(
 				selectOptions.map((item, i) => {
 					const { name, value, ...props } = item;
 					return (
-						<option key={i} value={item.value} {...props}>
+						<option key={i} value={item.value} {...props} onClick={handleClick}>
 							{item.name}
 						</option>
 					);

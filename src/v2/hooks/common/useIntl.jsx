@@ -1,14 +1,10 @@
-// import { useAppContext } from '../../context/AppContext';
-// import useConfig from '../app/useConfig';
+import useApp from '../../context/app/useApp';
+import useSettings from '../../context/settings/useSettings';
 
 export default function useIntl() {
-	// const { language } = useAppContext();
-	const language = 'tr';
-	// const config = useConfig();
-	// const defaultCurrency = config.getDefaultCurrency(true);
-	const defaultCurrency = 'TRY';
+	const { language } = useApp();
+	const { defaultCurrency } = useSettings();
 
-	console.log('Intl requires language and default currency');
 	/**
 	 * Return string with intl formatted number
 	 * @param {*} amount

@@ -1,0 +1,110 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import Form from '../../components/forms/Form';
+import Card from '../../components/common/Card';
+import ModuleHeader from '../../components/layout/ModuleHeader';
+
+import useSettings from '../../context/settings/useSettings';
+
+import useSettingsForm from './useSettingsForm';
+import { FaExclamationTriangle, FaTimes } from 'react-icons/fa';
+
+export default function Settings() {
+	const { t } = useTranslation('pages/settings');
+
+	const { settings } = useSettings();
+	const { select, register, actions, formState, showApiSection, isApiKeyDisabled, getError } = useSettingsForm({
+		data: settings,
+	});
+
+	return (
+		<>
+			<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
+				{/* Card Header */}
+				<ModuleHeader
+					text={settings?.setupComplete > 0 ? t('title') : t('titleInitial')}
+					module='settings'
+					role='main'
+				/>
+
+				{/* Form Start */}
+				<Form onSubmit={actions.handleSubmit} onReset={actions.handleReset} setSubmitted={actions.setIsSubmitted}>
+					{/* Remote Api Section */}
+					{showApiSection && (
+						<Form.Section title={t('form.titleXrate')}>
+							<Form.Control label={t('form.api')} altLabel={t('form.apiAlt')} error={getError('api')}>
+								<Form.Select options={select.api} {...register({ field: 'api', isControlled: true })} />
+							</Form.Control>
+							<Form.Control label={t('form.apiKey')} altLabel={t('form.apiKeyAlt')} error={getError('apiKey')}>
+								<Form.Text
+									name='apiKey'
+									disabled={isApiKeyDisabled}
+									{...register({ field: 'apiKey', isControlled: false })}
+								/>
+							</Form.Control>
+						</Form.Section>
+					)}
+					{/* Currency Options */}
+					<Form.Section title={t('form.titleCurrency')}>
+						{settings?.setupComplete > 0 ? <Alert>{t('warning')}</Alert> : <Alert>{t('warningInitialSetup')}</Alert>}
+						<Form.Control
+							label={t('form.defaultCurrency')}
+							altLabel={t('form.defaultCurrencyAlt')}
+							error={getError('defaultCurrency')}
+						>
+							<Form.Select
+								name='defaultCurrency'
+								options={select.defaultCurrency}
+								{...register({ field: 'defaultCurrency', isControlled: true })}
+							/>
+						</Form.Control>
+						<Form.Row>
+							<Form.Control label={t('form.currency')} altLabel={t('form.currencyAlt')}>
+								<Form.Select
+									name='currencies'
+									defaultValue={select.currencies[0].value}
+									options={select.currencies}
+									onSelect={actions.onCurrencySelect}
+									disabled={formState.defaultCurrency === ''}
+								/>
+							</Form.Control>
+							<Form.Control
+								label={t('form.selectedCurrencies')}
+								altLabel={t('form.selectedCurrenciesAlt')}
+								error={getError('currencies')}
+							>
+								<div className='w-full min-h-12 bg-base-200 p-3 rounded-md flex flex-wrap gap-3'>
+									{formState.currencies.map((cur, i) => (
+										<SelectedCurrency name={cur} key={i} onRemove={() => actions.removeCurrency(cur)} />
+									))}
+								</div>
+							</Form.Control>
+						</Form.Row>
+					</Form.Section>
+				</Form>
+			</Card>
+		</>
+	);
+}
+
+function SelectedCurrency({ name = '', onRemove = null, isDefault = false }) {
+	return (
+		<div className='border rounded-md flex items-center '>
+			<span className='py-1 px-2 bg-base-100 rounded-l-md font-semibold text-xs'>{name}</span>
+			<button type='button' className='p-1 h-full rounded-r-md border-l  hover:bg-base-300' onClick={onRemove}>
+				<FaTimes />
+			</button>
+		</div>
+	);
+}
+
+function Alert({ children }) {
+	return (
+		<div className='alert alert-warning'>
+			<div className='gap-5'>
+				<FaExclamationTriangle className='min-w-fit text-xl' />
+				<span>{children}</span>
+			</div>
+		</div>
+	);
+}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppContext } from '../../context/AppContext';
+import useApp from '../../context/app/useApp';
 
 import useModuleTheme from '../../hooks/app/useModuleTheme';
 import BackButton from '../common/BackButton';
@@ -7,7 +7,9 @@ import Icon from '../common/Icon';
 
 export default function ModuleHeader({ children, module, text, subtext, role, backBtn, setBreadcrumb, customIcon }) {
 	const { icon, color, bgColor, backBtn: showBackButton } = useModuleTheme({ module, role });
-	const { page } = useAppContext(setBreadcrumb ? { breadcrumb: text } : null);
+
+	const { page } = useApp();
+	if (!page) throw new Error('ModuleHeader: Missing app context ');
 	if (typeof subtext !== 'string') subtext = '';
 
 	useEffect(() => {

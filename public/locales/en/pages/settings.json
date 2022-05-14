@@ -1,0 +1,30 @@
+{
+	"title": "Settings",
+	"titleInitial": "Initial Setup ",
+	"name": "Setting",
+	"warning": "Warning! Changing main currency might cause incorrect cost calculations for previously entered data. Removing active currencies that were actively being used might also cause data corruption. We don't recommend changing main currency and removing active currencies after you have entered any cost data.",
+	"warningInitialSetup": "Warning! Please choose carefully and try not to change currency settings after the initial setup. Doing so may cause incorrect calculations and data corruption.",
+	"form": {
+		"titleXrate": "Exchange Rate Provider",
+		"titleCurrency": "Currency Settings",
+		"apiKey": "Api Key",
+		"apiKeyAlt": "If selected service requires an api key, please provide it",
+		"api": "Remote Service",
+		"apiAlt": "Remote exchange rate provider for currency conversions",
+		"currency": "Available Currencies",
+		"currencyAlt": "List of supported currencies",
+		"selectedCurrencies": "Active Currencies",
+		"selectedCurrenciesAlt": "Choose most commonly used currencies in your business.",
+		"defaultCurrency": "Main Currency",
+		"defaultCurrencyAlt": "Choose the default currency for your business",
+		"defaultCurrencySelect": "Select Local Currency",
+		"defaultCurrencyRequired": "Select main currency first",
+		"noRemoteService": "None",
+		"success": "Settings saved successfully",
+		"error": "Failed to save settings. \n {{code}}"
+	},
+	"error": {
+		"InvalidData": "Invalid data received",
+		"UnsupportedCurrency": "An unsupported currency received"
+	}
+}

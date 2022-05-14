@@ -8,14 +8,15 @@ import {
 	differenceInYears,
 	formatDistanceStrict,
 } from 'date-fns';
-import { useAppContext } from '../../context/AppContext';
+
 import { tr, enUS } from 'date-fns/locale';
+import useApp from '../../context/app/useApp';
 
 //country code => localeObject
 const preloaded = { en: enUS, tr: tr };
 
 export default function useDateFns() {
-	const { language } = useAppContext();
+	const { language } = useApp();
 	const datePickerFormat = 'dd-MM-yyyy';
 	const datePickerJoiFormat = 'D-M-Y';
 
@@ -74,7 +75,6 @@ export default function useDateFns() {
 		}
 		return formatDistance(startingDate, endDate, opts);
 	}
-
 
 	return {
 		format: (date, formatStr = 'P', options = {}) => {

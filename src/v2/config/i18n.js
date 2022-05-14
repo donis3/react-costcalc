@@ -1,5 +1,5 @@
 import config from './config.json';
-
+const storageKey = `${config.app.localStorageKey}.lang`;
 
 const backendOptions = {
 	loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
@@ -13,7 +13,7 @@ const detectionOptions = {
 	// keys or params to lookup language from
 	lookupQuerystring: 'lng',
 	lookupCookie: 'i18next',
-	lookupLocalStorage: 'i18nextLng',
+	lookupLocalStorage: storageKey,
 	lookupSessionStorage: 'i18nextLng',
 	lookupFromPathIndex: 0,
 	lookupFromSubdomainIndex: 0,

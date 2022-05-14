@@ -40,7 +40,7 @@ const AppContextProvider = ({ children }) => {
 	//Theme Context
 	const [theme, setTheme] = useState(getCurrentTheme);
 	const handleChangeTheme = (newTheme) => {
-        console.log(newTheme)
+		console.log(newTheme);
 		const result = setCurrentTheme(newTheme);
 		if (result) {
 			config.debug.stateChange && console.log(`AppContext: theme changed to ${result}`);
