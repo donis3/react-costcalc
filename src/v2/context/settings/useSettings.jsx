@@ -22,6 +22,7 @@ export default function useSettings() {
 		return false;
 	};
 
+
 	return {
 		settings,
 		currencies: { default: defaultCurrency, enabled: enabledCurrencies, allowed: allowedCurrencies },

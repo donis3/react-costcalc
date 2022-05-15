@@ -29,5 +29,5 @@
 		"UnsupportedCurrency": "Desteklenmeyen bir para birimine rastlandı.",
 		"DefaultCurrencyChange": "Esas para birimi değiştirilemez"
 	},
-	"initialSetup": "İlk Kurulum: {{date}}"
+	"initialSetup": "İlk Kurulum"
 }

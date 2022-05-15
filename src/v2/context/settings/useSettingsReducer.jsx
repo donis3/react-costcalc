@@ -6,6 +6,7 @@ export default function useSettingsReducer() {
 	const { t } = useTranslation('pages/settings');
 	const currencyCodes = Object.keys(currency) || [];
 	const { initialData } = useDefaultSettings();
+	
 
 	/**
 	 * Settings Reducer
@@ -32,6 +33,8 @@ export default function useSettingsReducer() {
 					return { ...acc, [key]: initialData[key] };
 				}
 			}, {});
+			//Add timestamp
+			cleanNewState.updatedAt = Date.now();
 
 			return cleanNewState;
 		};

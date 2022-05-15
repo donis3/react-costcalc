@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Form from '../../components/forms/Form';
 import Card from '../../components/common/Card';
@@ -8,18 +8,28 @@ import useSettings from '../../context/settings/useSettings';
 
 import useSettingsForm from './useSettingsForm';
 import { FaExclamationTriangle, FaTimes } from 'react-icons/fa';
-import useDateFns from '../../hooks/common/useDateFns';
+
+import { useNavigate } from 'react-router-dom';
+import DocumentDates from '../../components/common/DocumentDates';
 
 export default function Settings() {
 	const { t } = useTranslation('pages/settings');
-
+	const navigate = useNavigate();
 	const { settings, setupComplete } = useSettings();
 	const { select, register, actions, formState, showApiSection, isApiKeyDisabled, getError, defaultCurrencyName } =
 		useSettingsForm({
 			data: settings,
 		});
 
-	const { timeSince } = useDateFns();
+	useEffect(() => {
+		if (settings?.updatedAt && settings.updatedAt > 1) {
+			const timeDiff = Date.now() - settings.updatedAt;
+			if (timeDiff < 100) {
+				//Update success, navigate home
+				navigate('/');
+			}
+		}
+	}, [settings?.updatedAt, navigate]);
 
 	return (
 		<>
@@ -89,11 +99,12 @@ export default function Settings() {
 					</Form.Section>
 				</Form>
 			</Card>
-			<div className='mb-10'>
-				<p className='text-xs font-light italic p-1'>
-					{setupComplete && t('initialSetup', { date: timeSince(new Date(settings.setupComplete)) })}
-				</p>
-			</div>
+			<DocumentDates
+				updatedAt={settings?.updatedAt}
+				createdAt={settings?.setupComplete}
+				createdText={t('initialSetup')}
+				showTimeSinceUpdate
+			/>
 		</>
 	);
 }

@@ -10,6 +10,7 @@ export default function useDefaultSettings() {
 		apiKey: '',
 		setupComplete: false,
 		isDemo: false,
+		updatedAt: null,
 	};
 
 	return { initialData: defaultSettings };

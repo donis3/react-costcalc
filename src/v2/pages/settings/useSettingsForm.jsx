@@ -22,6 +22,7 @@ export default function useSettingsForm({ data = null }) {
 	const { t } = useTranslation('pages/settings');
 	const { t: currencyTranslator, i18n } = useTranslation('currencies');
 	const [isSubmitted, setIsSubmitted] = useState(false);
+
 	const dispatch = useContext(SettingsDispatchContext);
 
 	//Generate initial data

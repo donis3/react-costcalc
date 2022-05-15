@@ -29,5 +29,5 @@
 		"UnsupportedCurrency": "An unsupported currency received",
 		"DefaultCurrencyChange": "Default currency can't be changed"
 	},
-	"initialSetup": "Initial Setup: {{date}}"
+	"initialSetup": "Initial Setup"
 }
