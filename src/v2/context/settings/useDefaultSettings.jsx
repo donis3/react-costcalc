@@ -5,6 +5,7 @@ export default function useDefaultSettings() {
 	const lang = language ? language.code : 'tr';
 	const defaultSettings = {
 		currencies: lang === 'tr' ? ['USD', 'EUR'] : [],
+		favoriteCurrencies: lang === 'tr' ? ['USD', 'EUR'] : [],
 		defaultCurrency: lang === 'tr' ? 'TRY' : 'USD',
 		apiProvider: '',
 		apiKey: '',

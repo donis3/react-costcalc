@@ -8,6 +8,7 @@ import useSettings from '../../context/settings/useSettings';
 
 import useSettingsForm from './useSettingsForm';
 import { FaExclamationTriangle, FaTimes } from 'react-icons/fa';
+import { AiFillStar as FavSelectedIcon, AiOutlineStar as FavIcon } from 'react-icons/ai';
 
 import { useNavigate } from 'react-router-dom';
 import DocumentDates from '../../components/common/DocumentDates';
@@ -24,7 +25,7 @@ export default function Settings() {
 	useEffect(() => {
 		if (settings?.updatedAt && settings.updatedAt > 1) {
 			const timeDiff = Date.now() - settings.updatedAt;
-			if (timeDiff < 100) {
+			if (timeDiff < 500) {
 				//Update success, navigate home
 				navigate('/');
 			}
@@ -90,9 +91,17 @@ export default function Settings() {
 								error={getError('currencies')}
 							>
 								<div className='w-full min-h-12 bg-base-200 p-3 rounded-md flex flex-wrap gap-3'>
-									{formState.currencies.map((cur, i) => (
-										<SelectedCurrency name={cur} key={i} onRemove={() => actions.removeCurrency(cur)} />
-									))}
+									{formState.currencies.map((cur) => {
+										return (
+											<SelectedCurrency
+												name={cur}
+												key={cur}
+												onRemove={() => actions.removeCurrency(cur)}
+												isFavorite={formState.favoriteCurrencies.includes(cur)}
+												toggleFavorite={() => actions.toggleFavorite(cur)}
+											/>
+										);
+									})}
 								</div>
 							</Form.Control>
 						</Form.Row>
@@ -109,10 +118,23 @@ export default function Settings() {
 	);
 }
 
-function SelectedCurrency({ name = '', onRemove = null, isDefault = false }) {
+function SelectedCurrency({ name = '', onRemove = null, isFavorite = false, toggleFavorite = null }) {
 	return (
 		<div className='border rounded-md flex items-center '>
 			<span className='py-1 px-2 bg-base-100 rounded-l-md font-semibold text-xs'>{name}</span>
+			{isFavorite ? (
+				<button type='button' className='p-1 h-full bg-base-100 border-l text-orange-500' onClick={toggleFavorite}>
+					<FavSelectedIcon />
+				</button>
+			) : (
+				<button
+					type='button'
+					className='p-1 h-full bg-base-100 border-l  hover:text-orange-500'
+					onClick={toggleFavorite}
+				>
+					<FavIcon />
+				</button>
+			)}
 			<button type='button' className='p-1 h-full rounded-r-md border-l  hover:bg-base-300' onClick={onRemove}>
 				<FaTimes />
 			</button>

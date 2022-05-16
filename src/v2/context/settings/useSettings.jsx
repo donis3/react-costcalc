@@ -19,6 +19,8 @@ export default function useSettings() {
 		[defaultCurrency, enabledCurrencies]
 	);
 
+	const favoriteCurrencies = Array.isArray(settings?.favoriteCurrencies) ? [...settings.favoriteCurrencies] : [];
+
 	const getCurrencyNames = useCallback(() => {
 		return allowedCurrencies.reduce((acc, code) => {
 			let currencyName = code;
@@ -42,23 +44,13 @@ export default function useSettings() {
 		return false;
 	};
 
-	//Load currency names
-	// const currencyNames = allowedCurrencies.reduce((acc, code) => {
-	// 	let currencyName = code;
-	// 	if (i18n.exists(code, { ns: 'currencies' })) {
-	// 		currencyName = t(code, { ns: 'currencies' });
-	// 	} else if (code in currency) {
-	// 		currencyName = currency[code].name;
-	// 	}
-	// 	return { ...acc, [code]: currencyName };
-	// }, {});
-
 	return {
 		settings,
 		currencies: {
 			default: defaultCurrency,
 			enabled: enabledCurrencies,
 			allowed: allowedCurrencies,
+			favorites: favoriteCurrencies,
 			getNames: getCurrencyNames,
 		},
 		defaultCurrency,

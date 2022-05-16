@@ -12,6 +12,7 @@ const initialState = {
 	apiKey: '',
 	defaultCurrency: '',
 	currencies: [],
+	favoriteCurrencies: [],
 };
 
 export default function useSettingsForm({ data = null }) {
@@ -28,12 +29,13 @@ export default function useSettingsForm({ data = null }) {
 	//Generate initial data
 	if (data) {
 		if (data?.defaultCurrency) initialState.defaultCurrency = data.defaultCurrency;
-		if (data?.currencies && Array.isArray(data.currencies)) initialState.currencies = data.currencies;
+		if (data?.currencies && Array.isArray(data.currencies)) initialState.currencies = [...data.currencies];
 		if (initialState.currencies.includes(initialState.defaultCurrency)) {
 			initialState.currencies = initialState.currencies.filter((c) => c !== initialState.defaultCurrency);
 		}
 		if (data?.apiProvider) initialState.api = data.apiProvider;
 		if (data?.apiKey) initialState.apiKey = data.apiKey;
+		if (Array.isArray(data?.favoriteCurrencies)) initialState.favoriteCurrencies = [...data.favoriteCurrencies];
 	}
 
 	//Load form builder
@@ -103,6 +105,14 @@ export default function useSettingsForm({ data = null }) {
 	const removeCurrency = (cur) => {
 		if (!cur) return;
 		setState('currencies', [...formState.currencies.filter((c) => c !== cur)]);
+
+		//Also remove from favorites if required
+		if (formState.favoriteCurrencies.includes(cur)) {
+			setState(
+				'favoriteCurrencies',
+				formState.favoriteCurrencies.filter((c) => c !== cur)
+			);
+		}
 	};
 
 	const onCurrencySelect = (currencyCode) => {
@@ -111,6 +121,20 @@ export default function useSettingsForm({ data = null }) {
 			removeCurrency(currencyCode);
 		} else {
 			addCurrency(currencyCode);
+		}
+	};
+
+	const toggleFavorite = (currencyCode) => {
+		if (!currencyCode || currencyCode in currency === false) return;
+		if (!formState.currencies.includes(currencyCode)) return;
+
+		if (formState.favoriteCurrencies.includes(currencyCode)) {
+			setState(
+				'favoriteCurrencies',
+				formState.favoriteCurrencies.filter((c) => c !== currencyCode)
+			);
+		} else {
+			setState('favoriteCurrencies', [currencyCode, ...formState.favoriteCurrencies]);
 		}
 	};
 
@@ -148,11 +172,18 @@ export default function useSettingsForm({ data = null }) {
 		.min(0)
 		.label(t('form.selectedCurrencies'));
 
+	schema.favoriteCurrencies = joi
+		.array()
+		.items(joi.string().valid(...currencyCodes))
+		.min(0)
+		.label(t('form.favoriteCurrencies'));
+
 	//=================// Form Actions //=====================//
 	function handleSubmit() {
 		if (!dispatch) return;
 		const success = () => toast.success(t('form.success'), { toastId: 'settings' });
 		const error = (code) => toast.error(t('form.error', { code }), { toastId: 'settings' });
+
 		try {
 			const data = getFormData(true);
 			const payload = {
@@ -160,6 +191,7 @@ export default function useSettingsForm({ data = null }) {
 				apiKey: data.apiKey,
 				apiProvider: data.api,
 				currencies: data.currencies,
+				favoriteCurrencies: data.favoriteCurrencies,
 			};
 
 			const action = {
@@ -171,6 +203,7 @@ export default function useSettingsForm({ data = null }) {
 			dispatch(action);
 		} catch (err) {
 			//Form errors.
+			//console.log(err);
 		}
 	}
 
@@ -193,6 +226,7 @@ export default function useSettingsForm({ data = null }) {
 			removeCurrency,
 			handleSubmit,
 			handleReset,
+			toggleFavorite,
 		},
 	};
 }

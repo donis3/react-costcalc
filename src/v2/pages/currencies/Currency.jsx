@@ -25,7 +25,7 @@ export default function Currency() {
 	useEffect(() => {
 		page.setBreadcrumb(getName(currency));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [currency]);
 
 	useEffect(() => {
 		if (!Array.isArray(currencies?.enabled) || !currencies.enabled.includes(currency)) {

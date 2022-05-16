@@ -256,6 +256,8 @@
 		"changeDefault": "Change Default Currency?",
 		"changeDefaultWarning": "This action will remove saved conversion rates",
 		"chartTitle": "{{name}} rate history",
+		"refresh": "Refresh",
+		"settings": "Settings",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",

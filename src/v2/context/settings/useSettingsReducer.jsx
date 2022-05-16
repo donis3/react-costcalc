@@ -6,7 +6,6 @@ export default function useSettingsReducer() {
 	const { t } = useTranslation('pages/settings');
 	const currencyCodes = Object.keys(currency) || [];
 	const { initialData } = useDefaultSettings();
-	
 
 	/**
 	 * Settings Reducer
@@ -35,7 +34,6 @@ export default function useSettingsReducer() {
 			}, {});
 			//Add timestamp
 			cleanNewState.updatedAt = Date.now();
-
 			return cleanNewState;
 		};
 
@@ -67,15 +65,22 @@ export default function useSettingsReducer() {
 
 				//Get payload currencies
 				const currencies = Array.isArray(payload?.currencies) ? payload.currencies : [];
+				const favoriteCurrencies = Array.isArray(payload?.favoriteCurrencies) ? payload.favoriteCurrencies : [];
 
 				//Filter currencies and remove default currency if exists
-				const newState = { ...state, ...payload, currencies: currencies.filter((c) => c !== payload.defaultCurrency) };
+				const newState = {
+					...state,
+					...payload,
+					currencies: currencies.filter((c) => c !== payload.defaultCurrency),
+					favoriteCurrencies: favoriteCurrencies.filter((c) => c !== payload.defaultCurrency),
+				};
 
 				//Set setup complete if this is initial setup
 				if (!state.setupComplete) newState.setupComplete = Date.now();
 
 				//Sort
 				newState.currencies.sort();
+				newState.favoriteCurrencies.sort();
 
 				console.log('TODO: If a currency is removed, go through all data and remove items using that');
 

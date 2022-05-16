@@ -22,7 +22,7 @@ export default function Currencies() {
 				<p className='opacity-80'>
 					{currencyArray.length > 0 ? t('currency.selectCurrency') : t('currency.noSelectableCurrency')}
 				</p>
-				<div className='w-full  my-5 grid gap-5 grid-flow-col grid-cols-4'>
+				<div className='w-full  my-5 flex flex-wrap gap-5'>
 					{currencyArray.map((cur) => (
 						<SelectCurBtn key={cur} currency={cur} defaultCurrency={currencies.default} />
 					))}
