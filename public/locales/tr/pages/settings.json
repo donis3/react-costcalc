@@ -14,7 +14,7 @@
 		"currency": "Para Birimleri",
 		"currencyAlt": "Kullanılabilir para birimleri",
 		"selectedCurrencies": "Aktif Para Birimleri",
-		"selectedCurrenciesAlt": "İşinizde sıklıkla kullandığınız para birimlerini ekleyebilirsiniz.",
+		"selectedCurrenciesAlt": "İşinizde sıklıkla kullandığınız para birimlerini ekleyebilirsiniz. Yıldız butonu ile favori para birimlerinizi seçerek kolay erişim çubuğuna ekleyebilirsiniz.",
 		"defaultCurrency": "Esas Para Birimi",
 		"defaultCurrencyAlt": "Firmanızın varsayılan para birimi. Genellikle Bulunduğunuz ülkenin para birimidir.",
 		"defaultCurrencySelect": "Yerel Para Biriminizi Seçin",

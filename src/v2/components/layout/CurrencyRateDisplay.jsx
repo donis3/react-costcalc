@@ -9,15 +9,17 @@ import { Link } from 'react-router-dom';
 import useCurrency from '../../context/currency/useCurrency';
 import ReactTooltip from 'react-tooltip';
 import DropdownMenu from '../common/DropdownMenu';
+import useExchangeRates from '../../hooks/exrates/useExchangeRates';
 
 export default function CurrencyRateDisplay() {
-	const [showDetails, setShowDetails] = useState(false);
 	const { t } = useTranslation('translation');
 	const { currencies, getRate } = useCurrency();
 	const favorites = currencies?.favorites || []; //Show only favorites
+	const { fetchExchangeRates, loading, isDisabled, provider } = useExchangeRates();
 
 	useEffect(() => {
 		ReactTooltip.rebuild();
+		
 	}, []);
 
 	if (!Array.isArray(favorites) || favorites.length === 0) return <></>;
@@ -37,13 +39,17 @@ export default function CurrencyRateDisplay() {
 			</ul>
 
 			<DropdownMenu icon={<MenuIcon />}>
-				<DropdownMenu.Item callback={() => console.log('Fetch')}>
-					<div className='flex flex-col gap-1 justify-end items-end'>
-						<span>{t('currency.refresh')}</span>
-						<span className='font-light text-xs'>{t('currency.remoteApi')}</span>
-					</div>
-					<RefreshIcon />
-				</DropdownMenu.Item>
+				{isDisabled === false && (
+					<DropdownMenu.Item callback={fetchExchangeRates} disabled={loading}>
+						<div className='flex flex-col gap-1 justify-end items-end'>
+							<span>{t('currency.refresh')}</span>
+							<span className='font-light text-xs'>{provider.name}</span>
+						</div>
+						<RefreshIcon className={loading ? 'animate-spin' : ''} />
+					</DropdownMenu.Item>
+				)}
+
+				{/* Settings Link */}
 				<DropdownMenu.Link to='/settings'>
 					{t('currency.settings')}
 					<SettingsIcon />

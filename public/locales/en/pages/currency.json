@@ -3,6 +3,15 @@
 		"InvalidData": "Invalid data.",
 		"InvalidCurrency": "Currency not enabled or is invalid",
 		"InvalidDefaultCurrency": "Invalid default currency",
-		"InvalidRate": "Exchange rate must be a number greater than 0"
+		"InvalidRate": "Exchange rate must be a number greater than 0",
+		"fetchFailed": "Unable to fetch remote data"
+	},
+	"api1": {
+		"notWorking": "Unable to reach exchangerate.host remote service"
+	},
+	"api2": {
+		"name": "Turkish Central Bank",
+		"invalidBase": "Main currency must be TRY to be able to use TCMB Api",
+		"parseFail": "Failed to parse TCMB data"
 	}
 }

@@ -107,7 +107,9 @@
 		"convertPrice": "Yerel para birimine çevir?",
 		"changeDefault": "Yerel para birimini değiştir?",
 		"changeDefaultWarning": "Bu işlem, kayıtlı döviz kurlarını sıfırlayacaktır.",
-		"chartTitle": "{{name}} kur geçmişi"
+		"chartTitle": "{{name}} kur geçmişi",
+		"refresh": "YENİLE",
+		"settings": "Ayarlar"
 	},
 	"error": {
 		"error": "Hata",

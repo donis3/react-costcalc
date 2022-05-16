@@ -14,7 +14,7 @@
 		"currency": "Available Currencies",
 		"currencyAlt": "List of supported currencies",
 		"selectedCurrencies": "Active Currencies",
-		"selectedCurrenciesAlt": "Choose most commonly used currencies in your business.",
+		"selectedCurrenciesAlt": "Choose most commonly used currencies in your business. Mark your favorite currencies with the star button for easy access.",
 		"defaultCurrency": "Main Currency",
 		"defaultCurrencyAlt": "Choose the default currency for your business",
 		"defaultCurrencySelect": "Select Local Currency",
