@@ -1,15 +1,35 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SettingsContext } from './index';
+import currency from '../../config/currency.json';
 
 export default function useSettings() {
 	const settings = useContext(SettingsContext);
+	const { t, i18n } = useTranslation('currencies');
 
 	/**
 	 * Current Currency Settings
 	 */
 	const defaultCurrency = settings.defaultCurrency ?? 'USD';
-	const enabledCurrencies = [...settings?.currencies?.filter((c) => c !== defaultCurrency)];
-	const allowedCurrencies = [defaultCurrency, ...enabledCurrencies];
+	const enabledCurrencies = useMemo(() => {
+		return [...settings?.currencies?.filter((c) => c !== defaultCurrency)];
+	}, [settings?.currencies, defaultCurrency]);
+	const allowedCurrencies = useMemo(
+		() => [defaultCurrency, ...enabledCurrencies],
+		[defaultCurrency, enabledCurrencies]
+	);
+
+	const getCurrencyNames = useCallback(() => {
+		return allowedCurrencies.reduce((acc, code) => {
+			let currencyName = code;
+			if (i18n.exists(code, { ns: 'currencies' })) {
+				currencyName = t(code, { ns: 'currencies' });
+			} else if (code in currency) {
+				currencyName = currency[code].name;
+			}
+			return { ...acc, [code]: currencyName };
+		}, {});
+	}, [allowedCurrencies, i18n, t]);
 
 	//Is initial setup compelte?
 	const setupComplete = () => {
@@ -22,10 +42,25 @@ export default function useSettings() {
 		return false;
 	};
 
+	//Load currency names
+	// const currencyNames = allowedCurrencies.reduce((acc, code) => {
+	// 	let currencyName = code;
+	// 	if (i18n.exists(code, { ns: 'currencies' })) {
+	// 		currencyName = t(code, { ns: 'currencies' });
+	// 	} else if (code in currency) {
+	// 		currencyName = currency[code].name;
+	// 	}
+	// 	return { ...acc, [code]: currencyName };
+	// }, {});
 
 	return {
 		settings,
-		currencies: { default: defaultCurrency, enabled: enabledCurrencies, allowed: allowedCurrencies },
+		currencies: {
+			default: defaultCurrency,
+			enabled: enabledCurrencies,
+			allowed: allowedCurrencies,
+			getNames: getCurrencyNames,
+		},
 		defaultCurrency,
 		setupComplete: setupComplete(),
 	};

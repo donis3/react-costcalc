@@ -1,0 +1,8 @@
+{
+	"error": {
+		"InvalidData": "Invalid data.",
+		"InvalidCurrency": "Currency not enabled or is invalid",
+		"InvalidDefaultCurrency": "Invalid default currency",
+		"InvalidRate": "Exchange rate must be a number greater than 0"
+	}
+}

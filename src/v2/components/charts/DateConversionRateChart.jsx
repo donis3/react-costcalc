@@ -16,8 +16,8 @@ import 'chartjs-adapter-date-fns';
 //import { tr } from 'date-fns/locale';
 
 import useIntl from '../../hooks/common/useIntl';
-import { useAppContext } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
+import useApp from '../../context/app/useApp';
 
 ChartJS.register(
 	CategoryScale,
@@ -33,7 +33,7 @@ ChartJS.register(
 
 export default function DateConversionRateChart({ data = null, from = null, to = null } = {}) {
 	const { displayDate, displayNumber } = useIntl();
-	const { language } = useAppContext();
+	const { language } = useApp();
 	const [dateLocale, setDateLocale] = useState(null);
 	const { t } = useTranslation('translation');
 

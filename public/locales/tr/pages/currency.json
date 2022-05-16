@@ -1,0 +1,8 @@
+{
+	"error": {
+		"InvalidData": "Hatalı veri",
+		"InvalidCurrency": "Para birimi aktif değil veya hatalı",
+		"InvalidDefaultCurrency": "Esas para birimi hatalı",
+		"InvalidRate": "Döviz kuru 0'dan büyük bir sayı olmalı"
+	}
+}
