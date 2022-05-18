@@ -32,6 +32,8 @@ export default function Settings() {
 		}
 	}, [settings?.updatedAt, navigate]);
 
+	
+
 	return (
 		<>
 			<Card className='w-full px-3 py-5' shadow='shadow-lg'>

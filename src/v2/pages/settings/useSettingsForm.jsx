@@ -33,18 +33,17 @@ export default function useSettingsForm({ data = null }) {
 		if (initialState.currencies.includes(initialState.defaultCurrency)) {
 			initialState.currencies = initialState.currencies.filter((c) => c !== initialState.defaultCurrency);
 		}
-		if (data?.apiProvider) initialState.api = data.apiProvider;
-		if (data?.apiKey) initialState.apiKey = data.apiKey;
+		initialState.api = data.apiProvider ?? '';
+		initialState.apiKey = data.apiKey ?? '';
 		if (Array.isArray(data?.favoriteCurrencies)) initialState.favoriteCurrencies = [...data.favoriteCurrencies];
 	}
 
 	//Load form builder
-	const { schema, joi, register, getError, handleChange, getFormData, resetForm, formState, setState } = useFormBuilder(
-		{
+	const { schema, joi, register, getError, handleChange, getFormData, resetForm, formState, setState, setValue } =
+		useFormBuilder({
 			initialState,
 			isSubmitted,
-		}
-	);
+		});
 
 	//=================// Select Arrays //=====================//
 	const select = {
@@ -152,6 +151,18 @@ export default function useSettingsForm({ data = null }) {
 
 	const currentApi = availableApis.find((api) => api.id === formState.api);
 	const isApiKeyDisabled = currentApi?.requiresKey === true ? false : true;
+
+	/**
+	 * When api changes, remove api key value if its not required
+	 */
+	handleChange('api', (apiId) => {
+		const selected = availableApis.find((api) => api.id === apiId);
+		if (!selected || !selected?.requiresKey) {
+			setValue('apiKey', '');
+		} else {
+			setValue('apiKey', initialState.apiKey);
+		}
+	});
 
 	//=================// Schema //=====================//
 	schema.api = joi.string().min(0).label(t('form.api'));
