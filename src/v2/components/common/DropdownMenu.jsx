@@ -75,5 +75,10 @@ function DropdownLink({ children, icon = null, to = '/', active = false }) {
 	);
 }
 
+function DropdownElement({ children }) {
+	return <li className='w-auto min-w-fit'>{children}</li>;
+}
+
 DropdownMenu.Item = DropdownItem;
 DropdownMenu.Link = DropdownLink;
+DropdownMenu.Element = DropdownElement;

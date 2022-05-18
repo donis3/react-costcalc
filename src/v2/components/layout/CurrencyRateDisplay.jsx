@@ -19,7 +19,6 @@ export default function CurrencyRateDisplay() {
 
 	useEffect(() => {
 		ReactTooltip.rebuild();
-		
 	}, []);
 
 	if (!Array.isArray(favorites) || favorites.length === 0) return <></>;
@@ -40,8 +39,8 @@ export default function CurrencyRateDisplay() {
 
 			<DropdownMenu icon={<MenuIcon />}>
 				{isDisabled === false && (
-					<DropdownMenu.Item callback={fetchExchangeRates} disabled={loading}>
-						<div className='flex flex-col gap-1 justify-end items-end'>
+					<DropdownMenu.Item callback={loading ? null : fetchExchangeRates}>
+						<div className={`flex flex-col gap-1 justify-end items-end ${loading && 'opacity-50'}`}>
 							<span>{t('currency.refresh')}</span>
 							<span className='font-light text-xs'>{provider.name}</span>
 						</div>

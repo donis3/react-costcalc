@@ -47,7 +47,12 @@ export default function useExchangeRates() {
 		if (!fetcher) return;
 		if (isExpired === false) {
 			//Cache is not yet expired
-			return cache.data;
+			console.log('Using cached data with mock fetch wait time.');
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve(cache.data);
+				}, 1000);
+			});
 		} else {
 			//Get remote data
 			const data = await fetcher?.(currencies.enabled, currencies.default, provider, settings?.apiKey);
@@ -59,11 +64,12 @@ export default function useExchangeRates() {
 	async function fetchExchangeRates() {
 		setLoading(true);
 		try {
+			//Fetch remote data using the chosen adapter. If fails, throws error
 			const data = await fetchRemoteData();
 			console.log(data);
 		} catch (error) {
+			//Catch error from the adapter and toast it
 			let errKey = `${provider.id}.${error.message}`;
-
 			let msg = t('error.fetchFailed');
 			if (i18n.exists(errKey, { ns: 'pages/currency' })) {
 				msg = t(errKey, { ns: 'pages/currency' });
