@@ -1,8 +1,17 @@
 import axios from 'axios';
 const axiosOptions = { timeout: 20000 };
 
-// Expected Result = [ {code: 'USD', rate: 15},...]
-
+/**
+ * Fetches using base currency and returns base/quote
+ * We want reversed pairs.
+ *
+ *
+ * @param {*} currencies
+ * @param {*} baseCurrency
+ * @param {*} provider
+ * @param {*} apiKey
+ * @returns
+ */
 export default async function fetchExchangeRatesHost(currencies = [], baseCurrency = null, provider, apiKey = null) {
 	const { url, requiresKey } = provider || {};
 	if (!url || (requiresKey && !apiKey)) return;
@@ -21,10 +30,12 @@ export default async function fetchExchangeRatesHost(currencies = [], baseCurren
 		const result = Object.keys(rates).reduce((acc, code) => {
 			code = code.toUpperCase();
 			if (!currencies.includes(code)) return acc;
-			let rate = parseFloat(rates[code]);
+			const rate = parseFloat(rates[code]);
 			if (isNaN(rate) || rate <= 0) return acc;
+			//Reverse the value
+			let reversedRate = 1 / rate;
 
-			return [...acc, { code, rate }];
+			return [...acc, { code, rate: reversedRate }];
 		}, []);
 
 		return result;

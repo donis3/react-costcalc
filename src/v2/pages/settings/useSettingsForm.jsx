@@ -20,7 +20,7 @@ export default function useSettingsForm({ data = null }) {
 	const availableApis = config.all?.apiProviders || [];
 	const showApiSection = availableApis.length > 0;
 	const currencyCodes = Object.keys(currency);
-	const { t } = useTranslation('pages/settings');
+	const { t } = useTranslation('pages/settings', 'pages/currency');
 	const { t: currencyTranslator, i18n } = useTranslation('currencies');
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -90,7 +90,15 @@ export default function useSettingsForm({ data = null }) {
 	select.currencies = getAvailableCurrencies(allCurrencies, formState.currencies, formState.defaultCurrency);
 
 	//Remote Api's
-	select.api = availableApis.map((provider) => ({ name: provider.name, value: provider.id }));
+	select.api = availableApis.map((provider) => {
+		let localKey = `${provider.id}.name`;
+		let name = provider.name;
+		if (i18n.exists(localKey, { ns: 'pages/currency' })) {
+			name = t(localKey, { ns: 'pages/currency' });
+		}
+
+		return { name: name, value: provider.id };
+	});
 	select.api.unshift({ name: t('form.noRemoteService'), value: '' });
 
 	//=================// Actions //=====================//

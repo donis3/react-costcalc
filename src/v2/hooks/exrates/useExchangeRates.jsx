@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import useSettings from '../../context/settings/useSettings';
 import useConfig from '../app/useConfig';
 import useExchangeCache from './useExchangeCache';
@@ -6,6 +6,7 @@ import fetchTcmb from './fetchTcmb';
 import fetchExchangeRatesHost from './fetchExchangeRatesHost';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { CurrencyDispatchContext } from '../../context/currency';
 
 /**
  * Each api id from the config must have a fetcher function
@@ -15,15 +16,25 @@ const fetchers = {
 	api2: fetchTcmb,
 };
 
+/**
+ * Exchange Rate Remote Service Fetching System
+ *
+ * @returns
+ */
 export default function useExchangeRates() {
 	const { t, i18n } = useTranslation('pages/currency');
+	//Currency repo dispatcher
+	const dispatch = useContext(CurrencyDispatchContext);
 	//Detect current api provider
 	const { settings, currencies } = useSettings();
 	const config = useConfig();
 	const providers = config.get('apiProviders') || [];
-	let provider = { id: 'none' };
+	let provider = { id: 'none', localName: null };
 	if (settings?.apiProvider) provider = providers.find((p) => p.id === settings.apiProvider);
 	const isDisabled = provider.id === 'none';
+
+	//Get localized provider names
+	provider.localName = provider.id !== 'none' ? t(`${provider.id}.name`) : null;
 
 	//Check if fetcher exists
 	if (!isDisabled && provider.id in fetchers === false) {
@@ -33,9 +44,18 @@ export default function useExchangeRates() {
 
 	//Create states
 	const [loading, setLoading] = useState(false);
-	const [data, setData] = useState(null);
-	const [error, setError] = useState(null);
 	const { cache, isExpired, setCache } = useExchangeCache(provider);
+
+	//Toast Helpers
+	const onSuccess = (msg) => toast.success(msg, { toastId: 'exchangeRateSuccess' });
+	const onError = (code) => {
+		let errKey = `${provider.id}.${code}`;
+		let msg = t('error.fail');
+		if (i18n.exists(errKey, { ns: 'pages/currency' })) {
+			msg = t(errKey, { ns: 'pages/currency' });
+		}
+		toast.error(msg, { toastId: 'exchangeRateErr' });
+	};
 
 	/**
 	 * Fetch remote api data if cache is expired and return data
@@ -66,20 +86,34 @@ export default function useExchangeRates() {
 		try {
 			//Fetch remote data using the chosen adapter. If fails, throws error
 			const data = await fetchRemoteData();
-			console.log(data);
+			saveExchangeRates(data);
 		} catch (error) {
-			//Catch error from the adapter and toast it
-			let errKey = `${provider.id}.${error.message}`;
-			let msg = t('error.fetchFailed');
-			if (i18n.exists(errKey, { ns: 'pages/currency' })) {
-				msg = t(errKey, { ns: 'pages/currency' });
-			}
-			toast.error(msg);
+			onError(error.message);
 		}
 		setLoading(false);
-
-		console.log('TODO: Send rates to dispatch');
 	}
 
-	return { fetchExchangeRates, loading, data, error, isDisabled, provider };
+	/**
+	 * Takes an array of rate objects and prepares them for dispatch BatchUpdate
+	 * @param {*} reversedRates Array of rate objects with {code, rate}
+	 */
+	function saveExchangeRates(reversedRates) {
+		if (!currencies || !currencies?.default) {
+			return onError('InvalidData');
+		}
+		if (!reversedRates || !Array.isArray(reversedRates) || reversedRates.length === 0) {
+			return onError('InvalidData');
+		}
+		const success = () => onSuccess(t('success.refresh', { provider: provider.name }));
+		const error = onError;
+		const payload = reversedRates.reduce((acc, item) => {
+			const { code, rate } = item;
+			if (!code || isNaN(parseFloat(rate)) || !currencies.enabled.includes(code) || rate <= 0) return acc;
+			const rateItem = { from: code, to: currencies.default, rate: parseFloat(rate) };
+			return [...acc, rateItem];
+		}, []);
+		dispatch({ type: 'BatchUpdate', payload, success, error });
+	}
+
+	return { fetchExchangeRates, loading, isDisabled, provider };
 }

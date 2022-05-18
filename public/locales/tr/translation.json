@@ -109,6 +109,7 @@
 		"changeDefaultWarning": "Bu işlem, kayıtlı döviz kurlarını sıfırlayacaktır.",
 		"chartTitle": "{{name}} kur geçmişi",
 		"refresh": "YENİLE",
+		"showAll": "Tüm Pariteler",
 		"settings": "Ayarlar"
 	},
 	"error": {

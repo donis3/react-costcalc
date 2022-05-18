@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Card from '../../components/common/Card';
 import FormInput from '../../components/form/FormInput';
@@ -17,13 +17,14 @@ export default function Currency() {
 	const navigate = useNavigate();
 	const { t } = useTranslation('translation', 'pages/currency');
 	const { page } = useApp();
-	const { currencies, rates, getName } = useCurrency();
+	const { currencies, rates, getName, getRate } = useCurrency();
 	const dispatch = useContext(CurrencyDispatchContext);
 
 	const rateHistory = rates?.[currency] ? [...rates?.[currency]] : [];
 
 	useEffect(() => {
 		page.setBreadcrumb(getName(currency));
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currency]);
 
@@ -37,6 +38,14 @@ export default function Currency() {
 	//====================// Handle New Rate Form //=========================//
 	const Joi = useJoi();
 	const [formState, setFormState] = useState({ rate: 0 });
+
+	//Update default value if rate changes
+	useEffect(() => {
+		const currentRate = getRate(currency);
+		if (currentRate.rate > 0.0001) currentRate.rate = Math.round(currentRate.rate * 10000) / 10000;
+		if (currentRate) setFormState((state) => ({ ...state, rate: currentRate.rate }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currency, rates]);
 	const schema = Joi.object({
 		rate: Joi.number().min(0).positive().required().label(t('currency.formRate')),
 	});

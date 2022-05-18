@@ -258,6 +258,7 @@
 		"chartTitle": "{{name}} rate history",
 		"refresh": "Refresh",
 		"settings": "Settings",
+		"showAll": "All Pairs",
 		"USD": "U.S. Dollar",
 		"EUR": "Euro",
 		"TRY": "Turkish Lira",

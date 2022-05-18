@@ -4,9 +4,15 @@
 		"InvalidCurrency": "Currency not enabled or is invalid",
 		"InvalidDefaultCurrency": "Invalid default currency",
 		"InvalidRate": "Exchange rate must be a number greater than 0",
-		"fetchFailed": "Unable to fetch remote data"
+		"NoChange": "Change is too small or none",
+		"TooSoon": "Not enough time has passed between requests.",
+		"fail": "Failed to process exchange rate request"
+	},
+	"success": {
+		"refresh": "Received exchange rate data from {{provider}}"
 	},
 	"api1": {
+		"name": "ExchangeRates.Host",
 		"notWorking": "Unable to reach exchangerate.host remote service"
 	},
 	"api2": {

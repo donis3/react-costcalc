@@ -12,7 +12,7 @@
 		{
 			"id": "api1",
 			"name": "exchangerates.host",
-			"requiresKey": true,
+			"requiresKey": false,
 			"cacheDurationMinutes": 5,
 			"url": "https://api.exchangerate.host/latest"
 		},

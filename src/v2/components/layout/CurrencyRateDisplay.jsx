@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { RiMenuFill as MenuIcon, RiRefreshLine as RefreshIcon, RiSettings3Line as SettingsIcon } from 'react-icons/ri';
+import React, { useEffect } from 'react';
+import {
+	RiMenuFill as MenuIcon,
+	RiRefreshLine as RefreshIcon,
+	RiSettings3Line as SettingsIcon,
+	RiExchangeBoxLine as AllIcon,
+} from 'react-icons/ri';
 
 import useIntl from '../../hooks/common/useIntl';
-import { FaCaretUp, FaCaretDown, FaSpinner } from 'react-icons/fa';
+import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -42,11 +47,17 @@ export default function CurrencyRateDisplay() {
 					<DropdownMenu.Item callback={loading ? null : fetchExchangeRates}>
 						<div className={`flex flex-col gap-1 justify-end items-end ${loading && 'opacity-50'}`}>
 							<span>{t('currency.refresh')}</span>
-							<span className='font-light text-xs'>{provider.name}</span>
+							<span className='font-light text-xs'>{provider?.localName ? provider.localName : provider.name}</span>
 						</div>
 						<RefreshIcon className={loading ? 'animate-spin' : ''} />
 					</DropdownMenu.Item>
 				)}
+
+				{/* All Currencies Link */}
+				<DropdownMenu.Link to='/currency'>
+					{t('currency.showAll')}
+					<AllIcon />
+				</DropdownMenu.Link>
 
 				{/* Settings Link */}
 				<DropdownMenu.Link to='/settings'>
