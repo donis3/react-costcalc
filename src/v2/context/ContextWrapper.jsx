@@ -1,6 +1,11 @@
 import React from 'react';
 import { AppContextProvider } from './app';
 import CurrencyProvider from './currency';
+import EndproductsProvider from './endproducts';
+import MaterialsProvider from './materials';
+import PackagesProvider from './packages';
+import ProductsProvider from './products';
+import RecipesProvider from './recipes';
 import SettingsProvider from './settings';
 
 export default function ContextWrapper({ children }) {
@@ -8,8 +13,18 @@ export default function ContextWrapper({ children }) {
 		<AppContextProvider>
 			<SettingsProvider>
 				<CurrencyProvider>
-					{/* Wrap */}
-					{children}
+					<ProductsProvider>
+						<MaterialsProvider>
+							<RecipesProvider>
+								<PackagesProvider>
+									<EndproductsProvider>
+										{/* Wrap */}
+										{children}
+									</EndproductsProvider>
+								</PackagesProvider>
+							</RecipesProvider>
+						</MaterialsProvider>
+					</ProductsProvider>
 				</CurrencyProvider>
 			</SettingsProvider>
 		</AppContextProvider>
