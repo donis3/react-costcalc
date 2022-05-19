@@ -4,8 +4,7 @@ import useSettings from '../settings/useSettings';
 
 export default function useEndproductsReducer() {
 	const { t } = useTranslation('pages/endproducts');
-	const { currencies } = useSettings();
-	const config = useConfig();
+	
 
 	/**
 	 * EndProducts Reducer

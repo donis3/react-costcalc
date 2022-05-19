@@ -64,8 +64,11 @@ export function sortArrayAlphabetic(data = [], prop = null, isAsc = true) {
 			return data;
 		} else {
 			return data.sort((a, b) => {
+				if (typeof a[prop] !== 'string' || typeof b[prop] !== 'string') {
+					return 0;
+				}
 				//Return -1 or 1 depending on asc or desc
-				return isAsc ? a[prop].localeCompare(b[prop]) : b[prop].localeCompare(a[prop]);
+				return isAsc ? a[prop]?.localeCompare(b[prop]) : b[prop]?.localeCompare(a[prop]);
 			});
 		}
 	} else {
@@ -118,7 +121,6 @@ export function getStorageSize(key = null, unit = 'auto') {
 			result = new Blob(Object.values(localStorage[key])).size;
 		}
 	}
-	
 
 	//Find the multiplier to get requested unit
 	let divider = 1;

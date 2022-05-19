@@ -48,7 +48,7 @@ export default function Router() {
 			{/* Settings */}
 			<Route path='/system' element={<System />} />
 			{/* Business Routes */}
-			<Route path='/materials' element={<Materials />} />
+			
 
 			<Route path='/products' element={<Products />} />
 			<Route path='/currency' element={<CurrencySelectOne />} />
@@ -59,7 +59,8 @@ export default function Router() {
 			<Route path='/recipes/add/' element={<RecipeForm />} />
 			<Route path='/recipes/edit/:recipeId' element={<RecipeForm isEdit={true} />} />
 
-			{/* Experimental */}
+			{/* Materials */}
+			<Route path='/materials' element={<Materials />} />
 			<Route path='/materials/:materialId' element={<Material />} />
 			<Route path='/materials/add' element={<MaterialForm />} />
 			<Route path='/materials/edit' element={<Materials />} />

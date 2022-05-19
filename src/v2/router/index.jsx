@@ -8,6 +8,9 @@ import Currency from '../pages/currencies/Currency';
 
 //Other
 import Home from '../pages/Home';
+import MaterialForm from '../pages/materials/form/MaterialForm';
+import Material from '../pages/materials/Material';
+import Materials from '../pages/materials/Materials';
 import About from '../pages/other/About';
 import Contact from '../pages/other/Contact';
 import Demo from '../pages/other/Demo';
@@ -25,6 +28,12 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* ===================== Materials  ===================== */}
+			<Route path='/materials' element={<Materials />} />
+			<Route path='/materials/:materialId' element={<Material />} />
+			<Route path='/materials/add' element={<MaterialForm />} />
+			<Route path='/materials/edit/:materialId' element={<MaterialForm isEdit={true} />} />
+
 			{/* ===================== Currencies  ===================== */}
 			<Route path='/currency' element={<Currencies />} />
 			<Route path='/currency/:currency' element={<Currency />} />

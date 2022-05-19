@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useConfig from '../../hooks/app/useConfig';
 import useIntl from '../../hooks/common/useIntl';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import OptionControl from './OptionControl';
+import useCurrency from '../../context/currency/useCurrency';
 
 /**
  * Main wrapper for item details page
@@ -107,9 +107,9 @@ function UnitCostBox({ currency, price, priceWithTax, previousPrice, title, unit
 	if (isNaN(priceWithTax)) priceWithTax = price;
 	if (isNaN(previousPrice)) previousPrice = price;
 
-	const config = useConfig();
+	const { currencies } = useCurrency();
 	const { t } = useTranslation('translation');
-	if (!currency) currency = config.getDefaultCurrency(true);
+	if (!currency) currency = currencies.default;
 	const { displayMoney, displayNumber } = useIntl();
 
 	//Calculate price change
@@ -162,8 +162,8 @@ UnitCostBox.defaultProps = {
 
 function Toggles({ setOption, getOption, options, ...attributes }) {
 	const { t } = useTranslation('translation');
-	const config = useConfig();
-	const defaultCurrencyName = t('currency.' + config.getDefaultCurrency(true));
+	const { currencies, getName } = useCurrency();
+	const defaultCurrencyName = getName(currencies.default);
 
 	if (!Array.isArray(options) || options.length === 0) return <></>;
 

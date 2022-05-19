@@ -276,7 +276,7 @@
 	"toggles": {
 		"includeTax": "Vergi Dahil?",
 		"showTax": "Vergi Dahil?",
-		"localPrice": "Tutarları {{currency}}'ye çevir?",
+		"localPrice": "{{currency}} değeri göster?",
 		"baseUnit": "Temel ölçü birimlerini kullan?"
 	},
 	"tabs": {

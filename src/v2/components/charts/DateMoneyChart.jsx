@@ -16,8 +16,8 @@ import 'chartjs-adapter-date-fns';
 //import { tr } from 'date-fns/locale';
 
 import useIntl from '../../hooks/common/useIntl';
-import { useCurrencyContext } from '../../context/MainContext';
-import { useAppContext } from '../../context/AppContext';
+import useCurrency from '../../context/currency/useCurrency';
+import useApp from '../../context/app/useApp';
 
 ChartJS.register(
 	CategoryScale,
@@ -33,8 +33,8 @@ ChartJS.register(
 
 export default function DateMoneyChart({ data = null, title = '', currency = null, label = 'label' } = {}) {
 	const { displayDate, displayMoney } = useIntl();
-	const { currencies } = useCurrencyContext();
-	const { language } = useAppContext();
+	const { currencies } = useCurrency();
+	const { language } = useApp();
 	const [dateLocale, setDateLocale] = useState(null);
 
 	//Will lazy load a locale for date functions to be able to localize dates
@@ -47,7 +47,7 @@ export default function DateMoneyChart({ data = null, title = '', currency = nul
 	}, [language.code]);
 
 	//Set default currency
-	if (!currency) currency = currencies.defaultCurrency;
+	if (!currency) currency = currencies.default;
 
 	const options = {
 		locale: language.locale || 'en-EN',
@@ -123,8 +123,6 @@ export default function DateMoneyChart({ data = null, title = '', currency = nul
 			},
 		],
 	};
-
-	
 
 	return <Line options={options} data={chartData2} />;
 }

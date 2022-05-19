@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import useStorageRepo from '../../hooks/common/useStorageRepo';
-import useMaterialsReducer from './useMaterialsReducer';
+import materialsReducer from './materialsReducer';
 
 //Create Required Contexts
 export const MaterialsContext = createContext();
@@ -10,21 +10,31 @@ export const MaterialsDispatchContext = createContext();
  * Context provider & storage repo handler for * Materials *
  */
 export default function MaterialsProvider({ children }) {
-	//Load Reducer
-	const reducer = useMaterialsReducer();
 	//Set up repo & State
 	const [materialsRepo, setMaterialsRepo] = useStorageRepo('application', 'materials', []);
-	const [materials, dispatch] = useReducer(reducer, materialsRepo);
+	const [materials, dispatch] = useReducer(materialsReducer, materialsRepo);
 
 	//Update repo if state changes
 	useEffect(() => {
 		setMaterialsRepo(materials);
+		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [materials]);
 
+	/**
+	 * Add dependencies to this modules reducer dispatcher
+	 */
+	const dispatchWrapper = (action) => {
+		if (!action) throw new Error('Invalid Dispatch Received');
+		//Add all dependencies
+		action.dependencies = { test: 'selam' };
+		//Dispatch
+		dispatch(action);
+	};
+
 	return (
 		<MaterialsContext.Provider value={materials}>
-			<MaterialsDispatchContext.Provider value={dispatch}>
+			<MaterialsDispatchContext.Provider value={dispatchWrapper}>
 				{/* Wrap */}
 				{children}
 			</MaterialsDispatchContext.Provider>

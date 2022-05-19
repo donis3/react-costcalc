@@ -2,6 +2,7 @@
 	"title": "Hammaddeler",
 	"lead": "Hammadde tanımları ve detayları.",
 	"btnNew": "Yeni",
+	"nodata": "Gösterilecek hammadde henüz yok. Yeni hammadde butonuna basarak ekleyin.",
 	"table": {
 		"material": "Hammadde",
 		"unit": "Birim",

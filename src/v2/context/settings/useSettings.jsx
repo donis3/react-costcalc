@@ -7,7 +7,6 @@ export default function useSettings() {
 	const settings = useContext(SettingsContext);
 	const { t, i18n } = useTranslation('currencies');
 
-
 	/**
 	 * Current Currency Settings
 	 */
@@ -34,6 +33,16 @@ export default function useSettings() {
 		}, {});
 	}, [allowedCurrencies, i18n, t]);
 
+	const getCurrencySymbols = useCallback(() => {
+		return allowedCurrencies.reduce((acc, code) => {
+			let symbol = code;
+			if (code in currency) {
+				symbol = currency[code]?.symbol ?? code;
+			}
+			return { ...acc, [code]: symbol };
+		}, {});
+	}, [allowedCurrencies]);
+
 	//Is initial setup compelte?
 	const setupComplete = () => {
 		if (!settings) return false;
@@ -53,6 +62,7 @@ export default function useSettings() {
 			allowed: allowedCurrencies,
 			favorites: favoriteCurrencies,
 			getNames: getCurrencyNames,
+			getSymbols: getCurrencySymbols,
 		},
 		defaultCurrency,
 		setupComplete: setupComplete(),
