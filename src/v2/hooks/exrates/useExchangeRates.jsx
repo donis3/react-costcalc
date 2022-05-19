@@ -12,8 +12,8 @@ import { CurrencyDispatchContext } from '../../context/currency';
  * Each api id from the config must have a fetcher function
  */
 const fetchers = {
-	api1: fetchExchangeRatesHost,
-	api2: fetchTcmb,
+	exhost: fetchExchangeRatesHost,
+	tcmb: fetchTcmb,
 };
 
 /**
@@ -29,15 +29,21 @@ export default function useExchangeRates() {
 	const { settings, currencies } = useSettings();
 	const config = useConfig();
 	const providers = config.get('apiProviders') || [];
-	let provider = { id: 'none', localName: null };
-	if (settings?.apiProvider) provider = providers.find((p) => p.id === settings.apiProvider);
-	const isDisabled = provider.id === 'none';
+	//Active Provider
+	let provider = { id: null, localName: null };
+	if (settings?.apiProvider) {
+		const activeProvider = providers.find((p) => p.id === settings.apiProvider);
+		if (activeProvider) provider = { ...provider, ...activeProvider };
+	}
+	const isDisabled = provider.id === 'none' || provider.id === null;
 
 	//Get localized provider names
-	provider.localName = provider.id !== 'none' ? t(`${provider.id}.name`) : null;
-
-	//Check if fetcher exists
+	if (provider.id && i18n.exists(`${provider.id}.name`, { ns: 'pages/currency' })) {
+		provider.localName = t(`${provider.id}.name`);
+	}
+	
 	if (!isDisabled && provider.id in fetchers === false) {
+		//Check if fetcher exists
 		throw new Error('Fetch method must be defined in useExchangeRates for api id: ' + provider.id);
 	}
 	const fetcher = isDisabled ? null : fetchers[provider.id];
@@ -63,11 +69,11 @@ export default function useExchangeRates() {
 	 * @returns
 	 */
 	async function fetchRemoteData() {
-		if (provider.id === 'none') return;
+		if (!provider || !provider?.id || provider.id === 'none') return;
 		if (!fetcher) return;
 		if (isExpired === false) {
 			//Cache is not yet expired
-			console.log('Using cached data with mock fetch wait time.');
+			console.log(`${provider.name}: Using cached data`);
 			return new Promise((resolve) => {
 				setTimeout(() => {
 					resolve(cache.data);

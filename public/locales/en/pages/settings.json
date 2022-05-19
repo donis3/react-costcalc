@@ -27,7 +27,9 @@
 	"error": {
 		"InvalidData": "Invalid data received",
 		"UnsupportedCurrency": "An unsupported currency received",
-		"DefaultCurrencyChange": "Default currency can't be changed"
+		"DefaultCurrencyChange": "Default currency can't be changed",
+		"MissingApi": "Your choice of Exchange rate provider is no longer available. Please select another."
 	},
+
 	"initialSetup": "Initial Setup"
 }

@@ -27,7 +27,8 @@
 	"error": {
 		"InvalidData": "Yollanan veriler hatalı",
 		"UnsupportedCurrency": "Desteklenmeyen bir para birimine rastlandı.",
-		"DefaultCurrencyChange": "Esas para birimi değiştirilemez"
+		"DefaultCurrencyChange": "Esas para birimi değiştirilemez",
+		"MissingApi": "Tercihlerinizdeki döviz kuru sağlayıcı artık desteklenmiyor. Lütfen başka bir sağlayıcı seçiniz."
 	},
 	"initialSetup": "İlk Kurulum"
 }

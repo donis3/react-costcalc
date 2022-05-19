@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import currency from '../../config/currency.json';
+import useConfig from '../../hooks/app/useConfig';
 import useDefaultSettings from './useDefaultSettings';
 
 export default function useSettingsReducer() {
+	const config = useConfig();
+	const providers = config.get('apiProviders') || [];
 	const { t } = useTranslation('pages/settings');
 	const currencyCodes = Object.keys(currency) || [];
 	const { initialData } = useDefaultSettings();
@@ -85,6 +88,23 @@ export default function useSettingsReducer() {
 				console.log('TODO: If a currency is removed, go through all data and remove items using that');
 
 				return onSuccess(newState);
+			}
+
+			/**
+			 * Check if currently active api is still available in config.
+			 * Dispatch this action from settings page
+			 */
+			case 'ApiHealthCheck': {
+				//Check if currently selected api is still available in config
+				const apiId = state.apiProvider;
+				if (!apiId) return state;
+				const provider = providers.find((item) => item.id === apiId);
+
+				if (!provider) {
+					//Selected api provider is no longer available. Remove it
+					return onSuccess({ ...state, apiProvider: '', apiKey: '' });
+				}
+				return state;
 			}
 
 			/**

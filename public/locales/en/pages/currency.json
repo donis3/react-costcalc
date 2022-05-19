@@ -11,11 +11,11 @@
 	"success": {
 		"refresh": "Received exchange rate data from {{provider}}"
 	},
-	"api1": {
+	"exhost": {
 		"name": "ExchangeRates.Host",
 		"notWorking": "Unable to reach exchangerate.host remote service"
 	},
-	"api2": {
+	"tcmb": {
 		"name": "Turkish Central Bank",
 		"invalidBase": "Main currency must be TRY to be able to use TCMB Api",
 		"parseFail": "Failed to parse TCMB data"

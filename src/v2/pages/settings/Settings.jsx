@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Form from '../../components/forms/Form';
 import Card from '../../components/common/Card';
 import ModuleHeader from '../../components/layout/ModuleHeader';
+import { toast } from 'react-toastify';
 
 import useSettings from '../../context/settings/useSettings';
 
@@ -12,11 +13,13 @@ import { AiFillStar as FavSelectedIcon, AiOutlineStar as FavIcon } from 'react-i
 
 import { useNavigate } from 'react-router-dom';
 import DocumentDates from '../../components/common/DocumentDates';
+import { SettingsDispatchContext } from '../../context/settings';
 
 export default function Settings() {
 	const { t } = useTranslation('pages/settings');
 	const navigate = useNavigate();
 	const { settings, setupComplete } = useSettings();
+	const dispatch = useContext(SettingsDispatchContext);
 	const { select, register, actions, formState, showApiSection, isApiKeyDisabled, getError, defaultCurrencyName } =
 		useSettingsForm({
 			data: settings,
@@ -32,7 +35,12 @@ export default function Settings() {
 		}
 	}, [settings?.updatedAt, navigate]);
 
-	
+	//Healthchecks
+	useEffect(() => {
+		const success = () => toast.warning(t('error.MissingApi'), { toastId: 'settings' });
+		dispatch({ type: 'ApiHealthCheck', success });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>

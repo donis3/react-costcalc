@@ -10,14 +10,14 @@
 	},
 	"apiProviders": [
 		{
-			"id": "api1",
+			"id": "exhost",
 			"name": "exchangerates.host",
 			"requiresKey": false,
-			"cacheDurationMinutes": 5,
+			"cacheDurationMinutes": 10,
 			"url": "https://api.exchangerate.host/latest"
 		},
 		{
-			"id": "api2",
+			"id": "tcmb",
 			"name": "TCMB",
 			"requiresKey": false,
 			"cacheDurationMinutes": 30,

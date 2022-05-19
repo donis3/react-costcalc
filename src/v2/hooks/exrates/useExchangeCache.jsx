@@ -1,18 +1,21 @@
-import React from 'react';
-import useConfig from '../app/useConfig';
 import useStorageState from '../common/useStorageState';
 
 export default function useExchangeCache({ id = null, cacheDurationMinutes = 1 } = {}) {
-	const [cache, setCache] = useStorageState(`cache_${id}`, { updatedAt: null, data: null });
+	const cacheName = id ? `cache_${id}` : null;
+	const [cache, setCache] = useStorageState(cacheName, { updatedAt: null, data: null });
 
-	//Convert minutes to milliseconds
+	/**
+	 * Default cache duration is 1 min and can't be lower.
+	 * Max duration is 1 day (1440 minutes)
+	 */
 	cacheDurationMinutes = parseInt(cacheDurationMinutes);
-	if (isNaN(cacheDurationMinutes)) cacheDurationMinutes = 30;
+	if (isNaN(cacheDurationMinutes) || cacheDurationMinutes <= 0) cacheDurationMinutes = 1;
+	if (cacheDurationMinutes > 1440) cacheDurationMinutes = 1440;
 	const cacheDuration = cacheDurationMinutes * 60 * 1000;
 
 	//Check if cache is expired
 	let isExpired = true;
-	if (cache && cache.updatedAt > 1) {
+	if (id && cache && cache.updatedAt > 1) {
 		const timePassed = Date.now() - cache.updatedAt;
 		if (timePassed > cacheDuration) {
 			//enough time has passed
@@ -24,6 +27,8 @@ export default function useExchangeCache({ id = null, cacheDurationMinutes = 1 }
 
 	function setCacheData(data) {
 		if (!Array.isArray(data)) return;
+		if (!id) return;
+
 		setCache({ updatedAt: Date.now(), data });
 	}
 

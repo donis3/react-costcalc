@@ -14,11 +14,12 @@ import useConfig from '../app/useConfig';
 export default function useStorageState(identifier = null, initialValue = null) {
 	//Generate storage key
 	const configHook = useConfig();
-	const localStorageKey = configHook.getUniqueKey(identifier);
+	const localStorageKey = identifier ? configHook.getUniqueKey(identifier) : null;
 	//Initialize state
-	const [state, setState] = useState(getInitialValue(localStorageKey, initialValue));
+	const initialState = identifier ? getInitialValue(localStorageKey, initialValue) : {};
+	const [state, setState] = useState(initialState);
 	if (!localStorageKey) return returnDefault(initialValue);
-	
+
 	//setState function that will save state in local storage
 	const handleSetState = (newState) => {
 		//If a function is passed, pass current state to it and get the result
@@ -44,7 +45,7 @@ const returnDefault = (defaultValue = null) => {
 		config.debug.storage && console.log(msg);
 	};
 	//Inform error
-	defaultSetter();
+	//defaultSetter();
 	//return hook
 	return [defaultValue, defaultSetter];
 };

@@ -7,6 +7,7 @@ export default function useSettings() {
 	const settings = useContext(SettingsContext);
 	const { t, i18n } = useTranslation('currencies');
 
+
 	/**
 	 * Current Currency Settings
 	 */
