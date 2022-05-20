@@ -1,7 +1,7 @@
 import useJoi from '../../hooks/common/useJoi';
 import { useTranslation } from 'react-i18next';
 
-export default function useSchemaProducts() {
+export default function useProductsSchema() {
 	//Get custom joi instance
 	const Joi = useJoi({ abortEarly: false, convert: true });
 	//Load materials translations

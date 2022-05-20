@@ -17,7 +17,14 @@ import Demo from '../pages/other/Demo';
 import Help from '../pages/other/Help';
 import NotFound from '../pages/other/NotFound';
 import Welcome from '../pages/other/Welcome';
+
+//Products
 import Products from '../pages/products/Products';
+
+//Recipes
+import Recipes from '../pages/recipes/Recipes';
+import Recipe from '../pages/recipes/Recipe';
+import RecipeForm from '../pages/recipes/form/RecipeForm';
 
 //Settings
 import Settings from '../pages/settings/Settings';
@@ -29,9 +36,15 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* ===================== Recipes  ===================== */}
+			<Route path='/recipes' element={<Recipes />} />
+			<Route path='/recipes/:recipeId' element={<Recipe />} />
+			<Route path='/recipes/add/' element={<RecipeForm />} />
+			<Route path='/recipes/edit/:recipeId' element={<RecipeForm isEdit={true} />} />
+
 			{/* ===================== Products  ===================== */}
 			<Route path='/products' element={<Products />} />
-			
+
 			{/* ===================== Materials  ===================== */}
 			<Route path='/materials' element={<Materials />} />
 			<Route path='/materials/:materialId' element={<Material />} />

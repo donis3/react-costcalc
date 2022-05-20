@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { ProductsDispatchContext } from '../../context/products';
 import useProducts from '../../context/products/useProducts';
+import useProductsSchema from '../../context/products/useProductsSchema';
 import useRecipes from '../../context/recipes/useRecipes';
 import useFormHandler from '../../hooks/common/useFormHandler';
-import useSchemaProducts from './useSchemaProducts';
 
 export default function useProductsForm({ productId = null, handleClose = null }) {
 	const { t } = useTranslation('pages/products');
@@ -19,7 +19,7 @@ export default function useProductsForm({ productId = null, handleClose = null }
 
 	const formInitialState = products.generateFormInitialState({ productId });
 	const [formState, setFormState] = useState(formInitialState);
-	const { schema } = useSchemaProducts();
+	const { schema } = useProductsSchema();
 	const formHandler = useFormHandler({ formState, setFormState, schema });
 
 	//Custom Form Submit Handler

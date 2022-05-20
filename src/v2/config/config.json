@@ -30,7 +30,8 @@
 		"itemsPerPage": 10
 	},
 	"history": {
-		"exchangeRates": 10
+		"exchangeRates": 10,
+		"recipeCost": 10
 	},
 	"debug": {
 		"general": true,

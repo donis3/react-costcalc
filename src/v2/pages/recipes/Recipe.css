@@ -1,0 +1,22 @@
+.recipe-order {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.recipe-order,
+.recipe-order td {
+    border: 1px solid black;
+}
+
+.recipe-order td {
+    @apply p-2;
+}
+
+.recipe-order .order-subtitle {
+    @apply font-semibold pt-5;
+}
+
+.empty-area {
+    width: 100%;
+    height: 150px;
+}

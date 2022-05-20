@@ -5,7 +5,7 @@ import { EndproductsContext } from '.';
  * Use only this hook to access context: EndProducts
  */
 export default function useEndproducts() {
-	const endproducts = useContext(EndproductsContext);
+	const endProducts = useContext(EndproductsContext);
 
-	return { endproducts };
+	return { endProducts };
 }
