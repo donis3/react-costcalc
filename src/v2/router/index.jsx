@@ -17,6 +17,7 @@ import Demo from '../pages/other/Demo';
 import Help from '../pages/other/Help';
 import NotFound from '../pages/other/NotFound';
 import Welcome from '../pages/other/Welcome';
+import Products from '../pages/products/Products';
 
 //Settings
 import Settings from '../pages/settings/Settings';
@@ -28,6 +29,9 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* ===================== Products  ===================== */}
+			<Route path='/products' element={<Products />} />
+			
 			{/* ===================== Materials  ===================== */}
 			<Route path='/materials' element={<Materials />} />
 			<Route path='/materials/:materialId' element={<Material />} />

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import useConfig from '../app/useConfig';
 
 const useFormHandler = ({ formState = null, setFormState = null, schema = null }) => {
+	const config = useConfig();
 	const [errors, setErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [defaultState, setDefaultState] = useState({});
@@ -37,7 +39,6 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		if (!schema) return null;
 
 		const result = schema.validate(formData);
-		
 
 		//There are errors
 		if (result.error && result.error.details) {
@@ -71,11 +72,19 @@ const useFormHandler = ({ formState = null, setFormState = null, schema = null }
 		setIsSubmitted(true);
 
 		const data = validateForm(formState);
-		
+
 		if (!data) {
-			//There are errors do not submit
-			// console.log('Form has errors');
-			// console.table(errors);
+			//Show errors in console
+			if (errors && Array.isArray(errors) && errors.length > 0) {
+				console.log(errors);
+				const message = errors.reduce((acc, err) => {
+					return acc.length > 0 ? `${acc}, ${err.key}` : err.key;
+				}, '');
+				if (config.get('debug.forms')) {
+					console.warn(`Form validation errors: ${message}`);
+				}
+			}
+
 			return [...errors];
 		} else {
 			//there are no errors and we received a clean data object. Pass it down to form caller
