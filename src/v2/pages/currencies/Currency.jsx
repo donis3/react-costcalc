@@ -57,9 +57,7 @@ export default function Currency() {
 		//Create payload for dispatch
 		const payload = { from: currency, to: currencies.default, rate: data.rate };
 		const success = () =>
-			toast.success(t('currency.addSuccess', { from: currency, to: currencies.default }), {
-				toastId: 'currencySuccess',
-			});
+			toast.success(t('currency.addSuccess', { from: currency, to: currencies.default }));
 		const error = (code) => toast.error(t('currency.addError', { code }), { toastId: 'currency' });
 		dispatch({ type: 'AddRate', payload, success, error });
 	};

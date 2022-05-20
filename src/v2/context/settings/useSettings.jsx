@@ -2,10 +2,26 @@ import { useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SettingsContext } from './index';
 import currency from '../../config/currency.json';
+import useConfig from '../../hooks/app/useConfig';
 
 export default function useSettings() {
+	const config = useConfig();
 	const settings = useContext(SettingsContext);
 	const { t, i18n } = useTranslation('currencies');
+
+	/**
+	 * Get active api provider
+	 */
+	const getCurrentApiProvider = useCallback(() => {
+		let currentApiProvider = { id: null, name: 'none', requiresKey: false, url: null };
+		if (settings?.apiProvider) {
+			const provider = config.all.apiProviders.find((item) => item.id === settings?.apiProvider);
+			if (provider) {
+				currentApiProvider = { ...currentApiProvider, ...provider };
+			}
+		}
+		return currentApiProvider;
+	}, [config.all.apiProviders, settings?.apiProvider]);
 
 	/**
 	 * Current Currency Settings
@@ -65,6 +81,7 @@ export default function useSettings() {
 			getSymbols: getCurrencySymbols,
 		},
 		defaultCurrency,
+		getCurrentApiProvider,
 		setupComplete: setupComplete(),
 	};
 }
