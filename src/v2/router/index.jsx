@@ -34,6 +34,11 @@ import Packages from '../pages/packages/Packages';
 import PackageForm from '../pages/packages/PackageForm';
 import Package from '../pages/packages/Package';
 
+//EndProducts
+import EndProducts from '../pages/endproducts/EndProducts';
+import EndProductForm from '../pages/endproducts/EndProductForm';
+import EndProduct from '../pages/endproducts/EndProduct';
+
 export default function Router() {
 	//Detect first time setup
 	const { setupComplete } = useSettings();
@@ -41,6 +46,12 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* EndProducts */}
+			<Route path='/endproducts' element={<EndProducts />} />
+			<Route path='/endproducts/add' element={<EndProductForm isEdit={false} />} />
+			<Route path='/endproducts/:endId' element={<EndProduct />} />
+			<Route path='/endproducts/edit/:endId' element={<EndProductForm isEdit={true} />} />
+
 			{/* ===================== Packages  ===================== */}
 			<Route path='/packages' element={<Packages />} />
 			<Route path='/packages/:packageId' element={<Package />} />

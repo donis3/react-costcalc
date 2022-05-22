@@ -16,7 +16,8 @@
 		"invalidId": "Save failed. Invalid product ID",
 		"notFound": "Product couldn't be found",
 		"packageError": "The packaging item bound to this product couldn't be found. Please edit the product",
-		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product"
+		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product",
+		"noChange": "No changes were made"
 	},
 	"labels": {
 		"endId": "Product ID",

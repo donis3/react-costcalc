@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import useCurrencyConversion from '../../hooks/app/useCurrencyConversion';
+import useMoney from '../../hooks/app/useMoney';
 
 export default function PricePerUnit({ unit = null, currency = null, children } = {}) {
 	const { t, i18n } = useTranslation('translation');
-	const { displayMoney, defaultCurrency } = useCurrencyConversion();
+	const { displayMoney, defaultCurrency } = useMoney();
 	if (!currency) currency = defaultCurrency;
 
 	if (i18n.exists('units.' + unit, { ns: 'translation' })) {

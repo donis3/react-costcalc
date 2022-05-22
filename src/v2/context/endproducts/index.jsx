@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import useStorageRepo from '../../hooks/common/useStorageRepo';
 import endproductsReducer from './endproductsReducer';
+import useEndproductsDefaults from './useEndproductsDefaults';
 
 //Create Required Contexts
 export const EndproductsContext = createContext();
@@ -13,6 +14,7 @@ export default function EndproductsProvider({ children }) {
 	//Set up repo & State
 	const [endproductsRepo, setEndproductsRepo] = useStorageRepo('application', 'endproducts', []);
 	const [endproducts, dispatch] = useReducer(endproductsReducer, endproductsRepo);
+	const { defaultFields } = useEndproductsDefaults();
 
 	//Update repo if state changes
 	useEffect(() => {
@@ -24,7 +26,7 @@ export default function EndproductsProvider({ children }) {
 	const dispatchWrapper = (action) => {
 		if (!action) throw new Error('Invalid dispatch request @ Endproducts');
 		//Inject
-		action.dependencies = {};
+		action.dependencies = { defaultFields };
 		//Dispatch
 		dispatch(action);
 	};

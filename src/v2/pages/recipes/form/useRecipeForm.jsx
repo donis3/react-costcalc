@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -25,9 +25,18 @@ export default function useRecipeForm({ recipe, products } = {}) {
 	const { endProducts } = useEndproducts();
 	const productList = products.getAllSorted({ field: 'name' });
 	//Select first product by default
-	if (!recipe) {
+	if (!recipe && productList?.length > 0) {
 		initialState.productId = productList[0].productId;
 	}
+
+	//Case: No product available
+	useEffect(() => {
+		if (!productList || !Array.isArray(productList) || productList.length === 0) {
+			toast.warn(t('form.noProducts'));
+			navigate('/recipes');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [productList]);
 
 	//=============// Form Actions & Helpers //===============//
 	/**
@@ -105,7 +114,7 @@ export default function useRecipeForm({ recipe, products } = {}) {
 		resetForm();
 		setSubmitted(false);
 	};
-	
+
 	const handleDelete = () => {
 		if (!recipe) return;
 		if (!isDeleteAllowed()) return;
