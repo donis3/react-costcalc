@@ -20,7 +20,9 @@ export default function Products() {
 
 		setModalState({ isOpen: true, type, productId });
 	};
-	const closeModal = () => setModalState({ isOpen: false, type: 'add', productId: null });
+	const closeModal = () => {
+		setModalState({ isOpen: false, type: 'add', productId: null });
+	};
 
 	return (
 		<>

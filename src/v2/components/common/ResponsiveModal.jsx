@@ -17,7 +17,6 @@ export default function ResponsiveModal({
 }) {
 	// const { windowType } = useContext(AppContext);
 	const { windowType } = useApp();
-	
 
 	//Close modal when clicked outside
 	const handleOutsideClick = (e) => {
@@ -76,7 +75,7 @@ export default function ResponsiveModal({
 					)}
 					{/* Absolute Positioned Close Button */}
 					<div className='absolute top-5 right-5  text-base-content '>
-						<button className='btn-ghost rounded-md p-1' onClick={handleButtonClick}>
+						<button type='button' className='btn-ghost rounded-md p-1' onClick={handleButtonClick}>
 							<AiOutlineClose className='text-2xl' />
 						</button>
 					</div>
