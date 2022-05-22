@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import './Modal.css';
 import { AiOutlineClose } from 'react-icons/ai';
 // import AppContext from '../../context/AppContext';
@@ -15,7 +15,6 @@ export default function ResponsiveModal({
 	autoFooter = false,
 	icon = null,
 }) {
-	// const { windowType } = useContext(AppContext);
 	const { windowType } = useApp();
 
 	//Close modal when clicked outside

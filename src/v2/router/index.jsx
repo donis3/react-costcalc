@@ -2,6 +2,9 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import useSettings from '../context/settings/useSettings';
 
+//Settings
+import Settings from '../pages/settings/Settings';
+
 //Currency
 import Currencies from '../pages/currencies/Currencies';
 import Currency from '../pages/currencies/Currency';
@@ -26,8 +29,10 @@ import Recipes from '../pages/recipes/Recipes';
 import Recipe from '../pages/recipes/Recipe';
 import RecipeForm from '../pages/recipes/form/RecipeForm';
 
-//Settings
-import Settings from '../pages/settings/Settings';
+//Packages
+import Packages from '../pages/packages/Packages';
+import PackageForm from '../pages/packages/PackageForm';
+import Package from '../pages/packages/Package';
 
 export default function Router() {
 	//Detect first time setup
@@ -36,6 +41,12 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* ===================== Packages  ===================== */}
+			<Route path='/packages' element={<Packages />} />
+			<Route path='/packages/:packageId' element={<Package />} />
+			<Route path='/packages/add' element={<PackageForm isEdit={false} />} />
+			<Route path='/packages/edit/:packageId' element={<PackageForm isEdit={true} />} />
+
 			{/* ===================== Recipes  ===================== */}
 			<Route path='/recipes' element={<Recipes />} />
 			<Route path='/recipes/:recipeId' element={<Recipe />} />
