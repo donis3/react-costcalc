@@ -10,7 +10,6 @@ import Currencies from '../pages/currencies/Currencies';
 import Currency from '../pages/currencies/Currency';
 
 //Other
-import Home from '../pages/Home';
 import MaterialForm from '../pages/materials/form/MaterialForm';
 import Material from '../pages/materials/Material';
 import Materials from '../pages/materials/Materials';
@@ -52,6 +51,7 @@ import Expenses from '../pages/company/Expenses';
 import ExpenseForm from '../pages/company/expenses/ExpenseForm';
 import ExpenseDetails from '../pages/company/expenses/ExpenseDetails';
 import ExpenseChart from '../pages/company/expenses/ExpenseChart';
+import HomePage from '../pages/HomePage';
 
 export default function Router() {
 	//Detect first time setup
@@ -115,7 +115,7 @@ export default function Router() {
 			<Route path='/contact' element={<Contact />} />
 			<Route path='/about' element={<About />} />
 			<Route path='/help' element={<Help />} />
-			<Route path='/' element={<Home />} />
+			<Route path='/' element={<HomePage />} />
 			<Route path='/*' element={<NotFound />} />
 		</Routes>
 	);

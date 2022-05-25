@@ -14,8 +14,9 @@ import {
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 import useIntl from '../../../hooks/common/useIntl';
-import { useAppContext } from '../../../context/AppContext';
+
 import { useTranslation } from 'react-i18next';
+import useApp from '../../../context/app/useApp';
 
 ChartJS.register(
 	CategoryScale,
@@ -33,7 +34,7 @@ export default function ProductionChart({ production = [] } = {}) {
 	const { t } = useTranslation('pages/homepage', 'translation');
 	const { displayDate, displayNumber } = useIntl();
 
-	const { language } = useAppContext();
+	const { language } = useApp();
 	const [dateLocale, setDateLocale] = useState(null);
 	//Will lazy load a locale for date functions to be able to localize dates
 	useEffect(() => {

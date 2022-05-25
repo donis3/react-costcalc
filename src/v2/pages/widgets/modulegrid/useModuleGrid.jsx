@@ -1,22 +1,20 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCompany from '../../../context/company/useCompany';
-import {
-	useEndProductsContext,
-	useMaterialContext,
-	usePackagesContext,
-	useProductsContext,
-	useRecipesContext,
-} from '../../../context/MainContext';
+import useEndproducts from '../../../context/endproducts/useEndproducts';
+import useMaterials from '../../../context/materials/useMaterials';
+import usePackages from '../../../context/packages/usePackages';
+import useProducts from '../../../context/products/useProducts';
+import useRecipes from '../../../context/recipes/useRecipes';
 
 export default function useModuleGrid() {
 	const { t } = useTranslation('pages/homepage');
 	const { company } = useCompany();
-	const { products } = useProductsContext();
-	const { Materials } = useMaterialContext();
-	const { recipes } = useRecipesContext();
-	const { packages } = usePackagesContext();
-	const { endProducts } = useEndProductsContext();
+	const { products } = useProducts();
+	const { Materials } = useMaterials();
+	const { recipes } = useRecipes();
+	const packages = usePackages();
+	const endProducts = useEndproducts();
 
 	//================// Helper Methods //==================//
 	function getCount(data) {

@@ -14,9 +14,10 @@ import {
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 import useIntl from '../../../hooks/common/useIntl';
-import { useCurrencyContext } from '../../../context/MainContext';
-import { useAppContext } from '../../../context/AppContext';
+
 import { useTranslation } from 'react-i18next';
+import useApp from '../../../context/app/useApp';
+import useMoney from '../../../hooks/app/useMoney';
 
 ChartJS.register(
 	CategoryScale,
@@ -33,9 +34,10 @@ ChartJS.register(
 export default function CostsChart({ overhead = [], labor = [] } = {}) {
 	const { t } = useTranslation('pages/homepage', 'translation');
 	const { displayDate, displayMoney } = useIntl();
-	const { currencies } = useCurrencyContext();
-	const { language } = useAppContext();
+	const { defaultCurrency } = useMoney();
+	const { language } = useApp();
 	const [dateLocale, setDateLocale] = useState(null);
+
 	//Will lazy load a locale for date functions to be able to localize dates
 	useEffect(() => {
 		async function loadDateLocale() {
@@ -44,8 +46,9 @@ export default function CostsChart({ overhead = [], labor = [] } = {}) {
 		}
 		loadDateLocale();
 	}, [language.code]);
+
 	//Constants
-	const defaultCurrency = currencies.defaultCurrency;
+
 	const colors = ['58, 134, 255', '251, 86, 7'];
 	function getColor(index = 0, bg = false) {
 		if (!colors?.[index]) index = 0;
@@ -118,7 +121,6 @@ export default function CostsChart({ overhead = [], labor = [] } = {}) {
 			},
 		},
 	};
-
 
 	const chartData2 = {
 		datasets: [

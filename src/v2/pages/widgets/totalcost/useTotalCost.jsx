@@ -1,10 +1,10 @@
 import useCompany from '../../../context/company/useCompany';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
-import useConfig from '../../../hooks/app/useConfig';
+
+import useMoney from '../../../hooks/app/useMoney';
 
 export default function useTotalCost({ period = 'y' } = {}) {
-	const config = useConfig();
-	const defaultCurrency = config.getDefaultCurrency(true);
+	const { defaultCurrency } = useMoney();
 	const { periods, periodCoefficients } = useCompanyDefaults();
 	if (!periods.includes(period)) period = 'y';
 	const { company } = useCompany();
