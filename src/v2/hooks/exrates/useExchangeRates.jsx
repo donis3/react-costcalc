@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useSettings from '../../context/settings/useSettings';
 import useConfig from '../app/useConfig';
 import useExchangeCache from './useExchangeCache';
@@ -41,7 +41,7 @@ export default function useExchangeRates() {
 	if (provider.id && i18n.exists(`${provider.id}.name`, { ns: 'pages/currency' })) {
 		provider.localName = t(`${provider.id}.name`);
 	}
-	
+
 	if (!isDisabled && provider.id in fetchers === false) {
 		//Check if fetcher exists
 		throw new Error('Fetch method must be defined in useExchangeRates for api id: ' + provider.id);
@@ -120,6 +120,7 @@ export default function useExchangeRates() {
 		}, []);
 		dispatch({ type: 'BatchUpdate', payload, success, error });
 	}
+
 
 	return { fetchExchangeRates, loading, isDisabled, provider };
 }

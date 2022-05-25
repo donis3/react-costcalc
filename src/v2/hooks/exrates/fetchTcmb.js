@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
-const axiosOptions = { timeout: 20000 };
+const axiosOptions = { timeout: 20000, timestamp: Date.now() };
 
 // Expected Result = [ {code: 'USD', rate: 15},...]
 
@@ -9,7 +9,7 @@ export default async function fetchTcmb(currencies = [], baseCurrency = null, pr
 	if (!url || (requiresKey && !apiKey)) return;
 	if (!Array.isArray(currencies) || currencies.length === 0 || !baseCurrency) return;
 
-    //Only works for TRY bases
+	//Only works for TRY bases
 	if (baseCurrency !== 'TRY') {
 		throw new Error('invalidBase');
 	}

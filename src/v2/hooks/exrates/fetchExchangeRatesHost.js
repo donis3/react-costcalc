@@ -1,9 +1,13 @@
 import axios from 'axios';
+
 const axiosOptions = { timeout: 20000 };
 
 /**
  * Fetches using base currency and returns base/quote
  * We want reversed pairs.
+ * 
+ * IMPORTANT: Must add a unique timestamp with each request to avoid browser cache
+ * Because the url is the same, we'll get cached response otherwise
  *
  *
  * @param {*} currencies
@@ -18,11 +22,12 @@ export default async function fetchExchangeRatesHost(currencies = [], baseCurren
 	if (!Array.isArray(currencies) || currencies.length === 0 || !baseCurrency) return;
 
 	//https://exchangerate.host/#/#docs options
-	axiosOptions.params = { base: baseCurrency, symbols: currencies.join(',') };
+	axiosOptions.params = { base: baseCurrency, symbols: currencies.join(','), timestamp: Date.now() };
 
 	//Fetch Data
 	try {
 		const response = await axios.get(url, axiosOptions);
+
 		const { rates, success, base } = response?.data || {};
 		if (!success || !rates || !base) throw new Error('notWorking');
 
