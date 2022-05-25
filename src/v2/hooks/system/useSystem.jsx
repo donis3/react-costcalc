@@ -159,7 +159,7 @@ export default function useSystem() {
 	 * @returns {string} Appname - Company - Date .json
 	 */
 	function generateFilename() {
-		const dateString = format(new Date(), 'dd-MM-yyyy hh:mm');
+		const dateString = format(new Date(), 'dd-MM-yyyy HH:mm');
 		let companyName = info?.name ? info.name : config.app.name;
 
 		const result = t('backup.filename', {
@@ -169,6 +169,8 @@ export default function useSystem() {
 		});
 		return result;
 	}
+
+	
 
 	//========================// Delete Application Data //=======================//
 	function onDeleteRequest(deleteFormState) {
