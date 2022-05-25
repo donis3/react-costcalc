@@ -52,6 +52,7 @@ import ExpenseForm from '../pages/company/expenses/ExpenseForm';
 import ExpenseDetails from '../pages/company/expenses/ExpenseDetails';
 import ExpenseChart from '../pages/company/expenses/ExpenseChart';
 import HomePage from '../pages/HomePage';
+import System from '../pages/system/System';
 
 export default function Router() {
 	//Detect first time setup
@@ -109,6 +110,9 @@ export default function Router() {
 
 			{/* ===================== Settings  ===================== */}
 			<Route path='/settings' element={<Settings />} />
+
+			{/* ===================== System  ===================== */}
+			<Route path='/system' element={<System />} />
 
 			{/* ===================== Other Routes  ===================== */}
 			<Route path='/demo' element={<Demo />} />
