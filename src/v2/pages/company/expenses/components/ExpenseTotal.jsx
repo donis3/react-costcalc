@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useCompanyDefaults from '../../../../context/company/useCompanyDefaults';
-import useConfig from '../../../../hooks/app/useConfig';
+import useMoney from '../../../../hooks/app/useMoney';
 import useIntl from '../../../../hooks/common/useIntl';
 
 /**
@@ -11,8 +11,8 @@ import useIntl from '../../../../hooks/common/useIntl';
 export default function ExpenseTotal({ expenses, options }) {
 	const { t } = useTranslation('pages/company', 'translation');
 	const { displayMoney } = useIntl();
-	const config = useConfig();
-	const defaultCurrency = config.getDefaultCurrency(true);
+
+	const { defaultCurrency } = useMoney();
 	const period = options?.showPeriod ? options.showPeriod : 'y';
 	const currentPeriodText = t(`periods.${options.showPeriod}`, { ns: 'translation' });
 	const { periodCoefficients } = useCompanyDefaults();

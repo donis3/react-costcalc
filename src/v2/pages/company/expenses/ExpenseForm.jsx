@@ -4,14 +4,15 @@ import { useParams } from 'react-router-dom';
 import Card from '../../../components/common/Card';
 import Form from '../../../components/forms/Form';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
-import { useAppContext } from '../../../context/AppContext';
+import useApp from '../../../context/app/useApp';
+
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
 import useIntl from '../../../hooks/common/useIntl';
 import useExpenseForm from './useExpenseForm';
 
 export default function ExpenseForm({ isEdit = false }) {
 	const { t } = useTranslation('pages/company', 'translation');
-	const { page } = useAppContext();
+	const { page } = useApp();
 	const { expenseId } = useParams();
 	const { findById } = useCompanyExpenses();
 	const expense = isEdit ? findById(expenseId) : null;

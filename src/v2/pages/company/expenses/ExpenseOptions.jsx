@@ -5,12 +5,13 @@ import { FaCaretDown, FaCaretLeft, FaUndoAlt } from 'react-icons/fa';
 import OptionControl from '../../../components/common/OptionControl';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
-import useConfig from '../../../hooks/app/useConfig';
+
+import useMoney from '../../../hooks/app/useMoney';
 
 export default function ExpenseOptions({ setOption, options, display }) {
 	const { t } = useTranslation('pages/company', 'translation');
-	const config = useConfig();
-	const defaultCurrency = config.getDefaultCurrency(true);
+
+	const { defaultCurrency } = useMoney();
 	const [expanded, setExpanded] = useState(false);
 	const { getAvailableCategories } = useCompanyExpenses();
 	const { periods } = useCompanyDefaults();
@@ -57,9 +58,9 @@ export default function ExpenseOptions({ setOption, options, display }) {
 		<div className='mb-10'>
 			{/* Options Toggle */}
 			<div className='w-full flex p-1 justify-end'>
-				<button type='button' className='badge badge-secondary' onClick={() => setExpanded(!expanded)}>
+				<button type='button' className='badge badge-secondary' onClick={() => setExpanded((state) => !state)}>
 					{expanded ? <FaCaretDown /> : <FaCaretLeft />}
-					{Array.isArray(options?.showCategory) && options.showCategory.length > 0
+					{Array.isArray(options?.showCategory) && options.showCategory.length > 0 && display.includes('category')
 						? t('labels.filtering', { ns: 'translation', count: options.showCategory.length })
 						: t('buttons.options', { ns: 'translation' })}
 				</button>

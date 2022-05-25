@@ -7,8 +7,8 @@ import TablePagination from '../../../components/tables/TablePagination';
 
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
+import useMoney from '../../../hooks/app/useMoney';
 
-import useCurrencyConversion from '../../../hooks/app/useCurrencyConversion';
 import useSortTableByField from '../../../hooks/app/useSortTableByField';
 import useUiToggles from '../../../hooks/app/useUiToggles';
 import useIntl from '../../../hooks/common/useIntl';
@@ -17,8 +17,7 @@ import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseOptions from './ExpenseOptions';
 
 export default function ExpensesTable() {
-	// eslint-disable-next-line no-unused-vars
-	const [getOption, setOption, options] = useUiToggles();
+	const [, setOption, options] = useUiToggles();
 	const { getAll, sorting } = useCompanyExpenses();
 	const { t } = useTranslation('pages/company');
 	const [sortingState, sortBy] = useSortTableByField('expenses', sorting.fields, sorting.default);
@@ -29,6 +28,24 @@ export default function ExpensesTable() {
 		name: 'Expenses',
 	});
 
+	if (!Array.isArray(rows) || rows.length === 0) {
+		return (
+			<>
+				<div className='flex flex-col-reverse md:flex-row mt-5 gap-x-10 relative '>
+					<div className='flex-1'>
+						<ExpenseTotal expenses={expenses} options={options} />
+					</div>
+					<div className=''>
+						<ExpenseOptions options={options} setOption={setOption} />
+					</div>
+				</div>
+
+				<div className='my-10'>
+					<p className='opacity-75 italic text-sm'>{t('expenses.noData')}</p>
+				</div>
+			</>
+		);
+	}
 	return (
 		<>
 			{/* Table options and total cost */}
@@ -79,7 +96,7 @@ export default function ExpensesTable() {
 function ExpenseTableRow({ expense, options }) {
 	const { displayMoney } = useIntl();
 	const { defaultCost } = useCompanyExpenseCalculator();
-	const { convert, defaultCurrency } = useCurrencyConversion();
+	const { convert, defaultCurrency } = useMoney();
 	if (!expense || 'expenseId' in expense === false) return <></>;
 
 	const { expenseId, name, localCategory, period, localPeriod, cost = defaultCost, currency } = expense;

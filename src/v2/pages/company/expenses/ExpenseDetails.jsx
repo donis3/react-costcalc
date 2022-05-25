@@ -7,25 +7,28 @@ import Card from '../../../components/common/Card';
 import ItemDetails from '../../../components/common/ItemDetails';
 import NumericUnit from '../../../components/common/NumericUnit';
 import ModuleHeader from '../../../components/layout/ModuleHeader';
-import { useAppContext } from '../../../context/AppContext';
+import useApp from '../../../context/app/useApp';
+
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useCompanyExpenses from '../../../context/company/useCompanyExpenses';
-import useConfig from '../../../hooks/app/useConfig';
+
+import useMoney from '../../../hooks/app/useMoney';
 import useUiToggles from '../../../hooks/app/useUiToggles';
 import useIntl from '../../../hooks/common/useIntl';
 import ExpenseOptions from './ExpenseOptions';
 
 export default function ExpenseDetails() {
-	const { page } = useAppContext();
+	const { page } = useApp();
 	const { expenseId } = useParams();
 	const { findById } = useCompanyExpenses();
 	const expense = findById(expenseId);
 	const { t } = useTranslation('pages/company');
-	const config = useConfig();
+	
+	const { defaultCurrency } = useMoney();
 	const navigate = useNavigate();
-	// eslint-disable-next-line no-unused-vars
-	const [getOption, setOption, options] = useUiToggles();
+
+	const [, setOption, options] = useUiToggles();
 
 	useEffect(() => {
 		if (expense) {
@@ -40,7 +43,7 @@ export default function ExpenseDetails() {
 	if (!expense) return <></>;
 
 	//Options for expense options popup
-	const isForeignCurrency = expense.currency !== config.getDefaultCurrency(true);
+	const isForeignCurrency = expense.currency !== defaultCurrency;
 	const expenseOptionsDisplay = isForeignCurrency ? ['period', 'localPrice'] : ['period'];
 	//Render
 	return (
@@ -57,7 +60,7 @@ export default function ExpenseDetails() {
 					<ExpenseTotals expense={expense} options={options} />
 				</div>
 				<div className=''>
-					<ExpenseOptions options={options} setOption={setOption} display={expenseOptionsDisplay} />
+					<ExpenseOptions options={options} setOption={setOption} display={expenseOptionsDisplay}  />
 				</div>
 			</div>
 			<ExpenseDetailsGrid expense={expense} />
@@ -119,16 +122,15 @@ function ExpenseDetailsGrid({ expense = null }) {
 }
 
 function ExpenseTotals({ expense = null, options = null }) {
-	const { displayMoney } = useIntl();
 	const { t } = useTranslation('pages/company', 'translation');
 	const { calculateCost, defaultCost } = useCompanyExpenseCalculator();
 	const { periods } = useCompanyDefaults();
-	const config = useConfig();
+	const { defaultCurrency, displayMoney } = useMoney();
 
 	//Extract period and currency
 	const period = periods.includes(options?.showPeriod) ? options.showPeriod : periods[0];
 	const currentPeriodText = t('periods.' + options?.showPeriod, { ns: 'translation' });
-	const currency = options?.localPrice ? config.getDefaultCurrency(true) : expense?.currency;
+	const currency = options?.localPrice ? defaultCurrency : expense?.currency;
 
 	//Get money values
 	let total = 0;

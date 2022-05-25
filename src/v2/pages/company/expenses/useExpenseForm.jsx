@@ -5,6 +5,7 @@ import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenseActions from '../../../context/company/useCompanyExpenseActions';
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
 import useConfig from '../../../hooks/app/useConfig';
+import useMoney from '../../../hooks/app/useMoney';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
 export default function useExpenseForm(expense = null) {
@@ -13,7 +14,7 @@ export default function useExpenseForm(expense = null) {
 	const { t } = useTranslation('pages/company', 'translation');
 	const { periods, units, defaultExpense, expenseCategories } = useCompanyDefaults();
 	const selectData = useSelectArray({ units, periods, expenseCategories });
-	const currencies = config.getCurrenciesArray();
+	const { enabledCurrencies } = useMoney();
 	const { calculateCost, defaultCost } = useCompanyExpenseCalculator();
 	const actions = useCompanyExpenseActions();
 
@@ -29,7 +30,7 @@ export default function useExpenseForm(expense = null) {
 		isSubmitted,
 	});
 	//=============// Form Schema //===============//
-	addSchemaRules(schema, joi, { t, currencies, units, periods, expenseCategories });
+	addSchemaRules(schema, joi, { t, currencies: enabledCurrencies, units, periods, expenseCategories });
 
 	//=============// Form Handlers //===============//
 	const onSubmit = (e) => {
@@ -99,7 +100,7 @@ export default function useExpenseForm(expense = null) {
  */
 function useSelectArray({ units, periods, expenseCategories }) {
 	const { t } = useTranslation('pages/company', 'translation');
-	const config = useConfig();
+	const { selectCurrencyArray } = useMoney();
 
 	let unitsSelect = [];
 	let periodsSelect = [];
@@ -125,7 +126,7 @@ function useSelectArray({ units, periods, expenseCategories }) {
 		unit: unitsSelect,
 		period: periodsSelect,
 		category: categioriesSelect,
-		currencies: config.getLocalizedCurrencies({ longNames: true, symbols: true }),
+		currencies: selectCurrencyArray(),
 	};
 }
 

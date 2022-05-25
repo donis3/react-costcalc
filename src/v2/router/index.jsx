@@ -47,6 +47,12 @@ import Employees from '../pages/company/Employees';
 import EmployeeDetails from '../pages/company/employees/EmployeeDetails';
 import EmployeeForm from '../pages/company/employees/EmployeeForm';
 
+//Expenses
+import Expenses from '../pages/company/Expenses';
+import ExpenseForm from '../pages/company/expenses/ExpenseForm';
+import ExpenseDetails from '../pages/company/expenses/ExpenseDetails';
+import ExpenseChart from '../pages/company/expenses/ExpenseChart';
+
 export default function Router() {
 	//Detect first time setup
 	const { setupComplete } = useSettings();
@@ -56,6 +62,14 @@ export default function Router() {
 		<Routes>
 			{/* Company */}
 			<Route path='/company' element={<Company />} />
+
+			{/* Company > Expenses */}
+			<Route path='/company/expenses' element={<Expenses />} />
+			<Route path='/company/expenses/add' element={<ExpenseForm />} />
+			<Route path='/company/expenses/edit/:expenseId' element={<ExpenseForm isEdit={true} />} />
+			<Route path='/company/expenses/:expenseId' element={<ExpenseDetails />} />
+			<Route path='/company/expenses/chart' element={<ExpenseChart />} />
+
 			{/* Company > Employees */}
 			<Route path='/company/employees' element={<Employees />} />
 			<Route path='/company/employees/add' element={<EmployeeForm isEdit={false} />} />
