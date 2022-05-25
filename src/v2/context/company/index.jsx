@@ -18,7 +18,7 @@ export default function CompanyProvider({ children }) {
 	const { calculateCost } = useCompanyExpenseCalculator();
 
 	//Set up repo & State
-	const [companyRepo, setCompanyRepo, deleteRepo] = useStorageRepo('application', 'company', defaultCompany);
+	const [companyRepo, setCompanyRepo] = useStorageRepo('application', 'company', defaultCompany);
 	const [company, dispatch] = useReducer(companyReducer, companyRepo);
 
 	//Update repo if state changes

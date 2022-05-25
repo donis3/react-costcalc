@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import useCompanyDefaults from '../../../context/company/useCompanyDefaults';
 import useCompanyExpenseActions from '../../../context/company/useCompanyExpenseActions';
 import useCompanyExpenseCalculator from '../../../context/company/useCompanyExpenseCalculator';
-import useConfig from '../../../hooks/app/useConfig';
 import useMoney from '../../../hooks/app/useMoney';
 import useFormBuilder from '../../../hooks/forms/useFormBuilder';
 
 export default function useExpenseForm(expense = null) {
-	const config = useConfig();
+	
 	const navigate = useNavigate();
 	const { t } = useTranslation('pages/company', 'translation');
 	const { periods, units, defaultExpense, expenseCategories } = useCompanyDefaults();

@@ -8,6 +8,7 @@ import PackagesProvider from './packages';
 import ProductsProvider from './products';
 import RecipesProvider from './recipes';
 import SettingsProvider from './settings';
+import WidgetsProvider from './widgets';
 
 export default function ContextWrapper({ children }) {
 	return (
@@ -20,8 +21,10 @@ export default function ContextWrapper({ children }) {
 								<RecipesProvider>
 									<PackagesProvider>
 										<EndproductsProvider>
-											{/* Wrap */}
-											{children}
+											<WidgetsProvider>
+												{/* Wrap */}
+												{children}
+											</WidgetsProvider>
 										</EndproductsProvider>
 									</PackagesProvider>
 								</RecipesProvider>

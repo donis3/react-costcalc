@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import useSettings from '../../context/settings/useSettings';
 import useConfig from '../app/useConfig';
 import useExchangeCache from './useExchangeCache';
@@ -120,7 +120,6 @@ export default function useExchangeRates() {
 		}, []);
 		dispatch({ type: 'BatchUpdate', payload, success, error });
 	}
-
 
 	return { fetchExchangeRates, loading, isDisabled, provider };
 }
