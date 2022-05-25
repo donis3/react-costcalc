@@ -1,19 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-//import useCompanyInfo from '../../../context/company/useCompanyInfo';
+import useCompanyInfo from '../../../context/company/useCompanyInfo';
 import useIntl from '../../../hooks/common/useIntl';
 import useDefaultButtons from '../../../hooks/forms/useDefaultButtons';
 
-const info = {
-	name: 'Undefined Company',
-
-}
 
 export default function RecipeOrder({ recipe, close } = {}) {
 	const { t } = useTranslation('pages/recipes', 'translation');
 	const { displayDate, displayNumber } = useIntl();
-	//const { info } = useCompanyInfo();
-	console.log('Todo: Add company info to RecipeOrder')
+	const { info } = useCompanyInfo();
+	
 	const { Print, Cancel } = useDefaultButtons();
 	if (!recipe) return <></>;
 

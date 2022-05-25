@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCompanyToaster from './useCompanyToaster';
 import { validate, version } from 'uuid';
-import useCurrencyConversion from '../../hooks/app/useCurrencyConversion';
+
 import { isValid, parseISO } from 'date-fns';
 import { CompanyContext, CompanyDispatchContext } from '.';
 import { sortArrayAlphabetic, sortArrayDate, sortArrayNumeric } from '../../lib/common';
+import useMoney from '../../hooks/app/useMoney';
 
 
 const validateId = (id) => validate(id) && version(id) === 4;
@@ -16,7 +17,7 @@ export default function useCompanyEmployees() {
 
 	const { successToast, errorToast } = useCompanyToaster();
 	const { t } = useTranslation('pages/company');
-	const { convert, defaultCurrency } = useCurrencyConversion();
+	const { convert, defaultCurrency } = useMoney();
 
 	//=============================// Definitions //=============================//
 	const sortingSchema = {

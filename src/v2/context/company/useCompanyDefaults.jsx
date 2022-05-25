@@ -55,6 +55,9 @@ export default function useCompanyDefaults() {
 		website: t('defaultCompany.website'),
 	};
 
+	//Random employee birth year
+	const randomYear = parseInt(new Date().getFullYear()) - 88 + Math.round(Math.random() * 70);
+
 	const employee = {
 		employeeId: 0,
 		name: '',
@@ -65,8 +68,8 @@ export default function useCompanyDefaults() {
 		currency: defaultCurrency,
 		email: '',
 		mobile: '',
-		dob: formatISO(new Date('01/01/1987')),
-		doe: formatISO(new Date(new Date().getFullYear(), 1, 1)),
+		dob: formatISO(new Date(randomYear, 0, 1)),
+		doe: formatISO(new Date(new Date().getFullYear(), 0, 1)),
 	};
 
 	const expense = {

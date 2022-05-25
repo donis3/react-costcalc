@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
-import { CompanyDispatchContext } from '.';
+import { CompanyContext, CompanyDispatchContext } from '.';
 import useConfig from '../../hooks/app/useConfig';
-import { CompanyContext } from '../CompanyContext';
+
 import useProducts from '../products/useProducts';
 import useCompanyDefaults from './useCompanyDefaults';
 

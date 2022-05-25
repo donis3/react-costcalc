@@ -39,6 +39,14 @@ import EndProducts from '../pages/endproducts/EndProducts';
 import EndProductForm from '../pages/endproducts/EndProductForm';
 import EndProduct from '../pages/endproducts/EndProduct';
 
+//Company
+import Company from '../pages/company/Company';
+
+//Employees
+import Employees from '../pages/company/Employees';
+import EmployeeDetails from '../pages/company/employees/EmployeeDetails';
+import EmployeeForm from '../pages/company/employees/EmployeeForm';
+
 export default function Router() {
 	//Detect first time setup
 	const { setupComplete } = useSettings();
@@ -46,6 +54,14 @@ export default function Router() {
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
 		<Routes>
+			{/* Company */}
+			<Route path='/company' element={<Company />} />
+			{/* Company > Employees */}
+			<Route path='/company/employees' element={<Employees />} />
+			<Route path='/company/employees/add' element={<EmployeeForm isEdit={false} />} />
+			<Route path='/company/employees/edit/:employeeId' element={<EmployeeForm isEdit={true} />} />
+			<Route path='/company/employees/:employeeId' element={<EmployeeDetails />} />
+
 			{/* EndProducts */}
 			<Route path='/endproducts' element={<EndProducts />} />
 			<Route path='/endproducts/add' element={<EndProductForm isEdit={false} />} />

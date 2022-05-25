@@ -264,7 +264,7 @@ export default function companyReducer(state, action) {
 				let mergedPayload = { ...state.totals, ...payload, updatedAt: state.totals?.updatedAt };
 				if (JSON.stringify(state.totals) === JSON.stringify(mergedPayload)) {
 					//Both data are the same, no need to update
-					//return state;
+					return state;
 				}
 			}
 			//Calculate current overhead and labor
