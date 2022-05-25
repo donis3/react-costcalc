@@ -22,7 +22,7 @@ export default function useRecipeForm({ recipe, products } = {}) {
 	const moduleName = t('name');
 
 	const { t: tEndProducts } = useTranslation('pages/endproducts');
-	const { endProducts } = useEndproducts();
+	const  endProducts  = useEndproducts();
 	const productList = products.getAllSorted({ field: 'name' });
 	//Select first product by default
 	if (!recipe && productList?.length > 0) {

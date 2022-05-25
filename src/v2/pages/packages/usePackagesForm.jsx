@@ -15,7 +15,7 @@ export default function usePackagesForm({ packageId = null } = {}) {
 
 	const packages = usePackages();
 	const { schema, defaultPackage } = usePackagesDefaults();
-	const { endProducts } = useEndproducts();
+	const endProducts = useEndproducts();
 
 	const pack = packageId === null ? null : packages.findById(packageId, true);
 	const originalState = pack ? { ...pack } : { ...defaultPackage };
@@ -58,7 +58,6 @@ export default function usePackagesForm({ packageId = null } = {}) {
 				return;
 			}
 		}
-
 		const dispatchAction = getDeleteDispatchAction(formState);
 		dispatch(dispatchAction);
 		navigate('/packages');
