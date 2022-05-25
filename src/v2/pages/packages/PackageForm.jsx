@@ -10,16 +10,16 @@ import ModuleHeader from '../../components/layout/ModuleHeader';
 import { validate as isUuid } from 'uuid';
 import PackageFormTable from './packageForm/PackageFormTable';
 import usePackagesForm from './usePackagesForm';
+import Form from '../../components/forms/Form';
 
 export default function PackageForm({ isEdit = false } = {}) {
 	const { packageId } = useParams();
 	const navigate = useNavigate();
 	const { t } = useTranslation('pages/packages', 'translation');
 
-	const { formState, onChangeHandler, hasError, onSubmit, onAddItem, onRemoveItem, resetForm, onDelete } =
-		usePackagesForm({
-			packageId,
-		});
+	const { onAddItem, onRemoveItem, formHandler, getError, register, formState } = usePackagesForm({
+		packageId,
+	});
 
 	useEffect(() => {
 		//verify package if this is edit mode
@@ -51,85 +51,54 @@ export default function PackageForm({ isEdit = false } = {}) {
 					{/* Form lead depending on context */}
 					{t('form.details')}
 				</p>
+				{/* Start Form  */}
+				<Form {...formHandler}>
+					{/* First Section */}
+					<Form.Section key='Section1' title={t('form.subtitle')}>
+						{/* Package Name */}
+						<Form.Control error={getError('name')} label={t('labels.name')}>
+							<Form.Text {...register({ field: 'name', isControlled: false })} />
+						</Form.Control>
 
-				<form onSubmit={onSubmit} className='w-full mt-10'>
-					{/* Form Start*/}
+						{/* Product Type */}
+						<Form.Control
+							error={getError('productType')}
+							label={t('labels.productType')}
+							altLabel={t('labels.productTypeAlt')}
+						>
+							<Form.Select
+								disabled={isEdit}
+								options={physicalStates}
+								{...register({ field: 'productType', isControlled: true })}
+							/>
+						</Form.Control>
 
-					{/* Flex Container for form */}
-					<div className='flex flex-col justify-start gap-10 items-start xl:flex-row gap-y-20 xl:gap-y-0 gap-x-10'>
-						{/* Package Definitions Section */}
-						<div className='w-full flex flex-col gap-y-5 max-w-lg md:max-w-2xl'>
-							<h1 className='text-xl m-0 p-0 border-b-8'>{t('form.subtitle')}</h1>
+						{/* Package Capacity */}
+						<Form.ControlGroup
+							error={getError('packageCapacity')}
+							label={t('labels.packageCapacity')}
+							altLabel={t('labels.packageCapacityAlt')}
+						>
+							<Form.Number {...register({ field: 'packageCapacity', isControlled: false })} />
+							{/* Display Liters or Kilograms depending on current product type */}
+							<span>
+								{formState.productType === 'liquid'
+									? t('units.L', { ns: 'translation', count: Math.round(formState.packageCapacity) })
+									: t('units.kg', { ns: 'translation', count: Math.round(formState.packageCapacity) })}
+							</span>
+						</Form.ControlGroup>
 
-							{/* name */}
-							<FormInput label={t('labels.name')} error={hasError('name')}>
-								<FormInput.Text name='name' onChange={onChangeHandler} value={formState.name} />
-							</FormInput>
-							{isEdit === false ? (
-								<FormInput
-									label={t('labels.productType')}
-									error={hasError('productType')}
-									altLabel={t('labels.productTypeAlt')}
-								>
-									<FormInput.Select
-										name='productType'
-										options={physicalStates}
-										onChange={onChangeHandler}
-										value={formState.productType}
-									/>
-								</FormInput>
-							) : (
-								<FormInput label={t('labels.productType')}>
-									<input
-										type='text'
-										disabled
-										className='input input-bordered'
-										value={t('physicalStates.' + formState.productType, { ns: 'translation' })}
-									/>
-								</FormInput>
-							)}
-							{/* capacity */}
-							<FormInput
-								label={t('labels.packageCapacity')}
-								error={hasError('packageCapacity')}
-								altLabel={t('labels.packageCapacityAlt')}
-							>
-								<FormInput.Group>
-									<FormInput.Text
-										name='packageCapacity'
-										filter='number'
-										onChange={onChangeHandler}
-										value={formState.packageCapacity}
-									/>
-									{/* Unit depends on physical state kg/L */}
-									<span>
-										{formState.productType === 'liquid'
-											? t('units.L', { ns: 'translation', count: Math.round(formState.packageCapacity) })
-											: t('units.kg', { ns: 'translation', count: Math.round(formState.packageCapacity) })}
-									</span>
-								</FormInput.Group>
-							</FormInput>
-							{/* Notes */}
-							<FormInput label={t('labels.notes')} error={hasError('notes')}>
-								<FormInput.Textarea name='notes' rows='1' onChange={onChangeHandler} value={formState.notes} />
-							</FormInput>
-						</div>
+						{/* Package Name */}
+						<Form.Control error={getError('notes')} label={t('labels.notes')}>
+							<Form.Textarea {...register({ field: 'notes', isControlled: false })} />
+						</Form.Control>
+					</Form.Section>
 
-						{/* Package Items */}
-						<div className='w-full flex flex-col gap-y-5  max-w-lg md:max-w-4xl'>
-							<h1 className='text-xl m-0 p-0 border-b-8'>{t('form.packingItemsTitle')}</h1>
-
-							{/* Package Component */}
-							<PackageFormTable items={formState.items} onAdd={onAddItem} onRemove={onRemoveItem} />
-						</div>
-					</div>
-					{/* Form Footer */}
-
-					<FormFooterActions className='mt-10 border-t-2 py-5' handleDelete={isEdit ? onDelete : null}>
-						<Button.Save className='btn btn-primary btn-md mr-1' type='submit' />
-						<Button.Reset className='btn btn-md' type='button' onClick={resetForm} />
-					</FormFooterActions>
-				</form>
+					<Form.Section key='Section2' title={t('form.packingItemsTitle')}>
+						{/* Package Component */}
+						<PackageFormTable items={formState.items} onAdd={onAddItem} onRemove={onRemoveItem} />
+					</Form.Section>
+				</Form>
 			</Card>
 		</>
 	);

@@ -346,7 +346,16 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	 */
 	const setState = (field, value) => {
 		if (typeof field !== 'string' || field.length === 0) return;
-		setFormState((state) => ({ ...state, [field]: value }));
+		//setFormState((state) => ({ ...state, [field]: value }));
+
+		//Pass current state if a function is provided
+		setFormState((state) => {
+			if (typeof value === 'function') {
+				return value(state);
+			} else {
+				return { ...state, [field]: value };
+			}
+		});
 	};
 	/**
 	 * Manually remove a field from formState
