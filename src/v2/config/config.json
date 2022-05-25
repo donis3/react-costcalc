@@ -32,7 +32,8 @@
 	"history": {
 		"exchangeRates": 10,
 		"recipeCost": 10,
-		"packageCost": 10
+		"packageCost": 10,
+		"company": 10
 	},
 	"debug": {
 		"general": true,
