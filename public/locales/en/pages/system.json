@@ -38,5 +38,13 @@
 		"selectAll": "Select All",
 		"resetSuccess": "Application data for {{modules}} is successfully deleted. Please wait for reload",
 		"resetError": "An error occurred while deleting requested data"
+	},
+
+	"delete": {
+		"title": "Delete System",
+		"lead": "Delete all data, including currency settings, language, theme etc. Please make sure you have a backup of your data before taking this action. This will wipe all your application data. ",
+		"deleteAll": "Delete Everything!",
+		"success": "System data successfully cleared. Please wait for reload",
+		"error": "An error occurred while deleting application data. Please manually clear browser local storage."
 	}
 }

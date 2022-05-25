@@ -70,6 +70,14 @@ export default function useSettings() {
 		return false;
 	};
 
+	const isDemo = () => {
+		if (!settings) return false;
+		if ('isDemo' in settings) {
+			return settings.isDemo;
+		}
+		return false;
+	};
+
 	return {
 		settings,
 		currencies: {
@@ -83,5 +91,6 @@ export default function useSettings() {
 		defaultCurrency,
 		getCurrentApiProvider,
 		setupComplete: setupComplete(),
+		isDemo: isDemo(),
 	};
 }

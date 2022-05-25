@@ -9,9 +9,12 @@ export default function useDefaultSettings() {
 		defaultCurrency: lang === 'tr' ? 'TRY' : 'USD',
 		apiProvider: '',
 		apiKey: '',
+		updatedAt: null,
+		//Version
+		v: process.env.REACT_APP_VERSION,
+		//Toggles
 		setupComplete: false,
 		isDemo: false,
-		updatedAt: null,
 	};
 
 	return { initialData: defaultSettings };

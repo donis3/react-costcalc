@@ -4,6 +4,7 @@
 	"moreInfo": "More information 🛈",
 	"buttons": {
 		"start": "Get Started",
-		"demo": "See Demo"
+		"demo": "See Demo",
+		"load": "Load Backup"
 	}
 }

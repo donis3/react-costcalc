@@ -177,10 +177,56 @@ export default function useSystem() {
 		if (result && result.length > 0) deleteData(result);
 	}
 
+	//========================// Dekete System //=======================//
+
+	/**
+	 * Delete all storage keys belonging to this application
+	 */
+	function onDeleteEverything() {
+		const onSuccess = () => toast.success(t('delete.success'));
+		try {
+			const prefix = config.app.localStorageKey;
+			const keys = Object.keys(localStorage);
+			let targetKeys = [];
+			if (!keys || keys.length === 0) throw new Error('InvalidStorageData');
+			if (!prefix) {
+				targetKeys = keys;
+			} else {
+				keys.forEach((key) => {
+					const parts = key.split('.');
+					if (parts.length > 0 && parts[0] === prefix) {
+						//This key belongs to the application
+						targetKeys.push(key);
+					}
+				});
+			}
+
+			if (targetKeys.length === 0) throw new Error('InvalidStorageData');
+
+			//Delete each key
+			targetKeys.forEach((key) => {
+				localStorage.removeItem(key);
+			});
+
+			//Show toast & Reload
+			onSuccess();
+			setTimeout(() => {
+				window.location.reload(true);
+			}, 2000);
+		} catch (error) {
+			toast.error(t('delete.error'));
+		}
+	}
+
 	//========================// EXPORTS //=======================//
 	return {
 		system: system,
-		actions: { backup: handleDownload, upload: uploadFile, reset: onDeleteRequest },
+		actions: {
+			backup: handleDownload,
+			upload: uploadFile,
+			reset: onDeleteRequest,
+			deleteSystem: onDeleteEverything,
+		},
 		size: getStorageSize(repoName),
 		timeSinceBackup: timeSinceLastBackup(system.backup),
 	};

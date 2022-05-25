@@ -135,6 +135,9 @@ function WelcomeRouter() {
 			{/* ===================== Settings  ===================== */}
 			<Route path='/settings' element={<Settings />} />
 
+			{/* ===================== System  ===================== */}
+			<Route path='/system' element={<System />} />
+
 			{/* ===================== Other Routes  ===================== */}
 			<Route path='/demo' element={<Demo />} />
 			<Route path='/contact' element={<Contact />} />

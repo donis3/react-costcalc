@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { BiCloudUpload } from 'react-icons/bi';
 
 import useConfig from '../../hooks/app/useConfig';
 
@@ -33,7 +34,13 @@ export default function Welcome() {
 							</Link>
 						</div>
 						<div>
-							<p className='mt-5 text-sm opacity-50'>
+							<div className='mt-10'>
+								<Link to='/system' className='btn btn-outline btn-lg gap-2'>
+									<BiCloudUpload className='text-2xl' />
+									{t('buttons.load')}
+								</Link>
+							</div>
+							<p className='mt-2 text-sm opacity-50'>
 								<Link to='/about'>{t('moreInfo')}</Link>
 							</p>
 						</div>
