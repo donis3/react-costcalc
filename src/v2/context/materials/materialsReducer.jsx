@@ -3,7 +3,6 @@ import { fields } from './definitions';
 
 export default function materialsReducer(state, action) {
 	const { type, payload = {}, error, success, dependencies = {} } = action;
-	
 
 	const onSuccess = (newState) => {
 		success?.();
@@ -175,6 +174,11 @@ export default function materialsReducer(state, action) {
 				//This material that needs updating
 				return { ...material, localPriceHistory: [...localPriceHistory] };
 			});
+		}
+
+		case 'healthCheck': {
+			console.log(`Starting health check for materials`);
+			return state;
 		}
 		/**
 		 * Invalid Dispatch

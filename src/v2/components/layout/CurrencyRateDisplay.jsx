@@ -7,7 +7,7 @@ import {
 } from 'react-icons/ri';
 
 import useIntl from '../../hooks/common/useIntl';
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
+import { FaCaretUp, FaCaretDown, FaCog } from 'react-icons/fa';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -26,7 +26,7 @@ export default function CurrencyRateDisplay() {
 		ReactTooltip.rebuild();
 	}, []);
 
-	if (!Array.isArray(favorites) || favorites.length === 0) return <></>;
+	if (!Array.isArray(favorites) || favorites.length === 0) return <NoCurrencyComponent />;
 	return (
 		<div className='flex gap-1 relative'>
 			<ReactTooltip id='currency-tooltip' />
@@ -68,6 +68,16 @@ export default function CurrencyRateDisplay() {
 		</div>
 	);
 }
+
+const NoCurrencyComponent = () => {
+	const { t } = useTranslation('translation');
+	return (
+		<Link to='/settings' className='btn btn-xs btn-ghost gap-1 opacity-50 hover:opacity-100'>
+			{t('currency.settings')}
+			<FaCog />
+		</Link>
+	);
+};
 
 //Each parity item
 const CurrencyDisplayItem = ({ from, to, data }) => {

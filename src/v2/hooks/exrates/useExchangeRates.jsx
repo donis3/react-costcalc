@@ -50,7 +50,7 @@ export default function useExchangeRates() {
 
 	//Create states
 	const [loading, setLoading] = useState(false);
-	const { cache, isExpired, setCache } = useExchangeCache(provider);
+	const { cache, isExpired, setCache, deleteCache } = useExchangeCache(provider);
 
 	//Toast Helpers
 	const onSuccess = (msg) => toast.success(msg, { toastId: 'exchangeRateSuccess' });
@@ -121,5 +121,5 @@ export default function useExchangeRates() {
 		dispatch({ type: 'BatchUpdate', payload, success, error });
 	}
 
-	return { fetchExchangeRates, loading, isDisabled, provider };
+	return { fetchExchangeRates, loading, isDisabled, provider, deleteCache };
 }

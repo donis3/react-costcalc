@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { sortArrayAlphabetic } from '../../lib/common';
 import useFormBuilder from '../../hooks/forms/useFormBuilder';
 import { SettingsDispatchContext } from '../../context/settings';
+import useSettings from '../../context/settings/useSettings';
+import useExchangeRates from '../../hooks/exrates/useExchangeRates';
 
 const initialState = {
 	api: '',
@@ -23,6 +25,8 @@ export default function useSettingsForm({ data = null }) {
 	const { t } = useTranslation('pages/settings', 'pages/currency');
 	const { t: currencyTranslator, i18n } = useTranslation('currencies');
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const { currencies } = useSettings();
+	const { deleteCache } = useExchangeRates();
 
 	const dispatch = useContext(SettingsDispatchContext);
 
@@ -220,6 +224,11 @@ export default function useSettingsForm({ data = null }) {
 				error,
 			};
 			dispatch(action);
+			
+			//If enabled currencies change, remove exchange rate cache
+			if (JSON.stringify(currencies.enabled) !== JSON.stringify(payload.currencies)) {
+				deleteCache();
+			}
 		} catch (err) {
 			//Form errors.
 			//console.log(err);

@@ -7,8 +7,7 @@
 
 export default function currencyReducer(state, action) {
 	const { type, payload = {}, error, success, dependencies = {} } = action || {};
-	const { t, enabledCurrencies = [], defaultCurrency, historyLimit = 10 } = dependencies || {};
-	if (!t || !defaultCurrency) throw new Error('Missing reducer dependencies @ Currency');
+	const { t = null, enabledCurrencies = [], defaultCurrency = null, historyLimit = 10 } = dependencies || {};
 
 	const onSuccess = (newState) => {
 		success?.();

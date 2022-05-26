@@ -32,5 +32,14 @@ export default function useExchangeCache({ id = null, cacheDurationMinutes = 1 }
 		setCache({ updatedAt: Date.now(), data });
 	}
 
-	return { cache, setCache: setCacheData, isExpired };
+	const deleteCache = () => {
+		
+		setCache((state) => ({ ...state, updatedAt: null, data: null }));
+		//Must reload to refresh saved cache state
+		setTimeout(() => {
+			window.location.reload();
+		}, 1000);
+	};
+
+	return { cache, setCache: setCacheData, isExpired, deleteCache };
 }
