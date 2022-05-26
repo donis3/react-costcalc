@@ -1,4 +1,5 @@
 {
+	"demoActive": "Demo Mode",
 	"buttons": {
 		"system": "System & Data",
 		"systemTip": "Application data management"

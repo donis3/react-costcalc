@@ -12,12 +12,14 @@ import useClickOutside from '../../hooks/common/useClickOutside';
 import Icon from '../common/Icon';
 import useApp from '../../context/app/useApp';
 import useConfig from '../../hooks/app/useConfig';
+import useSettings from '../../context/settings/useSettings';
 
 export default function Navbar() {
 	const { t } = useTranslation('routes', 'translation');
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [isLangModalOpen, setLangModalOpen] = useState(false);
 	const { language } = useApp();
+	const { setupComplete } = useSettings();
 
 	const loc = useLocation();
 
@@ -43,37 +45,41 @@ export default function Navbar() {
 					</div>
 					<div className={'nav-list-container lg:w-3/5 ' + (menuOpen ? 'flex' : ' hidden')}>
 						<ul className='nav-list  flex flex-wrap'>
-							{/* Business Links */}
-							<NavbarItem to='/endproducts' module='endproducts'>
-								{t('endproducts')}
-							</NavbarItem>
-							<NavbarItem to='/materials' module='materials'>
-								{t('materials')}
-							</NavbarItem>
-							<NavbarItem to='/packages' module='packages'>
-								{t('packages')}
-							</NavbarItem>
-							<NavbarDropdown text={t('nav.manufacturing', { ns: 'translation' })} module='manufacturing'>
-								<NavbarItem to='/products' module='products'>
-									{t('nav.products', { ns: 'translation' })}
-								</NavbarItem>
-								<NavbarItem to='/recipes' module='recipes'>
-									{t('nav.recipes', { ns: 'translation' })}
-								</NavbarItem>
-							</NavbarDropdown>
+							{setupComplete && (
+								<>
+									{/* Business Links */}
+									<NavbarItem to='/endproducts' module='endproducts'>
+										{t('endproducts')}
+									</NavbarItem>
+									<NavbarItem to='/materials' module='materials'>
+										{t('materials')}
+									</NavbarItem>
+									<NavbarItem to='/packages' module='packages'>
+										{t('packages')}
+									</NavbarItem>
+									<NavbarDropdown text={t('nav.manufacturing', { ns: 'translation' })} module='manufacturing'>
+										<NavbarItem to='/products' module='products'>
+											{t('nav.products', { ns: 'translation' })}
+										</NavbarItem>
+										<NavbarItem to='/recipes' module='recipes'>
+											{t('nav.recipes', { ns: 'translation' })}
+										</NavbarItem>
+									</NavbarDropdown>
 
-							{/* Company Nested */}
-							<NavbarDropdown text={t('nav.company', { ns: 'translation' })} module='company'>
-								<NavbarNestedItem to='/company/expenses' module='expenses'>
-									{t('nav.expenses', { ns: 'translation' })}
-								</NavbarNestedItem>
-								<NavbarNestedItem to='/company/employees' module='employees'>
-									{t('nav.employees', { ns: 'translation' })}
-								</NavbarNestedItem>
-								<NavbarNestedItem to='/company' module='company'>
-									{t('nav.company', { ns: 'translation' })}
-								</NavbarNestedItem>
-							</NavbarDropdown>
+									{/* Company Nested */}
+									<NavbarDropdown text={t('nav.company', { ns: 'translation' })} module='company'>
+										<NavbarNestedItem to='/company/expenses' module='expenses'>
+											{t('nav.expenses', { ns: 'translation' })}
+										</NavbarNestedItem>
+										<NavbarNestedItem to='/company/employees' module='employees'>
+											{t('nav.employees', { ns: 'translation' })}
+										</NavbarNestedItem>
+										<NavbarNestedItem to='/company' module='company'>
+											{t('nav.company', { ns: 'translation' })}
+										</NavbarNestedItem>
+									</NavbarDropdown>
+								</>
+							)}
 							{/* Language Selector */}
 							<li className='nav-item lg:border-l lg:mt-0 mt-3 ml-3 border-white border-opacity-50'>
 								<button onClick={() => setLangModalOpen(true)} className=' opacity-50 text-sm'>

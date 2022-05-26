@@ -6,12 +6,14 @@ import ThemeSelect from './ThemeSelect';
 
 import { Link } from 'react-router-dom';
 import useApp from '../../context/app/useApp';
+import useSettings from '../../context/settings/useSettings';
 
 export default function Footer() {
 	const { t } = useTranslation('translation', 'routes');
 
 	const [isThemeSelectOpen, setThemeSelectOpen] = useState(false);
 	const { theme } = useApp();
+	const { isDemo, setupComplete } = useSettings();
 
 	return (
 		<>
@@ -33,11 +35,13 @@ export default function Footer() {
 
 				<div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end'>
 					<ul className='flex gap-2'>
-						<li>
-							<Link to='/demo' className='link'>
-								{t('demo', { ns: 'routes' })}
-							</Link>
-						</li>
+						{!setupComplete && !isDemo && (
+							<li>
+								<Link to='/demo' className='link'>
+									{t('demo', { ns: 'routes' })}
+								</Link>
+							</li>
+						)}
 						<li>
 							<Link to='/contact' className='link'>
 								{t('contact', { ns: 'routes' })}

@@ -11,16 +11,19 @@ import { useTranslation } from 'react-i18next';
 import { GoSettings } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import CompanyHistory from './widgets/companyhistory/CompanyHistory';
+import useSettings from '../context/settings/useSettings';
 
 export default function HomePage() {
 	const { t } = useTranslation('pages/homepage');
 	const { info } = useCompanyInfo();
+	const { isDemo } = useSettings();
 
 	return (
 		<>
 			<ReactTooltip effect='solid' multiline id='homepage' />
 			<div className='flex flex-wrap justify-between items-end border-b-4 border-neutral mb-10 p-3'>
-				<Link to='/company'>
+				<Link to='/company' className='flex flex-col'>
+					{isDemo && <span className='text-sm text-primary opacity-50'> {t('demoActive')}</span>}
 					<h1 className='text-3xl lg:text-4xl font-semibold'>{info.name}</h1>
 				</Link>
 				<Link to='/system'>

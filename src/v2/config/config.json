@@ -36,17 +36,17 @@
 		"company": 10
 	},
 	"debug": {
-		"general": true,
+		"general": false,
 		"themeHelper": false,
 		"i18next": false,
-		"stateChange": true,
-		"storage": true,
+		"stateChange": false,
+		"storage": false,
 		"windowType": false,
-		"exchangeRates": true,
-		"forms": true,
-		"expenses": true,
-		"companyProduction": true,
-		"companyTotals": true
+		"exchangeRates": false,
+		"forms": false,
+		"expenses": false,
+		"companyProduction": false,
+		"companyTotals": false
 	},
 	"modules": {
 		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },

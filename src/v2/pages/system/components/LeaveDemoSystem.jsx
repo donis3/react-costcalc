@@ -24,7 +24,7 @@ export default function LeaveDemoSystem() {
 
 	return (
 		<Card className='w-full px-3 py-5 mb-10' shadow='shadow-lg'>
-			<ModuleHeader text={t('isDemo.title')} module='system' role='main' customIcon='FaCloudUploadAlt' />
+			<ModuleHeader text={t('isDemo.title')} module='system' role='main' customIcon='FaLemon' />
 			<p className='opacity-80 text-sm'>{t('isDemo.lead')}</p>
 
 			<div className='p-3 my-5 flex flex-col gap-2'>
