@@ -4,6 +4,8 @@ import { fields } from './definitions';
 export default function materialsReducer(state, action) {
 	const { type, payload = {}, error, success, dependencies = {} } = action;
 
+	const {  allowedCurrencies = [] } = dependencies;
+
 	const onSuccess = (newState) => {
 		success?.();
 		if (!Array.isArray(newState)) return [];
@@ -177,7 +179,14 @@ export default function materialsReducer(state, action) {
 		}
 
 		case 'healthCheck': {
-			console.log(`Starting health check for materials`);
+			if (!Array.isArray(allowedCurrencies) || allowedCurrencies.length === 0) return state;
+			//Remove out unsupported currency materials
+			const filtered = state.filter((mat) => allowedCurrencies.includes(mat.currency));
+			const diff = state.length - filtered.length;
+			if (diff > 0) {
+				console.warn(`Deleted ${diff} materials due to their unsupported currency`);
+				return onSuccess(filtered);
+			}
 			return state;
 		}
 		/**

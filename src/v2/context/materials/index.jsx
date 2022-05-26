@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import useStorageRepo from '../../hooks/common/useStorageRepo';
+import useSettings from '../settings/useSettings';
 import materialsReducer from './materialsReducer';
 
 //Create Required Contexts
@@ -17,9 +18,12 @@ export default function MaterialsProvider({ children }) {
 	//Update repo if state changes
 	useEffect(() => {
 		setMaterialsRepo(materials);
-		
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [materials]);
+
+	//Dependencies
+	const { currencies } = useSettings();
 
 	/**
 	 * Add dependencies to this modules reducer dispatcher
@@ -27,7 +31,7 @@ export default function MaterialsProvider({ children }) {
 	const dispatchWrapper = (action) => {
 		if (!action) throw new Error('Invalid Dispatch Received');
 		//Add all dependencies
-		action.dependencies = { test: 'selam' };
+		action.dependencies = { defaultCurrency: currencies.default, allowedCurrencies: currencies.allowed };
 		//Dispatch
 		dispatch(action);
 	};

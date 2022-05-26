@@ -8,7 +8,6 @@ import { CompanyContext, CompanyDispatchContext } from '.';
 import { sortArrayAlphabetic, sortArrayDate, sortArrayNumeric } from '../../lib/common';
 import useMoney from '../../hooks/app/useMoney';
 
-
 const validateId = (id) => validate(id) && version(id) === 4;
 
 export default function useCompanyEmployees() {
@@ -129,10 +128,22 @@ export default function useCompanyEmployees() {
 		return localizedEmployees;
 	}
 
+	/**
+	 * Get all the employees who get paid in this currency
+	 * @param {string} currencyCode
+	 * @returns {Array}
+	 */
+	const findByCurrency = (currencyCode = '') => {
+		if (!currencyCode || !Array.isArray(company.employees) || company.employees.length === 0) return [];
+
+		return company.employees.filter((employee) => employee.currency === currencyCode);
+	};
+
 	return {
 		employees: company.employees,
 		findById,
 		getAll,
+		findByCurrency,
 		actions: {
 			removeAll: resetEmployees,
 			add: addEmployee,

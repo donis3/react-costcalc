@@ -2,7 +2,6 @@
 	"title": "Ayarlar",
 	"titleInitial": "İlk Kurulum",
 	"name": "Ayar",
-	"warning": "Dikkat! Var olan para birimlerini silmeniz durumunda, o para birimini kullanan kayıtlar var ise, bu kayıtlar silinecektir. Lütfen bu işlemi yapmadan önce verilerinizi yedekleyin.",
 	"warningInitialSetup": "Dikkat! İlk kurlum esnasında seçilen esas para birimi, daha sonra değiştirilemez. Bu para birimi genellikle ülkenizin yerel para birimidir. Lütfen emin olmadan kaydetmeyiniz.",
 	"form": {
 		"titleXrate": "Döviz Kuru Sağlayıcısı",
@@ -30,5 +29,18 @@
 		"DefaultCurrencyChange": "Esas para birimi değiştirilemez",
 		"MissingApi": "Tercihlerinizdeki döviz kuru sağlayıcı artık desteklenmiyor. Lütfen başka bir sağlayıcı seçiniz."
 	},
+
+	"currencyUsage": {
+		"inUse": "{{currency}} silinemez. \n{{usage}} hâla bu para birimini kullanmakta.",
+
+		"materials": "{{count}} Hammadde",
+
+		"packages": "{{count}} Ambalaj",
+
+		"expenses": "{{count}} Gider",
+
+		"employees": "{{count}} Çalışan"
+	},
+
 	"initialSetup": "İlk Kurulum"
 }

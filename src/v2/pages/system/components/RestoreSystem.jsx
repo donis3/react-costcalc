@@ -43,7 +43,7 @@ export default function RestoreSystem({ showCancel = false } = {}) {
 						{system.backup.lastRestorationDate ? displayDate(system.backup.lastRestorationDate) : t('restore.notFound')}
 					</p>
 				</div>
-				<div className='col-span-full border-t pt-3 flex gap-2'>
+				<div className='col-span-full border-t pt-3 flex gap-2 justify-between'>
 					<input type='file' accept='.json,text/json' ref={fileRef} className='hidden' onChange={handleFile} />
 					<Upload onClick={() => fileRef.current?.click?.()} />
 

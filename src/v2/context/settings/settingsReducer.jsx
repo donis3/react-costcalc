@@ -79,8 +79,6 @@ export default function settingsReducer(state, action) {
 			newState.currencies.sort();
 			newState.favoriteCurrencies.sort();
 
-			console.log('TODO: If a currency is removed, go through all data and remove items using that');
-
 			return onSuccess(newState);
 		}
 
@@ -99,6 +97,16 @@ export default function settingsReducer(state, action) {
 				return onSuccess({ ...state, apiProvider: '', apiKey: '' });
 			}
 			return state;
+		}
+
+		/**
+		 * Leave demo mode by changing isDemo to false
+		 */
+		case 'LeaveDemo': {
+			if (state?.isDemo !== true) {
+				return onError();
+			}
+			return onSuccess({ ...state, isDemo: false });
 		}
 
 		/**

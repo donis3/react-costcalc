@@ -126,6 +126,19 @@ export default function useMaterials() {
 				},
 			});
 		},
+
+		healthcheck: function () {
+			dispatch({
+				type: 'healthCheck',
+			});
+		},
+
+		/**
+		 * Get materials using the given currency
+		 */
+		findByCurrency: function (currencyCode = null) {
+			return this.materials.filter((mat) => mat.currency === currencyCode);
+		},
 	};
 
 	//Hook Returns

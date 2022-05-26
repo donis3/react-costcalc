@@ -1,4 +1,4 @@
-import { useContext} from 'react';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { validate as isUuid } from 'uuid';
 import { PackagesContext, PackagesDispatchContext } from '.';
@@ -24,7 +24,6 @@ export default function usePackages() {
 	const { defaultPackage } = usePackagesDefaults();
 
 	//==================// Continuous Cost Calculation //==================//
-	
 
 	//==================// Package Public Api //==================//
 
@@ -104,6 +103,34 @@ export default function usePackages() {
 		//console.log('No need for package update');
 	};
 
+	const findByCurrency = (currencyCode = '') => {
+		if (!currencyCode || !Array.isArray(packagesState) || packagesState.length === 0) return [];
+
+		//All packages will have a currency property with the default currency.
+		//WE are looking for packages with items that cost in the given currency
+
+		const filtered = packagesState.reduce((acc, pack) => {
+			const { currency, items = [] } = pack || {};
+
+			//If package currency matches, no need for further checking
+			if (currency === currencyCode) return [...acc, pack];
+
+			//Check each item inside the package for the requested currency
+			if (Array.isArray(items) && items.length > 0) {
+				if (items.find((item) => item.itemCurrency === currencyCode)) {
+					//Detected requested currency
+					//console.log(`Package called ${pack.name} is using ${currencyCode} `);
+					return [...acc, pack];
+				}
+			}
+			//Not found
+			return acc;
+		}, []);
+
+		//Return all packages that uses the given currency
+		return filtered;
+	};
+
 	//==================// Hook Exports//==================//
 	return {
 		data: packagesState,
@@ -114,6 +141,7 @@ export default function usePackages() {
 		defaultPackage,
 		dispatch,
 		reCalculateCosts,
+		findByCurrency,
 	};
 } //End of hook
 

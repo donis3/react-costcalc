@@ -8,6 +8,7 @@ const reactToastifyConfig = {
 	pauseOnFocusLoss: true,
 	draggable: false,
 	pauseOnHover: true,
+	limit: 4,
 };
 
 export default reactToastifyConfig;

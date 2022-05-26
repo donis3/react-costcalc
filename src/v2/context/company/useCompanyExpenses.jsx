@@ -109,8 +109,19 @@ export default function useCompanyExpenses() {
 		}, []);
 	};
 
+	/**
+	 * Get all the expenses that use this currency
+	 * @param {string} currencyCode
+	 * @returns {Array}
+	 */
+	function findByCurrency(currencyCode = '') {
+		if (!currencyCode || !Array.isArray(company.expenses) || company.expenses.length === 0) return [];
+		return company.expenses.filter((expense) => expense.currency === currencyCode);
+	}
+
 	return {
 		findById,
+		findByCurrency,
 		getAll,
 		getAvailableCategories,
 		sorting: {

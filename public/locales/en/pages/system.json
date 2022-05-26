@@ -46,5 +46,15 @@
 		"deleteAll": "Delete Everything!",
 		"success": "System data successfully cleared. Please wait for reload",
 		"error": "An error occurred while deleting application data. Please manually clear browser local storage."
+	},
+
+	"isDemo": {
+		"title": "Demo Mode",
+		"lead": "You are using a demo backup file. After you are satisfied with the demo, you may leave demo mode to start using the application normally.",
+		"leaveDemo": "Leave Demo and remove all data",
+		"leaveDemoWithoutWipe": "Leave Demo but keep my progress",
+		"leave": "Leave Demo",
+		"leaveSuccess": "You are no longer in demo mode.",
+		"leaveError": "An error occurred while leaving demo mode. "
 	}
 }

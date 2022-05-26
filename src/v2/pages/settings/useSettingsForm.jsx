@@ -8,6 +8,7 @@ import useFormBuilder from '../../hooks/forms/useFormBuilder';
 import { SettingsDispatchContext } from '../../context/settings';
 import useSettings from '../../context/settings/useSettings';
 import useExchangeRates from '../../hooks/exrates/useExchangeRates';
+import useCurrencyUsage from '../../hooks/app/useCurrencyUsage';
 
 const initialState = {
 	api: '',
@@ -27,6 +28,7 @@ export default function useSettingsForm({ data = null }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const { currencies } = useSettings();
 	const { deleteCache } = useExchangeRates();
+	const { getCurrencyUsage } = useCurrencyUsage();
 
 	const dispatch = useContext(SettingsDispatchContext);
 
@@ -115,6 +117,21 @@ export default function useSettingsForm({ data = null }) {
 	};
 	const removeCurrency = (cur) => {
 		if (!cur) return;
+
+		const usage = getCurrencyUsage(cur);
+		const usageMessages = [];
+		Object.keys(usage).forEach((key) => {
+			if (Array.isArray(usage[key]) && usage[key].length > 0) {
+				usageMessages.push(t(`currencyUsage.${key}`, { count: usage[key].length }));
+			}
+		});
+		if (usageMessages.length > 0) {
+			//There are items using this currency still
+			const msg = t('currencyUsage.inUse', { currency: cur, usage: usageMessages.join(', ') });
+			toast.warn(msg);
+			return;
+		}
+
 		setState('currencies', [...formState.currencies.filter((c) => c !== cur)]);
 
 		//Also remove from favorites if required
@@ -224,7 +241,7 @@ export default function useSettingsForm({ data = null }) {
 				error,
 			};
 			dispatch(action);
-			
+
 			//If enabled currencies change, remove exchange rate cache
 			if (JSON.stringify(currencies.enabled) !== JSON.stringify(payload.currencies)) {
 				deleteCache();

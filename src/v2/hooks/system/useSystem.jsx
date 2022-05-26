@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import useStorageState from '../common/useStorageState';
 import config from '../../config/config.json';
 import { getRepoStorageKey } from '../common/useStorageRepo';
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import systemReducer from './systemReducer';
 import useDeleteData from './useDeleteData';
+import { SettingsDispatchContext } from '../../context/settings';
 
 const repoName = getRepoStorageKey('application', config);
 
@@ -32,6 +33,7 @@ export default function useSystem() {
 	const downloadFile = useDownload();
 	const { info } = useCompanyInfo();
 	const { deleteData } = useDeleteData();
+	const settingsDispatch = useContext(SettingsDispatchContext);
 
 	//Save changes to repo
 	useEffect(() => {
@@ -170,8 +172,6 @@ export default function useSystem() {
 		return result;
 	}
 
-	
-
 	//========================// Delete Application Data //=======================//
 	function onDeleteRequest(deleteFormState) {
 		if (!deleteFormState) return;
@@ -184,7 +184,7 @@ export default function useSystem() {
 	/**
 	 * Delete all storage keys belonging to this application
 	 */
-	function onDeleteEverything() {
+	function onDeleteEverything(verbose = true) {
 		const onSuccess = () => toast.success(t('delete.success'));
 		try {
 			const prefix = config.app.localStorageKey;
@@ -211,12 +211,32 @@ export default function useSystem() {
 			});
 
 			//Show toast & Reload
-			onSuccess();
+			if (verbose) onSuccess();
+
 			setTimeout(() => {
 				window.location.reload(true);
 			}, 2000);
 		} catch (error) {
 			toast.error(t('delete.error'));
+		}
+	}
+
+	//========================// Demo Actions //=======================//
+
+	function leaveDemo(keepData = false) {
+		const onSuccess = () => toast.success(t('isDemo.leaveSuccess'));
+		const onError = () => toast.success(t('isDemo.leaveError'));
+
+		if (!keepData) {
+			onSuccess();
+			return onDeleteEverything(false);
+		} else {
+			const payload = {
+				type: 'LeaveDemo',
+				success: onSuccess,
+				error: onError,
+			};
+			settingsDispatch(payload);
 		}
 	}
 
@@ -228,6 +248,7 @@ export default function useSystem() {
 			upload: uploadFile,
 			reset: onDeleteRequest,
 			deleteSystem: onDeleteEverything,
+			leaveDemo,
 		},
 		size: getStorageSize(repoName),
 		timeSinceBackup: timeSinceLastBackup(system.backup),

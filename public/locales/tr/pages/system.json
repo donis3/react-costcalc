@@ -45,5 +45,15 @@
 		"deleteAll": "Herşeyi Sil!",
 		"success": "Tüm veriler başarıyla silindi. Uygulama yeniden yüklenecektir",
 		"error": "Veriler silinirken bir sorun oluştu. Lütfen tarayıcı ayarlarından manuel olarak yerel depolama verilerini silin."
+	},
+
+	"isDemo": {
+		"title": "Demo Modu",
+		"lead": "Uygulamayı bir demo yedeği üzerinden kullanmaktasınız. Eğer uygulamayı normal olarak kullanmaya başlamak istiyorsanız, demo modundan çıkabilirsiniz.",
+		"leaveDemo": "Demo'dan çık ve tüm verileri sil",
+		"leaveDemoWithoutWipe": "Demo'dan çık fakat veriler kalsın",
+		"leave": "Demo'dan Çıkış Yap",
+		"leaveSuccess": "Artık demo modunda değilsiniz.",
+		"leaveError": "Demo modundan çıkılırken bir sorun oluştu."
 	}
 }

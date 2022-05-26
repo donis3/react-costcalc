@@ -68,7 +68,7 @@ export default function Settings() {
 					{/* Currency Options */}
 					<Form.Section title={t('form.titleCurrency')}>
 						{/* Warning Text */}
-						{setupComplete ? <Alert>{t('warning')}</Alert> : <Alert info>{t('warningInitialSetup')}</Alert>}
+						{!setupComplete && <Alert info>{t('warningInitialSetup')}</Alert>}
 
 						<Form.Control
 							label={t('form.defaultCurrency')}

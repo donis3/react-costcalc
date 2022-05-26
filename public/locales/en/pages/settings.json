@@ -2,7 +2,6 @@
 	"title": "Settings",
 	"titleInitial": "Initial Setup ",
 	"name": "Setting",
-	"warning": "Warning! Removing a currency from available currencies may cause all the records that's using that currency to be deleted. Please download your data backup before changing any settings to prevent data-loss.",
 	"warningInitialSetup": "Warning! Default Currency can't be changed after the initial setup. This is usually your country's local currency. Please make sure you've chosen correctly before saving.",
 	"form": {
 		"titleXrate": "Exchange Rate Provider",
@@ -29,6 +28,21 @@
 		"UnsupportedCurrency": "An unsupported currency received",
 		"DefaultCurrencyChange": "Default currency can't be changed",
 		"MissingApi": "Your choice of Exchange rate provider is no longer available. Please select another."
+	},
+
+	"currencyUsage": {
+		"inUse": "{{currency}} can't be removed. \n{{usage}} are still using this currency.",
+		"materials": "{{count}} Material",
+		"materials_other": "{{count}} Materials",
+
+		"packages": "{{count}} Package",
+		"packages_other": "{{count}} Packages",
+
+		"expenses": "{{count}} Expense",
+		"expenses_other": "{{count}} Expenses",
+
+		"employees": "{{count}} Employee",
+		"employees_other": "{{count}} Employees"
 	},
 
 	"initialSetup": "Initial Setup"
