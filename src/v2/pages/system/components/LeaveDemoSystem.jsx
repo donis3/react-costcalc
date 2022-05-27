@@ -11,7 +11,7 @@ import useSystem from '../../../hooks/system/useSystem';
 export default function LeaveDemoSystem() {
 	const { Cancel } = useDefaultButtons();
 	const { t } = useTranslation('pages/system');
-	const [radioState, setRadioState] = useState('keep');
+	const [radioState, setRadioState] = useState('wipe');
 	const { actions } = useSystem();
 
 	const handleChange = (e) => {

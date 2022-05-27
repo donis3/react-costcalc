@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import Card from '../../components/common/Card';
 import ModuleHeader from '../../components/layout/ModuleHeader';
 import Button from '../../components/common/Button';
-import useMoney from '../../hooks/app/useMoney';
+
 
 import MaterialTable from './MaterialTable';
 
 export default function Materials() {
 	//Translation
 	const { t } = useTranslation('pages/materials');
-	const { convert, selectCurrencyArray } = useMoney();
+	
 
 	//JSX
 	return (

@@ -1,9 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import useCurrency from '../../context/currency/useCurrency';
 import useIntl from '../common/useIntl';
 
 export default function useMoney() {
-	const { t } = useTranslation('currency');
 	const { displayMoney: moneyIntl } = useIntl();
 	const { currencies, getRate } = useCurrency();
 	const { enabled = [], default: defaultCurrency } = currencies || {};

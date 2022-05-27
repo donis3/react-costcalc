@@ -13,6 +13,7 @@ export default function EndProducts() {
 
 	useEffect(() => {
 		endProducts.calculateProductCosts();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

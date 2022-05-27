@@ -7,7 +7,7 @@ import { v4 as uuidv4, validate } from 'uuid';
  * @param {*} action dispatch request params
  */
 export default function productsReducer(state, action) {
-	const { type, payload = {}, error, success, dependencies = {} } = action;
+	const { type, payload = {}, error, success } = action; //Has dependencies property if needed
 
 	const onSuccess = (newState) => {
 		success?.();

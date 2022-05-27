@@ -15,7 +15,7 @@ export default function Welcome() {
 		<>
 			<div
 				className='hero min-h-[600px] bg-cover bg-center'
-				style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/welcome.jpg)` }}
+				style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/welcome-v2-1280.jpg)` }}
 			>
 				<div className='hero-overlay bg-opacity-75'></div>
 				<div className='hero-content text-center text-neutral-content'>
@@ -47,10 +47,6 @@ export default function Welcome() {
 					</div>
 				</div>
 			</div>
-
-			<a href='https://www.freepik.com/photos/money-exchange' className='text-sm font-thin p-1 mt-5'>
-				Money exchange photo created by freepik - www.freepik.com
-			</a>
 		</>
 	);
 }
