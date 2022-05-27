@@ -38,7 +38,6 @@
 		"resetSuccess": "{{modules}} modül verileri silindi. Uygulama yeniden yüklenecektir.",
 		"resetError": "İstenilen veriler silinirken bir hata oluştu"
 	},
-
 	"delete": {
 		"title": "Sistemi Sil",
 		"lead": "Bu işlem; para birimi ayarları, dil tercihleri vb. dahil olmak üzere tüm verileri siler. Lütfen bu işlemden önce yedek almayı unutmayın. Kayıtlı tüm veriler yok edilecektir.",
@@ -46,7 +45,6 @@
 		"success": "Tüm veriler başarıyla silindi. Uygulama yeniden yüklenecektir",
 		"error": "Veriler silinirken bir sorun oluştu. Lütfen tarayıcı ayarlarından manuel olarak yerel depolama verilerini silin."
 	},
-
 	"isDemo": {
 		"title": "Demo Modu",
 		"lead": "Uygulamayı bir demo yedeği üzerinden kullanmaktasınız. Eğer uygulamayı normal olarak kullanmaya başlamak istiyorsanız, demo modundan çıkabilirsiniz.",

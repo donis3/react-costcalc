@@ -133,7 +133,8 @@
 		"updateName": "{{name}} güncellenirken bir hata oluştu",
 		"addInvalidData": "Hatalı veri. {{name}} eklenemedi.",
 		"updateInvalidData": "Hatalı veri. {{name}} güncellenemedi.",
-		"deleteInvalidData": "Hatalı veri. {{name}} silinemedi."
+		"deleteInvalidData": "Hatalı veri. {{name}} silinemedi.",
+		"noChange": "Değişiklik yapılmadı."
 	},
 	"errorBoundary": {
 		"title": "Kritik Hata!",

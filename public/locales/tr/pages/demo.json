@@ -10,12 +10,10 @@
 	"error": "Demo verileri yüklenemedi. Bu problem devam ederse lütfen bize bildirin.",
 	"fileError": "{{name}} dosyası yüklenemiyor. Böyle bir dosya yok",
 	"success": "Uygulama yeniden yükleniyor, lütfen bekleyin",
-
 	"lemonade": {
 		"title": "TaTaTa Limonata",
 		"scenario": "Bu senaryoda, başarılı bir limonata standının CEO'su sizsiniz. 3 farklı limonata ürün çeşidiniz ve her ürün için farklı reçeteleriniz var. \n\nLimonata üretiminden elde ettiğiniz ürünleri, 3 farklı ambalaj çeşidinizi kullanarak paketliyorsunuz. 330ml, 1L ve 20L seçenekleri sunuyorsunuz. Elbette tüm üretimi yapan bir iş gücünüz var. \n\nBu senaryoyu yükleyerek gider kalemlerinizi ve üretim maliyetlerinizi incelemek ister misiniz? "
 	},
-
 	"supplement": {
 		"title": "Nutri Mega!",
 		"scenario": "Bu senaryoda, gıda takviyeleri üreten bir firma yöneticisisiniz! Protein tozundan, vitamin haplarına kadar pek çok ürün çeşidiniz bulunuyor. \n\nBu senaryoyu yükleyerek gider kalemlerinizi ve üretim maliyetlerinizi incelemek ister misiniz?"

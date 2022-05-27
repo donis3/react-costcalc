@@ -16,7 +16,8 @@
 		"invalidId": "Kaydetme başarısız. Geçersiz ürün no",
 		"notFound": "Ürün bulunamadı",
 		"packageError": "Bu ürünle ilişkilendirilmiş ambalaj bulunamıyor. Lütfen ürünü düzenleyin",
-		"recipeError": "Bu ürünle ilişkilendirilmiş reçete bulunamıyor. Lütfen ürünü düzenleyin"
+		"recipeError": "Bu ürünle ilişkilendirilmiş reçete bulunamıyor. Lütfen ürünü düzenleyin",
+		"noChange": "Değişiklik yapılmadı."
 	},
 	"labels": {
 		"endId": "Ürün Numarası",

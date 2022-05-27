@@ -29,18 +29,12 @@
 		"DefaultCurrencyChange": "Esas para birimi değiştirilemez",
 		"MissingApi": "Tercihlerinizdeki döviz kuru sağlayıcı artık desteklenmiyor. Lütfen başka bir sağlayıcı seçiniz."
 	},
-
 	"currencyUsage": {
 		"inUse": "{{currency}} silinemez. \n{{usage}} hâla bu para birimini kullanmakta.",
-
 		"materials": "{{count}} Hammadde",
-
 		"packages": "{{count}} Ambalaj",
-
 		"expenses": "{{count}} Gider",
-
 		"employees": "{{count}} Çalışan"
 	},
-
 	"initialSetup": "İlk Kurulum"
 }
