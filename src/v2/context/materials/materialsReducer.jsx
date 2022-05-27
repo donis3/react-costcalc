@@ -1,10 +1,16 @@
 import { v4 as uuidv4, validate as isUuid } from 'uuid';
 import { fields } from './definitions';
+import config from '../../config/config.json';
+
+const conlog = (...msg) => {
+	if (!msg || !config?.debug?.general) return;
+	console.log(...msg);
+};
 
 export default function materialsReducer(state, action) {
 	const { type, payload = {}, error, success, dependencies = {} } = action;
 
-	const {  allowedCurrencies = [] } = dependencies;
+	const { allowedCurrencies = [] } = dependencies;
 
 	const onSuccess = (newState) => {
 		success?.();
@@ -127,7 +133,7 @@ export default function materialsReducer(state, action) {
 			if (!hasPriceChanged(price, priceItem.amount)) return state;
 
 			//Add new price to array
-			console.log(`Adding new price to ${material.name}. New: ${priceItem.amount} Old: ${price}`);
+			conlog(`Adding new price to ${material.name}. New: ${priceItem.amount} Old: ${price}`);
 			priceHistory.unshift(priceItem);
 
 			//Remove excess items
@@ -163,7 +169,7 @@ export default function materialsReducer(state, action) {
 			if (!hasPriceChanged(localPrice, priceItem.amount)) return state;
 
 			//Add new price to array
-			console.log(`Adding new local price to ${material.name}. New: ${priceItem.amount} Old: ${localPrice}`);
+			conlog(`Adding new local price to ${material.name}. New: ${priceItem.amount} Old: ${localPrice}`);
 			localPriceHistory.unshift(priceItem);
 
 			//Remove excess items

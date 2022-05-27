@@ -49,6 +49,7 @@
 		"recipeCost": "Hammadde",
 		"packageCost": "Ambalaj",
 		"labourCost": "İşçilik",
+		"overheadCost": "İşletme Giderleri",
 		"showAllMaterialsCost": "Detaylı Analiz Göster"
 	},
 	"deleteError": {

@@ -5,6 +5,7 @@ import EndProduct from './Endproduct';
 import { sortArrayAlphabetic, sortArrayNumeric } from '../../lib/common';
 import useRecipes from '../recipes/useRecipes';
 import usePackages from '../packages/usePackages';
+import useCompanyCosts from '../company/useCompanyCosts';
 
 /**
  * Use only this hook to access context: EndProducts
@@ -14,7 +15,7 @@ export default function useEndproducts() {
 	const dispatch = useContext(EndproductsDispatchContext);
 	const { recipes } = useRecipes();
 	const packages = usePackages();
-	const labourCost = null;
+	const { labourCost, overheadCost } = useCompanyCosts();
 
 	EndProduct.loadDependencies({
 		recipes: recipes?.getAllSorted() || [],
@@ -37,7 +38,7 @@ export default function useEndproducts() {
 		//Reduce products array and create an array with endId and costs
 		const productCostsArray = endProductsState.reduce((accumulator, current) => {
 			const endProduct = new EndProduct(current.endId);
-			const costOfProduct = calculateCost(endProduct, labourCost);
+			const costOfProduct = calculateCost(endProduct, labourCost, overheadCost);
 			// console.log(current.name, costOfProduct);
 			const productData = { endId: current.endId, ...costOfProduct };
 			//Return product id and cost information for dispatch
@@ -94,7 +95,7 @@ export default function useEndproducts() {
  * @param {Object} labourCost current labor cost data of the company.Ex: {net: 0, gross :0}
  * @returns {Object} cost data for the product
  */
-function calculateCost(product = null, labourCost = null) {
+function calculateCost(product = null, labourCost = null, overheadCost = null) {
 	if (!isUuid(product?.endId)) return null;
 	let quantity = 1;
 
@@ -106,6 +107,8 @@ function calculateCost(product = null, labourCost = null) {
 	const costData = {
 		labourCost: 0,
 		labourCostTax: 0,
+		overheadCost: 0,
+		overheadCostTax: 0,
 		recipeCost: 0,
 		recipeTax: 0,
 		packageCost: 0,
@@ -139,6 +142,7 @@ function calculateCost(product = null, labourCost = null) {
 	//Find labour cost for this recipe
 	if (labourCost && 'gross' in labourCost) {
 		const weight = parseFloat(product.getWeight());
+
 		if (isNaN(weight) === false) {
 			const labourNet = labourCost.net * weight;
 			const labourGross = labourCost.gross * weight;
@@ -147,7 +151,18 @@ function calculateCost(product = null, labourCost = null) {
 		}
 	}
 
-	costData.total = costData.recipeCost + costData.packageCost + costData.labourCost;
-	costData.totalWithTax = costData.total + costData.recipeTax + costData.packageTax + costData.labourCostTax;
+	if (overheadCost && 'gross' in overheadCost) {
+		const weight = parseFloat(product.getWeight());
+		if (isNaN(weight) === false) {
+			const overheadNet = overheadCost.net * weight;
+			const overheadGross = overheadCost.gross * weight;
+			costData.overheadCost = overheadNet;
+			costData.overheadCostTax = overheadGross - overheadNet;
+		}
+	}
+
+	costData.total = costData.recipeCost + costData.packageCost + costData.labourCost + costData.overheadCost;
+	costData.totalWithTax =
+		costData.total + costData.recipeTax + costData.packageTax + costData.labourCostTax + costData.overheadCostTax;
 	return costData;
 }

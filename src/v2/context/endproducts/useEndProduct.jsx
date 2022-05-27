@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
+import useCompanyCosts from '../company/useCompanyCosts';
 import useRecipe from '../recipes/useRecipe';
 import useEndproducts from './useEndproducts';
 
 export default function useEndProduct(endId = null) {
-	const labourCost = {};
-	console.log('UseEndProduct: requires labor cost from company');
+	const { labourCost, overheadCost } = useCompanyCosts();
+
 	const { t } = useTranslation('translation');
 	const endProducts = useEndproducts();
 
@@ -38,7 +39,7 @@ export default function useEndProduct(endId = null) {
 	}
 
 	let labourItems = [];
-	if (labourCost && endProduct && endProduct.cost && endProduct.cost.labourCost) {
+	if (labourCost && endProduct && endProduct.cost && labourCost?.net) {
 		let weight = parseFloat(endProduct?.getWeight());
 		if (isNaN(weight)) weight = 0;
 		//Add it as a cost item as well
@@ -53,5 +54,22 @@ export default function useEndProduct(endId = null) {
 		};
 		labourItems.push(costItem);
 	}
-	return { endProduct, recipeItems, packageItems, labourItems };
+
+	let overheadItems = [];
+	if (overheadCost && endProduct && endProduct.cost && overheadCost?.net) {
+		let weight = parseFloat(endProduct?.getWeight());
+		if (isNaN(weight)) weight = 0;
+		//Add it as a cost item as well
+		const costItem = {
+			name: t('labels.overheadCost'),
+			price: overheadCost.net,
+			tax: overheadCost.tax,
+			quantity: weight,
+			unit: null,
+			amount: overheadCost.net * weight, //must be cost without tax
+			currency: overheadCost.currency,
+		};
+		overheadItems.push(costItem);
+	}
+	return { endProduct, recipeItems, packageItems, labourItems, overheadItems };
 }

@@ -17,7 +17,7 @@ export default function EndProduct() {
 	const { endId } = useParams();
 	const { page } = useApp();
 	const navigate = useNavigate();
-	const { endProduct, recipeItems, packageItems, labourItems } = useEndProduct(endId);
+	const { endProduct, recipeItems, packageItems, labourItems, overheadItems } = useEndProduct(endId);
 	const { t } = useTranslation('pages/endproducts');
 
 	//Product not found ?
@@ -48,6 +48,7 @@ export default function EndProduct() {
 					labourItems={labourItems}
 					recipeItems={recipeItems}
 					packageItems={packageItems}
+					overheadItems={overheadItems}
 				/>
 			),
 		},
@@ -63,6 +64,7 @@ export default function EndProduct() {
 					labourItems={labourItems}
 					recipeItems={recipeItems}
 					packageItems={packageItems}
+					overheadItems={overheadItems}
 				/>
 			),
 		},

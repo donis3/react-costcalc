@@ -220,7 +220,8 @@
 		"physicalState": "Fiziksel Durum",
 		"weight": "Ağırlık",
 		"filtering": "Filtreleniyor ({{count}})",
-		"labourCost": "İşçilik Gideri"
+		"labourCost": "İşçilik Gideri",
+		"overheadCost": "İşletme Gideri"
 	},
 	"charts": {
 		"costHistory": "Maliyet Geçmişi",

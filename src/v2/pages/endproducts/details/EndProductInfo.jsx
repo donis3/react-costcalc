@@ -11,7 +11,7 @@ import useMoney from '../../../hooks/app/useMoney';
 import ProductInfo from '../../products/ProductInfo';
 import ProductPriceWidget from './ProductPriceWidget';
 
-export default function EndProductInfo({ data = null, recipeItems, packageItems, labourItems } = {}) {
+export default function EndProductInfo({ data = null, recipeItems, packageItems, labourItems, overheadItems } = {}) {
 	const { defaultCurrency } = useMoney();
 	const { t } = useTranslation('pages/endproducts');
 	const [modalState, setModalState] = useState({ modal: 'product', isOpen: false });
@@ -23,6 +23,7 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 		packageItems,
 		showTax: false,
 		labourItems,
+		overheadItems,
 	});
 
 	if (!data) return <></>;

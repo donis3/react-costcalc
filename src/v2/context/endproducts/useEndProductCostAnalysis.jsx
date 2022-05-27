@@ -2,7 +2,13 @@ import { useTranslation } from 'react-i18next';
 import useMoney from '../../hooks/app/useMoney';
 import useIntl from '../../hooks/common/useIntl';
 
-export default function useEndProductCostAnalysis({ recipeItems, packageItems, labourItems, showTax = false } = {}) {
+export default function useEndProductCostAnalysis({
+	recipeItems,
+	packageItems,
+	labourItems,
+	overheadItems,
+	showTax = false,
+} = {}) {
 	const { t } = useTranslation('translation');
 	const { displayNumber } = useIntl();
 	const { convert, defaultCurrency } = useMoney();
@@ -91,6 +97,28 @@ export default function useEndProductCostAnalysis({ recipeItems, packageItems, l
 
 	//Add Labour Cost
 	labourItems.forEach((item) => {
+		if (!item?.currency || !item?.amount) return;
+		//Add to costItems
+		costItems.push(item);
+		//Calculate cost for this labour item
+		let cost = 0;
+		if (item.amount) {
+			cost = item.amount;
+			if (showTax && item.tax > 0) {
+				cost = cost * (1 + item.tax / 100);
+			}
+			if (item.currency !== defaultCurrency) {
+				cost = convert(cost, item.currency).amount;
+			}
+			if (isNaN(cost)) cost = 0;
+		}
+		//Add to chart data
+		chartData.labels.push(item.name);
+		chartData.data.push(cost);
+	});
+
+	//Add Overhead Cost
+	overheadItems.forEach((item) => {
 		if (!item?.currency || !item?.amount) return;
 		//Add to costItems
 		costItems.push(item);

@@ -50,6 +50,7 @@
 		"recipeCost": "Materials",
 		"packageCost": "Packaging",
 		"labourCost": "Labour",
+		"overheadCost": "Overhead",
 		"showAllMaterialsCost": "Show Deep Analysis"
 	},
 	"deleteError": {

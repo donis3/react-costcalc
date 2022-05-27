@@ -134,7 +134,8 @@
 		"physicalState": "Physical State",
 		"weight": "Weight",
 		"filtering": "Filtering ({{count}})",
-		"labourCost": "Labour Cost"
+		"labourCost": "Labour Cost",
+		"overheadCost": "Overhead Cost"
 	},
 	"charts": {
 		"costHistory": "Cost History",
