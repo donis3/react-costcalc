@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const daisyConfig = `./src/v1/config/config.json`;
+const daisyConfig = `./src/v2/config/config.json`;
 
 //Will include all grid sizes and add them to safelist for dynamic class building
 function getAllCols() {
