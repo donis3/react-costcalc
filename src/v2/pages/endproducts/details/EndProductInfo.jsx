@@ -28,6 +28,8 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 		overheadItems,
 	});
 
+	
+
 	if (!data) return <></>;
 	if (!data.package) return <>{t('error.packageError')}</>;
 	if (!data.recipe) return <>{t('error.recipeError')}</>;
@@ -115,7 +117,6 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 					{/* Product Cost without tax */}
 					<PricePerUnit unit={'pcs'}>{data.totalCostWithTax}</PricePerUnit>
 				</InfoItem>
-
 
 				{/* Item */}
 				<InfoItem title={t('labels.commercialName')}>

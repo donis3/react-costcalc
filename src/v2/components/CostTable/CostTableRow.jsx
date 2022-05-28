@@ -10,7 +10,7 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 
 	//Extract row data
 	if (!data) return <></>;
-	const { name = '', price = 0, tax = 0, quantity = 0, unit = 'kg', amount = 0, currency = '' } = data;
+	const { name = '', price = 0, tax = 0, quantity = 0, unit = 'kg', amount = 0, currency = '', icon = null } = data;
 
 	//Clickable button if callback provided
 	const itemName =
@@ -24,7 +24,10 @@ export default function CostTableRow({ index, data, itemCallback = null } = {}) 
 	const quantityDecimalPlaces = unit === 'pcs' ? 0 : 2;
 	return (
 		<>
-			<div className={'col-span-4 ' + stripeClass + additionalClass}>{itemName}</div>
+			<div className={'col-span-4 flex gap-1 items-center' + stripeClass + additionalClass}>
+				{icon}
+				{itemName}
+			</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>{displayMoney(price, currency)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>% {displayNumber(tax, 1)}</div>
 			<div className={'col-span-2 ' + stripeClass + additionalClass}>

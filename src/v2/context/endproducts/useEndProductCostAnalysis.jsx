@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next';
+
 import useMoney from '../../hooks/app/useMoney';
 import useIntl from '../../hooks/common/useIntl';
 import useStorageState from '../../hooks/common/useStorageState';
+import { GrOrganization as OverheadIcon, GrUserWorker as LabourIcon } from 'react-icons/gr';
+import { FaBoxes as MaterialIcon, FaBoxOpen as PackageIcon } from 'react-icons/fa';
 
 export default function useEndProductCostAnalysis({
 	recipeItems,
@@ -69,6 +72,7 @@ export default function useEndProductCostAnalysis({
 				unit: material.unit,
 				amount: costWithoutTax, //must be cost without tax
 				currency: material.currency,
+				icon: <MaterialIcon />,
 			};
 			costItems.push(costItem);
 		});
@@ -117,6 +121,7 @@ export default function useEndProductCostAnalysis({
 				unit: 'pcs',
 				amount: cost,
 				currency: item.itemCurrency,
+				icon: <PackageIcon />,
 			};
 			costItems.push(costItem);
 		});
@@ -128,6 +133,9 @@ export default function useEndProductCostAnalysis({
 	if (toggles.labour) {
 		labourItems.forEach((item) => {
 			if (!item?.currency || !item?.amount) return;
+			//Add Icon to this cost item
+			item.icon = <LabourIcon />;
+
 			//Add to costItems
 			costItems.push(item);
 			//Calculate cost for this labour item
@@ -154,6 +162,8 @@ export default function useEndProductCostAnalysis({
 	if (toggles.overhead) {
 		overheadItems.forEach((item) => {
 			if (!item?.currency || !item?.amount) return;
+			//Add Icon to this cost item
+			item.icon = <OverheadIcon />;
 			//Add to costItems
 			costItems.push(item);
 			//Calculate cost for this labour item
