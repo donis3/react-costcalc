@@ -13,7 +13,7 @@
 
 	"lemonade": {
 		"title": "The Lemonade Company",
-		"scenario": "In this scenario, you are the director of a successful lemonade stand. You have 3 product definitions and multiple recipes for each product. \n\nAfter producing your lemonades, you have 3 kinds of packaging available to create end-user products. You have .33L can, 1L bottle and 20L barrel options. You of course employ a labor force (probably mom) for manufacturing. \n\nLoad this scenario to check your expenses and product costs! "
+		"scenario": "In this scenario, you are the director of a successful lemonade stand. You have a variety of lemonade recipes. \n\nAfter producing your lemonades, you have 3 kinds of packaging available to create end-user products. You have .33L cup for drinking on the spot, 0.5L bottle and 20L barrel options for taking home. You of course employ a labor force (probably mom) for manufacturing. \n\nLoad this scenario to check your expenses and product costs! "
 	},
 
 	"supplement": {

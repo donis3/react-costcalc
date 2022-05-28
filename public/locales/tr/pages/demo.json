@@ -12,7 +12,7 @@
 	"success": "Uygulama yeniden yükleniyor, lütfen bekleyin",
 	"lemonade": {
 		"title": "TaTaTa Limonata",
-		"scenario": "Bu senaryoda, başarılı bir limonata standının CEO'su sizsiniz. 3 farklı limonata ürün çeşidiniz ve her ürün için farklı reçeteleriniz var. \n\nLimonata üretiminden elde ettiğiniz ürünleri, 3 farklı ambalaj çeşidinizi kullanarak paketliyorsunuz. 330ml, 1L ve 20L seçenekleri sunuyorsunuz. Elbette tüm üretimi yapan bir iş gücünüz var. \n\nBu senaryoyu yükleyerek gider kalemlerinizi ve üretim maliyetlerinizi incelemek ister misiniz? "
+		"scenario": "Bu senaryoda, başarılı bir limonata standının CEO'su sizsiniz. Birkaç çeşit limonata tarifiniz bulunuyor. \n\nLimonata üretiminden elde ettiğiniz ürünleri, 3 farklı ambalaj çeşidinizi kullanarak paketliyorsunuz. 330ml bardak, 0,5L şişe ve 20L varil seçenekleri sunuyorsunuz. Elbette tüm üretimi yapan bir iş gücünüz var. \n\nBu senaryoyu yükleyerek gider kalemlerinizi ve üretim maliyetlerinizi incelemek ister misiniz? "
 	},
 	"supplement": {
 		"title": "Nutri Mega!",
