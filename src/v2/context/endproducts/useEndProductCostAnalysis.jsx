@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useMoney from '../../hooks/app/useMoney';
 import useIntl from '../../hooks/common/useIntl';

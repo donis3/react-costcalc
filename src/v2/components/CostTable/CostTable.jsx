@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CostTableFooter from './CostTableFooter';
 import CostTableRow from './CostTableRow';
