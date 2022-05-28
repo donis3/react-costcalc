@@ -22,6 +22,7 @@ const AppContextProvider = ({ children }) => {
 	const handleLanguageChange = (newLanguage) => {
 		config.debug.stateChange && console.log(`AppContext: lang changed to  ${newLanguage}`);
 		i18n.changeLanguage(newLanguage);
+		document.documentElement.setAttribute('lang', newLanguage);
 	};
 	//Calculate locale
 	//Will get a locale like tr_TR
@@ -82,6 +83,9 @@ const AppContextProvider = ({ children }) => {
 		//Page context
 		page: { setBreadcrumb, getBreadcrumb },
 	};
+
+	//Set html tag lang
+	document.documentElement.setAttribute('lang', langDetails.code);
 
 	return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>;
 };

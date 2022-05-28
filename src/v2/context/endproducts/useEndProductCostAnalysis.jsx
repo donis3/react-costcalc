@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useMoney from '../../hooks/app/useMoney';
 import useIntl from '../../hooks/common/useIntl';
+import useStorageState from '../../hooks/common/useStorageState';
 
 export default function useEndProductCostAnalysis({
 	recipeItems,
@@ -17,7 +18,12 @@ export default function useEndProductCostAnalysis({
 	if (!Array.isArray(packageItems)) packageItems = [];
 	if (!Array.isArray(labourItems)) labourItems = [];
 
-	const [toggles, setToggles] = useState({ materials: true, packaging: true, labour: true, overhead: true });
+	const [toggles, setToggles] = useStorageState('CostTableSettings', {
+		materials: true,
+		packaging: true,
+		labour: true,
+		overhead: true,
+	});
 
 	/**
 	 * Toggle a cost type
