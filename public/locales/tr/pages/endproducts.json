@@ -58,5 +58,11 @@
 		"package_other": "Bu ambalajı kullanmakta olan {{count}} ürün olduğu için silinemiyor.",
 		"recipe": "Bu reçeteyi kullanmakta olan bir ürün olduğu için silinemiyor.",
 		"recipe_other": "Bu reçeteyi kullanmakta olan {{count}} ürün olduğu için silinemiyor."
+	},
+	"toggles": {
+		"materials": "Hammadde",
+		"packaging": "Ambalaj",
+		"labour": "İşçilik",
+		"overhead": "İşletme Giderleri"
 	}
 }

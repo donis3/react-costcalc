@@ -9,16 +9,23 @@ import { Link, useLocation } from 'react-router-dom';
  * @param {*} param0
  * @returns
  */
-export default function DropdownMenu({ children, icon, className, ...props }) {
+export default function DropdownMenu({ children, icon, text, className, align, ...props }) {
 	const [isActive, setIsActive] = useState(false);
 	const handleOpen = () => setIsActive(true);
 	const handleClose = () => setIsActive(false);
 
 	return (
 		<div className={`relative  ${className}`} {...props}>
-			<button type='button' onClick={handleOpen} className='px-1 py-2 hover:text-primary'>
-				{icon}
-			</button>
+			{text ? (
+				<button type='button' onClick={handleOpen} className='btn btn-sm btn-ghost gap-1'>
+					{text}
+					{icon}
+				</button>
+			) : (
+				<button type='button' onClick={handleOpen} className='px-1 py-2 hover:text-primary'>
+					{icon}
+				</button>
+			)}
 			{isActive && (
 				<FocusTrap
 					active
@@ -29,7 +36,11 @@ export default function DropdownMenu({ children, icon, className, ...props }) {
 						onDeactivate: handleClose,
 					}}
 				>
-					<div className='absolute right-1 top-6 z-50 min-w-[100px] w-fit'>
+					<div
+						className={`absolute top-6 z-50 min-w-[100px] w-fit ${align === 'right' && 'right-1'} ${
+							align === 'left' && 'left-1'
+						}`}
+					>
 						<ul className='flex flex-col py-1 px-2 gap-y-1 shadow-md rounded-box bg-base-100 w-auto border min-w-fit'>
 							{children}
 						</ul>
@@ -39,6 +50,14 @@ export default function DropdownMenu({ children, icon, className, ...props }) {
 		</div>
 	);
 }
+
+DropdownMenu.defaultProps = {
+	icon: null,
+	text: null,
+	className: null,
+	align: 'right',
+};
+
 function DropdownItem({ children, icon = null, callback = null, active = false, disabled = false }) {
 	if (typeof active !== 'boolean') active = false;
 

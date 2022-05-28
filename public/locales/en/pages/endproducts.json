@@ -58,5 +58,11 @@
 		"package_other": "This package is being used by {{count}} products and can't be deleted.",
 		"recipe": "This recipe is being used by a product and can't be deleted.",
 		"recipe_other": "This recipe is being used by {{count}} products and can't be deleted."
+	},
+	"toggles": {
+		"materials": "Materials",
+		"packaging": "Packaging",
+		"labour": "Labour Cost",
+		"overhead": "Overhead Cost"
 	}
 }

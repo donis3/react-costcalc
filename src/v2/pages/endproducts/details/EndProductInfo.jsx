@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaCheck, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import DropdownMenu from '../../../components/common/DropdownMenu';
 import NumericUnit from '../../../components/common/NumericUnit';
 import PricePerUnit from '../../../components/common/PricePerUnit';
 import CostTable from '../../../components/CostTable/CostTable';
@@ -18,7 +20,7 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 	const openModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: true }));
 	const closeModal = (modal = 'product') => setModalState((state) => ({ ...state, modal, isOpen: false }));
 
-	const { costItems, costTotals } = useEndProductCostAnalysis({
+	const { costItems, costTotals, toggles, toggleCost } = useEndProductCostAnalysis({
 		recipeItems,
 		packageItems,
 		showTax: false,
@@ -117,7 +119,28 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 				{/* Grid End */}
 			</div>
 			<div className='mt-10'>
-				<h3 className='py-2 font-medium'>{t('endProduct.costTableTitle')}</h3>
+				<div className='p-2 flex gap-1 items-center'>
+					<h3 className='font-medium whitespace-nowrap'>{t('endProduct.costTableTitle')}</h3>
+					<DropdownMenu icon={<FaCog />} align='auto' className='flex-1'>
+						{Object.keys(toggles).map((costType, i) => {
+							const isActive = toggles[costType] === true;
+							return (
+								<DropdownMenu.Element key={'costType-' + i}>
+									<button
+										className={`btn btn-sm normal-case w-full justify-start btn-ghost gap-2 whitespace-nowrap ${
+											!isActive && 'font-normal pl-8'
+										}`}
+										type='button'
+										onClick={() => toggleCost(costType)}
+									>
+										{isActive && <FaCheck />}
+										{t(`toggles.${costType}`)}
+									</button>
+								</DropdownMenu.Element>
+							);
+						})}
+					</DropdownMenu>
+				</div>
 				<CostTable items={costItems} costs={costTotals} />
 			</div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CostTableFooter from './CostTableFooter';
 import CostTableRow from './CostTableRow';
@@ -6,7 +6,7 @@ import CostTableRow from './CostTableRow';
 //item needs to have id property for callbacks to work
 export default function CostTable({ items = null, costs = null, itemCallback = null } = {}) {
 	const { t } = useTranslation('translation');
-
+	
 	//Generate a callback function if id is defined in each item.
 	function getCallback(id = null) {
 		if (id === null || id === undefined) return null;
