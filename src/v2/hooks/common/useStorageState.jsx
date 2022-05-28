@@ -1,0 +1,116 @@
+import { useState } from 'react';
+//Will get 2 keys from config
+// config.debug.storage for verbose errors
+// config.app.localStorageKey for app specific unique storage key
+import config from '../../config/config.json';
+import useConfig from '../app/useConfig';
+
+/**
+ * Use browser local storage to have persistent state.
+ * @param {*} identifier A unique key for local storage key. will be prefixed with app name
+ * @param {*} initialValue Initial value for state
+ * @returns {Array} [value, setValue]
+ */
+export default function useStorageState(identifier = null, initialValue = null) {
+	//Generate storage key
+	const configHook = useConfig();
+	const localStorageKey = identifier ? configHook.getUniqueKey(identifier) : null;
+	//Initialize state
+	const initialState = identifier ? getInitialValue(localStorageKey, initialValue) : {};
+	const [state, setState] = useState(initialState);
+	if (!localStorageKey) return returnDefault(initialValue);
+
+	//setState function that will save state in local storage
+	const handleSetState = (newState) => {
+		//If a function is passed, pass current state to it and get the result
+		if (typeof newState === 'function') {
+			newState = newState(state);
+		}
+		//Save new state to local storage
+		setData(localStorageKey, newState);
+		//Save new state to react state
+		setState(newState);
+	};
+
+	const deleteStorage = () => {
+		localStorage.removeItem(localStorageKey);
+	};
+	return [state, handleSetState, deleteStorage];
+}
+
+//Create erroneous return array for failures
+const returnDefault = (defaultValue = null) => {
+	const msg = 'StorageState Error: A unique identifier is required.';
+	const defaultSetter = () => {
+		config.debug.storage && console.log(msg);
+	};
+	//Inform error
+	//defaultSetter();
+	//return hook
+	return [defaultValue, defaultSetter];
+};
+
+const setData = (key = null, data) => {
+	if (!key) return false;
+
+	try {
+		//Convert data
+		const jsonData = JSON.stringify(data);
+		//compare to current
+		const currentData = localStorage.getItem(key);
+		if (jsonData === currentData) {
+			//Both values same, no need to save
+			return;
+		}
+		//Save to storage
+		localStorage.setItem(key, jsonData);
+
+		return true;
+	} catch (error) {
+		//Error ocurred
+		config.debug.storage && console.log(error);
+		return false;
+	}
+};
+
+const getData = (key = null) => {
+	if (!key) return null;
+	try {
+		const jsonData = localStorage.getItem(key);
+		const data = JSON.parse(jsonData);
+		return data;
+	} catch (error) {
+		config.debug.storage && console.log(error);
+		return null;
+	}
+};
+
+// const removeData = (key = null) => {
+//     if(!key) return null;
+//     try {
+//         localStorage.removeItem(key);
+//         return true;
+//     } catch (error) {
+//         config.debug.storage && console.log(error);
+//         return null;
+//     }
+// }
+
+const getInitialValue = (key = null, initialValue = null) => {
+	if (!key) return null;
+
+	//Check if key exists in local. If it does, return data in local,
+	//If key doesn't exist, create the key and save initialValue,
+
+	const data = getData(key);
+	if (data === null) {
+		//Key doesnt exist
+		//no data found, save initialValue to local storage
+		setData(key, initialValue);
+		//Return initial value
+		return initialValue;
+	} else {
+		//Data is found in local storage, return it instead of default initialValue
+		return data;
+	}
+};

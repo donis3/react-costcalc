@@ -16,7 +16,8 @@
 		"invalidId": "Save failed. Invalid product ID",
 		"notFound": "Product couldn't be found",
 		"packageError": "The packaging item bound to this product couldn't be found. Please edit the product",
-		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product"
+		"recipeError": "The recipe bound to this product couldn't be found. Please edit the product",
+		"noChange": "No changes were made"
 	},
 	"labels": {
 		"endId": "Product ID",
@@ -49,6 +50,7 @@
 		"recipeCost": "Materials",
 		"packageCost": "Packaging",
 		"labourCost": "Labour",
+		"overheadCost": "Overhead",
 		"showAllMaterialsCost": "Show Deep Analysis"
 	},
 	"deleteError": {
@@ -56,5 +58,11 @@
 		"package_other": "This package is being used by {{count}} products and can't be deleted.",
 		"recipe": "This recipe is being used by a product and can't be deleted.",
 		"recipe_other": "This recipe is being used by {{count}} products and can't be deleted."
+	},
+	"toggles": {
+		"materials": "Materials",
+		"packaging": "Packaging",
+		"labour": "Labour Cost",
+		"overhead": "Overhead Cost"
 	}
 }

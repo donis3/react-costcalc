@@ -1,4 +1,5 @@
 {
+	"demoActive": "Demo Mode",
 	"buttons": {
 		"system": "System & Data",
 		"systemTip": "Application data management"
@@ -8,14 +9,19 @@
 		"labour": "Labour",
 		"periodText": "Per {{period}}",
 		"production": "Production",
-		"productionUnitCost": "Labour Cost",
-		"productionUnitCostDesc": "Labour cost per {{unit}}"
+		"labourUnitCost": "Labour Cost",
+		"labourUnitCostDesc": "Labour cost per {{unit}}",
+		"overheadUnitCost": "Overhead Cost",
+		"overheadUnitCostDesc": "Overhead cost per {{unit}}",
+		"combined": "Total Cost"
 	},
 	"help": {
 		"overhead": "expenses + employee salaries<br />(manufacturing dept. excluded)",
 		"labour": "manufacturing department salary",
 		"production": "Average production amount for given period",
-		"productionUnitCost": "Labour cost per unit of production <br />Total labour cost / total production"
+		"labourUnitCost": "Total Labour Cost = Manufacturing dept. employee salaries<br />Labour Per Unit =  Total labour cost / total production",
+		"overheadUnitCost": "Overhead cost per unit of production <br />Annual Overhead cost / total production",
+		"combined": "Overhead: {{overhead}} + Labour: {{labour}}"
 	},
 	"miniStats": {
 		"employees": "Employees",

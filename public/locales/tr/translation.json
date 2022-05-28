@@ -1,5 +1,6 @@
 {
 	"appname": "Costotus",
+	"firstTimeSetup": "{{appname}}'a Hoşgeldiniz.\nLütfen ilk kurulum için ayarlarınızı girin. Bol şans!",
 	"header": {
 		"home": "Anasayfa",
 		"notfound": "Sayfa-Bulunamadı",
@@ -86,11 +87,12 @@
 		"titleCurrency": "{{currency}} Güncel Kur",
 		"details": "Güncel {{from}}/{{to}} döviz kurunu düzenleyin. Tutarı bu döviz cinsinden olan değerlerin {{to}} cinsinden değeri, burada belirlediğiniz oran ile hesaplanacaktır.",
 		"selectCurrency": "Hangi döviz kurunu düzenlemek isterdiniz?",
+		"noSelectableCurrency": "Listelenecek ek para birimleri bulunmuyor. Yeni para birimleri eklemek için ayarları kullanabilirsiniz.",
 		"noCurrencies": "Uygulamada tanımlı para birimi bulunamadı. Döviz kurları düzenlenemez.",
 		"formRate": "Yeni döviz kuru",
 		"formRateAlt": "{{from}}/{{to}} için döviz kuru",
 		"addSuccess": "{{from}}/{{to}} döviz kuru kaydedildi",
-		"addError": "Yeni döviz kuru kaydedilemedi",
+		"addError": "Yeni döviz kuru kaydedilemedi \n{{code}}",
 		"tcmbParseError": "Merkez Bankası kurları yüklenirken bir hata oluştu.",
 		"tcmbSuccess": "Merkez Bankası kurları başarıyla kaydedildi",
 		"lastUpdate": "Son güncelleme {{date}}",
@@ -105,7 +107,10 @@
 		"convertPrice": "Yerel para birimine çevir?",
 		"changeDefault": "Yerel para birimini değiştir?",
 		"changeDefaultWarning": "Bu işlem, kayıtlı döviz kurlarını sıfırlayacaktır.",
-		"chartTitle": "{{name}} kur geçmişi"
+		"chartTitle": "{{name}} kur geçmişi",
+		"refresh": "YENİLE",
+		"showAll": "Tüm Pariteler",
+		"settings": "Ayarlar"
 	},
 	"error": {
 		"error": "Hata",
@@ -128,7 +133,8 @@
 		"updateName": "{{name}} güncellenirken bir hata oluştu",
 		"addInvalidData": "Hatalı veri. {{name}} eklenemedi.",
 		"updateInvalidData": "Hatalı veri. {{name}} güncellenemedi.",
-		"deleteInvalidData": "Hatalı veri. {{name}} silinemedi."
+		"deleteInvalidData": "Hatalı veri. {{name}} silinemedi.",
+		"noChange": "Değişiklik yapılmadı."
 	},
 	"errorBoundary": {
 		"title": "Kritik Hata!",
@@ -215,7 +221,9 @@
 		"physicalState": "Fiziksel Durum",
 		"weight": "Ağırlık",
 		"filtering": "Filtreleniyor ({{count}})",
-		"labourCost": "İşçilik Gideri"
+		"labourCost": "İşçilik Gideri",
+		"overheadCost": "İşletme Gideri",
+		"notes": "Notlar"
 	},
 	"charts": {
 		"costHistory": "Maliyet Geçmişi",
@@ -271,7 +279,7 @@
 	"toggles": {
 		"includeTax": "Vergi Dahil?",
 		"showTax": "Vergi Dahil?",
-		"localPrice": "Tutarları {{currency}}'ye çevir?",
+		"localPrice": "{{currency}} değeri göster?",
 		"baseUnit": "Temel ölçü birimlerini kullan?"
 	},
 	"tabs": {

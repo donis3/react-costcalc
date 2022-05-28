@@ -1,0 +1,49 @@
+{
+	"title": "Settings",
+	"titleInitial": "Initial Setup ",
+	"name": "Setting",
+	"warningInitialSetup": "Warning! Default Currency can't be changed after the initial setup. This is usually your country's local currency. Please make sure you've chosen correctly before saving.",
+	"form": {
+		"titleXrate": "Exchange Rate Provider",
+		"titleCurrency": "Currency Settings",
+		"apiKey": "Api Key",
+		"apiKeyAlt": "If selected service requires an api key, please provide it",
+		"api": "Remote Service",
+		"apiAlt": "Remote exchange rate provider for currency conversions",
+		"currency": "Available Currencies",
+		"currencyAlt": "List of supported currencies",
+		"selectedCurrencies": "Active Currencies",
+		"selectedCurrenciesAlt": "Choose most commonly used currencies in your business. Mark your favorite currencies with the star button for easy access.",
+		"defaultCurrency": "Main Currency",
+		"defaultCurrencyAlt": "Choose the default currency for your business",
+		"defaultCurrencySelect": "Select Local Currency",
+		"defaultCurrencyRequired": "Select main currency first",
+		"noRemoteService": "None",
+		"success": "Settings saved successfully",
+		"error": "Failed to save settings. \n {{code}}",
+		"cantChange": "This can't be changed"
+	},
+	"error": {
+		"InvalidData": "Invalid data received",
+		"UnsupportedCurrency": "An unsupported currency received",
+		"DefaultCurrencyChange": "Default currency can't be changed",
+		"MissingApi": "Your choice of Exchange rate provider is no longer available. Please select another."
+	},
+
+	"currencyUsage": {
+		"inUse": "{{currency}} can't be removed. \n{{usage}} are still using this currency.",
+		"materials": "{{count}} Material",
+		"materials_other": "{{count}} Materials",
+
+		"packages": "{{count}} Package",
+		"packages_other": "{{count}} Packages",
+
+		"expenses": "{{count}} Expense",
+		"expenses_other": "{{count}} Expenses",
+
+		"employees": "{{count}} Employee",
+		"employees_other": "{{count}} Employees"
+	},
+
+	"initialSetup": "Initial Setup"
+}

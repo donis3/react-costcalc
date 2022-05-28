@@ -1,4 +1,5 @@
 {
+	"demoActive": "Demo Modu",
 	"buttons": {
 		"system": "Sistem & Veri",
 		"systemTip": "Uygulama veri yönetimi"
@@ -8,14 +9,19 @@
 		"labour": "İşçilik",
 		"periodText": "Her {{period}}",
 		"production": "Üretim Miktarı",
-		"productionUnitCost": "İşçilik Maliyeti",
-		"productionUnitCostDesc": "Üretilen {{unit, lowercase}} başına işçilik"
+		"labourUnitCost": "İşçilik Gideri",
+		"labourUnitCostDesc": "Üretilen {{unit, lowercase}} başına işçilik",
+		"overheadUnitCost": "İşletme Gideri",
+		"overheadUnitCostDesc": "Üretilen {{unit, lowercase}} başına işletme gideri",
+		"combined": "Toplam Giderler"
 	},
 	"help": {
 		"overhead": "Giderler + Çalışan Ücretleri<br />(İmalat departmanı hariç)",
 		"labour": "İmalat departmanında çalışanların ücretleri",
 		"production": "Seçili zaman periyodunda üretilen ortalama ürün miktarı",
-		"productionUnitCost": "Üretilen birim başına işçilik maliyeti <br />Toplam işçilik / Toplam üretim miktarı"
+		"labourUnitCost": "Toplam İşçilik Gideri = Üretim Departmanı Personel Maaşları <br />Üretilen birim başına işçilik = Toplam İşçilik / Toplam Üretim",
+		"overheadUnitCost": "Üretilen birim başına işletme gideri maliyeti <br /> İşletme Giderleri / Toplam Üretim",
+		"combined": "İşletme Giderleri: {{overhead}} + İşçilik: {{labour}}"
 	},
 	"miniStats": {
 		"employees": "Çalışan",

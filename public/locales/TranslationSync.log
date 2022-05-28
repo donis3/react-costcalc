@@ -1,5 +1,50 @@
 
 
+[27.05.2022 17:17:48] Sync Started...
+[27.05.2022 17:17:48] [tr] Writing over key [pcs_other]
+[27.05.2022 17:17:48] [tr] Writing over key [gb_other]
+[27.05.2022 17:17:48] [tr] Writing over key [mb_other]
+[27.05.2022 17:17:48] [tr] Writing over key [kb_other]
+[27.05.2022 17:17:48] [tr] Writing over key [byte_other]
+[27.05.2022 17:17:48] [tr] Writing over key [kwh_other]
+[27.05.2022 17:17:48] [tr] Writing over key [pcs_other]
+[27.05.2022 17:17:48] [tr] Writing over key [L_other]
+[27.05.2022 17:17:48] [tr] Writing over key [mL_other]
+[27.05.2022 17:17:48] [tr] Writing over key [cc_other]
+[27.05.2022 17:17:48] [tr] Writing over key [t_other]
+[27.05.2022 17:17:48] [tr] Writing over key [kg_other]
+[27.05.2022 17:17:48] [tr] Writing over key [g_other]
+[27.05.2022 17:17:48] [tr] Writing over key [mg_other]
+[27.05.2022 17:17:48] [tr] Writing over key [minLength_other]
+[27.05.2022 17:17:48] [tr] Writing over key [minLength_one]
+[27.05.2022 17:17:48] [tr] Writing over key [noChange]
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\translation.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\routes.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\welcome.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\system.json
+[27.05.2022 17:17:48] [tr] Writing over key [employees_other]
+[27.05.2022 17:17:48] [tr] Writing over key [expenses_other]
+[27.05.2022 17:17:48] [tr] Writing over key [packages_other]
+[27.05.2022 17:17:48] [tr] Writing over key [materials_other]
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\settings.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\recipes.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\products.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\packages.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\notfound.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\materials.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\homepage.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\help.json
+[27.05.2022 17:17:48] [tr] Writing over key [noChange]
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\endproducts.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\demo.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\currency.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\contact.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\company.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\pages\about.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\joi.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\formparts.json
+[27.05.2022 17:17:48] [en] Synchronization started for: public\locales\en\currencies.json
+
 [12.05.2022 11:13:48] Sync Started...
 [12.05.2022 11:13:48] [tr] Writing over key [pcs_other]
 [12.05.2022 11:13:48] [tr] Writing over key [gb_other]

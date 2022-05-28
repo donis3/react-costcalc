@@ -2,6 +2,7 @@
 	"name": "Material",
 	"title": "Materials",
 	"lead": "Available materials and details.",
+	"nodata": "There are no materials to display. Click the new material button to add one.",
 	"btnNew": "New",
 	"showLocalPrice": "Show price in local currency?",
 	"showBaseUnit": "Convert to base unit?",

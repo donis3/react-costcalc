@@ -1,0 +1,126 @@
+{
+	"app": {
+		"name": "Costotus",
+		"icon": "FaCalculator",
+		"owner": "Deniz Özkan",
+		"releaseDate": "2022-02-09",
+		"localStorageKey": "costotus",
+		"git": "https://github.com/donis3",
+		"contact": "info@costotus.com"
+	},
+	"apiProviders": [
+		{
+			"id": "exhost",
+			"name": "exchangerates.host",
+			"requiresKey": false,
+			"cacheDurationMinutes": 10,
+			"url": "https://api.exchangerate.host/latest"
+		},
+		{
+			"id": "tcmb",
+			"name": "TCMB",
+			"requiresKey": false,
+			"cacheDurationMinutes": 30,
+			"url": "https://doncors.herokuapp.com/https://www.tcmb.gov.tr/kurlar/today.xml"
+		}
+	],
+	"languages": ["tr", "en"],
+	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
+	"tables": {
+		"itemsPerPage": 10
+	},
+	"history": {
+		"exchangeRates": 10,
+		"recipeCost": 10,
+		"packageCost": 10,
+		"company": 10
+	},
+	"debug": {
+		"general": false,
+		"themeHelper": false,
+		"i18next": false,
+		"stateChange": false,
+		"storage": false,
+		"windowType": false,
+		"exchangeRates": false,
+		"forms": false,
+		"expenses": false,
+		"companyProduction": false,
+		"companyTotals": false
+	},
+	"modules": {
+		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },
+		"currency": { "icon": "FaRegMoneyBillAlt", "colors": ["#495371", "#74959A"] },
+		"materials": { "icon": "FaBoxes", "colors": ["#dc2f02", "#e85d04"] },
+		"packages": { "icon": "FaBoxOpen", "colors": ["#081c15", "#1b4332"] },
+		"products": { "icon": "FaClipboardList", "colors": ["#C36839", "#86340A"] },
+		"recipes": { "icon": "FaRegFileAlt", "colors": ["#630000", "#810000"] },
+		"endproducts": { "icon": "FaStore", "colors": ["#0C4271", "#0A81AB"] },
+		"manufacturing": { "icon": "FaIndustry", "colors": ["#0C4271", "#0A81AB"], "children": ["products", "recipes"] },
+		"company": { "icon": "FaBuilding", "colors": ["#001845", "#002855"], "children": ["employees", "expenses"] },
+		"expenses": { "icon": "FaMoneyBillWave", "colors": ["#2b9348", "#55a630"] },
+		"employees": { "icon": "FaUsers", "colors": ["#982183", "#CB2DAE"] },
+		"system": { "icon": "FaCogs", "colors": ["#480CA8", "#560BAD"] },
+		"about": { "icon": "FaScroll", "colors": ["#7209b7", "#3a0ca3"] },
+		"help": { "icon": "FaQuestionCircle", "colors": ["#03045e", "#023e8a"] },
+		"demo": { "icon": "FaLemon", "colors": ["#9D5C0D", "#E5890A"] },
+		"contact": { "icon": "FaRegEnvelope", "colors": ["#56776C", "#5B8A72"] },
+		"settings": { "icon": "FaWrench", "colors": ["#B20600", "#FF5F00"] },
+		"other": { "icon": "FaRegBookmark", "colors": ["#907FA4", "#A58FAA"] }
+	},
+	"company": {
+		"defaultProductionUnit": "kg",
+		"departments": [
+			{ "name": "manufacturing", "isLabour": true },
+			{ "name": "administration", "isLabour": false },
+			{ "name": "marketing", "isLabour": false },
+			{ "name": "hr", "isLabour": false },
+			{ "name": "pr", "isLabour": false },
+			{ "name": "cr", "isLabour": false },
+			{ "name": "it", "isLabour": false },
+			{ "name": "finance", "isLabour": false },
+			{ "name": "management", "isLabour": false },
+			{ "name": "other", "isLabour": false }
+		]
+	},
+	"applicationData": {
+		"unitsComment": "Weight value represents x/kg volume value represents x/L",
+		"units": [
+			{
+				"name": "mg",
+				"type": "weight",
+				"value": 0.000001
+			},
+			{
+				"name": "g",
+				"type": "weight",
+				"value": 0.001
+			},
+			{
+				"name": "kg",
+				"type": "weight",
+				"value": 1
+			},
+			{
+				"name": "t",
+				"type": "weight",
+				"value": 1000
+			},
+			{
+				"name": "mL",
+				"type": "volume",
+				"value": 0.001
+			},
+			{
+				"name": "cc",
+				"type": "volume",
+				"value": 0.001
+			},
+			{
+				"name": "L",
+				"type": "volume",
+				"value": 1
+			}
+		]
+	}
+}

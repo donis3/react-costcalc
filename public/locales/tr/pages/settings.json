@@ -1,0 +1,40 @@
+{
+	"title": "Ayarlar",
+	"titleInitial": "İlk Kurulum",
+	"name": "Ayar",
+	"warningInitialSetup": "Dikkat! İlk kurlum esnasında seçilen esas para birimi, daha sonra değiştirilemez. Bu para birimi genellikle ülkenizin yerel para birimidir. Lütfen emin olmadan kaydetmeyiniz.",
+	"form": {
+		"titleXrate": "Döviz Kuru Sağlayıcısı",
+		"titleCurrency": "Para Birimi Ayarları",
+		"apiKey": "Erişim Anahtarı",
+		"apiKeyAlt": "Eğer seçilen servis api-anahtarı gerektiriyorsa, buraya giriniz",
+		"api": "Servis Sağlayıcı",
+		"apiAlt": "Döviz kuru bilgilerini ileten servis sağlayıcı",
+		"currency": "Para Birimleri",
+		"currencyAlt": "Kullanılabilir para birimleri",
+		"selectedCurrencies": "Aktif Para Birimleri",
+		"selectedCurrenciesAlt": "İşinizde sıklıkla kullandığınız para birimlerini ekleyebilirsiniz. Yıldız butonu ile favori para birimlerinizi seçerek kolay erişim çubuğuna ekleyebilirsiniz.",
+		"defaultCurrency": "Esas Para Birimi",
+		"defaultCurrencyAlt": "Firmanızın varsayılan para birimi. Genellikle Bulunduğunuz ülkenin para birimidir.",
+		"defaultCurrencySelect": "Yerel Para Biriminizi Seçin",
+		"defaultCurrencyRequired": "Önce esas para birimi seçilmelidir",
+		"noRemoteService": "Hiçbiri",
+		"success": "Ayarlar başarıyla kaydedildi",
+		"error": "Ayarlar kaydedilemedi. \n {{code}}",
+		"cantChange": "Bu değer değiştirilemez"
+	},
+	"error": {
+		"InvalidData": "Yollanan veriler hatalı",
+		"UnsupportedCurrency": "Desteklenmeyen bir para birimine rastlandı.",
+		"DefaultCurrencyChange": "Esas para birimi değiştirilemez",
+		"MissingApi": "Tercihlerinizdeki döviz kuru sağlayıcı artık desteklenmiyor. Lütfen başka bir sağlayıcı seçiniz."
+	},
+	"currencyUsage": {
+		"inUse": "{{currency}} silinemez. \n{{usage}} hâla bu para birimini kullanmakta.",
+		"materials": "{{count}} Hammadde",
+		"packages": "{{count}} Ambalaj",
+		"expenses": "{{count}} Gider",
+		"employees": "{{count}} Çalışan"
+	},
+	"initialSetup": "İlk Kurulum"
+}

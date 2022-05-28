@@ -16,7 +16,8 @@
 		"invalidId": "Kaydetme başarısız. Geçersiz ürün no",
 		"notFound": "Ürün bulunamadı",
 		"packageError": "Bu ürünle ilişkilendirilmiş ambalaj bulunamıyor. Lütfen ürünü düzenleyin",
-		"recipeError": "Bu ürünle ilişkilendirilmiş reçete bulunamıyor. Lütfen ürünü düzenleyin"
+		"recipeError": "Bu ürünle ilişkilendirilmiş reçete bulunamıyor. Lütfen ürünü düzenleyin",
+		"noChange": "Değişiklik yapılmadı."
 	},
 	"labels": {
 		"endId": "Ürün Numarası",
@@ -49,6 +50,7 @@
 		"recipeCost": "Hammadde",
 		"packageCost": "Ambalaj",
 		"labourCost": "İşçilik",
+		"overheadCost": "İşletme Giderleri",
 		"showAllMaterialsCost": "Detaylı Analiz Göster"
 	},
 	"deleteError": {
@@ -56,5 +58,11 @@
 		"package_other": "Bu ambalajı kullanmakta olan {{count}} ürün olduğu için silinemiyor.",
 		"recipe": "Bu reçeteyi kullanmakta olan bir ürün olduğu için silinemiyor.",
 		"recipe_other": "Bu reçeteyi kullanmakta olan {{count}} ürün olduğu için silinemiyor."
+	},
+	"toggles": {
+		"materials": "Hammadde",
+		"packaging": "Ambalaj",
+		"labour": "İşçilik",
+		"overhead": "İşletme Giderleri"
 	}
 }

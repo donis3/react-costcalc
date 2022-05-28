@@ -35,7 +35,8 @@
 		"formTitleEdit": "Çalışanı Düzenle",
 		"statTotal": "Brüt Toplam",
 		"statLabour": "İşçilik",
-		"statPeriod": "Her {{period}}"
+		"statPeriod": "Her {{period}}",
+		"noData": "Henüz bir çalışan eklenmedi. Lütfen Yeni Çalışan butonunu kullanarak çalışan ekleyin."
 	},
 	"table": {
 		"name": "İsim",
@@ -82,7 +83,8 @@
 		"formSectionDetails": "Gider Detayları",
 		"formSectionCost": "Maliyet Detayları",
 		"formMonthlyTitle": "Aylık Maliyet",
-		"formAnnualTitle": "Yıllık Maliyet"
+		"formAnnualTitle": "Yıllık Maliyet",
+		"noData": "Henüz bir gider eklenmedi. Lütfen Yeni Gider butonunu kullanarak gider ekleyin."
 	},
 	"expensesTable": {
 		"categoryOptions": "Gösterilecek Kategoriler",

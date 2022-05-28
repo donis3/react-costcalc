@@ -1,0 +1,23 @@
+{
+	"error": {
+		"InvalidData": "Hatalı veri",
+		"InvalidCurrency": "Para birimi aktif değil veya hatalı",
+		"InvalidDefaultCurrency": "Esas para birimi hatalı",
+		"InvalidRate": "Döviz kuru 0'dan büyük bir sayı olmalı",
+		"NoChange": "Değişim yok veya çok küçük.",
+		"TooSoon": "İstekler arasında yeterinde zaman geçmedi.",
+		"fail": "Döviz kuru isteği işlenirken bir hata oluştu"
+	},
+	"success": {
+		"refresh": "{{provider}} kullanılarak döviz kurları yenilendi"
+	},
+	"exhost": {
+		"name": "ExchangeRates.Host",
+		"notWorking": "Exchangerate.host servisine erişilemiyor"
+	},
+	"tcmb": {
+		"name": "T.C. Merkez Bankası",
+		"invalidBase": "TCMB kaynağını kullanabilmek için esas para biriminin TRY olması gerekmektedir.",
+		"parseFail": "TCMB verileri işlenirken bir hata oluştu"
+	}
+}
