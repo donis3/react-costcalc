@@ -116,6 +116,18 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 					<PricePerUnit unit={'pcs'}>{data.totalCostWithTax}</PricePerUnit>
 				</InfoItem>
 
+
+				{/* Item */}
+				<InfoItem title={t('labels.commercialName')}>
+					{/* Package Bundle Name */}
+					{data.commercialName}
+				</InfoItem>
+				{/* Notes */}
+				<InfoItem title={t('labels.notes', { ns: 'translation' })} row pre>
+					{/* Package Bundle Name */}
+					{data.notes}
+				</InfoItem>
+
 				{/* Grid End */}
 			</div>
 			<div className='mt-10'>
@@ -152,15 +164,15 @@ export default function EndProductInfo({ data = null, recipeItems, packageItems,
 	);
 }
 
-function InfoItem({ title = null, children, ...attributes } = {}) {
+function InfoItem({ title = null, children, row = false, pre = false, ...attributes } = {}) {
 	if (typeof children === 'string' && children.trim().length === 0) {
 		return <></>;
 	}
 	return (
-		<div {...attributes}>
+		<div {...attributes} className={row ? 'col-span-full' : ''}>
 			{/* Product Name */}
 			<h4 className='text-base-content opacity-60 text-sm mb-1'>{title}</h4>
-			<p className='text-base-content text-base font-medium'>{children}</p>
+			<p className={`text-base-content text-base font-medium ${pre && 'whitespace-pre'}`}>{children}</p>
 		</div>
 	);
 }

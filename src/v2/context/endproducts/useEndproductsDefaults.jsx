@@ -5,16 +5,6 @@ export default function useEndproductsDefaults() {
 	const { t } = useTranslation('pages/endproducts');
 	const Joi = useJoi();
 
-	const schema = Joi.object({
-		endId: Joi.string().empty('').guid({ version: 'uuidv4' }).label(t('name')),
-		recipeId: Joi.string().guid({ version: 'uuidv4' }).label(t('labels.recipe')),
-		packageId: Joi.string().guid({ version: 'uuidv4' }).label(t('labels.package')),
-
-		name: Joi.string().min(3).max(100).required().label(t('labels.name')),
-		commercialName: Joi.string().min(3).max(100).required().label(t('labels.commercialName')),
-		notes: Joi.string().min(0).max(500).label(t('labels.notes')),
-	});
-
 	const defaultFields = {
 		recipeId: '',
 		packageId: '',
@@ -23,5 +13,18 @@ export default function useEndproductsDefaults() {
 		notes: '',
 	};
 
-	return { schema, defaultFields };
+	/**
+	 * Bind module schema parameters to given schema
+	 * @param {*} schema
+	 */
+	function bindSchema(schema) {
+		schema.endId = Joi.string().empty('').guid({ version: 'uuidv4' }).label(t('name'));
+		schema.recipeId = Joi.string().guid({ version: 'uuidv4' }).label(t('labels.recipe'));
+		schema.packageId = Joi.string().guid({ version: 'uuidv4' }).label(t('labels.package'));
+		schema.name = Joi.string().min(3).max(100).required().label(t('labels.name'));
+		schema.commercialName = Joi.string().min(3).max(100).required().label(t('labels.commercialName'));
+		schema.notes = Joi.string().min(0).max(500).label(t('labels.notes'));
+	}
+
+	return { defaultFields, bindSchema };
 }

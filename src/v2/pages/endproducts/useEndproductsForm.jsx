@@ -7,7 +7,7 @@ import useEndproducts from '../../context/endproducts/useEndproducts';
 import useEndproductsDefaults from '../../context/endproducts/useEndproductsDefaults';
 import usePackages from '../../context/packages/usePackages';
 import useRecipes from '../../context/recipes/useRecipes';
-import useFormHandler from '../../hooks/common/useFormHandler';
+import useFormBuilder from '../../hooks/forms/useFormBuilder';
 
 export default function useEndproductsForm({ endProduct = null } = {}) {
 	const { t } = useTranslation('pages/endproducts', 'translation');
@@ -15,30 +15,41 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 
 	//Load end product dispatch
 	const { dispatch } = useEndproducts();
-	const { schema } = useEndproductsDefaults();
+	const { bindSchema } = useEndproductsDefaults();
 
 	//Load recipes & packages & memoize them
 	const packages = usePackages();
 	const { recipes } = useRecipes();
 
-	//Load select options
+	//Generate available recipe & package selection class
 	const selectData = useMemo(() => generateSelectOptions(recipes, packages), [recipes, packages]);
+	//Create initial state for form
+	const initialState = getInitialState(endProduct, selectData);
 
-	//Form State
-	const [formState, setFormState] = useState(getInitialState(endProduct, selectData));
+	//==========================// Form States //===================================//
+	//is form submitted
+	const [isSubmitted, setSubmitted] = useState(false);
 
-	//Load form handler
-	const { hasError, onChangeHandler, onSubmitHandler } = useFormHandler({
-		formState,
-		setFormState,
-		schema,
+	//==========================// Form Handling Library //===================================//
+	const { schema, getFormData, resetForm, formState, getError, register, setState } = useFormBuilder({
+		initialState,
+		isSubmitted,
 	});
+
+	//Bind module schema rules
+	bindSchema(schema);
+
+	//==========================// State Dependant Data //===================================//
+
+	//Get currently selected recipe data
+	const recipe = selectData.recipes.find((item) => item.value === formState.recipeId);
 
 	//When recipe changes, change selected package if needed
 	useEffect(() => {
 		//Current recipe
 		const recipeId = formState.recipeId;
-		if (!isUuid(recipeId)) {
+
+		if (isUuid(recipeId)) {
 			//check if selected package is suitable
 			if (!selectData.isPackageSuitable(recipeId, formState.packageId)) {
 				//Selected package is not suitable
@@ -46,56 +57,71 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 
 				if (isUuid(packageId) && packageId !== formState.packageId) {
 					//A package change is required
-					setFormState((state) => ({ ...state, packageId: packageId }));
+
+					setState('packageId', packageId);
 				} else {
 					//Set package to invalid id so form wont submit.
-					setFormState((state) => ({ ...state, packageId: 'notfound' }));
+					setState('packageId', 'notfound');
 				}
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState.recipeId]);
 
-	//Handle Submit
-	const onSubmit = (formData) => {
-		if (!endProduct) {
-			return dispatch({
-				type: 'add',
-				payload: { ...formData },
-				success: function () {
-					toast.success(t('success.add', { name: formData.name, ns: 'translation' }));
-					navigate('/endproducts');
-				},
-				error: function (errCode) {
-					if (errCode === 'duplicate') {
-						return toast.error(t('error.duplicate'));
-					}
-					return toast.error(t('error.add', { name: formData.name, ns: 'translation' }));
-				},
-			});
-		}
-		if (endProduct) {
-			return dispatch({
-				type: 'update',
-				payload: { ...formData, endId: endProduct.endId },
-				success: function () {
-					toast.success(t('success.update', { name: formData.name, ns: 'translation' }));
-					navigate('/endproducts');
-				},
-				error: function (errCode = null) {
-					let toastMsg = t('error.update', { name: formData.name, ns: 'translation' });
-					if (errCode) toastMsg = t('error.' + errCode, { name: formData.name});
-					return toast.error(toastMsg);
-				},
-			});
-		}
-
-		//dispatch({ type: 'reset' });
+	//==========================// Dispatch Actions//===================================//
+	const onAdd = (formData) => {
+		dispatch({
+			type: 'add',
+			payload: { ...formData },
+			success: function () {
+				toast.success(t('success.add', { name: formData.name, ns: 'translation' }));
+				navigate('/endproducts');
+			},
+			error: function (errCode) {
+				if (errCode === 'duplicate') {
+					return toast.error(t('error.duplicate'));
+				}
+				return toast.error(t('error.add', { name: formData.name, ns: 'translation' }));
+			},
+		});
 	};
 
-	const onDelete = () => {
-		if (!endProduct) return;
+	const onUpdate = (formData) => {
+		dispatch({
+			type: 'update',
+			payload: { ...formData, endId: endProduct.endId },
+			success: function () {
+				toast.success(t('success.update', { name: formData.name, ns: 'translation' }));
+				navigate('/endproducts');
+			},
+			error: function (errCode = null) {
+				let toastMsg = t('error.update', { name: formData.name, ns: 'translation' });
+				if (errCode) toastMsg = t('error.' + errCode, { name: formData.name });
+				return toast.error(toastMsg);
+			},
+		});
+	};
 
+	//==========================// Form Handlers //===================================//
+	const handleSubmit = (e) => {
+		try {
+			const data = getFormData(true);
+			if (!endProduct) {
+				onAdd(data);
+			} else {
+				onUpdate(data);
+			}
+		} catch (err) {
+			//Form errors.
+		}
+	};
+
+	const handleReset = () => {
+		resetForm();
+	};
+
+	const handleDelete = () => {
+		if (!endProduct) return;
 		return dispatch({
 			type: 'delete',
 			payload: endProduct.endId,
@@ -111,22 +137,25 @@ export default function useEndproductsForm({ endProduct = null } = {}) {
 		});
 	};
 
-	const onReset = () => {
-		const newState = getInitialState(endProduct, selectData);
-		return setFormState((state) => ({ ...state, ...newState }));
-	};
-
-	//Hook Exports
+	//==========================// Exports //===================================//
 	return {
-		selectRecipe: selectData.recipes,
-		selectPackage: selectData.getPackages(formState.recipeId),
-		handleChange: onChangeHandler,
-		hasError,
-		handleSubmit: (e) => onSubmitHandler(e, onSubmit),
-		onReset,
-		onDelete,
-		formState,
-		recipe: { isLiquid: false },
+		//Spreadable @ Form element
+		formActions: {
+			onSubmit: handleSubmit,
+			onReset: handleReset,
+			onDelete: endProduct ? handleDelete : null,
+			setSubmitted,
+		},
+
+		select: {
+			recipe: selectData.recipes,
+			package: selectData.getPackages(formState.recipeId),
+		},
+
+		//Form Builder Api
+		getError,
+		register,
+		recipe,
 	};
 } //End of hook
 

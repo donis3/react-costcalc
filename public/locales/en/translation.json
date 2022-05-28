@@ -135,7 +135,8 @@
 		"weight": "Weight",
 		"filtering": "Filtering ({{count}})",
 		"labourCost": "Labour Cost",
-		"overheadCost": "Overhead Cost"
+		"overheadCost": "Overhead Cost",
+		"notes": "Notes"
 	},
 	"charts": {
 		"costHistory": "Cost History",

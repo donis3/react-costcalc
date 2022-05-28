@@ -222,7 +222,8 @@
 		"weight": "Ağırlık",
 		"filtering": "Filtreleniyor ({{count}})",
 		"labourCost": "İşçilik Gideri",
-		"overheadCost": "İşletme Gideri"
+		"overheadCost": "İşletme Gideri",
+		"notes": "Notlar"
 	},
 	"charts": {
 		"costHistory": "Maliyet Geçmişi",
