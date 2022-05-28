@@ -21,7 +21,7 @@ export default function TotalCost() {
 	const { t } = useTranslation('pages/homepage', 'translation');
 	const { displayMoney } = useIntl();
 	const [getOption, setOption] = useUiToggles();
-	const { labour, overhead, updatedAt, production } = useTotalCost({ period: getOption('showPeriod') });
+	const { labour, overhead, updatedAt, production, combined } = useTotalCost({ period: getOption('showPeriod') });
 	const periodName = t(`periodName.${getOption('showPeriod')}`, { ns: 'translation' });
 
 	return (
@@ -34,7 +34,20 @@ export default function TotalCost() {
 			<UpdatedAtText updatedAt={updatedAt} />
 			{/* Stat Grid */}
 			<div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-20'>
+				{/* Combined Cost (Total Cost) */}
 				<Stat
+					desc={t('totals.periodText', { period: periodName })}
+					icon={[<EmployeeIcon />, <LabourIcon />, <CompanyIcon />]}
+					label={t('totals.combined')}
+					helpText={t('help.combined', {
+						overhead: displayMoney(overhead.totalWithTax, overhead.currency),
+						labour: displayMoney(labour.totalWithTax, labour.currency),
+					})}
+				>
+					{displayMoney(combined.totalWithTax, combined.currency)}
+				</Stat>
+
+				{/* <Stat
 					desc={t('totals.periodText', { period: periodName })}
 					icon={[<EmployeeIcon />, <CompanyIcon />]}
 					label={t('totals.overhead')}
@@ -50,7 +63,7 @@ export default function TotalCost() {
 					helpText={t('help.labour')}
 				>
 					{displayMoney(labour.totalWithTax, labour.currency)}
-				</Stat>
+				</Stat> */}
 
 				<Stat
 					label={t('totals.production')}
@@ -65,14 +78,27 @@ export default function TotalCost() {
 					</Link>
 				</Stat>
 
+				{/* Labour cost per unit produced */}
 				<Stat
-					label={t('totals.productionUnitCost')}
+					label={t('totals.labourUnitCost')}
 					icon={<LabourCostIcon />}
-					helpText={t('help.productionUnitCost')}
-					desc={t('totals.productionUnitCostDesc', { unit: t(`units.${production.unit}`, { ns: 'translation' }) })}
+					helpText={t('help.labourUnitCost')}
+					desc={t('totals.labourUnitCostDesc', { unit: t(`units.${production.unit}`, { ns: 'translation' }) })}
 				>
 					<NumericUnit type={production.unit} short isPer>
-						{displayMoney(production.cost)}
+						{displayMoney(production.labour)}
+					</NumericUnit>
+				</Stat>
+
+				{/* Overhead per unit produced */}
+				<Stat
+					label={t('totals.overheadUnitCost')}
+					icon={<LabourCostIcon />}
+					helpText={t('help.overheadUnitCost')}
+					desc={t('totals.overheadUnitCostDesc', { unit: t(`units.${production.unit}`, { ns: 'translation' }) })}
+				>
+					<NumericUnit type={production.unit} short isPer>
+						{displayMoney(production.overhead)}
 					</NumericUnit>
 				</Stat>
 			</div>

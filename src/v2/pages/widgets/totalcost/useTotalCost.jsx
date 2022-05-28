@@ -19,11 +19,20 @@ export default function useTotalCost({ period = 'y' } = {}) {
 		production?.totalProduction,
 		production?.unit,
 		company?.totals?.labourGross,
+		company?.totals?.expensesWithTax + company?.totals?.salariesGross,
 		period,
 		coefficient
 	);
+	
 
-	return { overhead, labour, updatedAt, production: productionCost };
+	const combined = {
+		total: labour.total + overhead.total,
+		totalWithTax: labour.totalWithTax + overhead.totalWithTax,
+		currency: defaultCurrency,
+		period,
+	};
+
+	return { overhead, labour, combined, updatedAt, production: productionCost };
 }
 
 function calculateOverhead(period, coefficient, company, defaultCurrency) {
@@ -75,15 +84,27 @@ function calculateLabour(period, coefficient, company, defaultCurrency) {
  * @param {*} production
  * @param {*} unit
  * @param {*} labourCost
+ * @param {*} overheadCost
  * @param {*} period
  * @param {*} coefficient
  * @returns
  */
-function calculateProduction(production = 0, unit = 'kg', labourCost = 0, period = 'y', coefficient = 1) {
-	const result = { production: 0, period, cost: 0, unit };
+function calculateProduction(
+	production = 0,
+	unit = 'kg',
+	labourCost = 0,
+	overheadCost = 0,
+	period = 'y',
+	coefficient = 1
+) {
+	labourCost = parseFloat(labourCost) ?? 0;
+	overheadCost = parseFloat(overheadCost) ?? 0;
+	const result = { production: 0, period, cost: 0, labour: 0, overhead: 0, unit };
 	if (!production || !coefficient || isNaN(coefficient)) return result;
 
 	result.production = production / coefficient;
-	result.cost = labourCost ? labourCost / production : 0;
+	result.labour = labourCost ? labourCost / production : 0;
+	result.overhead = overheadCost ? overheadCost / production : 0;
+	result.cost = result.labour + result.overhead;
 	return result;
 }
