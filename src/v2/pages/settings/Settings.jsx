@@ -91,7 +91,7 @@ export default function Settings() {
 									name='currencies'
 									defaultValue={select.currencies[0].value}
 									options={select.currencies}
-									onSelect={actions.onCurrencySelect}
+									onChange={actions.onCurrencySelect}
 									disabled={formState.defaultCurrency === ''}
 								/>
 							</Form.Control>
@@ -156,7 +156,7 @@ function Alert({ children, info = false }) {
 	return (
 		<div className={`alert ${info ? 'alert-info' : 'alert-warning'}`}>
 			<div className='gap-5'>
-				<FaExclamationTriangle className='min-w-fit text-xl' />
+				<FaExclamationTriangle className='min-w-[20px] text-xl' />
 				<span>{children}</span>
 			</div>
 		</div>

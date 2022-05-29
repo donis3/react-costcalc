@@ -80,15 +80,18 @@ export default function useSettingsForm({ data = null }) {
 		if (!Array.isArray(allCurrencies) || allCurrencies.length === 0) return [];
 		if (defaultCurrency in currency === false) return [selectDefaultCurrencyItem];
 
-		return allCurrencies.reduce((acc, item) => {
-			const { name, value } = item;
-			if (value === defaultCurrency) return acc; //filter default
-			let text = name;
-			if (selectedCurrencies.includes(value)) {
-				text = `✔ ${text} `;
-			}
-			return [...acc, { name: text, value: value }];
-		}, []);
+		return allCurrencies.reduce(
+			(acc, item) => {
+				const { name, value } = item;
+				if (value === defaultCurrency) return acc; //filter default
+				let text = name;
+				if (selectedCurrencies.includes(value)) {
+					text = `✔ ${text} `;
+				}
+				return [...acc, { name: text, value: value }];
+			},
+			[{ name: t('form.chooseCurrency'), value: '', disabled: true }]
+		);
 	}
 
 	//Generate the select arrays for default currency & available currencies. (filter default currency out)
@@ -143,7 +146,8 @@ export default function useSettingsForm({ data = null }) {
 		}
 	};
 
-	const onCurrencySelect = (currencyCode) => {
+	const onCurrencySelect = (e) => {
+		const currencyCode = e.target.value;
 		if (!currencyCode || currencyCode in currency === false) return;
 		if (formState.currencies.includes(currencyCode)) {
 			removeCurrency(currencyCode);

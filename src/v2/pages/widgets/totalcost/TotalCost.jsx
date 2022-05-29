@@ -129,7 +129,7 @@ function Stat({ children, label, desc, helpText, icon }) {
 			{/* Stat Value */}
 			<div className='stat-value text-lg'>{children}</div>
 			{/* Stat Description */}
-			<div className='stat-desc'>{desc}</div>
+			<div className='stat-desc whitespace-normal'>{desc}</div>
 		</div>
 	);
 }

@@ -1,1 +1,800 @@
-{"settings":{"currencies":["CNY","EUR","USD"],"favoriteCurrencies":["EUR","USD"],"defaultCurrency":"TRY","apiProvider":"exhost","apiKey":"","updatedAt":1653749154102,"v":"0.2.1","setupComplete":1653749154101,"isDemo":true},"currencies":{"CNY":[{"from":"CNY","to":"TRY","rate":2.4209206276963005,"date":1653749161906,"change":0}],"EUR":[{"from":"EUR","to":"TRY","rate":17.390094602114637,"date":1653749161906,"change":0}],"USD":[{"from":"USD","to":"TRY","rate":16.21533971136695,"date":1653749161906,"change":0}]},"company":{"info":{"name":"Mega Nutrition","legalName":"Mega Nutrition Supplements Co.","founder":"Danny Nutrisson","about":"This is a demo company and all information about this company is fictional.\nIn thic scenario, this company manufactures nutrient supplement pills and drinks.","establishedOn":"2017-12-31T21:00:00.000Z","address":"Dreams Building, 200 Elgin Ave","city":"Istanbul","country":"Turkiye","phone":"2121000000","mobile":"5321000000","fax":"2121000000","email":"mega@costotus.com","taxId":"1","website":"http://www.costotus.com"},"expenses":[{"expenseId":"f2ca1a96-2ec2-4634-a892-bc8bed68a1ae","name":"Manufacturing Building","category":"rent","period":"m","unit":"other","quantity":1,"price":5000,"tax":18,"currency":"TRY","cost":{"y":{"currency":"TRY","amount":60000,"amountWithTax":70800},"m":{"currency":"TRY","amount":5000,"amountWithTax":5900},"w":{"currency":"TRY","amount":1150.6849315068494,"amountWithTax":1357.808219178082},"d":{"currency":"TRY","amount":164.3835616438356,"amountWithTax":193.97260273972603},"h":{"currency":"TRY","amount":6.8493150684931505,"amountWithTax":8.082191780821917}}},{"expenseId":"54c7ae18-55cf-43cd-8575-8a5a68fb42e4","name":"Mobile Ads","category":"advertisement","period":"w","unit":"other","quantity":1,"price":100,"tax":18,"currency":"USD","cost":{"y":{"currency":"USD","amount":5214.285714285715,"amountWithTax":6152.857142857143},"m":{"currency":"USD","amount":434.5238095238096,"amountWithTax":512.7380952380953},"w":{"currency":"USD","amount":100,"amountWithTax":118},"d":{"currency":"USD","amount":14.285714285714286,"amountWithTax":16.857142857142858},"h":{"currency":"USD","amount":0.5952380952380952,"amountWithTax":0.7023809523809524}}},{"expenseId":"5461a6b0-9201-45e6-9f9e-e21367f6c82c","name":"A4 Paper","category":"office","period":"y","unit":"pcs","quantity":20,"price":25,"tax":8,"currency":"TRY","cost":{"y":{"currency":"TRY","amount":500,"amountWithTax":540},"m":{"currency":"TRY","amount":41.666666666666664,"amountWithTax":45},"w":{"currency":"TRY","amount":9.58904109589041,"amountWithTax":10.356164383561643},"d":{"currency":"TRY","amount":1.36986301369863,"amountWithTax":1.4794520547945205},"h":{"currency":"TRY","amount":0.05707762557077625,"amountWithTax":0.06164383561643835}}},{"expenseId":"61f5463f-f375-4188-9d75-4a578e6e1ca0","name":"Tablet Press Machine","category":"depreciation","period":"y","unit":"other","quantity":1,"price":2500,"tax":0,"currency":"TRY","cost":{"y":{"currency":"TRY","amount":2500,"amountWithTax":2500},"m":{"currency":"TRY","amount":208.33333333333334,"amountWithTax":208.33333333333334},"w":{"currency":"TRY","amount":47.94520547945205,"amountWithTax":47.94520547945205},"d":{"currency":"TRY","amount":6.8493150684931505,"amountWithTax":6.8493150684931505},"h":{"currency":"TRY","amount":0.2853881278538813,"amountWithTax":0.2853881278538813}}}],"employees":[{"employeeId":"c455bca6-40a1-48ba-b555-62d990ee700e","name":"Danny (Owner)","department":"management","notes":"This is me, the owner of the company","gross":120000,"net":90000,"currency":"TRY","email":"danny@costotus.com","mobile":"","dob":"1992-12-31T22:00:00.000Z","doe":"2017-12-31T21:00:00.000Z"},{"employeeId":"0b767880-2fcb-4cc3-8315-f5b331339f99","name":"Buffy (Laborer)","department":"manufacturing","notes":"My best worker","gross":85000,"net":70000,"currency":"TRY","email":"buffy@costotus.com","mobile":"","dob":"1996-12-31T22:00:00.000Z","doe":"2018-12-31T21:00:00.000Z"},{"employeeId":"feda7351-ef8c-4ba0-b862-4d01d15b9325","name":"Toby (admin)","department":"administration","notes":"Office administrator and general managment","gross":11000,"net":8000,"currency":"USD","email":"toby@costotus.com","mobile":"","dob":"1970-12-31T22:00:00.000Z","doe":"2019-12-31T21:00:00.000Z"},{"employeeId":"26a7c01d-ad7d-4254-bc66-8da259fd307b","name":"Tuffy (Laborer)","department":"manufacturing","notes":"Old but gold\nThey don't make them like him anymore!","gross":90000,"net":75000,"currency":"TRY","email":"tuff@costotus.com","mobile":"","dob":"1944-12-31T21:00:00.000Z","doe":"2018-05-09T21:00:00.000Z"}],"totals":{"currency":"TRY","updatedAt":1653752657057,"expenses":147551.41571428574,"expensesWithTax":173610.67054285714,"labourNet":145000,"labourGross":175000,"salariesNet":219722.71769999998,"salariesGross":298368.7368},"production":{"updatedAt":1653752065511,"unit":"kg","totalProduction":3800},"history":{"overhead":[{"currency":"TRY","amount":471979.40734285716,"date":1653752657056},{"currency":"TRY","amount":469479.40734285716,"date":1653752630311},{"currency":"TRY","amount":468939.40734285716,"date":1653752603403},{"currency":"TRY","amount":369168.7368,"date":1653752576523},{"currency":"TRY","amount":298368.7368,"date":1653749482677},{"currency":"TRY","amount":120000,"date":1653749398371},{"currency":"TRY","amount":0,"date":1653749173780}],"labor":[{"currency":"TRY","amount":175000,"date":1653749578888},{"currency":"TRY","amount":85000,"date":1653749435566},{"currency":"TRY","amount":0,"date":1653749173780}],"production":[{"unit":"kg","totalProduction":3800,"date":1653752065511},{"unit":"kg","totalProduction":3200,"date":1653752050209},{"unit":"kg","totalProduction":3700,"date":1653749826766},{"unit":"kg","totalProduction":2500,"date":1653749797103},{"unit":"kg","totalProduction":2000,"date":1653749732136},{"unit":"kg","totalProduction":1000,"date":1653749715763}]}},"products":[{"code":"VT-01","name":"Vitamin Mix","isLiquid":false,"density":1,"production":1000,"productId":"a2b153ef-7d3b-4385-8a58-983db9a6cd9e"},{"code":"Vit-02","name":"Vitamin C","isLiquid":false,"density":1,"production":1000,"productId":"25fb28a6-57f4-41e0-81b6-e837750cd820"},{"code":"LQ-01","name":"L-Carnitine Drink","isLiquid":true,"density":1.2,"production":1000,"productId":"82c18dfb-9226-40e8-a945-3e8b50a0241d"},{"code":"Vit-03","name":"Vitamin D liquid","isLiquid":true,"density":1.2,"production":500,"productId":"9c0b59ab-7a08-4070-8aa1-ae0929dba05c"}],"materials":[{"materialId":"277a8669-3364-4482-8626-00d30a4f902d","tax":20,"price":4.7,"density":1,"name":"Ascorbic Acid","provider":"Big Pharma","currency":"USD","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"0048fa36-7dd9-46ca-b547-7c4721e38e43","tax":20,"price":5,"density":1,"name":"Microcrystalline Cellulose Powder","provider":"China Pharma","currency":"USD","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"984ee143-8df2-4a06-b2de-bf726c65fe6f","tax":20,"price":80,"density":1,"name":"Tartaric Acid","provider":"China Pharma","currency":"CNY","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"09c25932-7512-44d7-adbe-9e26d5d94c05","tax":20,"price":70,"density":1,"name":"Gelatin Capsules","provider":"China Pharma","currency":"USD","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"9d2bb593-3d8e-467d-a9a2-4496fbc8ae62","tax":20,"price":250,"density":1,"name":"L-Carnitine Powder","provider":"China Pharma","currency":"CNY","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"8b40416b-3dab-4100-9ad8-25809a999491","tax":20,"price":90,"density":1,"name":"Vitamin Mix Powder ","provider":"China Phrama","currency":"USD","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"19d7efd9-2467-4cd3-af6c-d54770b6d4bb","tax":20,"price":42,"density":1.3,"name":"Vitamin d3 oil","provider":"China Pharma","currency":"USD","unit":"L","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"bb5fcc36-856b-4133-877f-da1c32572286","tax":18,"price":1,"density":1,"name":"Spring Water","provider":"Water Co","currency":"TRY","unit":"L","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"f3b274a3-9289-40f3-8be1-dd71127f0300","tax":18,"price":0.02,"density":1,"name":"Food Coloring","provider":"Color Co","currency":"EUR","unit":"mL","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"97a3c3eb-a5ac-4e47-834a-ef60f577c5ff","tax":8,"price":950,"density":1,"name":"Sugar Powder","provider":"Sugar Cane LLC","currency":"USD","unit":"t","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941},{"materialId":"a487b939-1bc3-4d0a-9271-e07c9b6f0348","tax":18,"price":1,"density":1,"name":"Sodium Carbonate","provider":"Big Pharma","currency":"EUR","unit":"kg","priceHistory":[],"localPriceHistory":[],"createdAt":1653749165941,"updatedAt":1653749165941}],"recipes":[{"name":"L-Carnitine Standard","recipeId":"2cc4fe8f-deb0-4fda-92cd-bed6867d9787","productId":"82c18dfb-9226-40e8-a945-3e8b50a0241d","yield":10,"notes":"Mix them all\nShake them all","materials":[{"materialId":"9d2bb593-3d8e-467d-a9a2-4496fbc8ae62","amount":1,"unit":"kg"},{"materialId":"f3b274a3-9289-40f3-8be1-dd71127f0300","amount":0.02,"unit":"L"},{"materialId":"a487b939-1bc3-4d0a-9271-e07c9b6f0348","amount":0.1,"unit":"kg"},{"materialId":"bb5fcc36-856b-4133-877f-da1c32572286","amount":11,"unit":"L"}],"createdAt":1653751566936,"updatedAt":1653751566936,"unitCosts":[{"recipeId":"2cc4fe8f-deb0-4fda-92cd-bed6867d9787","date":1653751569941,"cost":62.4925248,"costWithTax":74.9516354}]},{"name":"Vitamin C Standard","recipeId":"6b031636-7e1c-4c0a-8331-b111770176a1","productId":"25fb28a6-57f4-41e0-81b6-e837750cd820","yield":50,"notes":"Mix all and send to encapsulation\nEach capsule will hold around 1g powder","materials":[{"materialId":"277a8669-3364-4482-8626-00d30a4f902d","amount":5,"unit":"kg"},{"materialId":"97a3c3eb-a5ac-4e47-834a-ef60f577c5ff","amount":5,"unit":"kg"},{"materialId":"984ee143-8df2-4a06-b2de-bf726c65fe6f","amount":1,"unit":"kg"},{"materialId":"09c25932-7512-44d7-adbe-9e26d5d94c05","amount":7,"unit":"kg"},{"materialId":"0048fa36-7dd9-46ca-b547-7c4721e38e43","amount":32,"unit":"kg"}],"createdAt":1653752029087,"updatedAt":1653752029087,"unitCosts":[{"recipeId":"6b031636-7e1c-4c0a-8331-b111770176a1","date":1653752514763,"cost":223.834564,"costWithTax":268.416578}]},{"name":"Vitamin D3 standard","recipeId":"f8a47b0e-7ed7-404f-a25e-8e129cadded7","productId":"9c0b59ab-7a08-4070-8aa1-ae0929dba05c","yield":50,"notes":"Nice","materials":[{"materialId":"19d7efd9-2467-4cd3-af6c-d54770b6d4bb","amount":40,"unit":"L"},{"materialId":"f3b274a3-9289-40f3-8be1-dd71127f0300","amount":0.01,"unit":"L"},{"materialId":"97a3c3eb-a5ac-4e47-834a-ef60f577c5ff","amount":1,"unit":"kg"}],"createdAt":1653752139653,"updatedAt":1653752139653,"unitCosts":[{"recipeId":"f8a47b0e-7ed7-404f-a25e-8e129cadded7","date":1653752488186,"cost":545.21309238,"costWithTax":654.21729924}]},{"name":"Vitamin D3 High Quality","recipeId":"905a7efa-9d88-4ae2-89c1-ba0e0d171789","productId":"9c0b59ab-7a08-4070-8aa1-ae0929dba05c","yield":50,"notes":"","materials":[{"materialId":"19d7efd9-2467-4cd3-af6c-d54770b6d4bb","amount":50,"unit":"L"}],"createdAt":1653752165713,"updatedAt":1653752165713,"unitCosts":[{"recipeId":"905a7efa-9d88-4ae2-89c1-ba0e0d171789","date":1653752494005,"cost":681.0443,"costWithTax":817.2531}]},{"name":"Mix Vit Standard","recipeId":"ae26094f-c416-4c3a-a3b5-5e59f360ad58","productId":"a2b153ef-7d3b-4385-8a58-983db9a6cd9e","yield":50,"notes":"Blend together and send to encapsulation","materials":[{"materialId":"277a8669-3364-4482-8626-00d30a4f902d","amount":5,"unit":"kg"},{"materialId":"8b40416b-3dab-4100-9ad8-25809a999491","amount":25,"unit":"kg"},{"materialId":"0048fa36-7dd9-46ca-b547-7c4721e38e43","amount":15,"unit":"kg"},{"materialId":"09c25932-7512-44d7-adbe-9e26d5d94c05","amount":6,"unit":"kg"}],"createdAt":1653752224496,"updatedAt":1653752224496,"unitCosts":[{"recipeId":"ae26094f-c416-4c3a-a3b5-5e59f360ad58","date":1653752520194,"cost":897.843376,"costWithTax":1077.41202}]}],"packages":[{"name":"30ml Vial","productType":"liquid","packageCapacity":0.03,"notes":"High quality glass vial for vitamin D","items":[{"name":"Vial","packageType":"container","itemPrice":0.28,"itemTax":18,"itemCurrency":"USD"},{"name":"Cap with Dropper","packageType":"other","itemPrice":0.1,"itemTax":18,"itemCurrency":"USD"},{"name":"Label","packageType":"other","itemPrice":0.5,"itemTax":8,"itemCurrency":"TRY"},{"name":"Box","packageType":"box","itemPrice":25,"itemTax":18,"itemCurrency":"TRY","boxCapacity":100}],"packageId":"1d0d68c4-4e17-4a8d-adc1-856601a676ef","updatedAt":1653750923567,"cost":6.9118,"currency":"TRY","tax":1.194124,"costWithTax":8.105924000000002,"costHistory":[{"cost":6.9118,"currency":"TRY","date":1653750923739,"change":0}],"unit":"L","createdAt":1653750923567},{"name":"Drink Can 250ml","productType":"liquid","packageCapacity":0.25,"notes":"250ml metal can for drinks","items":[{"name":"Can","packageType":"container","itemPrice":0.18,"itemTax":18,"itemCurrency":"EUR"},{"name":"Label","packageType":"other","itemPrice":0.11,"itemTax":8,"itemCurrency":"USD"},{"name":"Box","packageType":"box","itemPrice":23,"itemTax":18,"itemCurrency":"TRY","boxCapacity":30}],"packageId":"446500e0-e40e-4490-a9c6-918997952a53","updatedAt":1653751308503,"cost":5.6805666666666665,"currency":"TRY","tax":0.844132,"costWithTax":6.524698666666667,"costHistory":[{"cost":5.6805666666666665,"currency":"TRY","date":1653751308647,"change":0}],"unit":"L","createdAt":1653751308503},{"name":"Tablet Botle 100g","productType":"solid","packageCapacity":0.1,"notes":"Glass bottle that holds 100grams of tablets","items":[{"name":"Glass Bottle","packageType":"container","itemPrice":0.18,"itemTax":20,"itemCurrency":"USD"},{"name":"Label & Bottle Box","packageType":"other","itemPrice":0.1,"itemTax":18,"itemCurrency":"USD"},{"name":"Metal Cap","packageType":"other","itemPrice":0.1,"itemTax":8,"itemCurrency":"USD"},{"name":"Box","packageType":"box","itemPrice":28,"itemTax":8,"itemCurrency":"TRY","boxCapacity":50}],"packageId":"3112a091-ae37-46d6-a1ee-352483d8e892","updatedAt":1653751216661,"cost":6.7218,"currency":"TRY","tax":1.05015,"costWithTax":7.7719499999999995,"costHistory":[{"cost":6.7218,"currency":"TRY","date":1653751216794,"change":0}],"unit":"kg","createdAt":1653751216661},{"name":"Tablet Bottle 200g","productType":"solid","packageCapacity":0.2,"notes":"A glass bottle for 200grams of tablets.","items":[{"name":"Glass Bottle","packageType":"container","itemPrice":0.2,"itemTax":18,"itemCurrency":"USD"},{"name":"Label & Bottle Box","packageType":"other","itemPrice":0.15,"itemTax":18,"itemCurrency":"USD"},{"name":"Metal Cap","packageType":"other","itemPrice":0.08,"itemTax":18,"itemCurrency":"USD"},{"name":"Box","packageType":"box","itemPrice":22,"itemTax":8,"itemCurrency":"TRY","boxCapacity":50}],"packageId":"f6fad330-23fd-4cf1-b664-6d2360f3a57b","updatedAt":1653751132654,"cost":7.4126,"currency":"TRY","tax":1.2902679999999997,"costWithTax":8.702868,"costHistory":[{"cost":7.4126,"currency":"TRY","date":1653751132790,"change":0}],"unit":"kg","createdAt":1653751132654}],"endproducts":[{"recipeId":"2cc4fe8f-deb0-4fda-92cd-bed6867d9787","packageId":"446500e0-e40e-4490-a9c6-918997952a53","name":"L-Carnitine 250","commercialName":"Lift Up!","notes":"L carnitine drink in 250ml can ","endId":"40ddd064-a5ed-4862-bf8a-27a00d64cb7b","updatedAt":1653752267949,"cost":{"labourCost":11.44736842105263,"labourCostTax":2.3684210526315805,"overheadCost":28.995326322180453,"overheadCostTax":8.266205836466163,"recipeCost":15.6231312,"recipeTax":3.1147776500000006,"packageCost":5.6805666666666665,"packageTax":0.844132,"total":61.74639260989975,"totalWithTax":76.3399291489975},"costHistory":[{"date":1653752675019,"amount":76.3399291489975},{"date":1653752268148,"amount":62.633823579824565}],"createdAt":1653752267949},{"recipeId":"ae26094f-c416-4c3a-a3b5-5e59f360ad58","packageId":"3112a091-ae37-46d6-a1ee-352483d8e892","name":"Mix Vitamins 100g","commercialName":"Vitamix 90","notes":"100g vitamin mix ~90 tablets","endId":"c7738a4d-0455-43a9-b132-d516e26b6539","updatedAt":1653752338535,"cost":{"labourCost":3.8157894736842106,"labourCostTax":0.7894736842105265,"overheadCost":9.665108774060151,"overheadCostTax":2.755401945488721,"recipeCost":89.78433760000001,"recipeTax":17.956864399999997,"packageCost":6.7218,"packageTax":1.05015,"total":109.98703584774438,"totalWithTax":132.53892587744363},"costHistory":[{"date":1653752675019,"amount":132.53892587744363},{"date":1653752522571,"amount":127.97022402105263},{"date":1653752338735,"amount":20.229022021052632}],"createdAt":1653752338535},{"recipeId":"ae26094f-c416-4c3a-a3b5-5e59f360ad58","packageId":"f6fad330-23fd-4cf1-b664-6d2360f3a57b","name":"Mix Vitamin 200","commercialName":"VitaMix 180","notes":"200g mix vitamin ~180 tablets","endId":"042c3ed7-7a65-480d-9204-5b601160d3b3","updatedAt":1653752368000,"cost":{"labourCost":7.631578947368421,"labourCostTax":1.578947368421053,"overheadCost":19.330217548120302,"overheadCostTax":5.510803890977442,"recipeCost":179.56867520000003,"recipeTax":35.913728799999994,"packageCost":7.4126,"packageTax":1.2902679999999997,"total":213.94307169548875,"totalWithTax":258.2368197548872},"costHistory":[{"date":1653752675019,"amount":258.2368197548872},{"date":1653752522571,"amount":249.09941604210525},{"date":1653752368201,"amount":33.617012042105266}],"createdAt":1653752368000},{"recipeId":"6b031636-7e1c-4c0a-8331-b111770176a1","packageId":"3112a091-ae37-46d6-a1ee-352483d8e892","name":"Vitamin C 100g","commercialName":"VitaC-90","notes":"Vitamin C 90 tablets","endId":"1b5d74da-89a9-4684-90d9-42e87ae639c7","updatedAt":1653752403517,"cost":{"labourCost":3.8157894736842106,"labourCostTax":0.7894736842105265,"overheadCost":9.665108774060151,"overheadCostTax":2.755401945488721,"recipeCost":22.3834564,"recipeTax":4.458201400000002,"packageCost":6.7218,"packageTax":1.05015,"total":42.586154647744365,"totalWithTax":51.639381677443616},"costHistory":[{"date":1653752675019,"amount":51.639381677443616},{"date":1653752517712,"amount":47.070679821052636},{"date":1653752403729,"amount":20.229022021052632}],"createdAt":1653752403517},{"recipeId":"905a7efa-9d88-4ae2-89c1-ba0e0d171789","packageId":"1d0d68c4-4e17-4a8d-adc1-856601a676ef","name":"Vitamin D3 HQ","commercialName":"D-Boom","notes":"30ml Vitamin D3 (High Quality)","endId":"fdb4c47a-381f-4d8f-af49-e4e509b628a3","updatedAt":1653752440413,"cost":{"labourCost":1.3736842105263156,"labourCostTax":0.28421052631578947,"overheadCost":3.479439158661654,"overheadCostTax":0.9919447003759392,"recipeCost":20.431329,"recipeTax":4.086264,"packageCost":6.9118,"packageTax":1.194124,"total":32.196252369187974,"totalWithTax":38.752795595879704},"costHistory":[{"date":1653752675019,"amount":38.752795595879704},{"date":1653752496148,"amount":37.10806292757895},{"date":1653752440624,"amount":12.59046992757895}],"createdAt":1653752440413},{"recipeId":"f8a47b0e-7ed7-404f-a25e-8e129cadded7","packageId":"1d0d68c4-4e17-4a8d-adc1-856601a676ef","name":"Vitamin D3 Standard","commercialName":"VitaD","notes":"30ml Vitamin D3 (Standard Quality)","endId":"cf24936b-7c8f-499d-b5e4-87e16d5813c4","updatedAt":1653752469493,"cost":{"labourCost":1.3736842105263156,"labourCostTax":0.28421052631578947,"overheadCost":3.479439158661654,"overheadCostTax":0.9919447003759392,"recipeCost":16.3563927714,"recipeTax":3.2701262057999987,"packageCost":6.9118,"packageTax":1.194124,"total":28.12131614058797,"totalWithTax":33.8617215730797},"costHistory":[{"date":1653752675019,"amount":33.8617215730797},{"date":1653752491712,"amount":32.216988904778944},{"date":1653752469704,"amount":12.59046992757895}],"createdAt":1653752469493}],"widgets":{"todos":[{"todoId":"a11bcc74-3aaf-499d-b820-8f7353a0966d","text":"Leave demo mode","isComplete":false,"createdAt":1653749166781,"updatedAt":1653749166781},{"todoId":"9b7fef74-365d-4110-9991-db930f59fed2","text":"Hire a chemist!","isComplete":false,"createdAt":1653752715816,"updatedAt":1653752715816},{"todoId":"822f4ab6-1b08-4bee-9038-7aae5a63799c","text":"Pay monthly bills","isComplete":true,"createdAt":1653752730585,"updatedAt":1653752746973}]}}
+{
+	"settings": {
+		"currencies": ["CNY", "EUR", "USD"],
+		"favoriteCurrencies": ["EUR", "USD"],
+		"defaultCurrency": "TRY",
+		"apiProvider": "exhost",
+		"apiKey": "",
+		"updatedAt": 1653749154102,
+		"v": "0.2.1",
+		"setupComplete": 1653749154101,
+		"isDemo": true
+	},
+	"currencies": {
+		"CNY": [{ "from": "CNY", "to": "TRY", "rate": 2.4209206276963005, "date": 1653749161906, "change": 0 }],
+		"EUR": [{ "from": "EUR", "to": "TRY", "rate": 17.390094602114637, "date": 1653749161906, "change": 0 }],
+		"USD": [{ "from": "USD", "to": "TRY", "rate": 16.21533971136695, "date": 1653749161906, "change": 0 }]
+	},
+	"company": {
+		"info": {
+			"name": "Mega Nutrition",
+			"legalName": "Mega Nutrition Supplements Co.",
+			"founder": "Danny Nutrisson",
+			"about": "This is a demo company and all information about this company is fictional.\nIn this scenario, your company manufactures nutrient supplement pills and drinks.",
+			"establishedOn": "2017-12-31T21:00:00.000Z",
+			"address": "Dreams Building, 200 Elgin Ave",
+			"city": "Istanbul",
+			"country": "Turkiye",
+			"phone": "2121000000",
+			"mobile": "5321000000",
+			"fax": "2121000000",
+			"email": "mega@costotus.com",
+			"taxId": "1",
+			"website": "http://www.costotus.com"
+		},
+		"expenses": [
+			{
+				"expenseId": "f2ca1a96-2ec2-4634-a892-bc8bed68a1ae",
+				"name": "Manufacturing Building",
+				"category": "rent",
+				"period": "m",
+				"unit": "other",
+				"quantity": 1,
+				"price": 5000,
+				"tax": 18,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 60000, "amountWithTax": 70800 },
+					"m": { "currency": "TRY", "amount": 5000, "amountWithTax": 5900 },
+					"w": { "currency": "TRY", "amount": 1150.6849315068494, "amountWithTax": 1357.808219178082 },
+					"d": { "currency": "TRY", "amount": 164.3835616438356, "amountWithTax": 193.97260273972603 },
+					"h": { "currency": "TRY", "amount": 6.8493150684931505, "amountWithTax": 8.082191780821917 }
+				}
+			},
+			{
+				"expenseId": "54c7ae18-55cf-43cd-8575-8a5a68fb42e4",
+				"name": "Mobile Ads",
+				"category": "advertisement",
+				"period": "w",
+				"unit": "other",
+				"quantity": 1,
+				"price": 100,
+				"tax": 18,
+				"currency": "USD",
+				"cost": {
+					"y": { "currency": "USD", "amount": 5214.285714285715, "amountWithTax": 6152.857142857143 },
+					"m": { "currency": "USD", "amount": 434.5238095238096, "amountWithTax": 512.7380952380953 },
+					"w": { "currency": "USD", "amount": 100, "amountWithTax": 118 },
+					"d": { "currency": "USD", "amount": 14.285714285714286, "amountWithTax": 16.857142857142858 },
+					"h": { "currency": "USD", "amount": 0.5952380952380952, "amountWithTax": 0.7023809523809524 }
+				}
+			},
+			{
+				"expenseId": "5461a6b0-9201-45e6-9f9e-e21367f6c82c",
+				"name": "A4 Paper",
+				"category": "office",
+				"period": "y",
+				"unit": "pcs",
+				"quantity": 20,
+				"price": 25,
+				"tax": 8,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 500, "amountWithTax": 540 },
+					"m": { "currency": "TRY", "amount": 41.666666666666664, "amountWithTax": 45 },
+					"w": { "currency": "TRY", "amount": 9.58904109589041, "amountWithTax": 10.356164383561643 },
+					"d": { "currency": "TRY", "amount": 1.36986301369863, "amountWithTax": 1.4794520547945205 },
+					"h": { "currency": "TRY", "amount": 0.05707762557077625, "amountWithTax": 0.06164383561643835 }
+				}
+			},
+			{
+				"expenseId": "61f5463f-f375-4188-9d75-4a578e6e1ca0",
+				"name": "Tablet Press Machine",
+				"category": "depreciation",
+				"period": "y",
+				"unit": "other",
+				"quantity": 1,
+				"price": 2500,
+				"tax": 0,
+				"currency": "TRY",
+				"cost": {
+					"y": { "currency": "TRY", "amount": 2500, "amountWithTax": 2500 },
+					"m": { "currency": "TRY", "amount": 208.33333333333334, "amountWithTax": 208.33333333333334 },
+					"w": { "currency": "TRY", "amount": 47.94520547945205, "amountWithTax": 47.94520547945205 },
+					"d": { "currency": "TRY", "amount": 6.8493150684931505, "amountWithTax": 6.8493150684931505 },
+					"h": { "currency": "TRY", "amount": 0.2853881278538813, "amountWithTax": 0.2853881278538813 }
+				}
+			}
+		],
+		"employees": [
+			{
+				"employeeId": "c455bca6-40a1-48ba-b555-62d990ee700e",
+				"name": "Danny (Owner)",
+				"department": "management",
+				"notes": "This is me, the owner of the company",
+				"gross": 120000,
+				"net": 90000,
+				"currency": "TRY",
+				"email": "danny@costotus.com",
+				"mobile": "",
+				"dob": "1992-12-31T22:00:00.000Z",
+				"doe": "2017-12-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "0b767880-2fcb-4cc3-8315-f5b331339f99",
+				"name": "Buffy (Laborer)",
+				"department": "manufacturing",
+				"notes": "My best worker",
+				"gross": 85000,
+				"net": 70000,
+				"currency": "TRY",
+				"email": "buffy@costotus.com",
+				"mobile": "",
+				"dob": "1996-12-31T22:00:00.000Z",
+				"doe": "2018-12-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "feda7351-ef8c-4ba0-b862-4d01d15b9325",
+				"name": "Toby (admin)",
+				"department": "administration",
+				"notes": "Office administrator and general managment",
+				"gross": 11000,
+				"net": 8000,
+				"currency": "USD",
+				"email": "toby@costotus.com",
+				"mobile": "",
+				"dob": "1970-12-31T22:00:00.000Z",
+				"doe": "2019-12-31T21:00:00.000Z"
+			},
+			{
+				"employeeId": "26a7c01d-ad7d-4254-bc66-8da259fd307b",
+				"name": "Tuffy (Laborer)",
+				"department": "manufacturing",
+				"notes": "Old but gold\nThey don't make them like him anymore!",
+				"gross": 90000,
+				"net": 75000,
+				"currency": "TRY",
+				"email": "tuff@costotus.com",
+				"mobile": "",
+				"dob": "1944-12-31T21:00:00.000Z",
+				"doe": "2018-05-09T21:00:00.000Z"
+			}
+		],
+		"totals": {
+			"currency": "TRY",
+			"updatedAt": 1653752657057,
+			"expenses": 147551.41571428574,
+			"expensesWithTax": 173610.67054285714,
+			"labourNet": 145000,
+			"labourGross": 175000,
+			"salariesNet": 219722.71769999998,
+			"salariesGross": 298368.7368
+		},
+		"production": { "updatedAt": 1653752065511, "unit": "kg", "totalProduction": 3800 },
+		"history": {
+			"overhead": [
+				{ "currency": "TRY", "amount": 471979.40734285716, "date": 1653752657056 },
+				{ "currency": "TRY", "amount": 469479.40734285716, "date": 1653752630311 },
+				{ "currency": "TRY", "amount": 468939.40734285716, "date": 1653752603403 },
+				{ "currency": "TRY", "amount": 369168.7368, "date": 1653752576523 },
+				{ "currency": "TRY", "amount": 298368.7368, "date": 1653749482677 },
+				{ "currency": "TRY", "amount": 120000, "date": 1653749398371 },
+				{ "currency": "TRY", "amount": 0, "date": 1653749173780 }
+			],
+			"labor": [
+				{ "currency": "TRY", "amount": 175000, "date": 1653749578888 },
+				{ "currency": "TRY", "amount": 85000, "date": 1653749435566 },
+				{ "currency": "TRY", "amount": 0, "date": 1653749173780 }
+			],
+			"production": [
+				{ "unit": "kg", "totalProduction": 3800, "date": 1653752065511 },
+				{ "unit": "kg", "totalProduction": 3200, "date": 1653752050209 },
+				{ "unit": "kg", "totalProduction": 3700, "date": 1653749826766 },
+				{ "unit": "kg", "totalProduction": 2500, "date": 1653749797103 },
+				{ "unit": "kg", "totalProduction": 2000, "date": 1653749732136 },
+				{ "unit": "kg", "totalProduction": 1000, "date": 1653749715763 }
+			]
+		}
+	},
+	"products": [
+		{
+			"code": "VT-01",
+			"name": "Vitamin Mix",
+			"isLiquid": false,
+			"density": 1,
+			"production": 1000,
+			"productId": "a2b153ef-7d3b-4385-8a58-983db9a6cd9e"
+		},
+		{
+			"code": "Vit-02",
+			"name": "Vitamin C",
+			"isLiquid": false,
+			"density": 1,
+			"production": 1000,
+			"productId": "25fb28a6-57f4-41e0-81b6-e837750cd820"
+		},
+		{
+			"code": "LQ-01",
+			"name": "L-Carnitine Drink",
+			"isLiquid": true,
+			"density": 1.2,
+			"production": 1000,
+			"productId": "82c18dfb-9226-40e8-a945-3e8b50a0241d"
+		},
+		{
+			"code": "Vit-03",
+			"name": "Vitamin D liquid",
+			"isLiquid": true,
+			"density": 1.2,
+			"production": 500,
+			"productId": "9c0b59ab-7a08-4070-8aa1-ae0929dba05c"
+		}
+	],
+	"materials": [
+		{
+			"materialId": "277a8669-3364-4482-8626-00d30a4f902d",
+			"tax": 20,
+			"price": 4.7,
+			"density": 1,
+			"name": "Ascorbic Acid",
+			"provider": "Big Pharma",
+			"currency": "USD",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "0048fa36-7dd9-46ca-b547-7c4721e38e43",
+			"tax": 20,
+			"price": 5,
+			"density": 1,
+			"name": "Microcrystalline Cellulose Powder",
+			"provider": "China Pharma",
+			"currency": "USD",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "984ee143-8df2-4a06-b2de-bf726c65fe6f",
+			"tax": 20,
+			"price": 80,
+			"density": 1,
+			"name": "Tartaric Acid",
+			"provider": "China Pharma",
+			"currency": "CNY",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "09c25932-7512-44d7-adbe-9e26d5d94c05",
+			"tax": 20,
+			"price": 70,
+			"density": 1,
+			"name": "Gelatin Capsules",
+			"provider": "China Pharma",
+			"currency": "USD",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "9d2bb593-3d8e-467d-a9a2-4496fbc8ae62",
+			"tax": 20,
+			"price": 250,
+			"density": 1,
+			"name": "L-Carnitine Powder",
+			"provider": "China Pharma",
+			"currency": "CNY",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "8b40416b-3dab-4100-9ad8-25809a999491",
+			"tax": 20,
+			"price": 90,
+			"density": 1,
+			"name": "Vitamin Mix Powder ",
+			"provider": "China Phrama",
+			"currency": "USD",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "19d7efd9-2467-4cd3-af6c-d54770b6d4bb",
+			"tax": 20,
+			"price": 42,
+			"density": 1.3,
+			"name": "Vitamin d3 oil",
+			"provider": "China Pharma",
+			"currency": "USD",
+			"unit": "L",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "bb5fcc36-856b-4133-877f-da1c32572286",
+			"tax": 18,
+			"price": 1,
+			"density": 1,
+			"name": "Spring Water",
+			"provider": "Water Co",
+			"currency": "TRY",
+			"unit": "L",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "f3b274a3-9289-40f3-8be1-dd71127f0300",
+			"tax": 18,
+			"price": 0.02,
+			"density": 1,
+			"name": "Food Coloring",
+			"provider": "Color Co",
+			"currency": "EUR",
+			"unit": "mL",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "97a3c3eb-a5ac-4e47-834a-ef60f577c5ff",
+			"tax": 8,
+			"price": 950,
+			"density": 1,
+			"name": "Sugar Powder",
+			"provider": "Sugar Cane LLC",
+			"currency": "USD",
+			"unit": "t",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		},
+		{
+			"materialId": "a487b939-1bc3-4d0a-9271-e07c9b6f0348",
+			"tax": 18,
+			"price": 1,
+			"density": 1,
+			"name": "Sodium Carbonate",
+			"provider": "Big Pharma",
+			"currency": "EUR",
+			"unit": "kg",
+			"priceHistory": [],
+			"localPriceHistory": [],
+			"createdAt": 1653749165941,
+			"updatedAt": 1653749165941
+		}
+	],
+	"recipes": [
+		{
+			"name": "L-Carnitine Standard",
+			"recipeId": "2cc4fe8f-deb0-4fda-92cd-bed6867d9787",
+			"productId": "82c18dfb-9226-40e8-a945-3e8b50a0241d",
+			"yield": 10,
+			"notes": "Mix them all\nShake them all",
+			"materials": [
+				{ "materialId": "9d2bb593-3d8e-467d-a9a2-4496fbc8ae62", "amount": 1, "unit": "kg" },
+				{ "materialId": "f3b274a3-9289-40f3-8be1-dd71127f0300", "amount": 0.02, "unit": "L" },
+				{ "materialId": "a487b939-1bc3-4d0a-9271-e07c9b6f0348", "amount": 0.1, "unit": "kg" },
+				{ "materialId": "bb5fcc36-856b-4133-877f-da1c32572286", "amount": 11, "unit": "L" }
+			],
+			"createdAt": 1653751566936,
+			"updatedAt": 1653751566936,
+			"unitCosts": [
+				{
+					"recipeId": "2cc4fe8f-deb0-4fda-92cd-bed6867d9787",
+					"date": 1653751569941,
+					"cost": 62.4925248,
+					"costWithTax": 74.9516354
+				}
+			]
+		},
+		{
+			"name": "Vitamin C Standard",
+			"recipeId": "6b031636-7e1c-4c0a-8331-b111770176a1",
+			"productId": "25fb28a6-57f4-41e0-81b6-e837750cd820",
+			"yield": 50,
+			"notes": "Mix all and send to encapsulation\nEach capsule will hold around 1g powder",
+			"materials": [
+				{ "materialId": "277a8669-3364-4482-8626-00d30a4f902d", "amount": 5, "unit": "kg" },
+				{ "materialId": "97a3c3eb-a5ac-4e47-834a-ef60f577c5ff", "amount": 5, "unit": "kg" },
+				{ "materialId": "984ee143-8df2-4a06-b2de-bf726c65fe6f", "amount": 1, "unit": "kg" },
+				{ "materialId": "09c25932-7512-44d7-adbe-9e26d5d94c05", "amount": 7, "unit": "kg" },
+				{ "materialId": "0048fa36-7dd9-46ca-b547-7c4721e38e43", "amount": 32, "unit": "kg" }
+			],
+			"createdAt": 1653752029087,
+			"updatedAt": 1653752029087,
+			"unitCosts": [
+				{
+					"recipeId": "6b031636-7e1c-4c0a-8331-b111770176a1",
+					"date": 1653752514763,
+					"cost": 223.834564,
+					"costWithTax": 268.416578
+				}
+			]
+		},
+		{
+			"name": "Vitamin D3 standard",
+			"recipeId": "f8a47b0e-7ed7-404f-a25e-8e129cadded7",
+			"productId": "9c0b59ab-7a08-4070-8aa1-ae0929dba05c",
+			"yield": 50,
+			"notes": "Nice",
+			"materials": [
+				{ "materialId": "19d7efd9-2467-4cd3-af6c-d54770b6d4bb", "amount": 40, "unit": "L" },
+				{ "materialId": "f3b274a3-9289-40f3-8be1-dd71127f0300", "amount": 0.01, "unit": "L" },
+				{ "materialId": "97a3c3eb-a5ac-4e47-834a-ef60f577c5ff", "amount": 1, "unit": "kg" }
+			],
+			"createdAt": 1653752139653,
+			"updatedAt": 1653752139653,
+			"unitCosts": [
+				{
+					"recipeId": "f8a47b0e-7ed7-404f-a25e-8e129cadded7",
+					"date": 1653752488186,
+					"cost": 545.21309238,
+					"costWithTax": 654.21729924
+				}
+			]
+		},
+		{
+			"name": "Vitamin D3 High Quality",
+			"recipeId": "905a7efa-9d88-4ae2-89c1-ba0e0d171789",
+			"productId": "9c0b59ab-7a08-4070-8aa1-ae0929dba05c",
+			"yield": 50,
+			"notes": "",
+			"materials": [{ "materialId": "19d7efd9-2467-4cd3-af6c-d54770b6d4bb", "amount": 50, "unit": "L" }],
+			"createdAt": 1653752165713,
+			"updatedAt": 1653752165713,
+			"unitCosts": [
+				{
+					"recipeId": "905a7efa-9d88-4ae2-89c1-ba0e0d171789",
+					"date": 1653752494005,
+					"cost": 681.0443,
+					"costWithTax": 817.2531
+				}
+			]
+		},
+		{
+			"name": "Mix Vit Standard",
+			"recipeId": "ae26094f-c416-4c3a-a3b5-5e59f360ad58",
+			"productId": "a2b153ef-7d3b-4385-8a58-983db9a6cd9e",
+			"yield": 50,
+			"notes": "Blend together and send to encapsulation",
+			"materials": [
+				{ "materialId": "277a8669-3364-4482-8626-00d30a4f902d", "amount": 5, "unit": "kg" },
+				{ "materialId": "8b40416b-3dab-4100-9ad8-25809a999491", "amount": 25, "unit": "kg" },
+				{ "materialId": "0048fa36-7dd9-46ca-b547-7c4721e38e43", "amount": 15, "unit": "kg" },
+				{ "materialId": "09c25932-7512-44d7-adbe-9e26d5d94c05", "amount": 6, "unit": "kg" }
+			],
+			"createdAt": 1653752224496,
+			"updatedAt": 1653752224496,
+			"unitCosts": [
+				{
+					"recipeId": "ae26094f-c416-4c3a-a3b5-5e59f360ad58",
+					"date": 1653752520194,
+					"cost": 897.843376,
+					"costWithTax": 1077.41202
+				}
+			]
+		}
+	],
+	"packages": [
+		{
+			"name": "30ml Vial",
+			"productType": "liquid",
+			"packageCapacity": 0.03,
+			"notes": "High quality glass vial for vitamin D",
+			"items": [
+				{ "name": "Vial", "packageType": "container", "itemPrice": 0.28, "itemTax": 18, "itemCurrency": "USD" },
+				{ "name": "Cap with Dropper", "packageType": "other", "itemPrice": 0.1, "itemTax": 18, "itemCurrency": "USD" },
+				{ "name": "Label", "packageType": "other", "itemPrice": 0.5, "itemTax": 8, "itemCurrency": "TRY" },
+				{
+					"name": "Box",
+					"packageType": "box",
+					"itemPrice": 25,
+					"itemTax": 18,
+					"itemCurrency": "TRY",
+					"boxCapacity": 100
+				}
+			],
+			"packageId": "1d0d68c4-4e17-4a8d-adc1-856601a676ef",
+			"updatedAt": 1653750923567,
+			"cost": 6.9118,
+			"currency": "TRY",
+			"tax": 1.194124,
+			"costWithTax": 8.105924000000002,
+			"costHistory": [{ "cost": 6.9118, "currency": "TRY", "date": 1653750923739, "change": 0 }],
+			"unit": "L",
+			"createdAt": 1653750923567
+		},
+		{
+			"name": "Drink Can 250ml",
+			"productType": "liquid",
+			"packageCapacity": 0.25,
+			"notes": "250ml metal can for drinks",
+			"items": [
+				{ "name": "Can", "packageType": "container", "itemPrice": 0.18, "itemTax": 18, "itemCurrency": "EUR" },
+				{ "name": "Label", "packageType": "other", "itemPrice": 0.11, "itemTax": 8, "itemCurrency": "USD" },
+				{
+					"name": "Box",
+					"packageType": "box",
+					"itemPrice": 23,
+					"itemTax": 18,
+					"itemCurrency": "TRY",
+					"boxCapacity": 30
+				}
+			],
+			"packageId": "446500e0-e40e-4490-a9c6-918997952a53",
+			"updatedAt": 1653751308503,
+			"cost": 5.6805666666666665,
+			"currency": "TRY",
+			"tax": 0.844132,
+			"costWithTax": 6.524698666666667,
+			"costHistory": [{ "cost": 5.6805666666666665, "currency": "TRY", "date": 1653751308647, "change": 0 }],
+			"unit": "L",
+			"createdAt": 1653751308503
+		},
+		{
+			"name": "Tablet Botle 100g",
+			"productType": "solid",
+			"packageCapacity": 0.1,
+			"notes": "Glass bottle that holds 100grams of tablets",
+			"items": [
+				{ "name": "Glass Bottle", "packageType": "container", "itemPrice": 0.18, "itemTax": 20, "itemCurrency": "USD" },
+				{
+					"name": "Label & Bottle Box",
+					"packageType": "other",
+					"itemPrice": 0.1,
+					"itemTax": 18,
+					"itemCurrency": "USD"
+				},
+				{ "name": "Metal Cap", "packageType": "other", "itemPrice": 0.1, "itemTax": 8, "itemCurrency": "USD" },
+				{ "name": "Box", "packageType": "box", "itemPrice": 28, "itemTax": 8, "itemCurrency": "TRY", "boxCapacity": 50 }
+			],
+			"packageId": "3112a091-ae37-46d6-a1ee-352483d8e892",
+			"updatedAt": 1653751216661,
+			"cost": 6.7218,
+			"currency": "TRY",
+			"tax": 1.05015,
+			"costWithTax": 7.7719499999999995,
+			"costHistory": [{ "cost": 6.7218, "currency": "TRY", "date": 1653751216794, "change": 0 }],
+			"unit": "kg",
+			"createdAt": 1653751216661
+		},
+		{
+			"name": "Tablet Bottle 200g",
+			"productType": "solid",
+			"packageCapacity": 0.2,
+			"notes": "A glass bottle for 200grams of tablets.",
+			"items": [
+				{ "name": "Glass Bottle", "packageType": "container", "itemPrice": 0.2, "itemTax": 18, "itemCurrency": "USD" },
+				{
+					"name": "Label & Bottle Box",
+					"packageType": "other",
+					"itemPrice": 0.15,
+					"itemTax": 18,
+					"itemCurrency": "USD"
+				},
+				{ "name": "Metal Cap", "packageType": "other", "itemPrice": 0.08, "itemTax": 18, "itemCurrency": "USD" },
+				{ "name": "Box", "packageType": "box", "itemPrice": 22, "itemTax": 8, "itemCurrency": "TRY", "boxCapacity": 50 }
+			],
+			"packageId": "f6fad330-23fd-4cf1-b664-6d2360f3a57b",
+			"updatedAt": 1653751132654,
+			"cost": 7.4126,
+			"currency": "TRY",
+			"tax": 1.2902679999999997,
+			"costWithTax": 8.702868,
+			"costHistory": [{ "cost": 7.4126, "currency": "TRY", "date": 1653751132790, "change": 0 }],
+			"unit": "kg",
+			"createdAt": 1653751132654
+		}
+	],
+	"endproducts": [
+		{
+			"recipeId": "2cc4fe8f-deb0-4fda-92cd-bed6867d9787",
+			"packageId": "446500e0-e40e-4490-a9c6-918997952a53",
+			"name": "L-Carnitine 250",
+			"commercialName": "Lift Up!",
+			"notes": "L carnitine drink in 250ml can ",
+			"endId": "40ddd064-a5ed-4862-bf8a-27a00d64cb7b",
+			"updatedAt": 1653752267949,
+			"cost": {
+				"labourCost": 11.44736842105263,
+				"labourCostTax": 2.3684210526315805,
+				"overheadCost": 28.995326322180453,
+				"overheadCostTax": 8.266205836466163,
+				"recipeCost": 15.6231312,
+				"recipeTax": 3.1147776500000006,
+				"packageCost": 5.6805666666666665,
+				"packageTax": 0.844132,
+				"total": 61.74639260989975,
+				"totalWithTax": 76.3399291489975
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 76.3399291489975 },
+				{ "date": 1653752268148, "amount": 62.633823579824565 }
+			],
+			"createdAt": 1653752267949
+		},
+		{
+			"recipeId": "ae26094f-c416-4c3a-a3b5-5e59f360ad58",
+			"packageId": "3112a091-ae37-46d6-a1ee-352483d8e892",
+			"name": "Mix Vitamins 100g",
+			"commercialName": "Vitamix 90",
+			"notes": "100g vitamin mix ~90 tablets",
+			"endId": "c7738a4d-0455-43a9-b132-d516e26b6539",
+			"updatedAt": 1653752338535,
+			"cost": {
+				"labourCost": 3.8157894736842106,
+				"labourCostTax": 0.7894736842105265,
+				"overheadCost": 9.665108774060151,
+				"overheadCostTax": 2.755401945488721,
+				"recipeCost": 89.78433760000001,
+				"recipeTax": 17.956864399999997,
+				"packageCost": 6.7218,
+				"packageTax": 1.05015,
+				"total": 109.98703584774438,
+				"totalWithTax": 132.53892587744363
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 132.53892587744363 },
+				{ "date": 1653752522571, "amount": 127.97022402105263 },
+				{ "date": 1653752338735, "amount": 20.229022021052632 }
+			],
+			"createdAt": 1653752338535
+		},
+		{
+			"recipeId": "ae26094f-c416-4c3a-a3b5-5e59f360ad58",
+			"packageId": "f6fad330-23fd-4cf1-b664-6d2360f3a57b",
+			"name": "Mix Vitamin 200",
+			"commercialName": "VitaMix 180",
+			"notes": "200g mix vitamin ~180 tablets",
+			"endId": "042c3ed7-7a65-480d-9204-5b601160d3b3",
+			"updatedAt": 1653752368000,
+			"cost": {
+				"labourCost": 7.631578947368421,
+				"labourCostTax": 1.578947368421053,
+				"overheadCost": 19.330217548120302,
+				"overheadCostTax": 5.510803890977442,
+				"recipeCost": 179.56867520000003,
+				"recipeTax": 35.913728799999994,
+				"packageCost": 7.4126,
+				"packageTax": 1.2902679999999997,
+				"total": 213.94307169548875,
+				"totalWithTax": 258.2368197548872
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 258.2368197548872 },
+				{ "date": 1653752522571, "amount": 249.09941604210525 },
+				{ "date": 1653752368201, "amount": 33.617012042105266 }
+			],
+			"createdAt": 1653752368000
+		},
+		{
+			"recipeId": "6b031636-7e1c-4c0a-8331-b111770176a1",
+			"packageId": "3112a091-ae37-46d6-a1ee-352483d8e892",
+			"name": "Vitamin C 100g",
+			"commercialName": "VitaC-90",
+			"notes": "Vitamin C 90 tablets",
+			"endId": "1b5d74da-89a9-4684-90d9-42e87ae639c7",
+			"updatedAt": 1653752403517,
+			"cost": {
+				"labourCost": 3.8157894736842106,
+				"labourCostTax": 0.7894736842105265,
+				"overheadCost": 9.665108774060151,
+				"overheadCostTax": 2.755401945488721,
+				"recipeCost": 22.3834564,
+				"recipeTax": 4.458201400000002,
+				"packageCost": 6.7218,
+				"packageTax": 1.05015,
+				"total": 42.586154647744365,
+				"totalWithTax": 51.639381677443616
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 51.639381677443616 },
+				{ "date": 1653752517712, "amount": 47.070679821052636 },
+				{ "date": 1653752403729, "amount": 20.229022021052632 }
+			],
+			"createdAt": 1653752403517
+		},
+		{
+			"recipeId": "905a7efa-9d88-4ae2-89c1-ba0e0d171789",
+			"packageId": "1d0d68c4-4e17-4a8d-adc1-856601a676ef",
+			"name": "Vitamin D3 HQ",
+			"commercialName": "D-Boom",
+			"notes": "30ml Vitamin D3 (High Quality)",
+			"endId": "fdb4c47a-381f-4d8f-af49-e4e509b628a3",
+			"updatedAt": 1653752440413,
+			"cost": {
+				"labourCost": 1.3736842105263156,
+				"labourCostTax": 0.28421052631578947,
+				"overheadCost": 3.479439158661654,
+				"overheadCostTax": 0.9919447003759392,
+				"recipeCost": 20.431329,
+				"recipeTax": 4.086264,
+				"packageCost": 6.9118,
+				"packageTax": 1.194124,
+				"total": 32.196252369187974,
+				"totalWithTax": 38.752795595879704
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 38.752795595879704 },
+				{ "date": 1653752496148, "amount": 37.10806292757895 },
+				{ "date": 1653752440624, "amount": 12.59046992757895 }
+			],
+			"createdAt": 1653752440413
+		},
+		{
+			"recipeId": "f8a47b0e-7ed7-404f-a25e-8e129cadded7",
+			"packageId": "1d0d68c4-4e17-4a8d-adc1-856601a676ef",
+			"name": "Vitamin D3 Standard",
+			"commercialName": "VitaD",
+			"notes": "30ml Vitamin D3 (Standard Quality)",
+			"endId": "cf24936b-7c8f-499d-b5e4-87e16d5813c4",
+			"updatedAt": 1653752469493,
+			"cost": {
+				"labourCost": 1.3736842105263156,
+				"labourCostTax": 0.28421052631578947,
+				"overheadCost": 3.479439158661654,
+				"overheadCostTax": 0.9919447003759392,
+				"recipeCost": 16.3563927714,
+				"recipeTax": 3.2701262057999987,
+				"packageCost": 6.9118,
+				"packageTax": 1.194124,
+				"total": 28.12131614058797,
+				"totalWithTax": 33.8617215730797
+			},
+			"costHistory": [
+				{ "date": 1653752675019, "amount": 33.8617215730797 },
+				{ "date": 1653752491712, "amount": 32.216988904778944 },
+				{ "date": 1653752469704, "amount": 12.59046992757895 }
+			],
+			"createdAt": 1653752469493
+		}
+	],
+	"widgets": {
+		"todos": [
+			{
+				"todoId": "a11bcc74-3aaf-499d-b820-8f7353a0966d",
+				"text": "Leave demo mode",
+				"isComplete": false,
+				"createdAt": 1653749166781,
+				"updatedAt": 1653749166781
+			},
+			{
+				"todoId": "9b7fef74-365d-4110-9991-db930f59fed2",
+				"text": "Hire a chemist!",
+				"isComplete": false,
+				"createdAt": 1653752715816,
+				"updatedAt": 1653752715816
+			},
+			{
+				"todoId": "822f4ab6-1b08-4bee-9038-7aae5a63799c",
+				"text": "Pay monthly bills",
+				"isComplete": true,
+				"createdAt": 1653752730585,
+				"updatedAt": 1653752746973
+			}
+		]
+	}
+}

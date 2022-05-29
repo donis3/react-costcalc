@@ -21,7 +21,8 @@
 		"noRemoteService": "None",
 		"success": "Settings saved successfully",
 		"error": "Failed to save settings. \n {{code}}",
-		"cantChange": "This can't be changed"
+		"cantChange": "This can't be changed",
+		"chooseCurrency": "Choose a currency"
 	},
 	"error": {
 		"InvalidData": "Invalid data received",
