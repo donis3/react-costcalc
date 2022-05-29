@@ -7,8 +7,11 @@ import ContextWrapper from './context/ContextWrapper';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from './pages/other/ErrorBoundary';
 import Router from './router/';
+import useGa from './hooks/app/useGa';
 
 function App() {
+	useGa();
+	
 	return (
 		// Error boundary will catch thrown errors and display a route
 		<ErrorBoundary>

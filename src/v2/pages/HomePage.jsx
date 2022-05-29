@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import CompanyHistory from './widgets/companyhistory/CompanyHistory';
 import useSettings from '../context/settings/useSettings';
 
+
 export default function HomePage() {
 	const { t } = useTranslation('pages/homepage');
 	const { info } = useCompanyInfo();
