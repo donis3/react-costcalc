@@ -11,7 +11,7 @@ import useGa from './hooks/app/useGa';
 
 function App() {
 	useGa();
-	
+
 	return (
 		// Error boundary will catch thrown errors and display a route
 		<ErrorBoundary>
