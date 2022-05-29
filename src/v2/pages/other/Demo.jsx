@@ -120,7 +120,7 @@ function DemoCard({ demoName = 'demo', callback = null } = {}) {
 					alt={demoName}
 				/>
 			</figure>
-			<div className='card-body w-full lg:w-3/4 h-[500px] '>
+			<div className='card-body w-full lg:w-3/4 min-h-[500px] '>
 				<h2 className='card-title text-2xl'>{warn ? t('warningTitle') : t(`${demoName}.title`)}</h2>
 				<p className='whitespace-pre-wrap'>{warn ? t('warningText') : t(`${demoName}.scenario`)}</p>
 

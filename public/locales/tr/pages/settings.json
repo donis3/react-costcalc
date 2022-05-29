@@ -21,7 +21,8 @@
 		"noRemoteService": "Hiçbiri",
 		"success": "Ayarlar başarıyla kaydedildi",
 		"error": "Ayarlar kaydedilemedi. \n {{code}}",
-		"cantChange": "Bu değer değiştirilemez"
+		"cantChange": "Bu değer değiştirilemez",
+		"chooseCurrency": "Para birimi seçin"
 	},
 	"error": {
 		"InvalidData": "Yollanan veriler hatalı",

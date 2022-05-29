@@ -1,7 +1,7 @@
 {
 	"title": "Welcome to {{appname}}",
 	"lead": "A convenient and safe way of analyzing your business expenses and production costs. Completely free to use!",
-	"moreInfo": "More information 🛈",
+	"moreInfo": "More information",
 	"buttons": {
 		"start": "Get Started",
 		"demo": "See Demo",

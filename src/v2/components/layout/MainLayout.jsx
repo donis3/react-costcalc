@@ -16,7 +16,7 @@ export default function MainLayout({ children, header, footer }) {
 			<div className='flex flex-col w-full h-screen justify-between'>
 				<header className='print:hidden'>{header}</header>
 				<main className='mb-auto flex flex-col items-center'>
-					<div className='container '>
+					<div className='container'>
 						<div className='w-full p-3 my-3   print:hidden flex flex-wrap gap-x-10  gap-y-2 justify-between items-center'>
 							<Breadcrumb />
 							<CurrencyRateDisplay />
