@@ -1,12 +1,39 @@
 import { useEffect, useState } from 'react';
+import config from '../../config/config.json';
 import { useLocation } from 'react-router-dom';
-import { useGA4React } from 'ga-4-react';
+import GA4React from 'ga-4-react';
+
+//TODO: Add Consent
 
 export default function useGa() {
-	const ga = useGA4React();
+	const measurementId = config?.analytics?.measurementId || null;
 	const { pathname } = useLocation();
-	const [currentModule, setCurrentModule] = useState('/');
 
+	//Current module path without item ID's
+	const [currentModule, setCurrentModule] = useState('/');
+	//Save current analytics object in state
+	const [ga, setGa] = useState(null);
+
+	/**
+	 * Initialize Google Analytics and set ga state value to ga wrapper obj
+	 * @returns
+	 */
+	const initializeGa = async () => {
+		if (!measurementId) return;
+		const ga4react = new GA4React(measurementId);
+		try {
+			const ga4 = await ga4react.initialize();
+			setGa(ga4);
+		} catch (e) {
+			if (config?.debug?.analytics) {
+				console.log('GA4 Err:', e.message);
+			}
+		}
+	};
+
+	/**
+	 * When location changes, detect current module name for analytics
+	 */
 	useEffect(() => {
 		const paths = pathname.split('/').filter((x) => x?.length > 0);
 		let path = '/';
@@ -19,9 +46,18 @@ export default function useGa() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pathname]);
 
+	/**
+	 * Triggers when page changes & ga changes
+	 * If ga obj is not ready initialize it then send pageview
+	 */
 	useEffect(() => {
-		if (ga && currentModule) ga.pageview(currentModule);
-	}, [currentModule, ga]);
+		if (!ga) return initializeGa();
+		if (config?.debug?.analytics) {
+			console.log(`Sending analytics data: pageview('${currentModule}')`);
+		}
+		ga.pageview(currentModule);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ga, currentModule]);
 
 	return { currentModule };
 }

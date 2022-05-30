@@ -24,6 +24,9 @@
 			"url": "https://doncors.herokuapp.com/https://www.tcmb.gov.tr/kurlar/today.xml"
 		}
 	],
+	"analytics": {
+		"measurementId": "G-12WJMQK73C"
+	},
 	"languages": ["tr", "en"],
 	"themes": ["emerald", "cupcake", "bumblebee", "dark", "light"],
 	"tables": {
@@ -46,7 +49,8 @@
 		"forms": false,
 		"expenses": false,
 		"companyProduction": false,
-		"companyTotals": false
+		"companyTotals": false,
+		"analytics": true
 	},
 	"modules": {
 		"home": { "icon": "FaHome", "colors": ["#5B7DB1", "#1A132F"] },
