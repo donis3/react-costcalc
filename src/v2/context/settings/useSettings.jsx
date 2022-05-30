@@ -92,5 +92,6 @@ export default function useSettings() {
 		getCurrentApiProvider,
 		setupComplete: setupComplete(),
 		isDemo: isDemo(),
+		isAnalyticsEnabled: 'analytics' in settings ? settings.analytics : false,
 	};
 }

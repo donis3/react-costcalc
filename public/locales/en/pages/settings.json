@@ -6,6 +6,7 @@
 	"form": {
 		"titleXrate": "Exchange Rate Provider",
 		"titleCurrency": "Currency Settings",
+		"titlePrivacy": "Privacy Settings",
 		"apiKey": "Api Key",
 		"apiKeyAlt": "If selected service requires an api key, please provide it",
 		"api": "Remote Service",
@@ -22,7 +23,8 @@
 		"success": "Settings saved successfully",
 		"error": "Failed to save settings. \n {{code}}",
 		"cantChange": "This can't be changed",
-		"chooseCurrency": "Choose a currency"
+		"chooseCurrency": "Choose a currency",
+		"analyticsText": "Enable google analytics tracking cookies? This will help us keep track of visitor data and help us improve our application. All data is anonymous."
 	},
 	"error": {
 		"InvalidData": "Invalid data received",

@@ -6,6 +6,7 @@
 	"form": {
 		"titleXrate": "Döviz Kuru Sağlayıcısı",
 		"titleCurrency": "Para Birimi Ayarları",
+		"titlePrivacy": "Gizlilik Ayarları",
 		"apiKey": "Erişim Anahtarı",
 		"apiKeyAlt": "Eğer seçilen servis api-anahtarı gerektiriyorsa, buraya giriniz",
 		"api": "Servis Sağlayıcı",
@@ -22,7 +23,8 @@
 		"success": "Ayarlar başarıyla kaydedildi",
 		"error": "Ayarlar kaydedilemedi. \n {{code}}",
 		"cantChange": "Bu değer değiştirilemez",
-		"chooseCurrency": "Para birimi seçin"
+		"chooseCurrency": "Para birimi seçin",
+		"analyticsText": "Google Analytics çerezlerine izin ver? Bu seçenek ziyaretçi trafiğini görmemizi sağlayacak ve uygulamamızı geliştirmemiz için bize yardımcı olacaktır. Tüm veriler anonimdir."
 	},
 	"error": {
 		"InvalidData": "Yollanan veriler hatalı",

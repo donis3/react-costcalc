@@ -3,9 +3,13 @@ import config from '../../config/config.json';
 import { useLocation } from 'react-router-dom';
 import GA4React from 'ga-4-react';
 
-//TODO: Add Consent
-
-export default function useGa() {
+/**
+ * Will send current module as a pageView event to google analytics
+ * If enabled: false nothing will be sent
+ * @param {*} param0
+ * @returns
+ */
+export default function useGa({ enabled = false } = {}) {
 	const measurementId = config?.analytics?.measurementId || null;
 	const { pathname } = useLocation();
 
@@ -19,8 +23,10 @@ export default function useGa() {
 	 * @returns
 	 */
 	const initializeGa = async () => {
+		if (!enabled) return;
 		if (!measurementId) return;
-		const ga4react = new GA4React(measurementId);
+
+		const ga4react = new GA4React(measurementId, { cookie_flags: 'SameSite=None;Secure' });
 		try {
 			const ga4 = await ga4react.initialize();
 			setGa(ga4);
@@ -51,13 +57,14 @@ export default function useGa() {
 	 * If ga obj is not ready initialize it then send pageview
 	 */
 	useEffect(() => {
+		if (!enabled) return;
 		if (!ga) return initializeGa();
 		if (config?.debug?.analytics) {
 			console.log(`Sending analytics data: pageview('${currentModule}')`);
 		}
 		ga.pageview(currentModule);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ga, currentModule]);
+	}, [ga, currentModule, enabled]);
 
 	return { currentModule };
 }

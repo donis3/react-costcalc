@@ -116,6 +116,13 @@ export default function Settings() {
 							</Form.Control>
 						</Form.Row>
 					</Form.Section>
+					<Form.Section title={t('form.titlePrivacy')}>
+						<Form.Control error={getError('analytics')}>
+							<Form.CheckboxLabel text={t('form.analyticsText')}>
+								<Form.Checkbox {...register({ field: 'analytics', isControlled: true })} />
+							</Form.CheckboxLabel>
+						</Form.Control>
+					</Form.Section>
 				</Form>
 			</Card>
 			<DocumentDates

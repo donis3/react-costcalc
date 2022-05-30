@@ -7,6 +7,7 @@ import InputSelect from './InputSelect';
 import InputText from './InputText';
 import InputDate from './InputDate';
 import InputTextarea from './InputTextarea';
+import InputCheckbox from './InputCheckbox';
 
 function Form({ children, colsSmall, colsLarge, onSubmit, onReset, onDelete, setSubmitted, footer, grid, ...props }) {
 	function handleSubmit(e) {
@@ -252,6 +253,16 @@ function FormRow({ children }) {
 	return <div className='flex flex-row  gap-x-5'>{children}</div>;
 }
 
+function CheckboxLabel({ children, text, textRight = true, ...props }) {
+	return (
+		<label className='select-none flex items-center gap-x-5 py-2' {...props}>
+			{!textRight && <span className='label-text'>{text}</span>}
+			<span className='min-w-[40px]'>{children}</span>
+			{textRight && <span className='label-text'>{text}</span>}
+		</label>
+	);
+}
+
 //Building Blocks
 Form.Grid = Grid;
 Form.Section = Section;
@@ -260,6 +271,7 @@ Form.ControlGroup = GroupControl;
 Form.Footer = Footer;
 Form.DefaultFooter = DefaultFooter;
 Form.Row = FormRow;
+Form.CheckboxLabel = CheckboxLabel;
 
 //Inputs
 Form.Text = InputText;
@@ -267,5 +279,6 @@ Form.Number = InputNumber;
 Form.Select = InputSelect;
 Form.Textarea = InputTextarea;
 Form.Date = InputDate;
+Form.Checkbox = InputCheckbox;
 
 export default Form;

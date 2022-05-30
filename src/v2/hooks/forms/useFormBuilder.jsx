@@ -56,7 +56,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			isSubmitted: isSubmitted,
 			key: field,
 			value: field in formState ? formState[field] : '',
-			onChange: (e) => onControlledInputChange(field, e.target.value),
+			onChange: (e) => onControlledInputChange(field, e.target.value, e.target),
 			setValue: (value) => setFormState((state) => ({ ...state, [field]: value })),
 		};
 	}
@@ -71,7 +71,7 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 			isSubmitted: isSubmitted,
 			key: field,
 			defaultValue: field in initialState ? initialState[field] : '',
-			onChange: (e) => normalInputChange(field, e.target.value),
+			onChange: (e) => normalInputChange(field, e.target.value, e.target),
 			ref: (element) => (inputRefs.current[field] = element),
 			setValue: (value) => {
 				if (field in inputRefs.current) {
@@ -82,15 +82,22 @@ export default function useFormBuilder({ initialState = {}, isSubmitted = false 
 	}
 
 	//ON change middleware for controlled inputs
-	function onControlledInputChange(field, value) {
+	function onControlledInputChange(field, value, element = null) {
+		if (element && element?.type === 'checkbox') {
+			value = element?.checked ?? false;
+		}
 		if (field in onChangeMiddleware && typeof onChangeMiddleware[field] === 'function') {
 			onChangeMiddleware[field](value);
 		}
+
 		return setFormState((state) => ({ ...state, [field]: value }));
 	}
 
 	//On change middleware for referenced inputs
-	function normalInputChange(field, value) {
+	function normalInputChange(field, value, element = null) {
+		if (element && element?.type === 'checkbox') {
+			value = element?.checked ?? false;
+		}
 		if (field in onChangeMiddleware && typeof onChangeMiddleware[field] === 'function') {
 			onChangeMiddleware[field](value);
 		}

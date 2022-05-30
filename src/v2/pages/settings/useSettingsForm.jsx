@@ -16,6 +16,7 @@ const initialState = {
 	defaultCurrency: '',
 	currencies: [],
 	favoriteCurrencies: [],
+	analytics: true,
 };
 
 export default function useSettingsForm({ data = null }) {
@@ -42,6 +43,7 @@ export default function useSettingsForm({ data = null }) {
 		initialState.api = data.apiProvider ?? '';
 		initialState.apiKey = data.apiKey ?? '';
 		if (Array.isArray(data?.favoriteCurrencies)) initialState.favoriteCurrencies = [...data.favoriteCurrencies];
+		initialState.analytics = data?.analytics ?? true;
 	}
 
 	//Load form builder
@@ -222,6 +224,8 @@ export default function useSettingsForm({ data = null }) {
 		.min(0)
 		.label(t('form.favoriteCurrencies'));
 
+	schema.analytics = joi.boolean().label(t('form.analytics'));
+
 	//=================// Form Actions //=====================//
 	function handleSubmit() {
 		if (!dispatch) return;
@@ -230,12 +234,14 @@ export default function useSettingsForm({ data = null }) {
 
 		try {
 			const data = getFormData(true);
+
 			const payload = {
 				defaultCurrency: data.defaultCurrency,
 				apiKey: data.apiKey,
 				apiProvider: data.api,
 				currencies: data.currencies,
 				favoriteCurrencies: data.favoriteCurrencies,
+				analytics: data.analytics,
 			};
 
 			const action = {

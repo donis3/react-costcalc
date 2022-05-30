@@ -10,6 +10,7 @@ export default function useDefaultSettings() {
 		apiProvider: '',
 		apiKey: '',
 		updatedAt: null,
+		analytics: false,
 		//Version
 		v: process.env.REACT_APP_VERSION,
 		//Toggles

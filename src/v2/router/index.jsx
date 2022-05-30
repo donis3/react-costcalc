@@ -53,10 +53,12 @@ import ExpenseDetails from '../pages/company/expenses/ExpenseDetails';
 import ExpenseChart from '../pages/company/expenses/ExpenseChart';
 import HomePage from '../pages/HomePage';
 import System from '../pages/system/System';
+import useGa from '../hooks/app/useGa';
 
 export default function Router() {
 	//Detect first time setup
-	const { setupComplete } = useSettings();
+	const { setupComplete, isAnalyticsEnabled } = useSettings();
+	useGa({ enabled: isAnalyticsEnabled });
 
 	if (!setupComplete) return <WelcomeRouter />;
 	return (
