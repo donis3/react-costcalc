@@ -14,8 +14,14 @@
 			"name": "exchangerate.host",
 			"requiresKey": true,
 			"cacheDurationMinutes": 10,
-			"url": "http://api.exchangerate.host/live",
-			"helpText": "Go to exchangerate.host and get a free tier api key and paste it here."
+			"url": "http://api.exchangerate.host/live"
+		},
+		{
+			"id": "fixer",
+			"name": "Fixer Api (apiLayer.com)",
+			"requiresKey": true,
+			"cacheDurationMinutes": 300,
+			"url": "https://api.apilayer.com/fixer/latest"
 		}
 	],
 	"analytics": {

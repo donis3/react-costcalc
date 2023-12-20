@@ -14,7 +14,12 @@
 	"exhost": {
 		"name": "ExchangeRate.Host",
 		"notWorking": "Unable to reach exchangerate.host remote service",
-		"helptext": "Goto exchangerate.host to get a free api key and paste it here to enable auto exchange rate fetching."
+		"helptext": "Only works with exchangerate.host paid subscription because free-tier doesn't allow SSL."
+	},
+	"fixer": {
+		"name": "Fixer Api (apilayer.com)",
+		"notWorking": "Unable to reach apilayer.com remote service",
+		"helptext": "Goto apilayer.com/marketplace/fixer-api to get a free api key and paste it here to enable auto exchange rate fetching."
 	},
 	"tcmb": {
 		"name": "Turkish Central Bank",

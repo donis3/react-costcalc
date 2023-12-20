@@ -14,7 +14,12 @@
 	"exhost": {
 		"name": "ExchangeRate.Host",
 		"notWorking": "Exchangerate.host servisine erişilemiyor",
-		"helptext": "exchangerate.host adresinden ücretsiz api anahtarı alıp buraya yapıştırarak güncel kurları otomatik çekebilirsiniz."
+		"helptext": "Exchangerate.host üzerinden ücretli hesap gerektirir. Api anahtarını buraya yapıştırın. Ücretsiz hesap çalışmayacaktır SSL desteklemediği için"
+	},
+	"fixer": {
+		"name": "Fixer Api (apilayer.com)",
+		"notWorking": "apilayer.com servisine erişilemiyor",
+		"helptext": "apilayer.com/marketplace/fixer-api adresinden ücretsiz api anahtarı alıp buraya yapıştırarak güncel kurları otomatik çekebilirsiniz."
 	},
 	"tcmb": {
 		"name": "T.C. Merkez Bankası",
