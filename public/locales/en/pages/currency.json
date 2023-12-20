@@ -12,8 +12,9 @@
 		"refresh": "Received exchange rate data from {{provider}}"
 	},
 	"exhost": {
-		"name": "ExchangeRates.Host",
-		"notWorking": "Unable to reach exchangerate.host remote service"
+		"name": "ExchangeRate.Host",
+		"notWorking": "Unable to reach exchangerate.host remote service",
+		"helptext": "Goto exchangerate.host to get a free api key and paste it here to enable auto exchange rate fetching."
 	},
 	"tcmb": {
 		"name": "Turkish Central Bank",

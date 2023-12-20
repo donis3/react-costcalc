@@ -12,8 +12,9 @@
 		"refresh": "{{provider}} kullanılarak döviz kurları yenilendi"
 	},
 	"exhost": {
-		"name": "ExchangeRates.Host",
-		"notWorking": "Exchangerate.host servisine erişilemiyor"
+		"name": "ExchangeRate.Host",
+		"notWorking": "Exchangerate.host servisine erişilemiyor",
+		"helptext": "exchangerate.host adresinden ücretsiz api anahtarı alıp buraya yapıştırarak güncel kurları otomatik çekebilirsiniz."
 	},
 	"tcmb": {
 		"name": "T.C. Merkez Bankası",
