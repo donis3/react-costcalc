@@ -5,9 +5,10 @@ import Loading from './v2/components/layout/Loading';
 import './v2/fonts';
 import './v2/index.css';
 import App from './v2/App';
-// eslint-disable-next-line no-unused-vars
-import i18n from './v2/lib/i18n'; //Import i18next initialization
+import i18n from './v2/lib/i18n';
 import { loadThemeFromStorage } from './v2/helpers/themeHelper';
+
+console.log(`Loaded ${i18n.language} language`);
 
 //Get theme value from storage and set document data-theme attribute in index.html
 loadThemeFromStorage();
