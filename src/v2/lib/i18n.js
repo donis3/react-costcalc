@@ -29,3 +29,4 @@ i18n.services.formatter.add('truncate', (value, lng, { maxLength = 1, dots = tru
 });
 // export default i18n;
 // export const t = i18n.t;
+export default i18n;
