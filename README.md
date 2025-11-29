@@ -1,8 +1,11 @@
 # Costotus
 
+[![Deploy to GitHub Pages](https://github.com/donis3/react-costcalc/actions/workflows/deploy.yml/badge.svg)](https://github.com/donis3/react-costcalc/actions/workflows/deploy.yml)
 ![Version](https://img.shields.io/badge/version-0.2.3-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![React](https://img.shields.io/badge/React-17.0.2-61DAFB?logo=react)
+
+**Live Demo:** [https://costotus.com](https://costotus.com)
 
 **A free, open-source cost calculation application for small manufacturing businesses.**
 

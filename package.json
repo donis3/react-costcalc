@@ -1,6 +1,7 @@
 {
 	"name": "react-cost-calc",
 	"version": "0.2.3",
+	"license": "MIT",
 	"homepage": "https://costotus.com",
 	"private": true,
 	"dependencies": {
