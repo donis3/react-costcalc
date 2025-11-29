@@ -1,6 +1,7 @@
 {
 	"name": "react-cost-calc",
 	"version": "0.2.3",
+	"homepage": "https://donis3.github.io/react-costcalc",
 	"private": true,
 	"dependencies": {
 		"@joi/date": "^2.1.0",
