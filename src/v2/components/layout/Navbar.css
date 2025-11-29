@@ -1,88 +1,127 @@
 .navbar-collapse-btn {
-	@apply text-neutral-content cursor-pointer text-xl leading-none px-0 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none;
+	@apply text-neutral-content cursor-pointer text-2xl leading-none px-2 py-2 border-0 rounded-lg bg-transparent block xl:hidden outline-none focus:outline-none hover:bg-neutral-focus transition-all duration-200;
 }
 
 .nav-item a,
 .nav-item button {
-	@apply px-3 py-2 flex items-center uppercase font-medium leading-snug text-white hover:opacity-75;
+	@apply px-4 py-2.5 flex items-center font-semibold leading-snug text-neutral-content hover:text-white transition-all duration-200 rounded-lg hover:bg-neutral-focus;
 }
 
 .nav-list-container {
-	@apply border-t-2 mt-3 pt-3 border-neutral-content lg:border-0 lg:flex flex-grow items-center;
+	@apply border-t border-neutral-focus/30 mt-4 pt-4 xl:border-0 xl:mt-0 xl:pt-0 xl:flex flex-grow items-center;
 }
 .nav-list {
-	@apply flex flex-col items-end lg:flex-row list-none lg:ml-auto  w-full lg:w-auto lg:text-lg;
+	@apply flex flex-col items-stretch xl:flex-row list-none xl:ml-auto gap-1 w-full xl:w-auto;
 }
 
 .nav-item .nav-active {
-	font-weight: 900;
+	@apply bg-primary/20 text-primary-content font-bold relative border-l-4 border-primary xl:border-l-0;
 }
 
+.nav-item .nav-active::after {
+	content: '';
+	@apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-0.5 bg-primary rounded-full hidden xl:block;
+}
 
 .nav-item svg {
-	@apply opacity-30;
+	@apply opacity-40 transition-opacity duration-200;
 }
 .nav-item .nav-active svg {
 	@apply opacity-100;
 }
+.nav-item a:hover svg,
+.nav-item button:hover svg {
+	@apply opacity-80;
+}
 
 
 .nav-dropdown {
-	@apply w-full flex flex-col items-end lg:w-auto lg:list-item;
+	@apply w-full flex flex-col items-stretch xl:w-auto xl:list-item relative;
 }
 .nav-dropdown button {
-	@apply text-neutral-content font-medium  px-3 py-2 lg:mr-0 uppercase lg:text-lg leading-5;
+	@apply text-neutral-content font-semibold px-4 py-2.5 xl:mr-0 leading-5 flex items-center gap-2 rounded-lg hover:bg-neutral-focus transition-all duration-200;
 }
 .nav-dropdown button:hover {
-	@apply opacity-75;
+	@apply text-white;
+}
+.nav-dropdown button.nav-active {
+	@apply bg-primary/20 text-primary-content;
 }
 .nav-dropdown ul a {
-	@apply px-3 py-1 text-sm flex justify-start uppercase font-medium leading-snug text-base-content hover:opacity-75;
+	@apply px-4 py-2.5 text-sm flex items-center gap-2 font-medium leading-snug text-base-content hover:bg-primary/10 hover:text-primary transition-all duration-200 rounded-md;
 }
 
 .nav-dropdown ul {
-	@apply scale-out z-[55] lg:mt-1 lg:-ml-3 m-0 flex flex-col items-end p-2 bg-base-100 opacity-75 lg:opacity-100 lg:shadow-lg lg:absolute border lg:w-auto w-full  rounded-md text-base-content gap-y-1 origin-top;
+	@apply scale-out z-[55] xl:mt-2 xl:ml-0 m-0 flex flex-col items-stretch p-2 bg-base-100/95 backdrop-blur-sm xl:shadow-xl xl:absolute border-0 xl:border xl:border-base-300 xl:w-56 w-full rounded-xl text-base-content gap-1 origin-top;
 }
 
 .nav-dropdown .nav-item .nav-active {
-	font-weight: 700;
-
+	@apply font-bold bg-primary/10 text-primary;
 }
 .nav-dropdown .nav-item a {
-	@apply border-r-4 ;
+	@apply border-l-4 border-transparent;
 }
 .nav-dropdown .nav-item a:hover {
-	@apply border-r-4 border-secondary;
+	@apply border-l-4 border-primary/50;
 }
 .nav-dropdown .nav-item a.nav-active {
-	@apply border-r-4 border-primary;
+	@apply border-l-4 border-primary;
 }
 .nav-dropdown .nav-item .nav-active::after {
 	content: '';
+	display: none;
 }
 
 .fade-in {
-	animation: fadeIn 0.5s;
+	animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
+		transform: translateY(-10px);
 	}
 	100% {
 		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
 .scale-out {
-	animation: scaleOut 0.3s;
+	animation: scaleOut 0.2s ease-out;
 }
 
 @keyframes scaleOut {
 	0% {
-		transform: scaleY(0);
+		opacity: 0;
+		transform: scaleY(0.95);
 	}
 	100% {
+		opacity: 1;
 		transform: scaleY(1);
+	}
+}
+
+/* Additional modern enhancements */
+.nav-item,
+.nav-dropdown {
+	@apply transition-all duration-200;
+}
+
+/* Mobile menu slide animation */
+@media (max-width: 1280px) {
+	.nav-list-container {
+		animation: slideDown 0.3s ease-out;
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
