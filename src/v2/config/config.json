@@ -14,7 +14,7 @@
 			"name": "exchangerate.host",
 			"requiresKey": true,
 			"cacheDurationMinutes": 10,
-			"url": "http://api.exchangerate.host/live"
+			"url": "https://api.exchangerate.host/live"
 		},
 		{
 			"id": "fixer",
