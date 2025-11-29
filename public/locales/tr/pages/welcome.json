@@ -1,10 +1,44 @@
 {
 	"title": "{{appname}}'a Hoşgeldiniz",
 	"lead": "Giderlerinizi ve Üretim Maliyetlerinizi kolayca analiz edebileceğiniz güvenli bir uygulama. Tamamen ücretsiz!",
+	"badge": "100% Ücretsiz & Açık Kaynak",
 	"moreInfo": "Daha fazla bilgi",
 	"buttons": {
 		"start": "Kullanmaya Başla",
 		"demo": "Demo'yu Gör",
-		"load": "Yedek Dosyası Yükle"
+		"load": "Yedek Dosyası Yükle",
+		"beginJourney": "Yolculuğunuza Başlayın"
+	},
+	"features": {
+		"sectionTitle": "İhtiyacınız Olan Her Şey",
+		"sectionSubtitle": "Küçük işletmelerin maliyetlerini anlamasına ve optimize etmesine yardımcı olmak için tasarlanmış güçlü özellikler",
+		"costAnalysis": {
+			"title": "Maliyet Analizi",
+			"description": "İşletme giderlerinizi hassas bir şekilde takip edin ve analiz edin"
+		},
+		"securePrivate": {
+			"title": "Güvenli ve Özel",
+			"description": "Tüm veriler tarayıcınızda yerel olarak saklanır - harici sunucu yok"
+		},
+		"growthInsights": {
+			"title": "Büyüme İçgörüleri",
+			"description": "Detaylı maliyet dökümü ile bilinçli kararlar alın"
+		},
+		"visualReports": {
+			"title": "Görsel Raporlar",
+			"description": "Kolay anlaşılır güzel grafikler ve çizelgeler"
+		},
+		"productManagement": {
+			"title": "Ürün Yönetimi",
+			"description": "Malzemeleri, tarifleri ve nihai ürünleri verimli bir şekilde düzenleyin"
+		},
+		"realtimeCalculations": {
+			"title": "Gerçek Zamanlı Hesaplamalar",
+			"description": "Maliyet yapılarınızı değiştirirken anında güncellemeler"
+		}
+	},
+	"cta": {
+		"title": "Başlamaya Hazır mısınız?",
+		"subtitle": "Dakikalar içinde işletme maliyetlerinizi analiz etmeye başlayın"
 	}
 }

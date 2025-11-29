@@ -66,7 +66,14 @@
 		"morders": "Manufacturing Orders"
 	},
 	"footer": {
-		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}"
+		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
+		"tagline": "A convenient and safe way of analyzing your business expenses and production costs.",
+		"quickLinks": "Quick Links",
+		"customize": "Customize",
+		"viewSource": "View Source",
+		"madeWith": "Made with ❤️ by {{author}}",
+		"freeOpenSource": "100% Free & Open Source",
+		"version": "Version {{version}}"
 	},
 	"themes": {
 		"emerald": "Emerald Theme",

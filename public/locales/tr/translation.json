@@ -9,7 +9,14 @@
 	"footer": {
 		"copyright": "{{appName}} - Ver: {{version}} - © {{year}} {{owner}}",
 		"about": "Hakkında",
-		"help": "Yardım"
+		"help": "Yardım",
+		"tagline": "Giderlerinizi ve Üretim Maliyetlerinizi kolayca analiz edebileceğiniz güvenli bir uygulama.",
+		"quickLinks": "Hızlı Bağlantılar",
+		"customize": "Özelleştir",
+		"viewSource": "Kaynak Kodu",
+		"madeWith": "{{author}} tarafından ❤️ ile yapıldı",
+		"freeOpenSource": "100% Ücretsiz & Açık Kaynak",
+		"version": "Sürüm {{version}}"
 	},
 	"themes": {
 		"dark": "Koyu Tema",

@@ -1,10 +1,44 @@
 {
 	"title": "Welcome to {{appname}}",
 	"lead": "A convenient and safe way of analyzing your business expenses and production costs. Completely free to use!",
+	"badge": "100% Free & Open Source",
 	"moreInfo": "More information",
 	"buttons": {
 		"start": "Get Started",
 		"demo": "See Demo",
-		"load": "Load Backup"
+		"load": "Load Backup",
+		"beginJourney": "Begin Your Journey"
+	},
+	"features": {
+		"sectionTitle": "Everything You Need",
+		"sectionSubtitle": "Powerful features designed to help small businesses understand and optimize their costs",
+		"costAnalysis": {
+			"title": "Cost Analysis",
+			"description": "Track and analyze your business expenses with precision"
+		},
+		"securePrivate": {
+			"title": "Secure & Private",
+			"description": "All data stored locally in your browser - no external servers"
+		},
+		"growthInsights": {
+			"title": "Growth Insights",
+			"description": "Make informed decisions with detailed cost breakdowns"
+		},
+		"visualReports": {
+			"title": "Visual Reports",
+			"description": "Beautiful charts and graphs for easy understanding"
+		},
+		"productManagement": {
+			"title": "Product Management",
+			"description": "Organize materials, recipes, and end products efficiently"
+		},
+		"realtimeCalculations": {
+			"title": "Real-time Calculations",
+			"description": "Instant updates as you modify your cost structures"
+		}
+	},
+	"cta": {
+		"title": "Ready to Get Started?",
+		"subtitle": "Start analyzing your business costs in minutes"
 	}
 }
